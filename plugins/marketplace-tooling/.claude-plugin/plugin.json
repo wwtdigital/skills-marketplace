@@ -1,7 +1,7 @@
 {
   "name": "marketplace-tooling",
   "displayName": "Marketplace Tooling",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Helpers for contributing to this marketplace: author a new skill in the WWT Digital format and check it before opening a PR.",
   "author": {
     "name": "WWT Digital"
