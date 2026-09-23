@@ -1,11 +1,11 @@
-# Delivery & Program Management
+# Tech
 
-Skills for delivery leads and PMs: status reporting, risk tracking, SOW and estimate support, client comms.
+Skills for engineers and technologists: code review, architecture documentation, repo hygiene, prototyping.
 
 Install:
 
 ```
-/plugin install delivery@wwt-digital
+/plugin install tech@wwt-digital
 ```
 
 ## Skills

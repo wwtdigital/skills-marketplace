@@ -1,14 +1,13 @@
 # Marketplace-wide files: admins
 /.claude-plugin/          @wwtdigital/skills-admins
-/scripts/                 @wwtdigital/skills-admins
 /site/                    @wwtdigital/skills-admins
 /templates/               @wwtdigital/skills-admins
 /.github/                 @wwtdigital/skills-admins
+/CONTRIBUTING.md          @wwtdigital/skills-admins
 
-# One owner team per discipline plugin (create these GitHub teams)
-/plugins/creative-tech/        @wwtdigital/creative-tech
-/plugins/engineering/          @wwtdigital/engineering
-/plugins/brand-and-voice/      @wwtdigital/brand
-/plugins/delivery/             @wwtdigital/delivery
-/plugins/data-ai/              @wwtdigital/data-ai
-/plugins/marketplace-tooling/  @wwtdigital/skills-admins
+# One owner team per category plugin (create these GitHub teams)
+/plugins/presentation/    @wwtdigital/skills-presentation
+/plugins/research/        @wwtdigital/skills-research
+/plugins/ops/             @wwtdigital/skills-ops
+/plugins/admin/           @wwtdigital/skills-admins
+/plugins/tech/            @wwtdigital/skills-tech

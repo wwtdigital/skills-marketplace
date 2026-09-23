@@ -9,10 +9,10 @@ description: >
   you are writing — use wwt-skill-author for that.
 metadata:
   owner: scott.cullum@wwt.com
-  discipline: tooling
+  category: admin
   status: draft
   connectors: []
-  version: 0.1.0
+  version: 0.1.1
 ---
 
 # Marketplace Smoke Test

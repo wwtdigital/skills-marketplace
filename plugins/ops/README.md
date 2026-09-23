@@ -1,11 +1,11 @@
-# Data & AI
+# Ops
 
-Skills for data and AI practitioners: analysis workflows, model evaluation, prompt and agent design patterns.
+Skills for running projects and teams: status reporting, staffing, risk tracking, SOW and estimate support.
 
 Install:
 
 ```
-/plugin install data-ai@wwt-digital
+/plugin install ops@wwt-digital
 ```
 
 ## Skills

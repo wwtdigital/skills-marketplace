@@ -11,7 +11,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import {
-  contentHash, DISCIPLINES, git, iterSkills, KEBAB, loadMarketplace, loadPluginManifest,
+  CATEGORIES, contentHash, git, iterSkills, KEBAB, loadMarketplace, loadPluginManifest,
   loadPrevCatalog, type Marketplace, type MarketplaceEntry, NO_BUMP_NEEDED, opt, parseSkillMd,
   pluginDir, rel, type SkillSource, STATUSES, walk,
 } from "./lib.ts";
@@ -61,7 +61,7 @@ function checkPlugin(entry: MarketplaceEntry) {
   if (!entry.description) warn(`plugin '${n}': no description in marketplace entry`);
 
   const skills = iterSkills(entry);
-  if (!skills.length) notes.push(`plugin '${n}': contains no skills yet`); // expected for new disciplines
+  if (!skills.length) notes.push(`plugin '${n}': contains no skills yet`); // expected for new categories
   for (const sk of skills) {
     for (const p of sk.problems) err(`${n}/${sk.name}: ${p}`);
     if (sk.problems.length && !sk.description) continue;
@@ -80,11 +80,13 @@ function checkSkill(plugin: string, sk: SkillSource) {
     if (!/\buse (this |it )?when\b|\btrigger/i.test(d)) warn(`${tag}: description doesn't say when to use it ('Use when …')`);
   }
   const md = sk.metadata;
-  if (!Object.keys(md).length) warn(`${tag}: no metadata block (owner, discipline, status)`);
+  if (!Object.keys(md).length) warn(`${tag}: no metadata block (owner, category, status)`);
   else {
     const owner = String(md.owner ?? "");
     if (!owner.endsWith("@wwt.com")) err(`${tag}: metadata.owner must be a @wwt.com address (got '${owner}')`);
-    if (!DISCIPLINES.includes(md.discipline as string)) err(`${tag}: metadata.discipline must be one of ${list(DISCIPLINES)}`);
+    if (!CATEGORIES.includes(md.category as string)) err(`${tag}: metadata.category must be one of ${list(CATEGORIES)}`);
+    else if (md.category !== plugin) err(`${tag}: metadata.category is '${md.category}' but the skill is in the '${plugin}' plugin`);
+    if ("discipline" in md) err(`${tag}: metadata.discipline was replaced by metadata.category`);
     if (!STATUSES.includes(md.status as string)) err(`${tag}: metadata.status must be one of ${list(STATUSES)}`);
     if (!("version" in md)) warn(`${tag}: metadata.version missing`);
   }

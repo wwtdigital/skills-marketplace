@@ -1,11 +1,11 @@
-# Engineering
+# Presentation
 
-Skills for software engineers: code review, architecture documentation, repo hygiene, CI/CD.
+Skills for anything you put in front of people: decks, documents, reports and copy, in the WWT house style.
 
 Install:
 
 ```
-/plugin install engineering@wwt-digital
+/plugin install presentation@wwt-digital
 ```
 
 ## Skills

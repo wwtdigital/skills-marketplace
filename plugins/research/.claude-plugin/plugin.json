@@ -1,0 +1,17 @@
+{
+  "name": "research",
+  "displayName": "Research",
+  "version": "0.1.0",
+  "description": "Skills for finding things out and making sense of them: desk and market research, interviews, analysis and synthesis.",
+  "author": {
+    "name": "WWT Digital"
+  },
+  "homepage": "https://skills-marketplace.wwtdigital.io/#research",
+  "repository": "https://github.com/wwtdigital/skills-marketplace",
+  "keywords": [
+    "research",
+    "analysis",
+    "synthesis",
+    "data"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "tech",
+  "displayName": "Tech",
+  "version": "0.1.0",
+  "description": "Skills for engineers and technologists: code review, architecture documentation, repo hygiene, prototyping.",
+  "author": {
+    "name": "WWT Digital"
+  },
+  "homepage": "https://skills-marketplace.wwtdigital.io/#tech",
+  "repository": "https://github.com/wwtdigital/skills-marketplace",
+  "keywords": [
+    "tech",
+    "engineering",
+    "code-review",
+    "architecture"
+  ]
+}

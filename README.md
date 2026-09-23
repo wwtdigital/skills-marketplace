@@ -1,8 +1,8 @@
 # WWT Digital Skills Marketplace
 
-A shared catalog of Claude skills for WWT Digital, organised by discipline. Each
-discipline is a **plugin**; each plugin contains one or more **skills**. Install the
-bundle for your role and Claude picks up the skills automatically in Claude Code and
+A shared catalog of Claude skills for WWT Digital, organised by category. Each
+category is a **plugin**; each plugin contains one or more **skills**. Install the
+bundles you need and Claude picks up the skills automatically in Claude Code and
 Cowork.
 
 Browse the catalog and get step-by-step install help at **https://skills-marketplace.wwtdigital.io**.
@@ -13,7 +13,7 @@ Browse the catalog and get step-by-step install help at **https://skills-marketp
 
 ```
 /plugin marketplace add wwtdigital/skills-marketplace
-/plugin install creative-tech@wwt-digital
+/plugin install presentation@wwt-digital
 ```
 
 Repeat `/plugin install <plugin>@wwt-digital` for each bundle you want. Run
@@ -26,19 +26,25 @@ Open *Customize → Plugins → Add marketplace* and paste
 
 **No GitHub access?**
 
-Download any skill as a `.skill` file from the site and drop it into Cowork
+In Claude Code, add the marketplace from the site instead. It works the same, updates included:
+
+```
+/plugin marketplace add https://skills-marketplace.wwtdigital.io/marketplace.json
+/plugin install presentation@wwt-digital
+```
+
+Or download any skill as a `.skill` file from the site and drop it into Cowork
 (*Customize → Skills → Add*), or unzip it into `~/.claude/skills/` for Claude Code.
 
 ## Plugins
 
 | Plugin | For | Install |
 | --- | --- | --- |
-| `creative-tech` | Creative Technology team | `/plugin install creative-tech@wwt-digital` |
-| `engineering` | Software engineers | `/plugin install engineering@wwt-digital` |
-| `brand-and-voice` | Anyone producing WWT-branded material | `/plugin install brand-and-voice@wwt-digital` |
-| `delivery` | Delivery leads and PMs | `/plugin install delivery@wwt-digital` |
-| `data-ai` | Data and AI practitioners | `/plugin install data-ai@wwt-digital` |
-| `marketplace-tooling` | Contributors to this repo | `/plugin install marketplace-tooling@wwt-digital` |
+| `presentation` | Decks, documents, reports, copy, house style | `/plugin install presentation@wwt-digital` |
+| `research` | Desk research, interviews, analysis, synthesis | `/plugin install research@wwt-digital` |
+| `ops` | Status reports, staffing, risks, SOWs and estimates | `/plugin install ops@wwt-digital` |
+| `admin` | Everyday admin, and tools for contributing to this marketplace | `/plugin install admin@wwt-digital` |
+| `tech` | Code review, architecture, repo hygiene, prototyping | `/plugin install tech@wwt-digital` |
 
 ## Repo layout
 
@@ -56,9 +62,9 @@ site/scripts/build-index.ts       builds the catalog, downloads and the URL mark
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Short version: copy the template into the
+See [CONTRIBUTING.md](CONTRIBUTING.md), also published at https://skills-marketplace.wwtdigital.io/contribute. Short version: copy the template into the
 right plugin, write a great `description`, run `npm --prefix site run validate`, open a PR.
-Install `marketplace-tooling` and ask Claude to "make this a skill" and it will walk
+Install `admin` and ask Claude to "make this a skill" and it will walk
 you through it.
 
 ## Maintainers

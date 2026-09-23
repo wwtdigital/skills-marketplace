@@ -1,11 +1,11 @@
-# Marketplace Tooling
+# Admin
 
-Helpers for contributing to this marketplace: author a new skill in the WWT Digital format and check it before opening a PR.
+Everyday admin skills, plus tools for contributing to this marketplace: author a new skill and check an install.
 
 Install:
 
 ```
-/plugin install marketplace-tooling@wwt-digital
+/plugin install admin@wwt-digital
 ```
 
 ## Skills

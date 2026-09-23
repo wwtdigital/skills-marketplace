@@ -1,7 +1,7 @@
 {
   "name": "wwt-digital",
-  "description": "WWT Digital's shared catalog of Claude skills, grouped by discipline. Install a bundle for your role, or browse and download individual skills at the marketplace site.",
-  "version": "0.1.0",
+  "description": "WWT Digital's shared catalog of Claude skills, grouped by category: presentation, research, ops, admin and tech. Install the bundles you need, or browse and download individual skills at the marketplace site.",
+  "version": "0.2.0",
   "owner": {
     "name": "WWT Digital",
     "url": "https://github.com/wwtdigital"
@@ -12,58 +12,88 @@
   },
   "plugins": [
     {
-      "name": "creative-tech",
-      "displayName": "Creative Technology",
-      "source": "./plugins/creative-tech",
-      "description": "Skills for the Creative Technology team: prototyping, experience design, staffing and team operations.",
-      "category": "discipline",
-      "tags": ["creative-tech", "prototyping", "xd", "staffing"],
-      "author": { "name": "WWT Digital — Creative Technology" }
+      "name": "presentation",
+      "displayName": "Presentation",
+      "source": "./plugins/presentation",
+      "description": "Skills for anything you put in front of people: decks, documents, reports and copy, in the WWT house style.",
+      "category": "presentation",
+      "tags": [
+        "presentation",
+        "decks",
+        "documents",
+        "writing",
+        "brand"
+      ],
+      "author": {
+        "name": "WWT Digital"
+      }
     },
     {
-      "name": "engineering",
-      "displayName": "Engineering",
-      "source": "./plugins/engineering",
-      "description": "Skills for software engineers: code review, architecture documentation, repo hygiene, CI/CD.",
-      "category": "discipline",
-      "tags": ["engineering", "code-review", "architecture", "devops"],
-      "author": { "name": "WWT Digital — Engineering" }
+      "name": "research",
+      "displayName": "Research",
+      "source": "./plugins/research",
+      "description": "Skills for finding things out and making sense of them: desk and market research, interviews, analysis and synthesis.",
+      "category": "research",
+      "tags": [
+        "research",
+        "analysis",
+        "synthesis",
+        "data"
+      ],
+      "author": {
+        "name": "WWT Digital"
+      }
     },
     {
-      "name": "brand-and-voice",
-      "displayName": "Brand & Voice",
-      "source": "./plugins/brand-and-voice",
-      "description": "Skills for writing and design in the WWT house style: brand-compliant decks, documents, reports and copy review.",
-      "category": "discipline",
-      "tags": ["brand", "writing", "design", "presentations"],
-      "author": { "name": "WWT Digital — Brand" }
+      "name": "ops",
+      "displayName": "Ops",
+      "source": "./plugins/ops",
+      "description": "Skills for running projects and teams: status reporting, staffing, risk tracking, SOW and estimate support.",
+      "category": "ops",
+      "tags": [
+        "ops",
+        "delivery",
+        "status",
+        "staffing"
+      ],
+      "author": {
+        "name": "WWT Digital"
+      }
     },
     {
-      "name": "delivery",
-      "displayName": "Delivery & Program Management",
-      "source": "./plugins/delivery",
-      "description": "Skills for delivery leads and PMs: status reporting, risk tracking, SOW and estimate support, client comms.",
-      "category": "discipline",
-      "tags": ["delivery", "pm", "status", "client"],
-      "author": { "name": "WWT Digital — Delivery" }
+      "name": "admin",
+      "displayName": "Admin",
+      "source": "./plugins/admin",
+      "description": "Everyday admin skills, plus tools for contributing to this marketplace: author a new skill and check an install.",
+      "category": "admin",
+      "tags": [
+        "admin",
+        "skills",
+        "authoring",
+        "contributing"
+      ],
+      "author": {
+        "name": "WWT Digital"
+      }
     },
     {
-      "name": "data-ai",
-      "displayName": "Data & AI",
-      "source": "./plugins/data-ai",
-      "description": "Skills for data and AI practitioners: analysis workflows, model evaluation, prompt and agent design patterns.",
-      "category": "discipline",
-      "tags": ["data", "ai", "analytics", "agents"],
-      "author": { "name": "WWT Digital — Data & AI" }
-    },
-    {
-      "name": "marketplace-tooling",
-      "displayName": "Marketplace Tooling",
-      "source": "./plugins/marketplace-tooling",
-      "description": "Helpers for contributing to this marketplace: author a new skill in the WWT Digital format and check it before opening a PR.",
-      "category": "tooling",
-      "tags": ["skills", "authoring", "contributing"],
-      "author": { "name": "WWT Digital" }
+      "name": "tech",
+      "displayName": "Tech",
+      "source": "./plugins/tech",
+      "description": "Skills for engineers and technologists: code review, architecture documentation, repo hygiene, prototyping.",
+      "category": "tech",
+      "tags": [
+        "tech",
+        "engineering",
+        "code-review",
+        "architecture"
+      ],
+      "author": {
+        "name": "WWT Digital"
+      }
     }
-  ]
+  ],
+  "renames": {
+    "marketplace-tooling": "admin"
+  }
 }

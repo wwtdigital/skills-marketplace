@@ -1,11 +1,11 @@
-# Creative Technology
+# Research
 
-Skills for the Creative Technology team: prototyping, experience design, staffing and team operations.
+Skills for finding things out and making sense of them: desk and market research, interviews, analysis and synthesis.
 
 Install:
 
 ```
-/plugin install creative-tech@wwt-digital
+/plugin install research@wwt-digital
 ```
 
 ## Skills

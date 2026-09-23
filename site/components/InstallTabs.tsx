@@ -25,7 +25,7 @@ export function InstallTabs({
     {
       // Third-party marketplaces don't auto-update by default; autoUpdate turns it on org-wide.
       extraKnownMarketplaces: { [marketplace]: { source: { source: "github", repo: slug }, autoUpdate: true } },
-      enabledPlugins: { [`brand-and-voice@${marketplace}`]: true },
+      enabledPlugins: { [`presentation@${marketplace}`]: true },
     },
     null,
     2,
@@ -49,7 +49,7 @@ export function InstallTabs({
             </li>
             <li>
               Install the bundle(s) you want, e.g.
-              <CopyCmd text={`/plugin install creative-tech@${marketplace}`} />
+              <CopyCmd text={`/plugin install presentation@${marketplace}`} />
             </li>
             <li>
               Later, pull new skills with
@@ -71,7 +71,7 @@ export function InstallTabs({
               <CopyCmd text={repo} />
             </li>
             <li>
-              Pick the discipline bundles you want and click <b>Install</b>. Skills appear in Claude&apos;s skill
+              Pick the category bundles you want and click <b>Install</b>. Skills appear in Claude&apos;s skill
               list immediately.
             </li>
           </ol>
@@ -90,7 +90,7 @@ export function InstallTabs({
                   <CopyCmd text={`/plugin marketplace add ${marketplaceUrl}`} />
                 </li>
                 <li>
-                  <CopyCmd text={`/plugin install creative-tech@${marketplace}`} />
+                  <CopyCmd text={`/plugin install presentation@${marketplace}`} />
                 </li>
               </ol>
               <p className="panel-lead">Or install a single skill by hand:</p>
@@ -107,7 +107,7 @@ export function InstallTabs({
             <li>
               <b>Claude Code:</b> unzip it into <code>~/.claude/skills/</code> — the folder name is the skill name.
             </li>
-            <li>Updates aren&apos;t automatic this way; check back here or ask your discipline owner.</li>
+            <li>Updates aren&apos;t automatic this way; check back here or ask the marketplace admin.</li>
           </ol>
         </div>
       )}

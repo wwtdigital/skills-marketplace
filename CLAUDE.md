@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A Claude Code / Cowork **plugin marketplace** for WWT Digital. Marketplace name `wwt-digital`.
-Skills are grouped into one plugin per discipline; users install a bundle for their role.
+Skills are grouped into one plugin per category; users install the bundles they need.
 A Next.js site (`site/`, deployed to Vercel) lets people browse and download skills without GitHub.
 
 Hosting:
@@ -32,11 +32,12 @@ site/                             Next.js App Router on Vercel (pages prerendere
 site/scripts/validate.ts          lint the whole repo; --strict makes warnings fatal; version-bump checks
 site/scripts/build-index.ts       writes site/public/{data/index.json, downloads/, marketplace.json}
 site/scripts/lib.ts               shared loaders (marketplace, manifests, SKILL.md frontmatter, hashing)
-.github/CODEOWNERS                one GitHub team per discipline (teams don't exist yet)
+.github/CODEOWNERS                one GitHub team per category (teams don't exist yet)
 ```
 
-Plugins: `creative-tech`, `engineering`, `brand-and-voice`, `delivery`, `data-ai`, `marketplace-tooling`.
-Only `marketplace-tooling` has a skill so far (`wwt-skill-author`).
+Plugins (one per category): `presentation`, `research`, `ops`, `admin`, `tech`. Only `admin` has
+skills so far (`wwt-skill-author`, `marketplace-smoke-test`). These replaced the original discipline
+plugins on 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
 
 ## Commands
 
@@ -56,13 +57,13 @@ There is no test suite. `validate.ts` is the lint/test gate, and it always check
 (you can't point it at one skill).
 
 Test the marketplace itself: `/plugin marketplace add ./` from the repo root, then
-`/plugin install marketplace-tooling@wwt-digital`.
+`/plugin install admin@wwt-digital`.
 
 ## Conventions
 
 - Skill folder name == frontmatter `name`, kebab-case. Prefix `wwt-` only for WWT-brand-specific skills.
-- Frontmatter `metadata`: `owner` (@wwt.com), `discipline`, `status` (draft|beta|stable),
-  `connectors` (list), `version`. Validator enforces owner/discipline/status.
+- Frontmatter `metadata`: `owner` (@wwt.com), `category`, `status` (draft|beta|stable),
+  `connectors` (list), `version`. Validator enforces owner/category/status.
 - Description: what + when (with trigger phrases) + not-for. ≤1024 chars. This is the only
   thing Claude reads to decide whether to load the skill.
 - Every skill's workflow includes a verification step.
@@ -75,15 +76,21 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   `metadata.version` is informational only; the site shows it, Claude Code ignores it.
   `validate.py --base` enforces the bumps (see below).
 - `site/public/data/` and `site/public/downloads/` are generated at build time and gitignored.
+- `CONTRIBUTING.md` is published as the site's `/contribute` page (read from the repo root at build
+  time), because most contributors can't see the private repo. Write it for them: absolute links to
+  the site (made relative when rendered), no links into the repo they can't open.
+- Maintainers commit straight to `main` for now (no PRs). A push to `main` deploys production, so
+  run `npm --prefix site run build` first; a failed Vercel build leaves the last good deploy up.
 
 ## How the pipeline fits together
 
 - `marketplace.json` is the single source of truth. Both scripts iterate its `plugins[]` and resolve
   each `source` (only relative-path sources are supported) via `common.plugin_dir`. A plugin folder
   that isn't listed there is invisible to validation, the site and Claude.
-- The allowed `metadata.discipline` values come from `DISCIPLINES` in `site/scripts/lib.ts`, not from
-  plugin names. `marketplace-tooling` skills use `discipline: tooling`. Adding a discipline plugin
-  means updating `DISCIPLINES`, `marketplace.json`, `CODEOWNERS`, and the template's discipline list.
+- `metadata.category` must be one of `CATEGORIES` in `site/scripts/lib.ts` *and* equal the plugin
+  folder the skill lives in. It's redundant in the repo but travels with a downloaded `.skill`.
+  Adding a category means updating `CATEGORIES`, `marketplace.json`, `CODEOWNERS`, the template,
+  and the table in `CONTRIBUTING.md`.
 - There is no GitHub Actions (not allowed here). The Vercel build is the CI: `npm run build` runs
   `validate.ts --strict`, then `build-index.ts`, then `next build`. The scripts read `../plugins`
   etc., so the Vercel project must include files outside the Root Directory (the default).
@@ -122,7 +129,7 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 - Plugin manifests link to `/#<plugin-name>`, which opens that bundle on the home page. Keep those
   anchor ids.
 - When copying `templates/skill-template/`, rename the frontmatter `name: skill-template` and cut
-  the `discipline`/`status` option lists down to single values. Otherwise the validator fails.
+  the `category`/`status` option lists down to single values. Otherwise the validator fails.
 
 ## Do not touch without asking
 
@@ -132,10 +139,9 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 ## Backlog (in rough priority order)
 
 1. Create the GitHub teams named in CODEOWNERS.
-2. Migrate Scott's existing skills as first PRs:
-   `staffing-manager`, `wwt-scorecard` → creative-tech; `deslopify` → brand-and-voice;
-   `mr-review-assistant`, `agents-md-generator`, `likec4-architect` → engineering.
-   Each needs the `metadata` block added and a README table row.
+2. Migrate Scott's existing skills: `staffing-manager` → ops; `deslopify` → presentation;
+   `mr-review-assistant`, `agents-md-generator`, `likec4-architect` → tech; `wwt-scorecard` →
+   admin (unconfirmed; could be research). Each needs the `metadata` block and a README row.
 3. Add `relevance` hints to marketplace entries once admins allowlist the marketplace.
 4. Consider a Notion intake path for non-git contributors (Notion MCP has upload-skill).
 5. Decide on Cowork install wording once verified against the current desktop UI.

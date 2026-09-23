@@ -9,7 +9,8 @@ import type { Catalog } from "../lib/catalog.ts";
 
 export const ROOT = path.resolve(import.meta.dirname, "../..");
 export const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-export const DISCIPLINES = ["brand-and-voice", "creative-tech", "data-ai", "delivery", "engineering", "tooling"];
+// One plugin per category; a skill's metadata.category must name the plugin it lives in.
+export const CATEGORIES = ["presentation", "research", "ops", "admin", "tech"];
 export const STATUSES = ["beta", "draft", "stable"];
 // Changes to these don't alter what Claude loads, so they don't count as a change needing a bump.
 export const NO_BUMP_NEEDED = new Set(["README.md", ".gitkeep", ".DS_Store"]);
@@ -27,7 +28,7 @@ export type Marketplace = {
 export type PluginManifest = { name?: string; version?: string; [k: string]: unknown };
 export type SkillMetadata = {
   owner?: string;
-  discipline?: string;
+  category?: string;
   status?: string;
   connectors?: string[];
   version?: string | number;

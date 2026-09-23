@@ -5,14 +5,14 @@ description: >
   skill ready to submit. Use when someone says "make this a skill", "add a skill to the
   marketplace", "turn this workflow into a skill", "package this for the team", or asks
   how to contribute a skill. Produces a SKILL.md in the WWT Digital format inside the
-  right discipline plugin, runs the marketplace validator, and drafts the PR description.
+  right category plugin, runs the marketplace validator, and drafts the PR description.
   Not for editing skills that live outside this marketplace.
 metadata:
   owner: scott.cullum@wwt.com
-  discipline: tooling
+  category: admin
   status: beta
   connectors: []
-  version: 0.1.1
+  version: 0.1.2
 ---
 
 # WWT Skill Author
@@ -26,8 +26,8 @@ hand the finished folder to a maintainer.
 Ask for these before writing anything (one question at a time):
 
 1. What the skill does, in the user's words, and 3–5 phrases people say when they want it.
-2. Which discipline plugin it belongs to (`creative-tech`, `engineering`,
-   `brand-and-voice`, `delivery`, `data-ai`). If unsure, propose one.
+2. Which category plugin it belongs to (`presentation`, `research`, `ops`, `admin`,
+   `tech`). If unsure, propose one.
 3. Which connectors it needs (Slack, Notion, Microsoft 365, GitLab…), if any.
 4. An example of a good finished output, if one exists.
 
@@ -35,7 +35,7 @@ Ask for these before writing anything (one question at a time):
 
 1. Locate the marketplace root (the folder containing `.claude-plugin/marketplace.json`).
    If not in a checkout, work in a scratch folder and tell the user to zip and send it.
-2. Copy `templates/skill-template/` to `plugins/<discipline>/skills/<skill-name>/`.
+2. Copy `templates/skill-template/` to `plugins/<category>/skills/<skill-name>/`.
    Name in kebab-case; prefix with `wwt-` only if the skill is WWT-brand specific.
 3. Write the `description` first. It must answer *what* and *when*, include the trigger
    phrases from step 1, and name exclusions if a neighbouring skill overlaps. Keep it
@@ -56,7 +56,7 @@ Ask for these before writing anything (one question at a time):
 
 ## Output
 
-A folder `plugins/<discipline>/skills/<skill-name>/` containing `SKILL.md` and optional
+A folder `plugins/<category>/skills/<skill-name>/` containing `SKILL.md` and optional
 `scripts/`, `references/`, `assets/`; a passing validator run; a PR description.
 
 ## Guardrails

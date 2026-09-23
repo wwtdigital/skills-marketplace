@@ -1,0 +1,17 @@
+{
+  "name": "ops",
+  "displayName": "Ops",
+  "version": "0.1.0",
+  "description": "Skills for running projects and teams: status reporting, staffing, risk tracking, SOW and estimate support.",
+  "author": {
+    "name": "WWT Digital"
+  },
+  "homepage": "https://skills-marketplace.wwtdigital.io/#ops",
+  "repository": "https://github.com/wwtdigital/skills-marketplace",
+  "keywords": [
+    "ops",
+    "delivery",
+    "status",
+    "staffing"
+  ]
+}
