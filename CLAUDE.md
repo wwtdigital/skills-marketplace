@@ -32,7 +32,7 @@ scripts/common.py                 shared loaders (stdlib + PyYAML)
 scripts/validate.py               lint everything; --strict makes warnings fatal; --base REF checks version bumps
 scripts/build_index.py            writes site/public/data/index.json + site/public/downloads/*.skill|*.zip
 site/                             Next.js App Router on Vercel (pages prerendered); Root Directory = site/
-.github/workflows/ci.yml          validate on PR; on main rebuild catalog and commit it
+site/scripts/catalog.sh           runs validate.py + build_index.py before next dev/build (this is the CI)
 .github/CODEOWNERS                one GitHub team per discipline (teams don't exist yet)
 ```
 
@@ -42,16 +42,15 @@ Only `marketplace-tooling` has a skill so far (`wwt-skill-author`).
 ## Commands
 
 ```
-pip install pyyaml                     # Homebrew Python refuses global installs: use a .venv
-python3 scripts/validate.py --strict --base origin/main   # what CI runs on a PR; must pass
-python3 scripts/build_index.py --check # dry run
-python3 scripts/build_index.py         # regenerates site/public/{data,downloads} (CI does this on main)
-claude plugin validate .               # official validator
-
 cd site && npm ci
-npm run dev                            # http://localhost:3000
-npm run build && npm run typecheck     # CI runs the build on every PR
+npm run dev                            # generates the catalog, then http://localhost:3000
+npm run build && npm run typecheck     # the same build Vercel runs: strict validation + catalog + next build
 npm start                              # serve the production build
+
+# run the Python scripts directly (site/scripts/catalog.sh keeps a venv with PyYAML in site/.pyenv)
+site/.pyenv/bin/python scripts/validate.py --strict --base origin/main   # pre-push: version bumps vs main
+site/.pyenv/bin/python scripts/build_index.py --check                    # dry run
+claude plugin validate .               # official validator (not run automatically)
 ```
 
 There is no test suite. `validate.py` is the lint/test gate, and it always checks the whole repo
@@ -76,7 +75,7 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   overrides any `version` on the marketplace entry (keep it out of `marketplace.json`). Skill
   `metadata.version` is informational only; the site shows it, Claude Code ignores it.
   `validate.py --base` enforces the bumps (see below).
-- Don't hand-edit `site/public/data/` or `site/public/downloads/`. Both are generated.
+- `site/public/data/` and `site/public/downloads/` are generated at build time and gitignored.
 
 ## How the pipeline fits together
 
@@ -86,17 +85,26 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 - The allowed `metadata.discipline` values come from `DISCIPLINES` in `scripts/common.py`, not from
   plugin names. `marketplace-tooling` skills use `discipline: tooling`. Adding a discipline plugin
   means updating `DISCIPLINES`, `marketplace.json`, `CODEOWNERS`, and the template's discipline list.
-- CI runs `validate.py --strict` everywhere, so warnings are errors: a description with no
-  "Use when…"/"trigger" wording, a description under 80 chars, no "verif"/"check" in the body,
-  a body over 250 lines, a missing `metadata.version`. Empty plugins print a `NOTE`, not a warning.
-- On PRs CI also passes `--base origin/<base branch>`. Any change under `plugins/<p>/` other than
-  `README.md`/`.gitkeep` then needs a higher `plugin.json` version, and a changed existing skill
-  needs a higher `metadata.version`. Adding or removing a plugin needs a higher marketplace
-  `version`. New plugins and new skills don't need a bump of their own. `--base` diffs against
-  the working tree, so uncommitted and untracked files count.
+- There is no GitHub Actions (not allowed here). The Vercel build is the CI: `npm run build` runs
+  `site/scripts/catalog.sh --strict`, which runs `validate.py --strict` and then `build_index.py`.
+  A validation failure fails the deploy, and Vercel reports that as the commit status on the PR.
+  Production keeps serving the last good build.
+- `--strict` makes warnings errors: a description with no "Use when…"/"trigger" wording, a
+  description under 80 chars, no "verif"/"check" in the body, a body over 250 lines, a missing
+  `metadata.version`. Empty plugins print a `NOTE`, not a warning.
+- Version bumps: any change under `plugins/<p>/` other than `README.md`/`.gitkeep` needs a higher
+  `plugin.json` version, and a changed existing skill needs a higher `metadata.version`. Adding or
+  removing a plugin needs a higher marketplace `version`. New plugins and new skills don't need a
+  bump of their own. There are two baselines for the same rules:
+  - On Vercel, `--prev-catalog auto` compares per-plugin and per-skill `content_hash`es against
+    the live production catalog (`metadata.site` + `/data/index.json`). The clone has no
+    `origin/main`. If there's no production catalog yet, the check is skipped with a `NOTE`.
+  - Locally, `--base origin/main` diffs the working tree, including uncommitted and untracked
+    files.
 - `build_index.py` quietly drops any skill with structural problems (no SKILL.md, bad frontmatter,
-  name mismatch) from the site. Run the validator first. It also reads `git log` for each skill's
-  "updated" date, so uncommitted skills show the current time.
+  name mismatch) from the site. Validation runs first in the build, so this only bites if you run
+  it on its own. "updated" dates come from the production catalog when a skill's hash is unchanged,
+  otherwise from `git log` (and the current time if that's empty).
 - The site reads `site/public/data/index.json` from disk at build time. Nothing is fetched at
   runtime. Its shape is whatever `build()` in `build_index.py` emits (typed in
   `site/lib/catalog.ts`), so change both together. `lib/load.ts` uses `node:fs`, so never import
@@ -111,7 +119,6 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 ## Do not touch without asking
 
 - `.claude-plugin/marketplace.json` plugin names (renaming breaks installs; use `renames`)
-- `.github/workflows/ci.yml` bot commit step
 - `site/vercel.json` download headers
 
 ## Backlog (in rough priority order)

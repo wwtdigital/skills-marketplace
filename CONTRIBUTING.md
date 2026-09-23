@@ -39,7 +39,7 @@ in `.github/CODEOWNERS`; they'll open the PR for you and credit you as author.
 - **Safe.** No credentials, no client names or data, no irreversible actions without
   confirmation. Scripts are readable and don't fetch from untrusted sources.
 - **Small.** `SKILL.md` body under 250 lines (the validator warns past that, and warnings
-  fail CI on `main`). Longer material goes in `references/`.
+  fail the site build). Longer material goes in `references/`.
 - **Owned.** `metadata.owner` is a real WWT email that will answer questions.
 
 ## Skill lifecycle
@@ -56,8 +56,9 @@ Bump the marketplace `version` when plugins are added, renamed or removed. Use t
 marketplace `renames` map if you rename a plugin so existing installs migrate.
 
 The plugin version is what Claude Code checks for updates: if it doesn't go up, people who
-already installed the plugin never get your change. CI fails a PR that changes a plugin or skill
-without bumping. Check before you push with
+already installed the plugin never get your change. The Vercel preview build for your PR fails
+if a plugin or skill changed without a bump (it compares against the live site). Check before you
+push with
 `python3 scripts/validate.py --strict --base origin/main`. README-only edits don't need a bump.
 
 ## Adding a plugin (new discipline)
@@ -72,6 +73,6 @@ Rare — ask in #wwtd-claude-skills first. If agreed: create `plugins/<name>/` w
 - [ ] Tested with two prompts that should trigger, one that shouldn't
 - [ ] No secrets, client data or PII anywhere in the folder
 - [ ] Verification step present
-- [ ] Validator and build pass in CI
+- [ ] Vercel preview deployment for the PR succeeded (it runs the validator)
 - [ ] Plugin README table updated
 - [ ] Versions bumped

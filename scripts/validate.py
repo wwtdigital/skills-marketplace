@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Validate marketplace.json, every plugin.json, and every SKILL.md.
 
-Usage:  python3 scripts/validate.py [--strict] [--base REF]
-  --strict     treat warnings as errors (CI uses this on main)
-  --base REF   also require version bumps for anything changed since REF (CI passes the PR base;
-               locally, e.g. --base origin/main). Compares against the working tree, so
-               uncommitted changes count.
+Usage:  python3 scripts/validate.py [--strict] [--base REF] [--prev-catalog SRC]
+  --strict            treat warnings as errors (the Vercel build uses this)
+  --base REF          require version bumps for anything changed since git REF, e.g.
+                      --base origin/main. Compares the working tree, so uncommitted changes count.
+  --prev-catalog SRC  require version bumps for anything whose content differs from a published
+                      site catalog (path, URL, or 'auto' for the live site). The Vercel build
+                      uses this, since its clone has no origin/main to diff against.
 Exit code 1 on any error.
 """
 from __future__ import annotations
@@ -16,8 +18,9 @@ import subprocess
 import sys
 from pathlib import Path
 
-from common import (DISCIPLINES, KEBAB, ROOT, STATUSES, iter_skills, load_marketplace,
-                    load_plugin_manifest, parse_skill_md, plugin_dir)
+from common import (DISCIPLINES, KEBAB, NO_BUMP_NEEDED, ROOT, STATUSES, content_hash, iter_skills,
+                    load_marketplace, load_plugin_manifest, load_prev_catalog, parse_skill_md,
+                    plugin_dir)
 
 SECRET_PATTERNS = [
     re.compile(r"(?i)(api[_-]?key|secret|token|password)\s*[:=]\s*['\"][^'\"]{8,}"),
@@ -140,9 +143,6 @@ def check_skill(plugin: str, sk) -> None:
 # plugin.json `version` is what Claude Code compares to decide whether installed users get an
 # update, so any shipped change to a plugin without a bump silently never reaches them.
 
-# Changes to these don't alter what Claude loads, so they don't need a bump.
-NO_BUMP_NEEDED = {"README.md", ".gitkeep"}
-
 
 def git(*args: str) -> str | None:
     r = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True)
@@ -211,9 +211,40 @@ def check_version_bumps(mp: dict, base: str) -> None:
                     f"{sk.metadata.get('version')} isn't above {old_sv}")
 
 
+def check_against_catalog(mp: dict, prev: dict) -> None:
+    """Same rules as check_version_bumps, with a published catalog as the baseline."""
+    where = "the published catalog"
+    old_names = {p["name"] for p in prev.get("plugins", [])}
+    if old_names != {p["name"] for p in mp.get("plugins", [])} \
+            and not bumped(prev.get("marketplace", {}).get("version"), mp.get("version")):
+        err(f"marketplace.json: plugins were added, removed or renamed since {where} but version "
+            f"is still {mp.get('version')} (bump it)")
+    old_plugins = {p["name"]: p for p in prev.get("plugins", [])}
+    for entry in mp.get("plugins", []):
+        old = old_plugins.get(entry["name"])
+        pdir = plugin_dir(entry)
+        if not old or not old.get("content_hash") or not pdir.is_dir():
+            continue  # new plugin, or a catalog from before hashes existed
+        new_v = (load_plugin_manifest(pdir) or {}).get("version")
+        if content_hash(pdir) != old["content_hash"] and not bumped(old.get("version"), new_v):
+            err(f"plugin '{entry['name']}': content changed since {where} but plugin.json version "
+                f"{new_v} isn't above {old.get('version')} — installed users won't get the change "
+                f"until it's bumped")
+        old_skills = {s["name"]: s for s in old.get("skills", [])}
+        for sk in iter_skills(entry):
+            o = old_skills.get(sk.name)
+            if sk.problems or not o or not o.get("content_hash"):
+                continue
+            if content_hash(sk.path) != o["content_hash"] and not bumped(o.get("version"), sk.metadata.get("version")):
+                err(f"{entry['name']}/{sk.name}: changed since {where} but metadata.version "
+                    f"{sk.metadata.get('version')} isn't above {o.get('version')}")
+
+
 def main() -> int:
     strict = "--strict" in sys.argv
-    base = sys.argv[sys.argv.index("--base") + 1] if "--base" in sys.argv[:-1] else None
+    def opt(name):
+        return sys.argv[sys.argv.index(name) + 1] if name in sys.argv[:-1] else None
+    base, prev_src = opt("--base"), opt("--prev-catalog")
     mp = load_marketplace()
     check_marketplace(mp)
     for entry in mp.get("plugins", []):
@@ -229,6 +260,9 @@ def main() -> int:
             seen.setdefault(sk.name, entry["name"])
     if base:
         check_version_bumps(mp, base)
+    prev = load_prev_catalog(prev_src, mp)
+    if prev:
+        check_against_catalog(mp, prev)
     for n in notes:
         print(f"NOTE  {n}")
     for w in warnings:

@@ -2,8 +2,8 @@
   "name": "wwt-digital-skills-site",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "sh scripts/catalog.sh && next dev",
+    "build": "sh scripts/catalog.sh --strict && next build",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
