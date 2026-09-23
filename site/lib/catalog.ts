@@ -19,6 +19,13 @@ export type Skill = {
   content_hash: string;
 };
 
+export type McpServer = {
+  name: string;
+  type: "http" | "sse" | "stdio";
+  /** Remote servers only. */
+  url?: string;
+};
+
 export type Plugin = {
   name: string;
   displayName: string;
@@ -32,6 +39,8 @@ export type Plugin = {
   download: string;
   download_bytes: number;
   content_hash: string;
+  /** MCP servers from the plugin's .mcp.json; they connect when the plugin is installed. */
+  mcp_servers: McpServer[];
   skills: Skill[];
 };
 

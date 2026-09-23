@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "artifact-publisher": {
+      "type": "http",
+      "url": "https://publish.creative-technology.digital/api/mcp"
+    }
+  }
+}

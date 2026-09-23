@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "brandscanner": {
+      "type": "http",
+      "url": "https://brandscanner.creative-technology.digital/api/mcp"
+    }
+  }
+}

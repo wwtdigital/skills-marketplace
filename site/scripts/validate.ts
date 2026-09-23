@@ -11,7 +11,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import {
-  CATEGORIES, contentHash, git, iterSkills, KEBAB, loadMarketplace, loadPluginManifest,
+  CATEGORIES, contentHash, git, iterSkills, KEBAB, loadMarketplace, loadMcpConfig, loadPluginManifest,
   loadPrevCatalog, type Marketplace, type MarketplaceEntry, NO_BUMP_NEEDED, opt, parseSkillMd,
   pluginDir, rel, type SkillSource, STATUSES, walk,
 } from "./lib.ts";
@@ -57,6 +57,8 @@ function checkPlugin(entry: MarketplaceEntry) {
     if (manifest.name !== n) err(`plugin '${n}': plugin.json name '${manifest.name}' does not match marketplace entry`);
     if (!("version" in manifest)) warn(`plugin '${n}': plugin.json has no version (users won't get pinned updates)`);
   }
+  if (manifest && "mcpServers" in manifest) err(`plugin '${n}': put MCP servers in .mcp.json at the plugin root, not plugin.json`);
+  checkMcp(n, pdir);
   if (!existsSync(path.join(pdir, "README.md"))) warn(`plugin '${n}': no README.md`);
   if (!entry.description) warn(`plugin '${n}': no description in marketplace entry`);
 
@@ -66,6 +68,37 @@ function checkPlugin(entry: MarketplaceEntry) {
     for (const p of sk.problems) err(`${n}/${sk.name}: ${p}`);
     if (sk.problems.length && !sk.description) continue;
     checkSkill(n, sk);
+  }
+}
+
+// MCP servers connect as soon as the plugin is installed, for everyone who installs it, and the
+// config is published on the site. So: remote servers over https only, and no literal credentials.
+function checkMcp(plugin: string, pdir: string) {
+  let servers;
+  try {
+    servers = loadMcpConfig(pdir);
+  } catch (e) {
+    return err(`plugin '${plugin}': .mcp.json: ${(e as Error).message}`);
+  }
+  for (const [name, c] of Object.entries(servers ?? {})) {
+    const tag = `plugin '${plugin}': MCP server '${name}'`;
+    if (!KEBAB.test(name)) err(`${tag}: name must be kebab-case`);
+    const type = c.type ?? (c.command ? "stdio" : "http");
+    if (type === "http" || type === "sse") {
+      if (!/^https:\/\/[^/]+/.test(c.url ?? "")) err(`${tag}: url must be https:// (got '${c.url ?? ""}')`);
+      if (type === "sse") warn(`${tag}: SSE transport is deprecated; use "type": "http"`);
+    } else if (type === "stdio") {
+      if (!c.command) err(`${tag}: stdio servers need a command`);
+    } else err(`${tag}: unknown type '${type}' (use http or stdio)`);
+    for (const [field, values] of [["headers", c.headers], ["env", c.env]] as const)
+      for (const [k, v] of Object.entries(values ?? {}))
+        if (!/^\$\{[A-Z0-9_]+(:-[^}]*)?\}$/.test(String(v).replace(/^Bearer /, "")))
+          err(`${tag}: ${field}.${k} must be a \${VAR} reference, not a literal value (it would be published)`);
+  }
+  const f = path.join(pdir, ".mcp.json");
+  if (existsSync(f)) {
+    const hit = SECRET_PATTERNS.find((p) => p.test(readFileSync(f, "utf8")));
+    if (hit) err(`plugin '${plugin}': possible secret in ${rel(f)} (pattern ${hit.source.slice(0, 30)}…)`);
   }
 }
 

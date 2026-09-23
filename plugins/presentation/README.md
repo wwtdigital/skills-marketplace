@@ -16,6 +16,14 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 | --- | --- |
 | _(none yet)_ | |
 
+## MCP servers
+
+Installing this plugin also connects these MCP servers. The first time a tool is used, run `/mcp` and sign in (OAuth); no keys are stored in the plugin.
+
+| Server | What it does |
+| --- | --- |
+| `artifact-publisher` | Publish HTML pages and reports as shareable, access-controlled links. |
+
 ## Owners
 
 Listed in [`CODEOWNERS`](../../.github/CODEOWNERS). Owners review every change to this plugin.

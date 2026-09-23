@@ -16,6 +16,14 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 | --- | --- |
 | _(none yet)_ | |
 
+## MCP servers
+
+Installing this plugin also connects these MCP servers. The first time a tool is used, run `/mcp` and sign in (OAuth); no keys are stored in the plugin.
+
+| Server | What it does |
+| --- | --- |
+| `brandscanner` | Brand research: scorecards, tech stack, security posture, app reviews and public financials. |
+
 ## Owners
 
 Listed in [`CODEOWNERS`](../../.github/CODEOWNERS). Owners review every change to this plugin.

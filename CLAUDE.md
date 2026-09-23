@@ -119,6 +119,13 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   it from a `"use client"` component.
 - Skill pages live at `/skills/<name>`, and downloads are `<name>.skill`, so skill names must be
   unique across all plugins. `validate.ts` enforces this.
+- MCP servers live in `plugins/<category>/.mcp.json` (not `plugin.json`, which the validator
+  rejects) and connect for everyone who installs that category. `presentation` has
+  `artifact-publisher`, `research` has `brandscanner`; both are OAuth-backed http servers, so the
+  config is just type + url. The validator requires https, kebab-case names, and `${VAR}`
+  references for any header/env value, and runs the secret scan on `.mcp.json`. build-index emits
+  them as `mcp_servers` per plugin, which the site shows on the plugin card. Verified: installing
+  the plugin registers `plugin:<category>:<server>` in `claude mcp list`.
 - Two ways to install the marketplace. The git one (`/plugin marketplace add wwtdigital/skills-marketplace`)
   needs GitHub access to this private repo. The URL one (`/plugin marketplace add
   https://skills-marketplace.wwtdigital.io/marketplace.json`) needs no GitHub account: build-index

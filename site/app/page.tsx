@@ -27,6 +27,9 @@ export default function Home() {
                 <b>{skills.length}</b> skills
               </span>
               <span>
+                <b>{catalog.plugins.reduce((n, p) => n + p.mcp_servers.length, 0)}</b> MCP servers
+              </span>
+              <span>
                 <b>{skills.filter((s) => s.status === "stable").length}</b> stable
               </span>
             </div>

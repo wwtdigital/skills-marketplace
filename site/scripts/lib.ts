@@ -5,7 +5,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { parse as parseYaml } from "yaml";
-import type { Catalog } from "../lib/catalog.ts";
+import type { Catalog, McpServer } from "../lib/catalog.ts";
 
 export const ROOT = path.resolve(import.meta.dirname, "../..");
 export const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -59,6 +59,26 @@ export function pluginDir(entry: MarketplaceEntry): string {
 export function loadPluginManifest(pdir: string): PluginManifest | null {
   const f = path.join(pdir, ".claude-plugin", "plugin.json");
   return existsSync(f) ? JSON.parse(readFileSync(f, "utf8")) : null;
+}
+
+export type McpServerConfig = { type?: string; url?: string; command?: string; headers?: Record<string, string>; env?: Record<string, string>; [k: string]: unknown };
+
+/** The plugin's .mcp.json servers (raw config), or null if it has none. Throws on invalid JSON. */
+export function loadMcpConfig(pdir: string): Record<string, McpServerConfig> | null {
+  const f = path.join(pdir, ".mcp.json");
+  if (!existsSync(f)) return null;
+  const servers = JSON.parse(readFileSync(f, "utf8")).mcpServers;
+  if (!servers || typeof servers !== "object" || Array.isArray(servers)) throw new Error(".mcp.json has no mcpServers object");
+  return servers;
+}
+
+/** What the site shows about each server: name, transport, and URL for remote ones. */
+export function mcpServers(pdir: string): McpServer[] {
+  return Object.entries(loadMcpConfig(pdir) ?? {}).map(([name, c]) => ({
+    name,
+    type: (c.type ?? (c.command ? "stdio" : "http")) as McpServer["type"],
+    ...(c.url ? { url: c.url } : {}),
+  }));
 }
 
 /** Returns [frontmatter, body]. Throws if there's no frontmatter. */

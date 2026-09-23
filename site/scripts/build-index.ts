@@ -21,7 +21,7 @@ import path from "node:path";
 import { zipSync, type Zippable } from "fflate";
 import { REPO_URL, type Catalog, type Plugin, type Skill } from "../lib/catalog.ts";
 import {
-  contentHash, git, iterSkills, loadMarketplace, loadPluginManifest, loadPrevCatalog, type Marketplace,
+  contentHash, git, iterSkills, loadMarketplace, loadPluginManifest, loadPrevCatalog, type Marketplace, mcpServers,
   opt, pluginDir, rel, ROOT, walk,
 } from "./lib.ts";
 
@@ -137,6 +137,7 @@ export function build(out: string, prev: Catalog | null): Catalog {
       download: `downloads/${entry.name}.zip`,
       download_bytes: psize,
       content_hash: contentHash(pdir),
+      mcp_servers: mcpServers(pdir),
       skills,
     };
     index.plugins.push(plugin);

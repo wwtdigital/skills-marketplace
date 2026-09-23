@@ -40,8 +40,12 @@ export function Catalog({ plugins }: { plugins: Plugin[] }) {
     });
 
   const visible = plugins
-    .map((p) => ({ plugin: p, skills: p.skills.filter((s) => matches(s, q, statuses)) }))
-    .filter(({ skills }) => !filtering || skills.length);
+    .map((p) => ({
+      plugin: p,
+      skills: p.skills.filter((s) => matches(s, q, statuses)),
+      servers: statuses.size ? [] : p.mcp_servers.filter((m) => !q || m.name.includes(q) || (m.url ?? "").includes(q)),
+    }))
+    .filter(({ skills, servers }) => !filtering || skills.length || servers.length);
 
   return (
     <section id="browse">
@@ -63,7 +67,7 @@ export function Catalog({ plugins }: { plugins: Plugin[] }) {
       </div>
 
       {visible.length === 0 && <div className="empty">No skills match.</div>}
-      {visible.map(({ plugin: p, skills }) => (
+      {visible.map(({ plugin: p, skills, servers }) => (
         <details
           key={p.name}
           className="plugin"
@@ -85,6 +89,11 @@ export function Catalog({ plugins }: { plugins: Plugin[] }) {
               <span className="count">
                 {skills.length} skill{skills.length === 1 ? "" : "s"}
               </span>
+              {p.mcp_servers.length > 0 && (
+                <span className="count">
+                  {p.mcp_servers.length} MCP server{p.mcp_servers.length === 1 ? "" : "s"}
+                </span>
+              )}
               {p.version && <span className="mono">v{p.version}</span>}
               {p.author && <span>· {p.author}</span>}
             </div>
@@ -100,13 +109,30 @@ export function Catalog({ plugins }: { plugins: Plugin[] }) {
                 Source
               </a>
             </div>
+            {servers.length > 0 && (
+              <div className="mcp">
+                <h3>MCP servers</h3>
+                <p className="muted">
+                  Connected automatically when you install this bundle. Sign in once with <code>/mcp</code> if a server
+                  asks.
+                </p>
+                <ul>
+                  {servers.map((m) => (
+                    <li key={m.name}>
+                      <code>{m.name}</code>
+                      {m.url && <span className="mono muted">{new URL(m.url).host}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             {skills.length ? (
               <div className="skills">
                 {skills.map((s) => (
                   <SkillCard key={s.name} skill={s} />
                 ))}
               </div>
-            ) : (
+            ) : servers.length ? null : (
               <div className="empty">
                 No skills in this bundle yet — <Link href="/contribute">be the first to add one</Link>.
               </div>

@@ -53,6 +53,31 @@ Not sure? Pick the closest one and say so when you submit it. A reviewer will mo
 6. Open a PR with the test prompts. The Vercel preview build is the CI: it fails if anything
    doesn't pass the checks.
 
+## Adding an MCP server
+
+A category plugin can also bring the team's MCP servers: installing the bundle connects them.
+Today `presentation` includes the artifact publisher and `research` includes brandscanner.
+
+To add one, send the server's name, URL and what it does to the marketplace admin (no git), or
+add it to `plugins/<category>/.mcp.json` yourself and list it in that plugin's README:
+
+```json
+{
+  "mcpServers": {
+    "my-server": { "type": "http", "url": "https://my-server.example.com/mcp" }
+  }
+}
+```
+
+Rules, which the build checks: remote servers use `https://`, names are kebab-case, and there
+are no credentials in the file. Prefer servers that sign people in with OAuth (`/mcp` in Claude
+Code). If a header or environment value is unavoidable, use a `${VAR}` reference that each
+person sets themselves. Everything in this repo is published on the site. Adding a server
+changes the plugin, so bump its `version`.
+
+Everyone who installs the category gets the server, and its tools take up room in Claude's
+context, so only add servers most people in that category will use.
+
 ## What gets a skill merged
 
 - **Repeatable.** Someone will run it more than once. One-off analyses are not skills.
