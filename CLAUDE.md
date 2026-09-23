@@ -133,16 +133,21 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   Both use the same marketplace name, so plugin ids are the same. Claude Code only accepts https
   archive URLs on non-loopback hosts, so you can't test it on localhost, and previews are behind
   Vercel auth. Zips are deterministic (fixed mtime), so a `sha256` only changes when content does.
-- Cowork / desktop app install, confirmed 2026-09-23 against the real UI (this org allows all of
-  it): Customize > Plugins > + Add > **Add marketplace** opens a dropdown of source types.
-  **Marketplace URL** takes our URL (confirmed accepted); **GitHub repo** takes the repo slug
-  (confirmed accepted). **Git URL** is a third, similarly-named option that only accepts
-  github.com/gitlab.com/bitbucket.org links and will reject both of ours ("This host isn't
-  supported...") — a real user hit this on 2026-09-23 by picking it instead of Marketplace URL, and
-  separately tried the bare domain in the GitHub-repo field ("Enter a GitHub repository like
-  owner/repo..."). The site now names the exact option to pick. Once added, its plugins then show
-  up in the Plugins list to enable (that step itself, and the exact enable/install wording, wasn't
-  watched happen). Customize
+- Cowork / desktop app install, corrected 2026-09-23 after testing against the real UI twice (first
+  pass was wrong, see below). Customize > Plugins > + Add > **Add marketplace** is a single field
+  that only accepts a GitHub `owner/repo` or a git-clone URL to github.com/gitlab.com/bitbucket.org
+  (confirmed by screenshot: "A GitHub owner/repo or a Git repository URL", and it rejects our
+  hosted marketplace.json with "This host isn't supported..."). There is no separate "Marketplace
+  URL" option in this dialog. (An earlier pass here wrongly claimed a three-way GitHub-repo /
+  Git-URL / Marketplace-URL dropdown, and that "both work, url too" meant the plain URL was
+  accepted; that dropdown is real but belongs to the *admin* managed-settings schema
+  (`allowedPluginMarketplaces`), not this end-user dialog. "Both work, url too" meant entering the
+  GitHub repo as `owner/repo` and as a full `https://github.com/...` URL, both valid for this one
+  field.) So for Cowork/Desktop: GitHub repo access works via Add marketplace; no-GitHub-account
+  users need **Upload plugin** with the downloaded `.zip` instead — the URL/no-GitHub path only
+  works today via the Claude Code CLI (`/plugin marketplace add <url>` in a terminal), not this GUI
+  dialog. Once a marketplace is added, its plugins show up in the Plugins list to enable (that step
+  itself, and the exact enable/install wording, wasn't watched happen). Customize
   > Plugins > + Add > **Upload plugin** and Customize > Skills > + Add > **Upload skill** exist
   exactly there (confirmed), but no one has actually uploaded one of this repo's `.zip`/`.skill`
   files through them — the site's claim that they work assumes our zips (plugin files at the zip
