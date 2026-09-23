@@ -134,9 +134,15 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   archive URLs on non-loopback hosts, so you can't test it on localhost, and previews are behind
   Vercel auth. Zips are deterministic (fixed mtime), so a `sha256` only changes when content does.
 - Cowork / desktop app install, confirmed 2026-09-23 against the real UI (this org allows all of
-  it): Customize > Plugins > + Add > **Add marketplace** takes either the GitHub repo or the
-  Marketplace URL (both confirmed accepted); its plugins then show up in the Plugins list to
-  enable (that step itself, and the exact enable/install wording, wasn't watched happen). Customize
+  it): Customize > Plugins > + Add > **Add marketplace** opens a dropdown of source types.
+  **Marketplace URL** takes our URL (confirmed accepted); **GitHub repo** takes the repo slug
+  (confirmed accepted). **Git URL** is a third, similarly-named option that only accepts
+  github.com/gitlab.com/bitbucket.org links and will reject both of ours ("This host isn't
+  supported...") — a real user hit this on 2026-09-23 by picking it instead of Marketplace URL, and
+  separately tried the bare domain in the GitHub-repo field ("Enter a GitHub repository like
+  owner/repo..."). The site now names the exact option to pick. Once added, its plugins then show
+  up in the Plugins list to enable (that step itself, and the exact enable/install wording, wasn't
+  watched happen). Customize
   > Plugins > + Add > **Upload plugin** and Customize > Skills > + Add > **Upload skill** exist
   exactly there (confirmed), but no one has actually uploaded one of this repo's `.zip`/`.skill`
   files through them — the site's claim that they work assumes our zips (plugin files at the zip

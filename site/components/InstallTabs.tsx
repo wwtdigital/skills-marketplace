@@ -84,16 +84,17 @@ export function InstallTabs({
         <div className="panel" role="tabpanel">
           <p className="lead">
             In the Claude desktop app: <b>Customize</b> &gt; <b>Plugins</b> &gt; <b>+ Add</b> &gt;{" "}
-            <b>Add marketplace</b>. Paste whichever it asks for:
+            <b>Add marketplace</b>. It offers a dropdown of source types; pick one of these two, not{" "}
+            <b>Git URL</b> (that one only takes github.com/gitlab.com/bitbucket.org links and will reject ours):
           </p>
           <ol>
             <li>
-              GitHub repo:
-              <CopyCmd text={slug} />
+              No GitHub account needed: pick <b>Marketplace URL</b> and paste
+              {marketplaceUrl && <CopyCmd text={marketplaceUrl} />}
             </li>
             <li>
-              or Marketplace URL (no GitHub account needed):
-              {marketplaceUrl && <CopyCmd text={marketplaceUrl} />}
+              Or, if you have GitHub access: pick <b>GitHub repo</b> and paste
+              <CopyCmd text={slug} />
             </li>
             <li>
               The bundles show up in your Plugins list. Enable the ones you want; their skills are available right
