@@ -14,8 +14,9 @@ comfortable with git.
    (with real trigger phrases), and what it's *not* for.
 4. Run the checks:
    ```
-   python3 scripts/validate.py --strict --base origin/main
-   python3 scripts/build_index.py --check
+   npm ci --prefix site           # once; Node 24+
+   npm --prefix site run validate -- --strict --base origin/main
+   npm --prefix site run catalog -- --check
    claude plugin validate .        # if you have Claude Code installed
    ```
 5. Add a row to `plugins/<discipline>/README.md`.
@@ -59,7 +60,7 @@ The plugin version is what Claude Code checks for updates: if it doesn't go up, 
 already installed the plugin never get your change. The Vercel preview build for your PR fails
 if a plugin or skill changed without a bump (it compares against the live site). Check before you
 push with
-`python3 scripts/validate.py --strict --base origin/main`. README-only edits don't need a bump.
+`npm --prefix site run validate -- --strict --base origin/main`. README-only edits don't need a bump.
 
 ## Adding a plugin (new discipline)
 

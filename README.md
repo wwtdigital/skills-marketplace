@@ -49,15 +49,15 @@ plugins/<plugin>/
   skills/<skill>/SKILL.md         one folder per skill
   README.md                       what's in the bundle
 templates/skill-template/         copy this to start a skill
-scripts/validate.py               checks manifests and every SKILL.md
-scripts/build_index.py            builds site/public/data/index.json and site/public/downloads/*.skill
-site/                             Next.js site (static export) deployed to Vercel
+site/                             Next.js site deployed to Vercel
+site/scripts/validate.ts          checks manifests and every SKILL.md (runs in every Vercel build)
+site/scripts/build-index.ts       builds the catalog, downloads and the URL marketplace.json
 ```
 
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Short version: copy the template into the
-right plugin, write a great `description`, run `python3 scripts/validate.py`, open a PR.
+right plugin, write a great `description`, run `npm --prefix site run validate`, open a PR.
 Install `marketplace-tooling` and ask Claude to "make this a skill" and it will walk
 you through it.
 

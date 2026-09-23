@@ -10,7 +10,15 @@ const TABS = [
   { id: "admin", label: "Admins" },
 ] as const;
 
-export function InstallTabs({ repo, marketplace }: { repo: string; marketplace: string }) {
+export function InstallTabs({
+  repo,
+  marketplace,
+  marketplaceUrl,
+}: {
+  repo: string;
+  marketplace: string;
+  marketplaceUrl: string | null;
+}) {
   const [tab, setTab] = useState<(typeof TABS)[number]["id"]>("code");
   const slug = repo.replace(/^https:\/\/github\.com\//, "");
   const managed = JSON.stringify(
@@ -71,6 +79,23 @@ export function InstallTabs({ repo, marketplace }: { repo: string; marketplace: 
       )}
       {tab === "nogit" && (
         <div className="panel" role="tabpanel">
+          {marketplaceUrl && (
+            <>
+              <p className="panel-lead">
+                <b>Claude Code:</b> add the marketplace straight from this site. No GitHub account needed, and you
+                still get updates:
+              </p>
+              <ol>
+                <li>
+                  <CopyCmd text={`/plugin marketplace add ${marketplaceUrl}`} />
+                </li>
+                <li>
+                  <CopyCmd text={`/plugin install creative-tech@${marketplace}`} />
+                </li>
+              </ol>
+              <p className="panel-lead">Or install a single skill by hand:</p>
+            </>
+          )}
           <ol>
             <li>
               Find a skill below and click <b>Download .skill</b>.

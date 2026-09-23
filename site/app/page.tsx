@@ -33,13 +33,17 @@ export default function Home() {
           )}
         </section>
 
-        <InstallTabs repo={repo} marketplace={catalog?.marketplace.name || "wwt-digital"} />
+        <InstallTabs
+          repo={repo}
+          marketplace={catalog?.marketplace.name || "wwt-digital"}
+          marketplaceUrl={catalog?.marketplace.site ? `${catalog.marketplace.site}/marketplace.json` : null}
+        />
 
         {catalog ? (
           <Catalog plugins={catalog.plugins} repo={repo} />
         ) : (
           <div className="empty">
-            Catalog not built yet. Run <code>python3 scripts/build_index.py</code>.
+            Catalog not built yet. Run <code>npm run catalog</code>.
           </div>
         )}
       </main>

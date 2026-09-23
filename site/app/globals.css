@@ -91,6 +91,8 @@ pre.cmd.inline button{top:4px;right:4px;padding:2px 6px}
 .full{white-space:pre-wrap;font-size:14.5px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:10px 0;max-width:760px}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .muted{color:var(--muted)}
+.panel-lead{margin:0 0 6px}
+.panel-lead + ol{margin-bottom:16px}
 .detail .kv{max-width:760px}
 
 /* rendered SKILL.md */

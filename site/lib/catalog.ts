@@ -1,6 +1,6 @@
 // Types and pure helpers only — safe to import from client components. File access lives in load.ts.
 
-// Shape emitted by scripts/build_index.py — change both together.
+// Shape emitted by scripts/build-index.ts, which imports these types.
 export type Skill = {
   name: string;
   description: string;
@@ -16,6 +16,7 @@ export type Skill = {
   source: string;
   download: string;
   download_bytes: number;
+  content_hash: string;
 };
 
 export type Plugin = {
@@ -30,6 +31,7 @@ export type Plugin = {
   source: string;
   download: string;
   download_bytes: number;
+  content_hash: string;
   skills: Skill[];
 };
 
@@ -39,6 +41,8 @@ export type Catalog = {
     description: string;
     version: string;
     repo: string;
+    /** Base URL this build was generated for; <site>/marketplace.json is the no-GitHub install. */
+    site: string;
     install: string;
     generated: string;
     commit: string;
