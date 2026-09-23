@@ -135,12 +135,15 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   Vercel auth. Zips are deterministic (fixed mtime), so a `sha256` only changes when content does.
 - Cowork / desktop app install, confirmed 2026-09-23 against the real UI (this org allows all of
   it): Customize > Plugins > + Add > **Add marketplace** takes either the GitHub repo or the
-  Marketplace URL; its plugins then show up in the Plugins list to enable. Customize > Plugins >
-  + Add > **Upload plugin** installs a bundle `.zip` directly with no marketplace at all — our zips
-  have the plugin files at the zip root, which is what that expects. Customize > Skills > + Add >
-  **Upload skill** takes a single `.skill` file the same way. None of this is guaranteed for other
-  orgs; their admins can disable user-added marketplaces, plugin uploads, or skill uploads
-  independently.
+  Marketplace URL (both confirmed accepted); its plugins then show up in the Plugins list to
+  enable (that step itself, and the exact enable/install wording, wasn't watched happen). Customize
+  > Plugins > + Add > **Upload plugin** and Customize > Skills > + Add > **Upload skill** exist
+  exactly there (confirmed), but no one has actually uploaded one of this repo's `.zip`/`.skill`
+  files through them — the site's claim that they work assumes our zips (plugin files at the zip
+  root; skill files inside a folder named for the skill) match what those buttons expect. Owner
+  decided 2026-09-23 not to test that upload, so treat it as documented-but-unverified until
+  someone does. None of this is guaranteed for other orgs; their admins can disable user-added
+  marketplaces, plugin uploads, or skill uploads independently.
 - Plugin manifests link to `/#<plugin-name>`, which opens that bundle on the home page. Keep those
   anchor ids.
 - When copying `templates/skill-template/`, rename the frontmatter `name: skill-template` and cut
