@@ -1,6 +1,6 @@
 # Contributing a skill
 
-Anyone at WWT Digital can contribute a skill, with or without a GitHub account. This page is
+Anyone at WWTDigital can contribute a skill, with or without a GitHub account. This page is
 also published at https://skills-marketplace.wwtdigital.io/contribute.
 
 ## Pick a category

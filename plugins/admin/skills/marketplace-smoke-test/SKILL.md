@@ -1,7 +1,7 @@
 ---
 name: marketplace-smoke-test
 description: >
-  Confirm the WWT Digital skills marketplace is installed and working end to end: the
+  Confirm the WWTDigital skills marketplace is installed and working end to end: the
   plugin loaded, its skills are visible, and bundled scripts run. Use when someone says
   "test the skills marketplace", "is the wwt-digital marketplace working", "smoke test the
   plugin install", or "did my skills install correctly". Reports which install path is in
@@ -12,7 +12,7 @@ metadata:
   category: admin
   status: draft
   connectors: []
-  version: 0.1.2
+  version: 0.1.3
 ---
 
 # Marketplace Smoke Test

@@ -44,7 +44,7 @@ export function InstallTabs({
         <div className="panel" role="tabpanel">
           <ol>
             <li>
-              Add the marketplace once (needs access to the GitHub repo):
+              Add the marketplace once (public repo, no login needed):
               <CopyCmd text={`/plugin marketplace add ${slug}`} />
             </li>
             <li>
@@ -83,8 +83,8 @@ export function InstallTabs({
       {tab === "cowork" && (
         <div className="panel" role="tabpanel">
           <p className="lead">
-            If you have GitHub access: <b>Customize</b> &gt; <b>Plugins</b> &gt; <b>+ Add</b> &gt;{" "}
-            <b>Add marketplace</b>, then paste
+            <b>Customize</b> &gt; <b>Plugins</b> &gt; <b>+ Add</b> &gt; <b>Add marketplace</b>, then paste (public
+            repo, no GitHub account needed):
           </p>
           <ol>
             <li>
@@ -96,8 +96,9 @@ export function InstallTabs({
             </li>
           </ol>
           <p className="lead" style={{ marginTop: 18 }}>
-            No GitHub account? That dialog only takes a GitHub repo or a git URL, not a plain link, so download a
-            bundle&apos;s <b>.zip</b> below, then <b>Customize</b> &gt; <b>Plugins</b> &gt; <b>+ Add</b> &gt;{" "}
+            That dialog only takes a GitHub repo or a git URL, not a plain link. If it gives you trouble, or you'd
+            rather skip it: download a bundle&apos;s <b>.zip</b> below, then <b>Customize</b> &gt; <b>Plugins</b>{" "}
+            &gt; <b>+ Add</b> &gt;{" "}
             <b>Upload plugin</b> and pick the file. (The URL marketplace works in Claude Code&apos;s terminal, just
             not yet in this dialog — see the No GitHub account tab.)
           </p>

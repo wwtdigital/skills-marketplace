@@ -10,8 +10,8 @@ const sans = Geist({ subsets: ["latin"], variable: "--font-sans" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: { default: "WWT Digital Skills", template: "%s | WWT Digital Skills" },
-  description: "Browse and install WWT Digital's shared Claude skills and MCP servers, grouped by category.",
+  title: { default: "WWTDigital Skills", template: "%s | WWTDigital Skills" },
+  description: "Browse and install WWTDigital's shared Claude skills and MCP servers, grouped by category.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="wrap nav">
             <Link className="brand" href="/">
               <span className="brand-mark" aria-hidden="true" />
-              WWT Digital Skills
+              WWTDigital Skills
             </Link>
             <span className="sp" />
             <nav className="nav-links" aria-label="Primary">

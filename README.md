@@ -1,6 +1,6 @@
-# WWT Digital Skills Marketplace
+# WWTDigital Skills Marketplace
 
-A shared catalog of Claude skills for WWT Digital, organised by category. Each
+A shared catalog of Claude skills for WWTDigital, organised by category. Each
 category is a **plugin**; each plugin contains one or more **skills**. Install the
 bundles you need and Claude picks up the skills automatically in Claude Code and
 Cowork.
@@ -24,9 +24,10 @@ Repeat `/plugin install <plugin>@wwt-digital` for each bundle you want. Run
 Open *Customize → Plugins → Add marketplace* and paste
 `https://github.com/wwtdigital/skills-marketplace`, then install the bundles you want.
 
-**No GitHub access?**
+**No GitHub account?**
 
-In Claude Code, add the marketplace from the site instead. It works the same, updates included:
+The repo is public, so the GitHub route above needs no account or access. If you'd rather skip
+GitHub entirely, add the marketplace from the site instead in Claude Code:
 
 ```
 /plugin marketplace add https://skills-marketplace.wwtdigital.io/marketplace.json

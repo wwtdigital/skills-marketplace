@@ -1,9 +1,9 @@
 {
   "name": "wwt-digital",
-  "description": "WWT Digital's shared catalog of Claude skills, grouped by category: presentation, research, ops, admin and tech. Install the bundles you need, or browse and download individual skills at the marketplace site.",
+  "description": "WWTDigital's shared catalog of Claude skills, grouped by category: presentation, research, ops, admin and tech. Install the bundles you need, or browse and download individual skills at the marketplace site.",
   "version": "0.2.0",
   "owner": {
-    "name": "WWT Digital",
+    "name": "WWTDigital",
     "url": "https://github.com/wwtdigital"
   },
   "metadata": {
@@ -25,7 +25,7 @@
         "brand"
       ],
       "author": {
-        "name": "WWT Digital"
+        "name": "WWTDigital"
       }
     },
     {
@@ -41,7 +41,7 @@
         "data"
       ],
       "author": {
-        "name": "WWT Digital"
+        "name": "WWTDigital"
       }
     },
     {
@@ -57,7 +57,7 @@
         "staffing"
       ],
       "author": {
-        "name": "WWT Digital"
+        "name": "WWTDigital"
       }
     },
     {
@@ -73,7 +73,7 @@
         "contributing"
       ],
       "author": {
-        "name": "WWT Digital"
+        "name": "WWTDigital"
       }
     },
     {
@@ -89,7 +89,7 @@
         "architecture"
       ],
       "author": {
-        "name": "WWT Digital"
+        "name": "WWTDigital"
       }
     }
   ],

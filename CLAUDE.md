@@ -4,12 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A Claude Code / Cowork **plugin marketplace** for WWT Digital. Marketplace name `wwt-digital`.
+A Claude Code / Cowork **plugin marketplace** for WWTDigital. Marketplace name `wwt-digital`.
 Skills are grouped into one plugin per category; users install the bundles they need.
 A Next.js site (`site/`, deployed to Vercel) lets people browse and download skills without GitHub.
 
 Hosting:
-- Repo: `github.com/wwtdigital/skills-marketplace` (private)
+- Repo: `github.com/wwtdigital/skills-marketplace` (public since 2026-09-23, so the GitHub install
+  path needs no org membership or account; the site's downloads already made everything else in it
+  public anyway. `wwtdigital` already runs other public repos, so this isn't out of pattern.)
 - Vercel: project `skills-marketplace` in team `wwtd`, Root Directory `site`, Next.js preset,
   production branch `main`. Every pushed branch gets a preview deployment.
 - Site: `https://skills-marketplace.wwtdigital.io` (`wwtdigital.io` DNS is managed in the `wwtd` team)
@@ -77,8 +79,8 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   `validate.py --base` enforces the bumps (see below).
 - `site/public/data/` and `site/public/downloads/` are generated at build time and gitignored.
 - `CONTRIBUTING.md` is published as the site's `/contribute` page (read from the repo root at build
-  time), because most contributors can't see the private repo. Write it for them: absolute links to
-  the site (made relative when rendered), no links into the repo they can't open.
+  time), for contributors who never open the repo at all. Write it for them: absolute links to the
+  site (made relative when rendered), no links assuming repo familiarity.
 - Maintainers commit straight to `main` for now (no PRs). A push to `main` deploys production, so
   run `npm --prefix site run build` first; a failed Vercel build leaves the last good deploy up.
 
@@ -127,8 +129,8 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   them as `mcp_servers` per plugin, which the site shows on the plugin card. Verified: installing
   the plugin registers `plugin:<category>:<server>` in `claude mcp list`.
 - Two ways to install the marketplace. The git one (`/plugin marketplace add wwtdigital/skills-marketplace`)
-  needs GitHub access to this private repo. The URL one (`/plugin marketplace add
-  https://skills-marketplace.wwtdigital.io/marketplace.json`) needs no GitHub account: build-index
+  needs no account or access now that the repo is public. The URL one (`/plugin marketplace add
+  https://skills-marketplace.wwtdigital.io/marketplace.json`) needs no GitHub account either: build-index
   generates that file with every plugin as an `archive` source (`downloads/<plugin>.zip` + `sha256`).
   Both use the same marketplace name, so plugin ids are the same. Claude Code only accepts https
   archive URLs on non-loopback hosts, so you can't test it on localhost, and previews are behind

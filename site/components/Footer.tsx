@@ -6,7 +6,7 @@ export function Footer({ catalog }: { catalog: Catalog | null }) {
   return (
     <footer className="site-footer">
       <div className="wrap">
-        <span>WWT Digital Skills{m && `, updated ${formatDate(m.generated)}`}</span>
+        <span>WWTDigital Skills{m && `, updated ${formatDate(m.generated)}`}</span>
         <nav aria-label="Footer">
           <Link href="/contribute">Contribute</Link>
           <a href="mailto:scott.cullum@wwt.com">Contact the maintainer</a>

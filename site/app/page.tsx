@@ -22,7 +22,7 @@ export default function Home() {
                 Skills Claude already knows how to use.
               </h1>
               <p className="hero-sub rise" style={step(1)}>
-                Shared across WWT Digital. Install a category bundle and Claude picks up the team&apos;s workflows in
+                Shared across WWTDigital. Install a category bundle and Claude picks up the team&apos;s workflows in
                 Claude Code and Cowork.
               </p>
               <div className="hero-ctas rise" style={step(2)}>

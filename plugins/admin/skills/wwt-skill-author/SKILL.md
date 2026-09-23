@@ -1,10 +1,10 @@
 ---
 name: wwt-skill-author
 description: >
-  Author a new Claude skill for the WWT Digital skills marketplace, or get an existing
+  Author a new Claude skill for the WWTDigital skills marketplace, or get an existing
   skill ready to submit. Use when someone says "make this a skill", "add a skill to the
   marketplace", "turn this workflow into a skill", "package this for the team", or asks
-  how to contribute a skill. Produces a SKILL.md in the WWT Digital format inside the
+  how to contribute a skill. Produces a SKILL.md in the WWTDigital format inside the
   right category plugin, runs the marketplace validator, and drafts the PR description.
   Not for editing skills that live outside this marketplace.
 metadata:
@@ -12,7 +12,7 @@ metadata:
   category: admin
   status: beta
   connectors: []
-  version: 0.1.3
+  version: 0.1.4
 ---
 
 # WWT Skill Author

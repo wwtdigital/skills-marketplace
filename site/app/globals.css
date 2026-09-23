@@ -1,5 +1,5 @@
 /*
-  WWT Digital Skills: design tokens + components. Native CSS, no framework.
+  WWTDigital Skills: design tokens + components. Native CSS, no framework.
   Dials (taste skill): VARIANCE 6 / MOTION 4 / DENSITY 4.
   Shape rule: controls and containers use --r (8px); status badges and filter chips are full pills.
   Color rule: one accent (--accent) for the whole site; statuses differ by fill style, not hue.

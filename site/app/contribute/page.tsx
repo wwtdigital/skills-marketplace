@@ -5,7 +5,7 @@ import { loadCatalog, loadRepoDoc } from "@/lib/load";
 
 export const metadata: Metadata = {
   title: "Contribute",
-  description: "How to add a skill or MCP server to the WWT Digital skills marketplace, with or without a GitHub account.",
+  description: "How to add a skill or MCP server to the WWTDigital skills marketplace, with or without a GitHub account.",
 };
 
 // Rendered from the repo's CONTRIBUTING.md at build time, so people without access to the
