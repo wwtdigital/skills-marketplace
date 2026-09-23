@@ -14,6 +14,7 @@ Vercel project needs "Include files outside the root directory" enabled (the def
 
 - `app/page.tsx`: catalog, install tabs, search and status filter (`components/`)
 - `app/skills/[name]/page.tsx`: one page per skill, rendering its SKILL.md body
+- `app/contribute/page.tsx`: the repo's `CONTRIBUTING.md`, rendered at build time (`components/Prose.tsx`)
 - `lib/catalog.ts`: catalog types and client-safe helpers. `lib/load.ts` reads the file and is server-only.
 
 Local preview:

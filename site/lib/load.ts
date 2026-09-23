@@ -19,3 +19,12 @@ export function findSkill(catalog: Catalog | null, name: string) {
   }
   return null;
 }
+
+/** A markdown doc from the repo root (e.g. CONTRIBUTING.md), read at build time. */
+export function loadRepoDoc(name: string): string | null {
+  try {
+    return readFileSync(path.join(process.cwd(), "..", name), "utf8");
+  } catch {
+    return null;
+  }
+}

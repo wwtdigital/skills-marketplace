@@ -15,7 +15,7 @@ export default function Home() {
         <section className="hero">
           <h1>Skills Claude already knows how to use — shared across WWT Digital.</h1>
           <p>
-            Install the bundle for your discipline and Claude picks up the team&apos;s workflows in Claude Code and
+            Install the bundles you need and Claude picks up the team&apos;s workflows in Claude Code and
             Cowork. No GitHub account? Download any skill as a file below.
           </p>
           {catalog && (
@@ -40,7 +40,7 @@ export default function Home() {
         />
 
         {catalog ? (
-          <Catalog plugins={catalog.plugins} repo={repo} />
+          <Catalog plugins={catalog.plugins} />
         ) : (
           <div className="empty">
             Catalog not built yet. Run <code>npm run catalog</code>.

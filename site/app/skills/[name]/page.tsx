@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { CopyCmd } from "@/components/CopyCmd";
 import { Footer } from "@/components/Footer";
+import { Prose } from "@/components/Prose";
 import { asset, formatDate } from "@/lib/catalog";
 import { findSkill, loadCatalog } from "@/lib/load";
 
@@ -77,12 +76,7 @@ export default async function SkillPage({ params }: Props) {
           </a>
         </div>
 
-        {s.body && (
-          <article className="prose">
-            <h2 className="prose-label">SKILL.md</h2>
-            <Markdown remarkPlugins={[remarkGfm]}>{s.body}</Markdown>
-          </article>
-        )}
+        {s.body && <Prose label="SKILL.md">{s.body}</Prose>}
       </main>
       <Footer catalog={catalog} />
     </>

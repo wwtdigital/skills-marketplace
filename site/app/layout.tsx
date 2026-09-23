@@ -10,7 +10,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: { default: "WWT Digital Skills", template: "%s · WWT Digital Skills" },
-  description: "Browse and install WWT Digital's shared Claude skills, grouped by discipline.",
+  description: "Browse and install WWT Digital's shared Claude skills, grouped by category.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -34,9 +34,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a className="lnk" href={repo} target="_blank" rel="noopener">
               GitHub
             </a>
-            <a className="lnk" href={`${repo}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener">
+            <Link className="lnk" href="/contribute">
               Contribute
-            </a>
+            </Link>
           </div>
         </header>
         {children}

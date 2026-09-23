@@ -13,7 +13,7 @@ function matches(s: Skill, q: string, statuses: Set<string>) {
   return [s.name, s.description, s.summary, ...s.connectors].join(" ").toLowerCase().includes(q);
 }
 
-export function Catalog({ plugins, repo }: { plugins: Plugin[]; repo: string }) {
+export function Catalog({ plugins }: { plugins: Plugin[] }) {
   const [query, setQuery] = useState("");
   const [statuses, setStatuses] = useState<Set<string>>(new Set());
   const [open, setOpen] = useState<Set<string>>(new Set());
@@ -108,7 +108,7 @@ export function Catalog({ plugins, repo }: { plugins: Plugin[]; repo: string }) 
               </div>
             ) : (
               <div className="empty">
-                No skills in this bundle yet — <a href={`${repo}/blob/main/CONTRIBUTING.md`}>be the first to add one</a>.
+                No skills in this bundle yet — <Link href="/contribute">be the first to add one</Link>.
               </div>
             )}
           </div>

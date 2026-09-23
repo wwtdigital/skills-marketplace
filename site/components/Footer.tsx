@@ -1,8 +1,8 @@
-import { formatDate, REPO_URL, type Catalog } from "@/lib/catalog";
+import Link from "next/link";
+import { formatDate, type Catalog } from "@/lib/catalog";
 
 export function Footer({ catalog }: { catalog: Catalog | null }) {
   const m = catalog?.marketplace;
-  const repo = m?.repo || REPO_URL;
   return (
     <footer className="wrap">
       {m && (
@@ -15,7 +15,7 @@ export function Footer({ catalog }: { catalog: Catalog | null }) {
         Maintained by WWT Digital · <a href="mailto:scott.cullum@wwt.com">scott.cullum@wwt.com</a>
       </span>
       <span>
-        <a href={`${repo}/blob/main/CONTRIBUTING.md`}>How to contribute a skill</a>
+        <Link href="/contribute">How to contribute a skill</Link>
       </span>
     </footer>
   );

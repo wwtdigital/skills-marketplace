@@ -2,6 +2,7 @@
 //   data/index.json            catalog of plugins + skills (rendered by the Next.js pages)
 //   downloads/<skill>.skill    zip of each skill folder, for installing one skill by hand
 //   downloads/<plugin>.zip     zip of each whole plugin (plugin files at the zip root)
+//   downloads/skill-template.zip  the skill template, for contributors without repo access
 //   marketplace.json           the marketplace with every plugin as an `archive` source pointing at
 //                              downloads/<plugin>.zip, so people without GitHub access can run
 //                              `/plugin marketplace add https://<site>/marketplace.json`
@@ -142,6 +143,7 @@ export function build(out: string, prev: Catalog | null): Catalog {
     archiveEntries.push({ ...entry, source: { source: "archive", url: `${base}/${plugin.download}`, sha256 } });
   }
 
+  zipDir(path.join(ROOT, "templates", "skill-template"), path.join(dl, "skill-template.zip"), "skill-template");
   writeFileSync(path.join(out, "data", "index.json"), JSON.stringify(index, null, 2) + "\n");
   // Same marketplace (same name, so installs are interchangeable), minus git-only fields.
   const { metadata, ...rest } = mp;
