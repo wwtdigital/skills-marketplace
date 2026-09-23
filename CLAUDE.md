@@ -9,9 +9,11 @@ Skills are grouped into one plugin per category; users install the bundles they 
 A Next.js site (`site/`, deployed to Vercel) lets people browse and download skills without GitHub.
 
 Hosting:
-- Repo: `github.com/wwtdigital/skills-marketplace` (public since 2026-09-23, so the GitHub install
+- Repo: `github.com/wwtdigital/skills-marketplace` (made public 2026-09-23 so the GitHub install
   path needs no org membership or account; the site's downloads already made everything else in it
-  public anyway. `wwtdigital` already runs other public repos, so this isn't out of pattern.)
+  public anyway, and `wwtdigital` already runs other public repos, so this isn't out of pattern.
+  **Owner calls this temporary, a for-now fix, not a settled decision** — don't assume it stays
+  public, and check with the owner before building anything that depends on it staying that way.)
 - Vercel: project `skills-marketplace` in team `wwtd`, Root Directory `site`, Next.js preset,
   production branch `main`. Every pushed branch gets a preview deployment.
 - Site: `https://skills-marketplace.wwtdigital.io` (`wwtdigital.io` DNS is managed in the `wwtd` team)
