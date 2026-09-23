@@ -20,9 +20,22 @@ jobs:
           python-version: "3.12"
       - run: pip install pyyaml
       - name: Validate manifests and skills
-        run: python3 scripts/validate.py ${{ github.ref == 'refs/heads/main' && '--strict' || '' }}
+        run: python3 scripts/validate.py --strict
+      - name: Require version bumps for changed plugins and skills
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/validate.py --strict --base origin/${{ github.base_ref }}
       - name: Dry-run site index
         run: python3 scripts/build_index.py --check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Build site against this branch's catalog (not committed)
+        run: |
+          python3 scripts/build_index.py
+          npm ci --prefix site
+          npm run build --prefix site
       - name: Official validator (claude plugin validate)
         run: |
           npm install -g @anthropic-ai/claude-code
@@ -41,18 +54,18 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pyyaml
-      - name: Build site/data and site/downloads
+      - name: Build site/public/data and site/public/downloads
         run: python3 scripts/build_index.py
       - name: Commit generated catalog
         run: |
           git config user.name "wwtd-skills-bot"
           git config user.email "skills-bot@wwt.com"
-          git add site/data site/downloads
+          git add site/public/data site/public/downloads
           if git diff --cached --quiet; then
             echo "catalog unchanged"
           else
             git commit -m "chore(site): rebuild catalog [skip ci]"
             git push
           fi
-      # Vercel is connected to this repo with Root Directory = site/, so the push above
+      # Vercel is connected to this repo with Root Directory = site/ (Next.js preset), so the push above
       # triggers the deploy. No Vercel token needed here.

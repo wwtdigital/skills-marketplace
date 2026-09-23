@@ -1,0 +1,159 @@
+{
+  "marketplace": {
+    "name": "wwt-digital",
+    "description": "WWT Digital's shared catalog of Claude skills, grouped by discipline. Install a bundle for your role, or browse and download individual skills at the marketplace site.",
+    "version": "0.1.0",
+    "repo": "https://github.com/wwtdigital/skills-marketplace",
+    "install": "/plugin marketplace add wwtdigital/skills-marketplace",
+    "generated": "2026-09-23T15:29:13+00:00",
+    "commit": "a8b85ed"
+  },
+  "plugins": [
+    {
+      "name": "creative-tech",
+      "displayName": "Creative Technology",
+      "description": "Skills for the Creative Technology team: prototyping, experience design, staffing and team operations.",
+      "category": "discipline",
+      "tags": [
+        "creative-tech",
+        "prototyping",
+        "xd",
+        "staffing"
+      ],
+      "version": "0.1.0",
+      "author": "WWT Digital \u2014 Creative Technology",
+      "install": "/plugin install creative-tech@wwt-digital",
+      "source": "https://github.com/wwtdigital/skills-marketplace/tree/main/plugins/creative-tech",
+      "download": "downloads/creative-tech.zip",
+      "download_bytes": 877,
+      "skills": []
+    },
+    {
+      "name": "engineering",
+      "displayName": "Engineering",
+      "description": "Skills for software engineers: code review, architecture documentation, repo hygiene, CI/CD.",
+      "category": "discipline",
+      "tags": [
+        "engineering",
+        "code-review",
+        "architecture",
+        "devops"
+      ],
+      "version": "0.1.0",
+      "author": "WWT Digital \u2014 Engineering",
+      "install": "/plugin install engineering@wwt-digital",
+      "source": "https://github.com/wwtdigital/skills-marketplace/tree/main/plugins/engineering",
+      "download": "downloads/engineering.zip",
+      "download_bytes": 863,
+      "skills": []
+    },
+    {
+      "name": "brand-and-voice",
+      "displayName": "Brand & Voice",
+      "description": "Skills for writing and design in the WWT house style: brand-compliant decks, documents, reports and copy review.",
+      "category": "discipline",
+      "tags": [
+        "brand",
+        "writing",
+        "design",
+        "presentations"
+      ],
+      "version": "0.1.0",
+      "author": "WWT Digital \u2014 Brand",
+      "install": "/plugin install brand-and-voice@wwt-digital",
+      "source": "https://github.com/wwtdigital/skills-marketplace/tree/main/plugins/brand-and-voice",
+      "download": "downloads/brand-and-voice.zip",
+      "download_bytes": 913,
+      "skills": []
+    },
+    {
+      "name": "delivery",
+      "displayName": "Delivery & Program Management",
+      "description": "Skills for delivery leads and PMs: status reporting, risk tracking, SOW and estimate support, client comms.",
+      "category": "discipline",
+      "tags": [
+        "delivery",
+        "pm",
+        "status",
+        "client"
+      ],
+      "version": "0.1.0",
+      "author": "WWT Digital \u2014 Delivery",
+      "install": "/plugin install delivery@wwt-digital",
+      "source": "https://github.com/wwtdigital/skills-marketplace/tree/main/plugins/delivery",
+      "download": "downloads/delivery.zip",
+      "download_bytes": 882,
+      "skills": []
+    },
+    {
+      "name": "data-ai",
+      "displayName": "Data & AI",
+      "description": "Skills for data and AI practitioners: analysis workflows, model evaluation, prompt and agent design patterns.",
+      "category": "discipline",
+      "tags": [
+        "data",
+        "ai",
+        "analytics",
+        "agents"
+      ],
+      "version": "0.1.0",
+      "author": "WWT Digital \u2014 Data & AI",
+      "install": "/plugin install data-ai@wwt-digital",
+      "source": "https://github.com/wwtdigital/skills-marketplace/tree/main/plugins/data-ai",
+      "download": "downloads/data-ai.zip",
+      "download_bytes": 865,
+      "skills": []
+    },
+    {
+      "name": "marketplace-tooling",
+      "displayName": "Marketplace Tooling",
+      "description": "Helpers for contributing to this marketplace: author a new skill in the WWT Digital format and check it before opening a PR.",
+      "category": "tooling",
+      "tags": [
+        "skills",
+        "authoring",
+        "contributing"
+      ],
+      "version": "0.2.0",
+      "author": "WWT Digital",
+      "install": "/plugin install marketplace-tooling@wwt-digital",
+      "source": "https://github.com/wwtdigital/skills-marketplace/tree/main/plugins/marketplace-tooling",
+      "download": "downloads/marketplace-tooling.zip",
+      "download_bytes": 5300,
+      "skills": [
+        {
+          "name": "marketplace-smoke-test",
+          "description": "Confirm the WWT Digital skills marketplace is installed and working end to end: the plugin loaded, its skills are visible, and bundled scripts run. Use when someone says \"test the skills marketplace\", \"is the wwt-digital marketplace working\", \"smoke test the plugin install\", or \"did my skills install correctly\". Reports which install path is in use (plugin or standalone .skill) and the installed versions. Not for validating a skill you are writing \u2014 use wwt-skill-author for that.",
+          "summary": "A tiny skill that exists to prove the marketplace pipeline works: install, skill discovery, bundled scripts, and version reporting. Safe to run anywhere; it only reads its own files.",
+          "body": "# Marketplace Smoke Test\n\nA tiny skill that exists to prove the marketplace pipeline works: install, skill discovery,\nbundled scripts, and version reporting. Safe to run anywhere; it only reads its own files.\n\n## Steps\n\n1. Run the bundled script from this skill's base directory:\n   ```\n   python3 scripts/report.py\n   ```\n   It prints JSON with the skill version, the plugin name and version (if installed as a\n   plugin), and the install path.\n2. Report the result to the user as a short table:\n\n   | Check | Result |\n   | --- | --- |\n   | Skill loaded | yes |\n   | Bundled script ran | yes / no (with the error) |\n   | Install type | `plugin` or `standalone` |\n   | Skill version | from the script output |\n   | Plugin version | from the script output, or n/a |\n\n3. **Verify:** the `skill_version` the script printed must match the `metadata.version` in\n   this SKILL.md's frontmatter. If they differ, the install is stale \u2014 tell the user to run\n   `/plugin marketplace update wwt-digital` and reinstall. See\n   [references/troubleshooting.md](references/troubleshooting.md) for other failures.\n\n## Guardrails\n\n- Read-only. Never modify files, settings, or installed plugins.\n- If `python3` is unavailable, say so and report the other checks from what you can see.",
+          "owner": "scott.cullum@wwt.com",
+          "status": "draft",
+          "version": "0.1.0",
+          "connectors": [],
+          "has_scripts": true,
+          "has_references": true,
+          "updated": "2026-09-23T15:29:13+00:00",
+          "source": "https://github.com/wwtdigital/skills-marketplace/tree/main/plugins/marketplace-tooling/skills/marketplace-smoke-test",
+          "download": "downloads/marketplace-smoke-test.skill",
+          "download_bytes": 2245
+        },
+        {
+          "name": "wwt-skill-author",
+          "description": "Author a new Claude skill for the WWT Digital skills marketplace, or get an existing skill ready to submit. Use when someone says \"make this a skill\", \"add a skill to the marketplace\", \"turn this workflow into a skill\", \"package this for the team\", or asks how to contribute a skill. Produces a SKILL.md in the WWT Digital format inside the right discipline plugin, runs the marketplace validator, and drafts the PR description. Not for editing skills that live outside this marketplace.",
+          "summary": "Turns a repeatable workflow into a skill that passes the marketplace's checks on the first try. Works for engineers in a checkout of the repo and for non-engineers who will hand the finished folder to a maintainer.",
+          "body": "# WWT Skill Author\n\nTurns a repeatable workflow into a skill that passes the marketplace's checks on the\nfirst try. Works for engineers in a checkout of the repo and for non-engineers who will\nhand the finished folder to a maintainer.\n\n## Inputs\n\nAsk for these before writing anything (one question at a time):\n\n1. What the skill does, in the user's words, and 3\u20135 phrases people say when they want it.\n2. Which discipline plugin it belongs to (`creative-tech`, `engineering`,\n   `brand-and-voice`, `delivery`, `data-ai`). If unsure, propose one.\n3. Which connectors it needs (Slack, Notion, Microsoft 365, GitLab\u2026), if any.\n4. An example of a good finished output, if one exists.\n\n## Steps\n\n1. Locate the marketplace root (the folder containing `.claude-plugin/marketplace.json`).\n   If not in a checkout, work in a scratch folder and tell the user to zip and send it.\n2. Copy `templates/skill-template/` to `plugins/<discipline>/skills/<skill-name>/`.\n   Name in kebab-case; prefix with `wwt-` only if the skill is WWT-brand specific.\n3. Write the `description` first. It must answer *what* and *when*, include the trigger\n   phrases from step 1, and name exclusions if a neighbouring skill overlaps. Keep it\n   under 1,024 characters.\n4. Fill the body. Prefer numbered steps over prose. Put anything longer than a screen\n   into `references/` and link to it. Put deterministic work into `scripts/`.\n5. Add a verification step to the skill's own workflow \u2014 every marketplace skill checks\n   its output before handing it over.\n6. Run `python3 scripts/validate.py --strict --base origin/main` from the marketplace root and fix everything it\n   reports. Then run `python3 scripts/build_index.py --check` to confirm the skill will\n   appear correctly on the site.\n7. Add a row to the plugin's `README.md` skills table, and bump the plugin's `plugin.json`\n   `version` (plus the skill's `metadata.version` if it already existed). Without the plugin\n   bump, people who already installed the plugin never get the change.\n8. Draft the PR using `.github/PULL_REQUEST_TEMPLATE.md`. Include two or three test\n   prompts a reviewer can paste to see the skill trigger.\n\n## Output\n\nA folder `plugins/<discipline>/skills/<skill-name>/` containing `SKILL.md` and optional\n`scripts/`, `references/`, `assets/`; a passing validator run; a PR description.\n\n## Guardrails\n\n- Never put credentials, tokens, customer names or client data in a skill.\n- Never commit or push; leave that to the contributor.\n- Do not edit other skills in the same PR unless the user asks.\n\n## Examples\n\n**User says:** \"Turn my weekly client status email process into a skill for the delivery team.\"\n**Claude does:** asks the four input questions, scaffolds\n`plugins/delivery/skills/client-status-report/`, writes the description with triggers like\n\"status report\", \"weekly update for the client\", runs the validator, drafts the PR.",
+          "owner": "scott.cullum@wwt.com",
+          "status": "beta",
+          "version": "0.1.1",
+          "connectors": [],
+          "has_scripts": false,
+          "has_references": false,
+          "updated": "2026-09-23T11:05:30-04:00",
+          "source": "https://github.com/wwtdigital/skills-marketplace/tree/main/plugins/marketplace-tooling/skills/wwt-skill-author",
+          "download": "downloads/wwt-skill-author.skill",
+          "download_bytes": 1903
+        }
+      ]
+    }
+  ]
+}

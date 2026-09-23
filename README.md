@@ -50,8 +50,8 @@ plugins/<plugin>/
   README.md                       what's in the bundle
 templates/skill-template/         copy this to start a skill
 scripts/validate.py               checks manifests and every SKILL.md
-scripts/build_index.py            builds site/data/index.json and site/downloads/*.skill
-site/                             static site deployed to Vercel
+scripts/build_index.py            builds site/public/data/index.json and site/public/downloads/*.skill
+site/                             Next.js site (static export) deployed to Vercel
 ```
 
 ## Contributing

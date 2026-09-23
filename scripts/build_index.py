@@ -2,12 +2,12 @@
 """Build the data the marketplace site reads.
 
 Writes:
-  site/data/index.json          catalog of plugins + skills
-  site/downloads/<skill>.skill  zip of each skill folder (for people without GitHub)
-  site/downloads/<plugin>.zip   zip of each whole plugin
+  site/public/data/index.json          catalog of plugins + skills (read by the Next.js site at build time)
+  site/public/downloads/<skill>.skill  zip of each skill folder (for people without GitHub)
+  site/public/downloads/<plugin>.zip   zip of each whole plugin
 
 Usage:  python3 scripts/build_index.py [--check]
-  --check   build to a temp dir and just report; don't write into site/
+  --check   build to a temp dir and just report; don't write into site/public/
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ from pathlib import Path
 
 from common import ROOT, iter_skills, load_marketplace, load_plugin_manifest, plugin_dir
 
-SITE = ROOT / "site"
+SITE = ROOT / "site" / "public"
 REPO_URL = "https://github.com/wwtdigital/skills-marketplace"
 
 
@@ -91,6 +91,7 @@ def build(out: Path) -> dict:
                 "name": sk.name,
                 "description": sk.description,
                 "summary": first_heading_para(sk.body),
+                "body": sk.body.strip(),
                 "owner": sk.metadata.get("owner", ""),
                 "status": sk.metadata.get("status", "draft"),
                 "version": str(sk.metadata.get("version", "")),
