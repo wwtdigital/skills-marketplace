@@ -1,17 +1,23 @@
-# CLAUDE.md — WWT Digital Skills Marketplace
+# CLAUDE.md
 
-Claude Code context for this repo. Read before making changes.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## What this is
 
 A Claude Code / Cowork **plugin marketplace** for WWT Digital. Marketplace name `wwt-digital`.
 Skills are grouped into one plugin per discipline; users install a bundle for their role.
-A static site (`site/`, deployed to Vercel) lets people browse and download skills without GitHub.
+A Next.js site (`site/`, deployed to Vercel) lets people browse and download skills without GitHub.
 
-Target hosting (not yet created):
-- Repo: `github.com/wwtdigital/skills-marketplace`
-- Site: `https://skills.wwtdigital.com` (hostname is assumed — change in `marketplace.json`,
-  `README.md`, `scripts/build_index.py` if different)
+Hosting:
+- Repo: `github.com/wwtdigital/skills-marketplace` (private)
+- Vercel: project `skills-marketplace` in team `wwtd`, Root Directory `site`, Next.js preset,
+  production branch `main`. Every pushed branch gets a preview deployment.
+- Site: `https://skills-marketplace.wwtdigital.io` (`wwtdigital.io` DNS is managed in the `wwtd` team)
+
+If either changes, `git grep` for it. The site hostname lives in `marketplace.json` `metadata.site`,
+every `plugin.json` `homepage`, and `README.md`. The repo slug lives in `site/lib/catalog.ts`
+(`REPO_URL`, shared by the build scripts and the pages), every `plugin.json` `repository`, and
+`README.md`.
 
 ## Layout
 
@@ -22,11 +28,10 @@ plugins/<plugin>/
   skills/<skill>/SKILL.md         one folder per skill (+ optional scripts/ references/ assets/)
   README.md                       bundle description + skills table (update when adding a skill)
 templates/skill-template/         starting point for new skills; frontmatter has a `metadata` block
-scripts/common.py                 shared loaders (stdlib + PyYAML)
-scripts/validate.py               lint everything; --strict makes warnings fatal (CI on main)
-scripts/build_index.py            writes site/data/index.json + site/downloads/*.skill|*.zip
-site/                             static, no build; Vercel Root Directory = site/
-.github/workflows/ci.yml          validate on PR; on main rebuild catalog and commit it
+site/                             Next.js App Router on Vercel (pages prerendered); Root Directory = site/
+site/scripts/validate.ts          lint the whole repo; --strict makes warnings fatal; version-bump checks
+site/scripts/build-index.ts       writes site/public/{data/index.json, downloads/, marketplace.json}
+site/scripts/lib.ts               shared loaders (marketplace, manifests, SKILL.md frontmatter, hashing)
 .github/CODEOWNERS                one GitHub team per discipline (teams don't exist yet)
 ```
 
@@ -35,14 +40,20 @@ Only `marketplace-tooling` has a skill so far (`wwt-skill-author`).
 
 ## Commands
 
+All tooling is Node (24+, which runs the `.ts` scripts directly). No Python.
+
 ```
-pip install pyyaml
-python3 scripts/validate.py            # must be 0 errors before any PR
-python3 scripts/build_index.py --check # dry run
-python3 scripts/build_index.py         # regenerates site/data + site/downloads (CI does this on main)
-claude plugin validate .               # official validator
-python3 -m http.server -d site 8080    # preview site locally
+cd site && npm ci
+npm run dev                            # generates the catalog, then http://localhost:3000
+npm run build && npm run typecheck     # the same build Vercel runs: strict validation + catalog + next build
+npm start                              # serve the production build
+npm run validate -- --strict --base origin/main   # pre-push: lint + version bumps vs main
+npm run catalog -- --check             # dry-run the catalog build
+claude plugin validate ..              # official validator (not run automatically)
 ```
+
+There is no test suite. `validate.ts` is the lint/test gate, and it always checks the whole repo
+(you can't point it at one skill).
 
 Test the marketplace itself: `/plugin marketplace add ./` from the repo root, then
 `/plugin install marketplace-tooling@wwt-digital`.
@@ -58,25 +69,76 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 - No secrets, client names or PII anywhere in `plugins/`. Validator scans for tokens.
 - Bump skill `metadata.version` and plugin `version` on every change; marketplace `version`
   when plugins are added/renamed/removed (use `renames` map for renames).
-- Don't hand-edit `site/data/` or `site/downloads/` — generated.
+- `plugin.json` `version` is the release gate: Claude Code skips `/plugin update` and auto-update
+  when it's unchanged, so a skill edit without a plugin bump never reaches installed users. It
+  overrides any `version` on the marketplace entry (keep it out of `marketplace.json`). Skill
+  `metadata.version` is informational only; the site shows it, Claude Code ignores it.
+  `validate.py --base` enforces the bumps (see below).
+- `site/public/data/` and `site/public/downloads/` are generated at build time and gitignored.
+
+## How the pipeline fits together
+
+- `marketplace.json` is the single source of truth. Both scripts iterate its `plugins[]` and resolve
+  each `source` (only relative-path sources are supported) via `common.plugin_dir`. A plugin folder
+  that isn't listed there is invisible to validation, the site and Claude.
+- The allowed `metadata.discipline` values come from `DISCIPLINES` in `site/scripts/lib.ts`, not from
+  plugin names. `marketplace-tooling` skills use `discipline: tooling`. Adding a discipline plugin
+  means updating `DISCIPLINES`, `marketplace.json`, `CODEOWNERS`, and the template's discipline list.
+- There is no GitHub Actions (not allowed here). The Vercel build is the CI: `npm run build` runs
+  `validate.ts --strict`, then `build-index.ts`, then `next build`. The scripts read `../plugins`
+  etc., so the Vercel project must include files outside the Root Directory (the default).
+  A validation failure fails the deploy, and Vercel reports that as the commit status on the PR.
+  Production keeps serving the last good build.
+- `--strict` makes warnings errors: a description with no "Use when…"/"trigger" wording, a
+  description under 80 chars, no "verif"/"check" in the body, a body over 250 lines, a missing
+  `metadata.version`. Empty plugins print a `NOTE`, not a warning.
+- Version bumps: any change under `plugins/<p>/` other than `README.md`/`.gitkeep` needs a higher
+  `plugin.json` version, and a changed existing skill needs a higher `metadata.version`. Adding or
+  removing a plugin needs a higher marketplace `version`. New plugins and new skills don't need a
+  bump of their own. There are two baselines for the same rules:
+  - On Vercel, the scripts default to `--prev-catalog auto` and compare per-plugin and per-skill
+    `content_hash`es against the live production catalog (`metadata.site` + `/data/index.json`).
+    The clone has no `origin/main`. If there's no production catalog yet, the check is skipped
+    with a `NOTE`.
+  - Locally, `--base origin/main` diffs the working tree, including uncommitted and untracked
+    files.
+- `build-index.ts` quietly drops any skill with structural problems (no SKILL.md, bad frontmatter,
+  name mismatch) from the site. Validation runs first in the build, so this only bites if you run
+  it on its own. "updated" dates come from the production catalog when a skill's hash is unchanged,
+  otherwise from `git log` (and the current time if that's empty).
+- The site reads `site/public/data/index.json` from disk at build time. Nothing is fetched at
+  runtime. Its shape is the `Catalog` type in `site/lib/catalog.ts`, which `build-index.ts` also
+  uses, so the compiler keeps them in step. `lib/load.ts` uses `node:fs`, so never import
+  it from a `"use client"` component.
+- Skill pages live at `/skills/<name>`, and downloads are `<name>.skill`, so skill names must be
+  unique across all plugins. `validate.ts` enforces this.
+- Two ways to install the marketplace. The git one (`/plugin marketplace add wwtdigital/skills-marketplace`)
+  needs GitHub access to this private repo. The URL one (`/plugin marketplace add
+  https://skills-marketplace.wwtdigital.io/marketplace.json`) needs no GitHub account: build-index
+  generates that file with every plugin as an `archive` source (`downloads/<plugin>.zip` + `sha256`).
+  Both use the same marketplace name, so plugin ids are the same. Claude Code only accepts https
+  archive URLs on non-loopback hosts, so you can't test it on localhost, and previews are behind
+  Vercel auth. Zips are deterministic (fixed mtime), so a `sha256` only changes when content does.
+- Plugin manifests link to `/#<plugin-name>`, which opens that bundle on the home page. Keep those
+  anchor ids.
+- When copying `templates/skill-template/`, rename the frontmatter `name: skill-template` and cut
+  the `discipline`/`status` option lists down to single values. Otherwise the validator fails.
 
 ## Do not touch without asking
 
 - `.claude-plugin/marketplace.json` plugin names (renaming breaks installs; use `renames`)
-- `.github/workflows/ci.yml` bot commit step
 - `site/vercel.json` download headers
 
 ## Backlog (in rough priority order)
 
-1. Create GitHub repo + teams named in CODEOWNERS; connect Vercel (Root Directory `site/`).
+1. Create the GitHub teams named in CODEOWNERS.
 2. Migrate Scott's existing skills as first PRs:
    `staffing-manager`, `wwt-scorecard` → creative-tech; `deslopify` → brand-and-voice;
    `mr-review-assistant`, `agents-md-generator`, `likec4-architect` → engineering.
    Each needs the `metadata` block added and a README table row.
-3. Site: skill detail should render the SKILL.md body (build_index could emit it as HTML).
-4. Add `relevance` hints to marketplace entries once admins allowlist the marketplace.
-5. Consider a Notion intake path for non-git contributors (Notion MCP has upload-skill).
-6. Decide on Cowork install wording once verified against the current desktop UI.
+3. Add `relevance` hints to marketplace entries once admins allowlist the marketplace.
+4. Consider a Notion intake path for non-git contributors (Notion MCP has upload-skill).
+5. Decide on Cowork install wording once verified against the current desktop UI.
 
 ## Origin
 

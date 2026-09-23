@@ -5,7 +5,7 @@ discipline is a **plugin**; each plugin contains one or more **skills**. Install
 bundle for your role and Claude picks up the skills automatically in Claude Code and
 Cowork.
 
-Browse the catalog and get step-by-step install help at **https://skills.wwtdigital.com**.
+Browse the catalog and get step-by-step install help at **https://skills-marketplace.wwtdigital.io**.
 
 ## Install
 
@@ -49,15 +49,15 @@ plugins/<plugin>/
   skills/<skill>/SKILL.md         one folder per skill
   README.md                       what's in the bundle
 templates/skill-template/         copy this to start a skill
-scripts/validate.py               checks manifests and every SKILL.md
-scripts/build_index.py            builds site/data/index.json and site/downloads/*.skill
-site/                             static site deployed to Vercel
+site/                             Next.js site deployed to Vercel
+site/scripts/validate.ts          checks manifests and every SKILL.md (runs in every Vercel build)
+site/scripts/build-index.ts       builds the catalog, downloads and the URL marketplace.json
 ```
 
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Short version: copy the template into the
-right plugin, write a great `description`, run `python3 scripts/validate.py`, open a PR.
+right plugin, write a great `description`, run `npm --prefix site run validate`, open a PR.
 Install `marketplace-tooling` and ask Claude to "make this a skill" and it will walk
 you through it.
 

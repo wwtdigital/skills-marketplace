@@ -12,7 +12,7 @@ metadata:
   discipline: tooling
   status: beta
   connectors: []
-  version: 0.1.0
+  version: 0.1.1
 ---
 
 # WWT Skill Author
@@ -44,10 +44,13 @@ Ask for these before writing anything (one question at a time):
    into `references/` and link to it. Put deterministic work into `scripts/`.
 5. Add a verification step to the skill's own workflow — every marketplace skill checks
    its output before handing it over.
-6. Run `python3 scripts/validate.py` from the marketplace root and fix everything it
-   reports. Then run `python3 scripts/build_index.py --check` to confirm the skill will
+6. Run `npm --prefix site run validate -- --strict --base origin/main` from the marketplace root
+   (after `npm ci --prefix site` once) and fix everything it reports. Then run
+   `npm --prefix site run catalog -- --check` to confirm the skill will
    appear correctly on the site.
-7. Add a row to the plugin's `README.md` skills table.
+7. Add a row to the plugin's `README.md` skills table, and bump the plugin's `plugin.json`
+   `version` (plus the skill's `metadata.version` if it already existed). Without the plugin
+   bump, people who already installed the plugin never get the change.
 8. Draft the PR using `.github/PULL_REQUEST_TEMPLATE.md`. Include two or three test
    prompts a reviewer can paste to see the skill trigger.
 

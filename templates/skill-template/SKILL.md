@@ -7,7 +7,7 @@ description: >
   This field is the only thing Claude reads to decide whether to load the skill — make it count.
 metadata:
   owner: your-name@wwt.com
-  discipline: creative-tech | engineering | brand-and-voice | delivery | data-ai
+  discipline: creative-tech | engineering | brand-and-voice | delivery | data-ai | tooling
   status: draft | beta | stable
   connectors: []          # e.g. [slack, notion, microsoft-365] — connectors this skill needs
   version: 0.1.0

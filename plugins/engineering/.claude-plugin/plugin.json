@@ -1,12 +1,12 @@
 {
   "name": "engineering",
   "displayName": "Engineering",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Skills for software engineers: code review, architecture documentation, repo hygiene, CI/CD.",
   "author": {
     "name": "WWT Digital \u2014 Engineering"
   },
-  "homepage": "https://skills.wwtdigital.com/#engineering",
+  "homepage": "https://skills-marketplace.wwtdigital.io/#engineering",
   "repository": "https://github.com/wwtdigital/skills-marketplace",
   "keywords": [
     "engineering",

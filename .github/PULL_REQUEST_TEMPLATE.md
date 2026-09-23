@@ -16,8 +16,8 @@ Paste these into Claude with the plugin installed. The first two should trigger 
 
 ## Checklist
 
-- [ ] `python3 scripts/validate.py` passes
-- [ ] `python3 scripts/build_index.py --check` passes
+- [ ] `npm --prefix site run validate -- --strict --base origin/main` passes
+- [ ] Vercel preview deployment for this PR succeeded
 - [ ] Description covers what / when / not-for
 - [ ] No secrets, client data or PII in the folder
 - [ ] Verification step included in the skill's workflow

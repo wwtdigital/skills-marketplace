@@ -14,8 +14,9 @@ comfortable with git.
    (with real trigger phrases), and what it's *not* for.
 4. Run the checks:
    ```
-   python3 scripts/validate.py
-   python3 scripts/build_index.py --check
+   npm ci --prefix site           # once; Node 24+
+   npm --prefix site run validate -- --strict --base origin/main
+   npm --prefix site run catalog -- --check
    claude plugin validate .        # if you have Claude Code installed
    ```
 5. Add a row to `plugins/<discipline>/README.md`.
@@ -38,7 +39,8 @@ in `.github/CODEOWNERS`; they'll open the PR for you and credit you as author.
   the script, recount the numbers).
 - **Safe.** No credentials, no client names or data, no irreversible actions without
   confirmation. Scripts are readable and don't fetch from untrusted sources.
-- **Small.** `SKILL.md` under ~200 lines. Longer material goes in `references/`.
+- **Small.** `SKILL.md` body under 250 lines (the validator warns past that, and warnings
+  fail the site build). Longer material goes in `references/`.
 - **Owned.** `metadata.owner` is a real WWT email that will answer questions.
 
 ## Skill lifecycle
@@ -54,6 +56,12 @@ every change (patch for wording, minor for new behaviour, major for changed trig
 Bump the marketplace `version` when plugins are added, renamed or removed. Use the
 marketplace `renames` map if you rename a plugin so existing installs migrate.
 
+The plugin version is what Claude Code checks for updates: if it doesn't go up, people who
+already installed the plugin never get your change. The Vercel preview build for your PR fails
+if a plugin or skill changed without a bump (it compares against the live site). Check before you
+push with
+`npm --prefix site run validate -- --strict --base origin/main`. README-only edits don't need a bump.
+
 ## Adding a plugin (new discipline)
 
 Rare — ask in #wwtd-claude-skills first. If agreed: create `plugins/<name>/` with
@@ -66,6 +74,6 @@ Rare — ask in #wwtd-claude-skills first. If agreed: create `plugins/<name>/` w
 - [ ] Tested with two prompts that should trigger, one that shouldn't
 - [ ] No secrets, client data or PII anywhere in the folder
 - [ ] Verification step present
-- [ ] Validator and build pass in CI
+- [ ] Vercel preview deployment for the PR succeeded (it runs the validator)
 - [ ] Plugin README table updated
 - [ ] Versions bumped

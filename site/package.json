@@ -1,0 +1,28 @@
+{
+  "name": "wwt-digital-skills-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/build-index.ts && next dev",
+    "build": "node scripts/validate.ts --strict && node scripts/build-index.ts && next build",
+    "start": "next start",
+    "validate": "node scripts/validate.ts",
+    "catalog": "node scripts/build-index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.3.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "fflate": "^0.8.3",
+    "typescript": "^7.0.2",
+    "yaml": "^2.9.1"
+  }
+}
