@@ -1,0 +1,17 @@
+{
+  "name": "creative-tech",
+  "displayName": "Creative Technology",
+  "version": "0.1.0",
+  "description": "Skills for the Creative Technology team: prototyping, experience design, staffing and team operations.",
+  "author": {
+    "name": "WWT Digital \u2014 Creative Technology"
+  },
+  "homepage": "https://skills.wwtdigital.com/#creative-tech",
+  "repository": "https://github.com/wwtdigital/skills-marketplace",
+  "keywords": [
+    "creative-tech",
+    "prototyping",
+    "xd",
+    "staffing"
+  ]
+}

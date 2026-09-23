@@ -1,0 +1,17 @@
+{
+  "name": "delivery",
+  "displayName": "Delivery & Program Management",
+  "version": "0.1.0",
+  "description": "Skills for delivery leads and PMs: status reporting, risk tracking, SOW and estimate support, client comms.",
+  "author": {
+    "name": "WWT Digital \u2014 Delivery"
+  },
+  "homepage": "https://skills.wwtdigital.com/#delivery",
+  "repository": "https://github.com/wwtdigital/skills-marketplace",
+  "keywords": [
+    "delivery",
+    "pm",
+    "status",
+    "client"
+  ]
+}
