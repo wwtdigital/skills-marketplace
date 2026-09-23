@@ -14,7 +14,7 @@ comfortable with git.
    (with real trigger phrases), and what it's *not* for.
 4. Run the checks:
    ```
-   python3 scripts/validate.py
+   python3 scripts/validate.py --strict --base origin/main
    python3 scripts/build_index.py --check
    claude plugin validate .        # if you have Claude Code installed
    ```
@@ -38,7 +38,8 @@ in `.github/CODEOWNERS`; they'll open the PR for you and credit you as author.
   the script, recount the numbers).
 - **Safe.** No credentials, no client names or data, no irreversible actions without
   confirmation. Scripts are readable and don't fetch from untrusted sources.
-- **Small.** `SKILL.md` under ~200 lines. Longer material goes in `references/`.
+- **Small.** `SKILL.md` body under 250 lines (the validator warns past that, and warnings
+  fail CI on `main`). Longer material goes in `references/`.
 - **Owned.** `metadata.owner` is a real WWT email that will answer questions.
 
 ## Skill lifecycle
@@ -53,6 +54,11 @@ Bump `metadata.version` in the skill and `version` in the plugin's `plugin.json`
 every change (patch for wording, minor for new behaviour, major for changed triggers).
 Bump the marketplace `version` when plugins are added, renamed or removed. Use the
 marketplace `renames` map if you rename a plugin so existing installs migrate.
+
+The plugin version is what Claude Code checks for updates: if it doesn't go up, people who
+already installed the plugin never get your change. CI fails a PR that changes a plugin or skill
+without bumping. Check before you push with
+`python3 scripts/validate.py --strict --base origin/main`. README-only edits don't need a bump.
 
 ## Adding a plugin (new discipline)
 

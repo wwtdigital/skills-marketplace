@@ -16,7 +16,7 @@ Paste these into Claude with the plugin installed. The first two should trigger 
 
 ## Checklist
 
-- [ ] `python3 scripts/validate.py` passes
+- [ ] `python3 scripts/validate.py --strict --base origin/main` passes
 - [ ] `python3 scripts/build_index.py --check` passes
 - [ ] Description covers what / when / not-for
 - [ ] No secrets, client data or PII in the folder

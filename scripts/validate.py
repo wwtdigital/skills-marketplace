@@ -1,17 +1,23 @@
 #!/usr/bin/env python3
 """Validate marketplace.json, every plugin.json, and every SKILL.md.
 
-Usage:  python3 scripts/validate.py [--strict]
-  --strict   treat warnings as errors (CI uses this on main)
+Usage:  python3 scripts/validate.py [--strict] [--base REF]
+  --strict     treat warnings as errors (CI uses this on main)
+  --base REF   also require version bumps for anything changed since REF (CI passes the PR base;
+               locally, e.g. --base origin/main). Compares against the working tree, so
+               uncommitted changes count.
 Exit code 1 on any error.
 """
 from __future__ import annotations
 
+import json
 import re
+import subprocess
 import sys
+from pathlib import Path
 
 from common import (DISCIPLINES, KEBAB, ROOT, STATUSES, iter_skills, load_marketplace,
-                    load_plugin_manifest, plugin_dir)
+                    load_plugin_manifest, parse_skill_md, plugin_dir)
 
 SECRET_PATTERNS = [
     re.compile(r"(?i)(api[_-]?key|secret|token|password)\s*[:=]\s*['\"][^'\"]{8,}"),
@@ -24,6 +30,7 @@ SECRET_PATTERNS = [
 
 errors: list[str] = []
 warnings: list[str] = []
+notes: list[str] = []
 
 
 def err(msg): errors.append(msg)
@@ -75,7 +82,7 @@ def check_plugin(entry: dict) -> None:
 
     skills = iter_skills(entry)
     if not skills:
-        warn(f"plugin '{n}': contains no skills yet")
+        notes.append(f"plugin '{n}': contains no skills yet")  # expected for new disciplines; not a warning
     for sk in skills:
         for p in sk.problems:
             err(f"{n}/{sk.name}: {p}")
@@ -129,12 +136,101 @@ def check_skill(plugin: str, sk) -> None:
                     break
 
 
+# ---- version bumps -------------------------------------------------------------------------
+# plugin.json `version` is what Claude Code compares to decide whether installed users get an
+# update, so any shipped change to a plugin without a bump silently never reaches them.
+
+# Changes to these don't alter what Claude loads, so they don't need a bump.
+NO_BUMP_NEEDED = {"README.md", ".gitkeep"}
+
+
+def git(*args: str) -> str | None:
+    r = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True)
+    return r.stdout if r.returncode == 0 else None
+
+
+def semver(v) -> tuple[int, ...] | None:
+    m = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)", str(v or "").strip())
+    return tuple(int(x) for x in m.groups()) if m else None
+
+
+def bumped(old, new) -> bool:
+    o, n = semver(old), semver(new)
+    return n > o if (o and n) else str(new) != str(old)
+
+
+def check_version_bumps(mp: dict, base: str) -> None:
+    mb = (git("merge-base", base, "HEAD") or "").strip()
+    if not mb:
+        err(f"--base {base}: not a git ref this checkout knows (fetch it, or use fetch-depth: 0 in CI)")
+        return
+    changed = set((git("diff", "--name-only", mb) or "").split())
+    changed |= set((git("ls-files", "--others", "--exclude-standard") or "").split())
+
+    def at_base(rel: str) -> str | None:
+        return git("show", f"{mb}:{rel}")
+
+    base_mp = at_base(".claude-plugin/marketplace.json")
+    if base_mp:
+        old = json.loads(base_mp)
+        if {p["name"] for p in old.get("plugins", [])} != {p["name"] for p in mp.get("plugins", [])} \
+                and not bumped(old.get("version"), mp.get("version")):
+            err(f"marketplace.json: plugins were added, removed or renamed but version is still "
+                f"{mp.get('version')} (bump it)")
+
+    for entry in mp.get("plugins", []):
+        pdir = plugin_dir(entry)
+        prel = pdir.relative_to(ROOT).as_posix()
+        shipped = sorted(f for f in changed
+                         if f.startswith(prel + "/") and Path(f).name not in NO_BUMP_NEEDED)
+        if not shipped:
+            continue
+        manifest_rel = f"{prel}/.claude-plugin/plugin.json"
+        old_manifest = at_base(manifest_rel)
+        if old_manifest is None:
+            continue  # new plugin: nothing installed to update
+        old_v = json.loads(old_manifest).get("version")
+        new_v = (load_plugin_manifest(pdir) or {}).get("version")
+        if not bumped(old_v, new_v):
+            err(f"plugin '{entry['name']}': {len(shipped)} file(s) changed since {base} "
+                f"(e.g. {shipped[0]}) but plugin.json version {new_v} isn't above {old_v} — "
+                f"installed users won't get the change until it's bumped")
+        for sk in iter_skills(entry):
+            srel = sk.path.relative_to(ROOT).as_posix()
+            if not any(f.startswith(srel + "/") for f in shipped) or sk.problems:
+                continue
+            old_md = at_base(f"{srel}/SKILL.md")
+            if old_md is None:
+                continue  # new skill
+            try:
+                old_sv = (parse_skill_md(old_md)[0].get("metadata") or {}).get("version")
+            except ValueError:
+                continue
+            if not bumped(old_sv, sk.metadata.get("version")):
+                err(f"{entry['name']}/{sk.name}: changed since {base} but metadata.version "
+                    f"{sk.metadata.get('version')} isn't above {old_sv}")
+
+
 def main() -> int:
     strict = "--strict" in sys.argv
+    base = sys.argv[sys.argv.index("--base") + 1] if "--base" in sys.argv[:-1] else None
     mp = load_marketplace()
     check_marketplace(mp)
     for entry in mp.get("plugins", []):
         check_plugin(entry)
+    # skill names must be unique marketplace-wide: downloads and site routes are keyed by name alone
+    seen: dict[str, str] = {}
+    for entry in mp.get("plugins", []):
+        if "source" not in entry or not plugin_dir(entry).is_dir():
+            continue
+        for sk in iter_skills(entry):
+            if sk.name in seen:
+                err(f"{entry['name']}/{sk.name}: skill name already used in plugin '{seen[sk.name]}'")
+            seen.setdefault(sk.name, entry["name"])
+    if base:
+        check_version_bumps(mp, base)
+    for n in notes:
+        print(f"NOTE  {n}")
     for w in warnings:
         print(f"WARN  {w}")
     for e in errors:
