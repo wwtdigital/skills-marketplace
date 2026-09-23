@@ -8,9 +8,11 @@ A Claude Code / Cowork **plugin marketplace** for WWT Digital. Marketplace name 
 Skills are grouped into one plugin per discipline; users install a bundle for their role.
 A Next.js site (`site/`, deployed to Vercel) lets people browse and download skills without GitHub.
 
-Target hosting (not yet created):
-- Repo: `github.com/wwtdigital/skills-marketplace`
-- Site: `https://skills.wwtdigital.com` (hostname is assumed)
+Hosting:
+- Repo: `github.com/wwtdigital/skills-marketplace` (private)
+- Vercel: project `skills-marketplace` in team `wwtd`, Root Directory `site`, Next.js preset,
+  production branch `main`. Every pushed branch gets a preview deployment.
+- Site: `https://skills-marketplace.wwtdigital.io` (`wwtdigital.io` DNS is managed in the `wwtd` team)
 
 If either changes, `git grep` for it. The site hostname lives in `marketplace.json` `metadata.site`,
 every `plugin.json` `homepage`, and `README.md`. The repo slug lives in `scripts/build_index.py`
@@ -114,7 +116,7 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 
 ## Backlog (in rough priority order)
 
-1. Create GitHub repo + teams named in CODEOWNERS; connect Vercel (Root Directory `site/`).
+1. Create the GitHub teams named in CODEOWNERS.
 2. Migrate Scott's existing skills as first PRs:
    `staffing-manager`, `wwt-scorecard` → creative-tech; `deslopify` → brand-and-voice;
    `mr-review-assistant`, `agents-md-generator`, `likec4-architect` → engineering.

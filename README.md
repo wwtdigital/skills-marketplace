@@ -5,7 +5,7 @@ discipline is a **plugin**; each plugin contains one or more **skills**. Install
 bundle for your role and Claude picks up the skills automatically in Claude Code and
 Cowork.
 
-Browse the catalog and get step-by-step install help at **https://skills.wwtdigital.com**.
+Browse the catalog and get step-by-step install help at **https://skills-marketplace.wwtdigital.io**.
 
 ## Install
 
