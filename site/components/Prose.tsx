@@ -13,7 +13,7 @@ const text = (n: ReactNode): string =>
       : n && typeof n === "object" && "props" in n
         ? text((n as { props: { children?: ReactNode } }).props.children)
         : "";
-const slug = (n: ReactNode) =>
+export const slug = (n: ReactNode) =>
   text(n)
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
@@ -40,11 +40,18 @@ const components: Components = {
   },
 };
 
+/** The `## ` headings of a markdown doc, with the same ids Prose gives them (for a table of contents). */
+export function headings(md: string): { id: string; text: string }[] {
+  return [...md.matchAll(/^## +(.+)$/gm)].map((m) => {
+    const t = m[1].replace(/[`*_]/g, "").trim();
+    return { id: slug(t), text: t };
+  });
+}
+
 /** Render repo markdown (SKILL.md bodies, CONTRIBUTING.md) with GitHub-flavored extensions. */
-export function Prose({ children, label }: { children: string; label?: string }) {
+export function Prose({ children }: { children: string }) {
   return (
     <article className="prose">
-      {label && <h2 className="prose-label">{label}</h2>}
       <Markdown remarkPlugins={[remarkGfm]} components={components}>
         {children}
       </Markdown>

@@ -5,8 +5,8 @@ import { CopyCmd } from "./CopyCmd";
 
 const TABS = [
   { id: "code", label: "Claude Code" },
-  { id: "cowork", label: "Cowork / Desktop" },
   { id: "nogit", label: "No GitHub account" },
+  { id: "cowork", label: "Cowork / Desktop" },
   { id: "admin", label: "Admins" },
 ] as const;
 
@@ -32,7 +32,7 @@ export function InstallTabs({
   );
 
   return (
-    <section className="install" id="install">
+    <section className="install rise" style={{ "--i": 3 } as React.CSSProperties} id="install" aria-label="Install">
       <div className="tabs" role="tablist">
         {TABS.map((t) => (
           <button key={t.id} role="tab" aria-selected={tab === t.id} onClick={() => setTab(t.id)}>
@@ -44,35 +44,16 @@ export function InstallTabs({
         <div className="panel" role="tabpanel">
           <ol>
             <li>
-              Add the marketplace once:
+              Add the marketplace once (needs access to the GitHub repo):
               <CopyCmd text={`/plugin marketplace add ${slug}`} />
             </li>
             <li>
-              Install the bundle(s) you want, e.g.
+              Install the bundles you want:
               <CopyCmd text={`/plugin install presentation@${marketplace}`} />
             </li>
             <li>
-              Later, pull new skills with
-              <CopyCmd text={`/plugin marketplace update ${marketplace}`} />
-              or turn on auto-update once in <b>/plugin → Marketplaces</b> (it&apos;s off by default for
-              non-Anthropic marketplaces).
-            </li>
-          </ol>
-        </div>
-      )}
-      {tab === "cowork" && (
-        <div className="panel" role="tabpanel">
-          <ol>
-            <li>
-              In the Claude desktop app open <b>Customize → Plugins</b>.
-            </li>
-            <li>
-              Choose <b>Add marketplace</b> and paste:
-              <CopyCmd text={repo} />
-            </li>
-            <li>
-              Pick the category bundles you want and click <b>Install</b>. Skills appear in Claude&apos;s skill
-              list immediately.
+              Pull new skills later with <code>/plugin marketplace update {marketplace}</code>, or turn on
+              auto-update in <b>/plugin</b>, then <b>Marketplaces</b>.
             </li>
           </ol>
         </div>
@@ -81,10 +62,7 @@ export function InstallTabs({
         <div className="panel" role="tabpanel">
           {marketplaceUrl && (
             <>
-              <p className="panel-lead">
-                <b>Claude Code:</b> add the marketplace straight from this site. No GitHub account needed, and you
-                still get updates:
-              </p>
+              <p className="lead">In Claude Code, add the marketplace from this site. Updates still work.</p>
               <ol>
                 <li>
                   <CopyCmd text={`/plugin marketplace add ${marketplaceUrl}`} />
@@ -93,21 +71,28 @@ export function InstallTabs({
                   <CopyCmd text={`/plugin install presentation@${marketplace}`} />
                 </li>
               </ol>
-              <p className="panel-lead">Or install a single skill by hand:</p>
+              <p className="lead" style={{ marginTop: 18 }}>
+                Or install one skill by hand: download its <b>.skill</b> file below, then add it in Cowork under{" "}
+                <b>Customize</b>, <b>Skills</b>, or unzip it into <code>~/.claude/skills/</code>.
+              </p>
             </>
           )}
+        </div>
+      )}
+      {tab === "cowork" && (
+        <div className="panel" role="tabpanel">
           <ol>
             <li>
-              Find a skill below and click <b>Download .skill</b>.
+              In the Claude desktop app, open <b>Customize</b>, then <b>Plugins</b>.
             </li>
             <li>
-              <b>Cowork:</b> open <b>Customize → Skills</b> and add the file (or drop it into the chat and choose{" "}
-              <i>Save skill</i>).
+              Choose <b>Add marketplace</b> and paste:
+              <CopyCmd text={repo} />
             </li>
             <li>
-              <b>Claude Code:</b> unzip it into <code>~/.claude/skills/</code> — the folder name is the skill name.
+              Pick the bundles you want and click <b>Install</b>. The skills show up in Claude&apos;s skill list
+              straight away.
             </li>
-            <li>Updates aren&apos;t automatic this way; check back here or ask the marketplace admin.</li>
           </ol>
         </div>
       )}
@@ -115,15 +100,12 @@ export function InstallTabs({
         <div className="panel" role="tabpanel">
           <ol>
             <li>
-              Pre-register the marketplace for everyone via managed settings:
+              Register the marketplace for everyone in managed settings:
               <CopyCmd text={managed} />
             </li>
             <li>
-              Add <code>{marketplace}</code> to <code>strictKnownMarketplaces</code> if you restrict which marketplaces
-              users may add.
-            </li>
-            <li>
-              Validate the repo locally with <code>claude plugin validate .</code> — CI runs it on every PR.
+              If you restrict which marketplaces people can add, include <code>{marketplace}</code> in{" "}
+              <code>strictKnownMarketplaces</code>.
             </li>
           </ol>
         </div>

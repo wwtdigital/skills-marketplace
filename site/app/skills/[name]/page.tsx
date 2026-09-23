@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowUpRightIcon, CaretRightIcon, DownloadSimpleIcon } from "@phosphor-icons/react/ssr";
 import { CopyCmd } from "@/components/CopyCmd";
 import { Footer } from "@/components/Footer";
 import { Prose } from "@/components/Prose";
@@ -30,53 +31,57 @@ export default async function SkillPage({ params }: Props) {
 
   return (
     <>
-      <main className="wrap detail">
-        <p className="crumbs">
-          <Link href="/#browse">Skills</Link> / <Link href={`/#${p.name}`}>{p.displayName}</Link>
-        </p>
-        <h1>{s.name}</h1>
-        <div className="sub">
-          <span className={`badge ${s.status}`}>{s.status}</span>
-          <span>
-            in <b>{p.displayName}</b>
-          </span>
-          {s.version && <span className="mono">v{s.version}</span>}
+      <main className="wrap doc">
+        <nav className="crumbs" aria-label="Breadcrumb">
+          <Link href="/#browse">Skills</Link>
+          <CaretRightIcon size={12} aria-hidden="true" />
+          <Link href={`/#${p.name}`}>{p.displayName}</Link>
+        </nav>
+        <header className="doc-head">
+          <h1>{s.name}</h1>
+          <div className="sub">
+            <span className={`badge ${s.status}`}>{s.status}</span>
+            {s.version && <span className="mono">v{s.version}</span>}
+            <span>in {p.displayName}</span>
+          </div>
+          <p className="desc">{s.description}</p>
+        </header>
+
+        <div className="doc-grid">
+          {s.body ? <Prose>{s.body}</Prose> : <div />}
+          <aside className="aside" aria-label="Install and details">
+            <p className="aside-label">Install the {p.displayName} bundle</p>
+            <CopyCmd text={p.install} />
+            <a className="btn btn-primary" href={asset(s.download)} download>
+              <DownloadSimpleIcon size={16} aria-hidden="true" />
+              Download .skill ({Math.max(1, Math.round(s.download_bytes / 1024))} KB)
+            </a>
+            <dl className="kv">
+              <dt>Owner</dt>
+              <dd>{s.owner ? <a href={`mailto:${s.owner}`}>{s.owner}</a> : "Not set"}</dd>
+              <dt>Connectors</dt>
+              <dd>
+                {s.connectors.length
+                  ? s.connectors.map((c) => (
+                      <span key={c} className="tag">
+                        {c}
+                      </span>
+                    ))
+                  : "None"}
+              </dd>
+              <dt>Includes</dt>
+              <dd>{includes || "SKILL.md only"}</dd>
+              <dt>Updated</dt>
+              <dd>{formatDate(s.updated)}</dd>
+              <dt>Source</dt>
+              <dd>
+                <a href={s.source} target="_blank" rel="noopener">
+                  GitHub <ArrowUpRightIcon size={12} weight="bold" aria-hidden="true" />
+                </a>
+              </dd>
+            </dl>
+          </aside>
         </div>
-        <div className="full">{s.description}</div>
-
-        <dl className="kv">
-          <dt>Owner</dt>
-          <dd>{s.owner ? <a href={`mailto:${s.owner}`}>{s.owner}</a> : "—"}</dd>
-          <dt>Connectors</dt>
-          <dd>
-            {s.connectors.length
-              ? s.connectors.map((c) => (
-                  <span key={c} className="tag">
-                    {c}
-                  </span>
-                ))
-              : "none"}
-          </dd>
-          <dt>Includes</dt>
-          <dd>{includes || "SKILL.md only"}</dd>
-          <dt>Updated</dt>
-          <dd>{formatDate(s.updated)}</dd>
-          <dt>Install bundle</dt>
-          <dd>
-            <CopyCmd text={p.install} className="inline" />
-          </dd>
-        </dl>
-
-        <div className="row">
-          <a className="btn primary" href={asset(s.download)} download>
-            Download .skill ({Math.max(1, Math.round(s.download_bytes / 1024))} KB)
-          </a>
-          <a className="btn" href={s.source} target="_blank" rel="noopener">
-            View source
-          </a>
-        </div>
-
-        {s.body && <Prose label="SKILL.md">{s.body}</Prose>}
       </main>
       <Footer catalog={catalog} />
     </>

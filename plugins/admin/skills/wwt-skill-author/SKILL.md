@@ -12,7 +12,7 @@ metadata:
   category: admin
   status: beta
   connectors: []
-  version: 0.1.2
+  version: 0.1.3
 ---
 
 # WWT Skill Author
@@ -25,7 +25,7 @@ hand the finished folder to a maintainer.
 
 Ask for these before writing anything (one question at a time):
 
-1. What the skill does, in the user's words, and 3–5 phrases people say when they want it.
+1. What the skill does, in the user's words, and 3-5 phrases people say when they want it.
 2. Which category plugin it belongs to (`presentation`, `research`, `ops`, `admin`,
    `tech`). If unsure, propose one.
 3. Which connectors it needs (Slack, Notion, Microsoft 365, GitLab…), if any.
@@ -42,7 +42,7 @@ Ask for these before writing anything (one question at a time):
    under 1,024 characters.
 4. Fill the body. Prefer numbered steps over prose. Put anything longer than a screen
    into `references/` and link to it. Put deterministic work into `scripts/`.
-5. Add a verification step to the skill's own workflow — every marketplace skill checks
+5. Add a verification step to the skill's own workflow. Every marketplace skill checks
    its output before handing it over.
 6. Run `npm --prefix site run validate -- --strict --base origin/main` from the marketplace root
    (after `npm ci --prefix site` once) and fix everything it reports. Then run

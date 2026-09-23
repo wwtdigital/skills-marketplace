@@ -6,13 +6,13 @@ description: >
   "test the skills marketplace", "is the wwt-digital marketplace working", "smoke test the
   plugin install", or "did my skills install correctly". Reports which install path is in
   use (plugin or standalone .skill) and the installed versions. Not for validating a skill
-  you are writing — use wwt-skill-author for that.
+  you are writing; use wwt-skill-author for that.
 metadata:
   owner: scott.cullum@wwt.com
   category: admin
   status: draft
   connectors: []
-  version: 0.1.1
+  version: 0.1.2
 ---
 
 # Marketplace Smoke Test
@@ -39,7 +39,7 @@ bundled scripts, and version reporting. Safe to run anywhere; it only reads its 
    | Plugin version | from the script output, or n/a |
 
 3. **Verify:** the `skill_version` the script printed must match the `metadata.version` in
-   this SKILL.md's frontmatter. If they differ, the install is stale — tell the user to run
+   this SKILL.md's frontmatter. If they differ, the install is stale: tell the user to run
    `/plugin marketplace update wwt-digital` and reinstall. See
    [references/troubleshooting.md](references/troubleshooting.md) for other failures.
 
