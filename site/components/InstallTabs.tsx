@@ -73,7 +73,8 @@ export function InstallTabs({
               </ol>
               <p className="lead" style={{ marginTop: 18 }}>
                 Or install one skill by hand: download its <b>.skill</b> file below, then add it in Cowork under{" "}
-                <b>Customize</b>, <b>Skills</b>, or unzip it into <code>~/.claude/skills/</code>.
+                <b>Customize</b> &gt; <b>Skills</b> &gt; <b>+ Add</b> &gt; <b>Upload skill</b>, or unzip it into{" "}
+                <code>~/.claude/skills/</code>.
               </p>
             </>
           )}
@@ -81,19 +82,28 @@ export function InstallTabs({
       )}
       {tab === "cowork" && (
         <div className="panel" role="tabpanel">
+          <p className="lead">
+            In the Claude desktop app: <b>Customize</b> &gt; <b>Plugins</b> &gt; <b>+ Add</b> &gt;{" "}
+            <b>Add marketplace</b>. Paste whichever it asks for:
+          </p>
           <ol>
             <li>
-              In the Claude desktop app, open <b>Customize</b>, then <b>Plugins</b>.
+              GitHub repo:
+              <CopyCmd text={slug} />
             </li>
             <li>
-              Choose <b>Add marketplace</b> and paste:
-              <CopyCmd text={repo} />
+              or Marketplace URL (no GitHub account needed):
+              {marketplaceUrl && <CopyCmd text={marketplaceUrl} />}
             </li>
             <li>
-              Pick the bundles you want and click <b>Install</b>. The skills show up in Claude&apos;s skill list
-              straight away.
+              The bundles show up in your Plugins list. Enable the ones you want; their skills are available right
+              away.
             </li>
           </ol>
+          <p className="lead" style={{ marginTop: 18 }}>
+            No marketplace at all: download a bundle&apos;s <b>.zip</b> below, then <b>Customize</b> &gt;{" "}
+            <b>Plugins</b> &gt; <b>+ Add</b> &gt; <b>Upload plugin</b> and pick the file.
+          </p>
         </div>
       )}
       {tab === "admin" && (

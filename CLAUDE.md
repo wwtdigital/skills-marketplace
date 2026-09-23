@@ -133,6 +133,14 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   Both use the same marketplace name, so plugin ids are the same. Claude Code only accepts https
   archive URLs on non-loopback hosts, so you can't test it on localhost, and previews are behind
   Vercel auth. Zips are deterministic (fixed mtime), so a `sha256` only changes when content does.
+- Cowork / desktop app install, confirmed 2026-09-23 against the real UI (this org allows all of
+  it): Customize > Plugins > + Add > **Add marketplace** takes either the GitHub repo or the
+  Marketplace URL; its plugins then show up in the Plugins list to enable. Customize > Plugins >
+  + Add > **Upload plugin** installs a bundle `.zip` directly with no marketplace at all — our zips
+  have the plugin files at the zip root, which is what that expects. Customize > Skills > + Add >
+  **Upload skill** takes a single `.skill` file the same way. None of this is guaranteed for other
+  orgs; their admins can disable user-added marketplaces, plugin uploads, or skill uploads
+  independently.
 - Plugin manifests link to `/#<plugin-name>`, which opens that bundle on the home page. Keep those
   anchor ids.
 - When copying `templates/skill-template/`, rename the frontmatter `name: skill-template` and cut
@@ -151,7 +159,6 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
    admin (unconfirmed; could be research). Each needs the `metadata` block and a README row.
 3. Add `relevance` hints to marketplace entries once admins allowlist the marketplace.
 4. Consider a Notion intake path for non-git contributors (Notion MCP has upload-skill).
-5. Decide on Cowork install wording once verified against the current desktop UI.
 
 ## Origin
 
