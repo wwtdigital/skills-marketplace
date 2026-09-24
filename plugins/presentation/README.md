@@ -14,7 +14,7 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 
 | Skill | What it does |
 | --- | --- |
-| _(none yet)_ | |
+| `humanizer` | Rewrites AI-sounding text so it reads like a person wrote it (from Toby Gerber) |
 
 ## MCP servers
 

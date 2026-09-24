@@ -48,7 +48,7 @@ export default async function SkillPage({ params }: Props) {
         </header>
 
         <div className="doc-grid">
-          {s.body ? <Prose>{s.body}</Prose> : <div />}
+          {s.body ? <Prose base={s.source.replace(/^.*?\/tree\/main\//, "")}>{s.body}</Prose> : <div />}
           <aside className="aside" aria-label="Install and details">
             <p className="aside-label">Install the {p.displayName} bundle</p>
             <CopyCmd text={p.install} />

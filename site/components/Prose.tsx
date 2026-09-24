@@ -19,18 +19,23 @@ export const slug = (n: ReactNode) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-/** Links to this site become relative (so they work on previews); repo-relative paths point at GitHub. */
-function href(h = ""): string {
+/**
+ * Links to this site become relative (so they work on previews); repo-relative paths point at
+ * GitHub, resolved against `base` (the markdown file's own folder, e.g. a skill's directory), so a
+ * skill's `references/x.md` link lands on that skill's file rather than the repo root.
+ */
+function href(h = "", base = ""): string {
   if (h.startsWith(SITE)) return h.slice(SITE.length) || "/";
   if (/^([a-z]+:|#|\/)/i.test(h)) return h;
-  return `${REPO_URL}/blob/main/${h.replace(/^(\.\.\/)+|^\.\//, "")}`;
+  const path = new URL(h, `https://repo.invalid/${base ? base.replace(/\/?$/, "/") : ""}`).pathname;
+  return `${REPO_URL}/blob/main${path}`;
 }
 
-const components: Components = {
+const components = (base: string): Components => ({
   h2: ({ children }) => <h2 id={slug(children)}>{children}</h2>,
   h3: ({ children }) => <h3 id={slug(children)}>{children}</h3>,
   a: ({ href: h, children }) => {
-    const to = href(h);
+    const to = href(h, base);
     const external = /^https?:/.test(to);
     return (
       <a href={to} {...(external ? { target: "_blank", rel: "noopener" } : {})}>
@@ -38,7 +43,7 @@ const components: Components = {
       </a>
     );
   },
-};
+});
 
 /** The `## ` headings of a markdown doc, with the same ids Prose gives them (for a table of contents). */
 export function headings(md: string): { id: string; text: string }[] {
@@ -49,10 +54,10 @@ export function headings(md: string): { id: string; text: string }[] {
 }
 
 /** Render repo markdown (SKILL.md bodies, CONTRIBUTING.md) with GitHub-flavored extensions. */
-export function Prose({ children }: { children: string }) {
+export function Prose({ children, base = "" }: { children: string; base?: string }) {
   return (
     <article className="prose">
-      <Markdown remarkPlugins={[remarkGfm]} components={components}>
+      <Markdown remarkPlugins={[remarkGfm]} components={components(base)}>
         {children}
       </Markdown>
     </article>
