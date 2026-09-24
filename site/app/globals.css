@@ -182,6 +182,9 @@ code, pre, .mono { font-family: var(--font-mono), ui-monospace, Menlo, monospace
 .category:first-of-type { border-top: 0; }
 .category-meta h3 { margin: 0 0 8px; font-size: 24px; letter-spacing: -.02em; font-weight: 600; }
 .category-meta p { margin: 0 0 16px; color: var(--muted); font-size: 14.5px; }
+.category-meta .addon {
+  margin: 0 0 6px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent);
+}
 .category-meta .facts { display: flex; gap: 16px; font-size: 13.5px; color: var(--muted); margin-bottom: 14px; }
 .category-meta .facts b { color: var(--text); font-weight: 600; }
 .category-meta .links { display: flex; gap: 4px; margin-top: 10px; margin-left: -8px; }

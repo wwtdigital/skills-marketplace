@@ -1,0 +1,453 @@
+{
+ "_comment": [
+  "Where every recipe's geometry came from, by NODE ID. Read scripts/check_provenance.py",
+  "and the Refresh section of SKILL.md before editing.",
+  "",
+  "This file exists because the source map used to cite frame names and headline text.",
+  "Three of its twenty rows named a headline that is not a frame name, two rows claimed a",
+  "board another recipe also claimed, and none of it could be checked against the file. A",
+  "name is a claim; a node id is checkable. REG-24 is the guard.",
+  "",
+  "It is also what makes a periodic refresh possible. Re-pull the section, diff the board",
+  "inventory against `boards` below, and you get added, removed and renamed boards in one",
+  "pass instead of reading prose and guessing."
+ ],
+ "source": {
+  "file_key": "lZ1TThUNRxNN6junV3Sxnk",
+  "file_name": "AI Presentation Templates",
+  "section": {
+   "node": "1659:786",
+   "name": "Source Files"
+  },
+  "container": {
+   "node": "1659:787",
+   "name": "Cover 4"
+  },
+  "url": "https://www.figma.com/design/lZ1TThUNRxNN6junV3Sxnk/AI-Presentation-Templates?node-id=1659-786&m=dev",
+  "pulled": "2026-09-11",
+  "board_count": 25
+ },
+ "artboard": {
+  "_comment": [
+   "Most boards are authored at 1940.4 x 1092.4 and normalise to the 1920 x 1080 canvas.",
+   "ONE IS NOT: 1659:1020 is already 1920 x 1080, so its child coordinates are final and",
+   "applying the factors below to them introduces a 1% error. Check the board size before",
+   "normalising anything."
+  ],
+  "authored": [
+   1940.4000244140625,
+   1092.4000244140625
+  ],
+  "canvas": [
+   1920,
+   1080
+  ],
+  "sx": 0.989487,
+  "sy": 0.988649,
+  "exceptions": {
+   "1659:1020": {
+    "authored": [
+     1920,
+     1080
+    ],
+    "sx": 1.0,
+    "sy": 1.0,
+    "note": "authored at final canvas size; take child coordinates raw"
+   }
+  }
+ },
+ "recipes": {
+  "01": {
+   "name": "Cover",
+   "nodes": [
+    "1659:788"
+   ],
+   "board": "Cover"
+  },
+  "02": {
+   "name": "Divider",
+   "nodes": [
+    "1659:1389"
+   ],
+   "board": "Slide 16:9 - 60"
+  },
+  "03": {
+   "name": "Statement",
+   "nodes": [
+    "1839:55"
+   ],
+   "board": "Statement"
+  },
+  "04": {
+   "name": "Executive summary",
+   "nodes": [
+    "1659:819"
+   ],
+   "board": "Executive Summary Light"
+  },
+  "05": {
+   "name": "Two-panel compare",
+   "nodes": [
+    "1659:846",
+    "1659:1081"
+   ],
+   "board": "Content: 2 Containers, Slide 16:9 - 46"
+  },
+  "06": {
+   "name": "Hero left + stat pair",
+   "nodes": [
+    "1659:872"
+   ],
+   "board": "Content - Hero Image Left"
+  },
+  "07": {
+   "name": "Stat strip",
+   "nodes": [
+    "1659:932"
+   ],
+   "board": "Slide 16:9 - 56"
+  },
+  "08": {
+   "name": "Metric hero",
+   "nodes": [
+    "1659:961"
+   ],
+   "board": "Slide 16:9 - 44"
+  },
+  "09": {
+   "name": "Card row",
+   "nodes": [
+    "1659:1106"
+   ],
+   "board": "Slide 16:9 - 47"
+  },
+  "10": {
+   "name": "Feature list + big card",
+   "nodes": [
+    "1659:1020"
+   ],
+   "board": "Slide 16:9 - 63",
+   "artboard_exception": true
+  },
+  "11": {
+   "name": "Split gradient + card",
+   "nodes": [
+    "1659:1291"
+   ],
+   "board": "Slide 16:9 - 51"
+  },
+  "12": {
+   "name": "Matrix",
+   "nodes": [
+    "1659:1258"
+   ],
+   "board": "Slide 16:9 - 61"
+  },
+  "13": {
+   "name": "Chart",
+   "nodes": [
+    "1659:1275"
+   ],
+   "board": "Slide 16:9 - 62"
+  },
+  "14": {
+   "name": "Process",
+   "nodes": [
+    "1659:1214"
+   ],
+   "board": "Slide 16:9 - 50"
+  },
+  "15": {
+   "name": "Device",
+   "nodes": [
+    "1659:1319",
+    "1659:1344"
+   ],
+   "board": "Content + Mockup Right, Content + Mockup Left"
+  },
+  "16": {
+   "name": "Quote",
+   "nodes": [
+    "1659:1369"
+   ],
+   "board": "Slide 16:9 - 28"
+  },
+  "17": {
+   "name": "Right flex, stat rows",
+   "nodes": [
+    "1659:986"
+   ],
+   "board": "Right flex  2/3 image"
+  },
+  "18": {
+   "name": "Right flex, no image",
+   "nodes": [
+    "1659:1138"
+   ],
+   "board": "Slide 16:9 - 55"
+  },
+  "19": {
+   "name": "Photo over band",
+   "nodes": [
+    "1659:1170"
+   ],
+   "board": "Slide 16:9 - 48"
+  },
+  "20": {
+   "name": "Split gradient, two ways in",
+   "nodes": [
+    "1659:1191"
+   ],
+   "board": "Slide 16:9 - 49"
+  }
+ },
+ "components": {
+  "_comment": "Devices measured from their own nodes rather than from a board.",
+  "brandx_cover": {
+   "node": "1799:46",
+   "what": "the cover X, one grouped vector, bars 536.2 and 273.3"
+  },
+  "brandx_group": {
+   "node": "1799:45",
+   "what": "the group the cover X sits in"
+  },
+  "logo_bug": {
+   "node": "1659:1396",
+   "what": "image 7, the bug reference"
+  },
+  "flex_triangle": {
+   "node": "1659:964",
+   "what": "1329 x 907 at left -519 / top 245"
+  },
+  "mesh_diag": {
+   "node": "1659:1172",
+   "what": "VectorPattern, 1205 x 1080, left-justified at x 0"
+  },
+  "mesh_r": {
+   "node": "1659:988",
+   "what": "the diag field pushed right, 1192 x 1068 at 728 / 6"
+  },
+  "ring": {
+   "node": "1138:2700",
+   "what": "parts-pie: 208 outer, 12.48 stroke, r 97.76"
+  },
+  "dark_ground": {
+   "node": "1892:32",
+   "what": "Darkmode Background. Gradient 165.47deg #1D569E 8.95% to #28115C 76.88%, full bleed. An EMPHASIS ground, capped at one slide in five by PAT-09. Lives outside section 1659:786, so it is a component rather than a board."
+  },
+  "dark_mesh": {
+   "node": "1892:34",
+   "what": "the dark ground's own mesh. Same 1764-path lattice as mesh-center but a separate export with its own gradient axis, 2409 x 1092 at x -265, normalised to 2384 x 1080 at left -262. Never substitute mesh-center scaled."
+  }
+ },
+ "boards": {
+  "_comment": [
+   "Every board in the section at the last pull, with who claims it. `covered: false` is",
+   "not a defect by itself, it is a decision: a board can be deliberately out of scope.",
+   "State the reason so the next refresh does not re-raise it."
+  ],
+  "1659:788": {
+   "name": "Cover",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "01"
+  },
+  "1659:819": {
+   "name": "Executive Summary Light",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "04"
+  },
+  "1839:55": {
+   "name": "Statement",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "03"
+  },
+  "1659:846": {
+   "name": "Content: 2 Containers",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "05"
+  },
+  "1659:872": {
+   "name": "Content - Hero Image Left",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "06"
+  },
+  "1659:898": {
+   "name": "Slide 16:9 - 42",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": null,
+   "reason": "UNCOVERED. 'One lab, every tech you can test' with a portrait right, a bullet list left and a 24/7 Access badge. A sibling variant of recipe 10, which is the same headline in a different composition. Awaiting a decision on whether the system needs both."
+  },
+  "1659:932": {
+   "name": "Slide 16:9 - 56",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "07"
+  },
+  "1659:961": {
+   "name": "Slide 16:9 - 44",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "08"
+  },
+  "1659:986": {
+   "name": "Right flex  2/3 image",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "17"
+  },
+  "1659:1020": {
+   "name": "Slide 16:9 - 63",
+   "size": [
+    1920,
+    1080
+   ],
+   "recipe": "10"
+  },
+  "1659:1059": {
+   "name": "Slide 16:9 - 45",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": null,
+   "reason": "UNCOVERED. A stat pair, 38% Lower Cost over 3X To Production, with two stacked photographs left. Closest to recipes 06 and 07 but neither reproduces it. Awaiting a decision."
+  },
+  "1659:1081": {
+   "name": "Slide 16:9 - 46",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "05"
+  },
+  "1659:1106": {
+   "name": "Slide 16:9 - 47",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "09"
+  },
+  "1659:1138": {
+   "name": "Slide 16:9 - 55",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "18"
+  },
+  "1659:1170": {
+   "name": "Slide 16:9 - 48",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "19"
+  },
+  "1659:1191": {
+   "name": "Slide 16:9 - 49",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "20"
+  },
+  "1659:1214": {
+   "name": "Slide 16:9 - 50",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "14"
+  },
+  "1659:1258": {
+   "name": "Slide 16:9 - 61",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "12"
+  },
+  "1659:1275": {
+   "name": "Slide 16:9 - 62",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "13"
+  },
+  "1659:1291": {
+   "name": "Slide 16:9 - 51",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "11"
+  },
+  "1659:1319": {
+   "name": "Content + Mockup Right",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "15"
+  },
+  "1659:1344": {
+   "name": "Content + Mockup Left",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "15"
+  },
+  "1659:1369": {
+   "name": "Slide 16:9 - 28",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "16"
+  },
+  "1659:1389": {
+   "name": "Slide 16:9 - 60",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": "02"
+  },
+  "1659:1417": {
+   "name": "Thank you",
+   "size": [
+    1940.4,
+    1092.4
+   ],
+   "recipe": null,
+   "reason": "OUT OF SCOPE BY DIRECTION. A closing recipe shipped through v3.2 and was removed at v3.3: the frame is a sign-off card rather than a layout the system needs. Do not re-raise."
+  }
+ }
+}

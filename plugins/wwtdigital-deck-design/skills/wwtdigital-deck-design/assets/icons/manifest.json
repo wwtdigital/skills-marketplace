@@ -1,0 +1,3068 @@
+{
+ "branded": {
+  "app-switcher": {
+   "bytes": 2124,
+   "figma": "icon/app-switcher",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "6e4d65b90e1e"
+  },
+  "article": {
+   "bytes": 2913,
+   "figma": "icon/article",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "e68b35615fd7"
+  },
+  "asset-360": {
+   "bytes": 4109,
+   "figma": "icon/asset-360",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "344cd163fa99"
+  },
+  "atc-apps": {
+   "bytes": 3449,
+   "figma": "icon/atc-apps",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "f5dcf8bf723a"
+  },
+  "atc-atom": {
+   "bytes": 2885,
+   "figma": "icon/atc-atom",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "6b5b72d3d130"
+  },
+  "atc-portal": {
+   "bytes": 2323,
+   "figma": "icon/atc-portal",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "c1ab68566bfe"
+  },
+  "atom-ai-dark": {
+   "bytes": 4297,
+   "figma": "icon/atom-ai-dark",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "0180af7efc87"
+  },
+  "atom-ai-light": {
+   "bytes": 4308,
+   "figma": "icon/atom-ai-light",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "a3bc2c91bfae"
+  },
+  "atom-insights": {
+   "bytes": 3057,
+   "figma": "icon/atom-insights",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "daaca1a86ccc"
+  },
+  "atom-insights-4": {
+   "bytes": 3257,
+   "figma": "icon/atom-insights_4",
+   "label_fill": "#1c1463",
+   "mono": true,
+   "sha1": "45167f59a15b"
+  },
+  "atom-insights-5": {
+   "bytes": 3243,
+   "figma": "icon/atom-insights_5",
+   "label_fill": "#1c1463",
+   "mono": true,
+   "sha1": "3fd6f714abc9"
+  },
+  "automation": {
+   "bytes": 10347,
+   "figma": "icon/automation",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "e584b375ab5a"
+  },
+  "briefing": {
+   "bytes": 3379,
+   "figma": "icon/briefing",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "9fa997743ca1"
+  },
+  "carrier-networking": {
+   "bytes": 4130,
+   "figma": "icon/carrier-networking",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "f66b8dbd7b54"
+  },
+  "case-study": {
+   "bytes": 3659,
+   "figma": "icon/case-study",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "ef1c859bcbb6"
+  },
+  "color-facebook": {
+   "bytes": 599,
+   "figma": "icon/color/facebook",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "600a768b2b22"
+  },
+  "color-google": {
+   "bytes": 1261,
+   "figma": "icon/color/google",
+   "label_fill": "#4e4f5f",
+   "mono": false,
+   "sha1": "c2a7aa0638c8"
+  },
+  "color-linked-in": {
+   "bytes": 1121,
+   "figma": "icon/color/linked-in",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "22b0c73a008f"
+  },
+  "color-softchoice-logo": {
+   "bytes": 887,
+   "figma": "icon/color/softchoice-logo",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "5e5959b6bfdc"
+  },
+  "color-wwt-logo": {
+   "bytes": 3142,
+   "figma": "icon/color/wwt-logo",
+   "label_fill": "#4e4f5f",
+   "mono": false,
+   "sha1": "4ca6b3a67576"
+  },
+  "color-youtube": {
+   "bytes": 1196,
+   "figma": "icon/color/youtube",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "1a231250258d"
+  },
+  "community": {
+   "bytes": 5419,
+   "figma": "icon/community",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "745c2993e590"
+  },
+  "connect-fill": {
+   "bytes": 2842,
+   "figma": "icon/connect-fill",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "d1a5ed28faed"
+  },
+  "connect-stroke": {
+   "bytes": 3429,
+   "figma": "icon/connect-stroke",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "f27f9a2c104d"
+  },
+  "demo": {
+   "bytes": 3839,
+   "figma": "icon/demo",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "8922a9d0104b"
+  },
+  "digital": {
+   "bytes": 2429,
+   "figma": "icon/digital",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "d8fc8fd621b8"
+  },
+  "digital-strategy": {
+   "bytes": 3918,
+   "figma": "icon/digital-strategy",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "926b4359bee7"
+  },
+  "digital-workspace": {
+   "bytes": 4340,
+   "figma": "icon/digital-workspace",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "4d811ebcf2fa"
+  },
+  "document-wwt": {
+   "bytes": 4362,
+   "figma": "icon/document-wwt",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "f56457e0c5c2"
+  },
+  "experience": {
+   "bytes": 7205,
+   "figma": "icon/experience",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "93ac261a8c21"
+  },
+  "experiment": {
+   "bytes": 4073,
+   "figma": "icon/experiment",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "c6b8a699dd8a"
+  },
+  "facebook": {
+   "bytes": 597,
+   "figma": "icon/facebook",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "2e430d72ac35"
+  },
+  "facebook-color": {
+   "bytes": 590,
+   "figma": "icon/facebook-color",
+   "label_fill": "logo-mark",
+   "mono": true,
+   "sha1": "e00a44fa55e0"
+  },
+  "google": {
+   "bytes": 1293,
+   "figma": "icon/google",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "d581758bf497"
+  },
+  "lab": {
+   "bytes": 2750,
+   "figma": "icon/lab",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "762147bfc506"
+  },
+  "linked-in": {
+   "bytes": 1116,
+   "figma": "icon/linked-in",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "154c6cac8cf1"
+  },
+  "logo": {
+   "bytes": 6691,
+   "figma": "icon/logo",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "4a668bdb8eb8"
+  },
+  "managed-services": {
+   "bytes": 5260,
+   "figma": "icon/managed-services",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "1b77d7510cab"
+  },
+  "multi-cloud-architecture": {
+   "bytes": 5152,
+   "figma": "icon/multi-cloud-architecture",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "2c4ae431caa2"
+  },
+  "nav-atc-portal": {
+   "bytes": 2762,
+   "figma": "icon/nav-atc-portal",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "90eb391969c1"
+  },
+  "nav-atc-portal-large": {
+   "bytes": 2589,
+   "figma": "icon/nav-atc-portal-large",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "beb0e4598481"
+  },
+  "nav-atom-insights": {
+   "bytes": 3517,
+   "figma": "icon/nav-atom-insights",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "bf8fd27df5af"
+  },
+  "nav-atom-insights-large": {
+   "bytes": 3354,
+   "figma": "icon/nav-atom-insights-large",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "7dd33c19936f"
+  },
+  "nav-lifecycle-management": {
+   "bytes": 1535,
+   "figma": "icon/nav-lifecycle-management",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "33f3367144d6"
+  },
+  "nav-my-softchoice": {
+   "bytes": 3518,
+   "figma": "icon/nav-my-softchoice",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "aba542090bc6"
+  },
+  "nav-my-softchoice-large": {
+   "bytes": 3503,
+   "figma": "icon/nav-my-softchoice-large",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "9736ecc9c08c"
+  },
+  "nav-shop": {
+   "bytes": 2860,
+   "figma": "icon/nav-shop",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "6beb5eef38d4"
+  },
+  "nav-softchoice-com": {
+   "bytes": 1177,
+   "figma": "icon/nav-softchoice-com",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "8be48a9acd9b"
+  },
+  "nav-softchoice-com-large": {
+   "bytes": 1005,
+   "figma": "icon/nav-softchoice-com-large",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "11cffb45df4d"
+  },
+  "nav-support": {
+   "bytes": 2222,
+   "figma": "icon/nav-support",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "30d3ea27f40e"
+  },
+  "nav-support-large": {
+   "bytes": 2219,
+   "figma": "icon/nav-support-large",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "e4075afd164b"
+  },
+  "nav-tbx": {
+   "bytes": 1667,
+   "figma": "icon/nav-tbx",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "3282f4d172c9"
+  },
+  "nav-tbx-large": {
+   "bytes": 1671,
+   "figma": "icon/nav-tbx-large",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "eee6afcd279a"
+  },
+  "nav-wwt-com": {
+   "bytes": 3422,
+   "figma": "icon/nav-wwt-com",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "2e5b0c9d99c9"
+  },
+  "nav-wwt-com-large": {
+   "bytes": 3237,
+   "figma": "icon/nav-wwt-com-large",
+   "label_fill": "#c33d04",
+   "mono": false,
+   "sha1": "c11486bf36a6"
+  },
+  "poc": {
+   "bytes": 2097,
+   "figma": "icon/poc",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "7eaf00088f55"
+  },
+  "security-transformation": {
+   "bytes": 1833,
+   "figma": "icon/security-transformation",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "104d36e14d40"
+  },
+  "service-offering": {
+   "bytes": 7515,
+   "figma": "icon/service-offering",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "2ce592de74dc"
+  },
+  "services": {
+   "bytes": 8741,
+   "figma": "icon/services",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "69f23bd18c9b"
+  },
+  "softchoice-logo": {
+   "bytes": 896,
+   "figma": "icon/softchoice-logo",
+   "label_fill": "#ff5100",
+   "mono": true,
+   "sha1": "52ba1c98e59d"
+  },
+  "tbx": {
+   "bytes": 1409,
+   "figma": "icon/tbx",
+   "label_fill": "#292940",
+   "mono": true,
+   "sha1": "e2651de1d9c3"
+  },
+  "technology": {
+   "bytes": 7541,
+   "figma": "icon/technology",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "383867a26c87"
+  },
+  "telecommunications": {
+   "bytes": 2311,
+   "figma": "icon/telecommunications",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "b056f593e570"
+  },
+  "training": {
+   "bytes": 3960,
+   "figma": "icon/training",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "aac3a527dce7"
+  },
+  "webinar": {
+   "bytes": 4102,
+   "figma": "icon/webinar",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "35a83b0356bb"
+  },
+  "workshop": {
+   "bytes": 6158,
+   "figma": "icon/workshop",
+   "label_fill": "#c33d04",
+   "mono": true,
+   "sha1": "d69dd6b71773"
+  },
+  "wwt-logo": {
+   "bytes": 3148,
+   "figma": "icon/wwt-logo",
+   "label_fill": "#1c0087",
+   "mono": true,
+   "sha1": "f6dca2a58be7"
+  },
+  "youtube": {
+   "bytes": 1186,
+   "figma": "icon/youtube",
+   "label_fill": "#4e4f5f",
+   "mono": true,
+   "sha1": "b47a3405fcd2"
+  }
+ },
+ "icons": {
+  "accessibility": {
+   "bytes": 1640,
+   "figma": "icon/accessibility",
+   "mono": true,
+   "sha1": "ed1474a5f419"
+  },
+  "accordion": {
+   "bytes": 663,
+   "figma": "icon/accordion",
+   "mono": true,
+   "sha1": "f2a22aa688f8"
+  },
+  "activity-feed": {
+   "bytes": 1018,
+   "figma": "icon/activity-feed",
+   "mono": true,
+   "sha1": "65c4640c4d92"
+  },
+  "add-reaction": {
+   "bytes": 1173,
+   "figma": "icon/add-reaction",
+   "mono": true,
+   "sha1": "8f32e906126a"
+  },
+  "add-user": {
+   "bytes": 1576,
+   "figma": "icon/add-user",
+   "mono": true,
+   "sha1": "52c9d7fba53e"
+  },
+  "additional-resources": {
+   "bytes": 6261,
+   "figma": "icon/additional-resources",
+   "mono": true,
+   "sha1": "da6125b10800"
+  },
+  "agile": {
+   "bytes": 1448,
+   "figma": "icon/agile",
+   "mono": true,
+   "sha1": "63853e396333"
+  },
+  "ai": {
+   "bytes": 1198,
+   "figma": "icon/ai",
+   "mono": true,
+   "sha1": "fde24aed777f"
+  },
+  "ai-proving-ground": {
+   "bytes": 4082,
+   "figma": "icon/ai-proving-ground",
+   "mono": true,
+   "sha1": "5c4cc8d50c4a"
+  },
+  "ai-security": {
+   "bytes": 1460,
+   "figma": "icon/ai-security",
+   "mono": true,
+   "sha1": "ab8294120508"
+  },
+  "ai-solutions": {
+   "bytes": 2006,
+   "figma": "icon/ai-solutions",
+   "mono": true,
+   "sha1": "e5f4214f76ff"
+  },
+  "align-content-bottom": {
+   "bytes": 874,
+   "figma": "icon/align-content-bottom",
+   "mono": true,
+   "sha1": "9434ec66ea3b"
+  },
+  "align-content-center-horizontal": {
+   "bytes": 814,
+   "figma": "icon/align-content-center-horizontal",
+   "mono": true,
+   "sha1": "48e135da5bcb"
+  },
+  "align-content-center-vertical": {
+   "bytes": 813,
+   "figma": "icon/align-content-center-vertical",
+   "mono": true,
+   "sha1": "abff5a1bf3d3"
+  },
+  "align-content-left": {
+   "bytes": 870,
+   "figma": "icon/align-content-left",
+   "mono": true,
+   "sha1": "e694827d381d"
+  },
+  "align-content-right": {
+   "bytes": 871,
+   "figma": "icon/align-content-right",
+   "mono": true,
+   "sha1": "821222a09630"
+  },
+  "align-content-space-between-horizontal": {
+   "bytes": 943,
+   "figma": "icon/align-content-space-between-horizontal",
+   "mono": true,
+   "sha1": "69d218bbb7fb"
+  },
+  "align-content-space-between-vertical": {
+   "bytes": 947,
+   "figma": "icon/align-content-space-between-vertical",
+   "mono": true,
+   "sha1": "d3342cbece56"
+  },
+  "align-content-space-evenly-horizontal": {
+   "bytes": 900,
+   "figma": "icon/align-content-space-evenly-horizontal",
+   "mono": true,
+   "sha1": "6484db026927"
+  },
+  "align-content-space-evenly-vertical": {
+   "bytes": 908,
+   "figma": "icon/align-content-space-evenly-vertical",
+   "mono": true,
+   "sha1": "f49950033290"
+  },
+  "align-content-top": {
+   "bytes": 873,
+   "figma": "icon/align-content-top",
+   "mono": true,
+   "sha1": "4994215c5438"
+  },
+  "align-text-center": {
+   "bytes": 456,
+   "figma": "icon/align-text-center",
+   "mono": true,
+   "sha1": "57f669c49974"
+  },
+  "align-text-justified": {
+   "bytes": 456,
+   "figma": "icon/align-text-justified",
+   "mono": true,
+   "sha1": "d6cb7d3873ed"
+  },
+  "align-text-left": {
+   "bytes": 456,
+   "figma": "icon/align-text-left",
+   "mono": true,
+   "sha1": "7ea3ab03d856"
+  },
+  "align-text-right": {
+   "bytes": 456,
+   "figma": "icon/align-text-right",
+   "mono": true,
+   "sha1": "b43ae7bcae35"
+  },
+  "apps": {
+   "bytes": 1724,
+   "figma": "icon/apps",
+   "mono": true,
+   "sha1": "632147d8cb72"
+  },
+  "ar": {
+   "bytes": 1281,
+   "figma": "icon/ar",
+   "mono": true,
+   "sha1": "394dbbdb3952"
+  },
+  "archive": {
+   "bytes": 2174,
+   "figma": "icon/archive",
+   "mono": true,
+   "sha1": "c239f305edfc"
+  },
+  "arrow-down": {
+   "bytes": 419,
+   "figma": "icon/arrow-down",
+   "mono": true,
+   "sha1": "66d2b2587c3e"
+  },
+  "arrow-left": {
+   "bytes": 420,
+   "figma": "icon/arrow-left",
+   "mono": true,
+   "sha1": "ade4ba73d541"
+  },
+  "arrow-right": {
+   "bytes": 414,
+   "figma": "icon/arrow-right",
+   "mono": true,
+   "sha1": "01ea4e95f28d"
+  },
+  "arrow-up": {
+   "bytes": 421,
+   "figma": "icon/arrow-up",
+   "mono": true,
+   "sha1": "e4e535fac9d1"
+  },
+  "arrows-up-down": {
+   "bytes": 870,
+   "figma": "icon/arrows-up-down",
+   "mono": true,
+   "sha1": "c81909d87886"
+  },
+  "assessment": {
+   "bytes": 3226,
+   "figma": "icon/assessment",
+   "mono": true,
+   "sha1": "849f5070bc9a"
+  },
+  "at-symbol": {
+   "bytes": 1107,
+   "figma": "icon/at-symbol",
+   "mono": true,
+   "sha1": "6a9cd13e5170"
+  },
+  "attachment": {
+   "bytes": 2027,
+   "figma": "icon/attachment",
+   "mono": true,
+   "sha1": "fc3b2976b147"
+  },
+  "award": {
+   "bytes": 7912,
+   "figma": "icon/award",
+   "mono": true,
+   "sha1": "3d8cb71875f1"
+  },
+  "backorder": {
+   "bytes": 1071,
+   "figma": "icon/backorder",
+   "mono": true,
+   "sha1": "3e1ec5ca3593"
+  },
+  "backup": {
+   "bytes": 2364,
+   "figma": "icon/backup",
+   "mono": true,
+   "sha1": "25da36b98267"
+  },
+  "backward": {
+   "bytes": 619,
+   "figma": "icon/backward",
+   "mono": true,
+   "sha1": "0cbd1e461326"
+  },
+  "badge": {
+   "bytes": 2674,
+   "figma": "icon/badge",
+   "mono": true,
+   "sha1": "3ec2c101d23a"
+  },
+  "bag": {
+   "bytes": 1185,
+   "figma": "icon/bag",
+   "mono": true,
+   "sha1": "c6c1b3d3fd5b"
+  },
+  "ban": {
+   "bytes": 2013,
+   "figma": "icon/ban",
+   "mono": true,
+   "sha1": "052d14fa0d67"
+  },
+  "bar-graph": {
+   "bytes": 1826,
+   "figma": "icon/bar-graph",
+   "mono": true,
+   "sha1": "2c8f33ef9249"
+  },
+  "barcode": {
+   "bytes": 911,
+   "figma": "icon/barcode",
+   "mono": true,
+   "sha1": "4ad35c55ed60"
+  },
+  "bill-and-hold": {
+   "bytes": 1754,
+   "figma": "icon/bill-and-hold",
+   "mono": true,
+   "sha1": "1f1bac2641cc"
+  },
+  "biplane": {
+   "bytes": 2827,
+   "figma": "icon/biplane",
+   "mono": true,
+   "sha1": "13fb0041acaa"
+  },
+  "blog": {
+   "bytes": 1961,
+   "figma": "icon/blog",
+   "mono": true,
+   "sha1": "217c7beb50b1"
+  },
+  "blueprint": {
+   "bytes": 2928,
+   "figma": "icon/blueprint",
+   "mono": true,
+   "sha1": "66a61727d7fd"
+  },
+  "bluetooth": {
+   "bytes": 897,
+   "figma": "icon/bluetooth",
+   "mono": true,
+   "sha1": "c091c7a712aa"
+  },
+  "bold": {
+   "bytes": 1030,
+   "figma": "icon/bold",
+   "mono": true,
+   "sha1": "5f422525b80c"
+  },
+  "bookmark-fill": {
+   "bytes": 982,
+   "figma": "icon/bookmark-fill",
+   "mono": true,
+   "sha1": "ebba92b6668e"
+  },
+  "bookmark-stroke": {
+   "bytes": 1131,
+   "figma": "icon/bookmark-stroke",
+   "mono": true,
+   "sha1": "770a306cf44a"
+  },
+  "box": {
+   "bytes": 889,
+   "figma": "icon/box",
+   "mono": true,
+   "sha1": "97a8f1d708df"
+  },
+  "briefcase": {
+   "bytes": 2636,
+   "figma": "icon/briefcase",
+   "mono": true,
+   "sha1": "aec12cbbc8c1"
+  },
+  "bubble": {
+   "bytes": 2405,
+   "figma": "icon/bubble",
+   "mono": true,
+   "sha1": "3a3e7d816412"
+  },
+  "bug": {
+   "bytes": 1446,
+   "figma": "icon/bug",
+   "mono": true,
+   "sha1": "b827fb0cb00e"
+  },
+  "building": {
+   "bytes": 1536,
+   "figma": "icon/building",
+   "mono": true,
+   "sha1": "9cc7bc24bf0a"
+  },
+  "button": {
+   "bytes": 586,
+   "figma": "icon/button",
+   "mono": true,
+   "sha1": "2cc7d71e41ad"
+  },
+  "calendar": {
+   "bytes": 3008,
+   "figma": "icon/calendar",
+   "mono": true,
+   "sha1": "eaf20e96716e"
+  },
+  "calendar-agenda-view": {
+   "bytes": 1551,
+   "figma": "icon/calendar agenda view",
+   "mono": true,
+   "sha1": "ef142e136f03"
+  },
+  "calendar-list-view": {
+   "bytes": 2019,
+   "figma": "icon/calendar list view",
+   "mono": true,
+   "sha1": "4dba8ed63209"
+  },
+  "calendar-plus": {
+   "bytes": 2666,
+   "figma": "icon/calendar-plus",
+   "mono": true,
+   "sha1": "0b99c37f1bdf"
+  },
+  "camera": {
+   "bytes": 3007,
+   "figma": "icon/camera",
+   "mono": true,
+   "sha1": "5f282e3f576b"
+  },
+  "camera-plus": {
+   "bytes": 2116,
+   "figma": "icon/camera-plus",
+   "mono": true,
+   "sha1": "a35cea310428"
+  },
+  "card": {
+   "bytes": 792,
+   "figma": "icon/card",
+   "mono": true,
+   "sha1": "466dd8adc683"
+  },
+  "caret-down": {
+   "bytes": 430,
+   "figma": "icon/caret-down",
+   "mono": true,
+   "sha1": "204616fa40a5"
+  },
+  "caret-down-double": {
+   "bytes": 650,
+   "figma": "icon/caret-down-double",
+   "mono": true,
+   "sha1": "87e95918b0ab"
+  },
+  "caret-left": {
+   "bytes": 432,
+   "figma": "icon/caret-left",
+   "mono": true,
+   "sha1": "9bb9a3c86639"
+  },
+  "caret-left-double": {
+   "bytes": 653,
+   "figma": "icon/caret-left-double",
+   "mono": true,
+   "sha1": "0a7379a8a57d"
+  },
+  "caret-right": {
+   "bytes": 434,
+   "figma": "icon/caret-right",
+   "mono": true,
+   "sha1": "4e416c1f29e8"
+  },
+  "caret-right-double": {
+   "bytes": 650,
+   "figma": "icon/caret-right-double",
+   "mono": true,
+   "sha1": "b36704142aea"
+  },
+  "caret-sort": {
+   "bytes": 738,
+   "figma": "icon/caret-sort",
+   "mono": true,
+   "sha1": "93fbecd1ddfb"
+  },
+  "caret-sort-down": {
+   "bytes": 1074,
+   "figma": "icon/caret-sort-down",
+   "mono": true,
+   "sha1": "cad84bb4c6f0"
+  },
+  "caret-sort-down-fill": {
+   "bytes": 971,
+   "figma": "icon/caret-sort-down-fill",
+   "mono": true,
+   "sha1": "e61b7e0d0c38"
+  },
+  "caret-sort-up": {
+   "bytes": 1132,
+   "figma": "icon/caret-sort-up",
+   "mono": true,
+   "sha1": "90f50c64ad29"
+  },
+  "caret-sort-up-fill": {
+   "bytes": 972,
+   "figma": "icon/caret-sort-up-fill",
+   "mono": true,
+   "sha1": "15491c8ba9f8"
+  },
+  "caret-up": {
+   "bytes": 436,
+   "figma": "icon/caret-up",
+   "mono": true,
+   "sha1": "e5b4cb3e71d4"
+  },
+  "caret-up-double": {
+   "bytes": 658,
+   "figma": "icon/caret-up-double",
+   "mono": true,
+   "sha1": "f1bf58a8a5d0"
+  },
+  "carousel": {
+   "bytes": 2021,
+   "figma": "icon/carousel",
+   "mono": true,
+   "sha1": "885502891de2"
+  },
+  "cart": {
+   "bytes": 2551,
+   "figma": "icon/cart",
+   "mono": true,
+   "sha1": "ba700f7772c2"
+  },
+  "cart-bold": {
+   "bytes": 2578,
+   "figma": "icon/cart-bold",
+   "mono": true,
+   "sha1": "678c9bb90f9c"
+  },
+  "catalog": {
+   "bytes": 4268,
+   "figma": "icon/catalog",
+   "mono": true,
+   "sha1": "d6f9be321aa7"
+  },
+  "category": {
+   "bytes": 718,
+   "figma": "icon/category",
+   "mono": true,
+   "sha1": "46de3ebc2e6a"
+  },
+  "certification": {
+   "bytes": 1336,
+   "figma": "icon/certification",
+   "mono": true,
+   "sha1": "253ef629f20d"
+  },
+  "chatbot": {
+   "bytes": 3901,
+   "figma": "icon/chatbot",
+   "mono": true,
+   "sha1": "668a9f5b1304"
+  },
+  "check": {
+   "bytes": 1271,
+   "figma": "icon/check",
+   "mono": true,
+   "sha1": "32c57811109e"
+  },
+  "circle": {
+   "bytes": 711,
+   "figma": "icon/circle",
+   "mono": true,
+   "sha1": "d949b3592224"
+  },
+  "circle-check": {
+   "bytes": 1300,
+   "figma": "icon/circle-check",
+   "mono": true,
+   "sha1": "b03697d585af"
+  },
+  "circle-ellipsis": {
+   "bytes": 1575,
+   "figma": "icon/circle-ellipsis",
+   "mono": true,
+   "sha1": "2c8657f93fcd"
+  },
+  "circle-exclamation": {
+   "bytes": 1167,
+   "figma": "icon/circle-exclamation",
+   "mono": true,
+   "sha1": "e9cf2a0b0b38"
+  },
+  "circle-info": {
+   "bytes": 1328,
+   "figma": "icon/circle-info",
+   "mono": true,
+   "sha1": "d31f525a089d"
+  },
+  "circle-minus": {
+   "bytes": 1361,
+   "figma": "icon/circle-minus",
+   "mono": true,
+   "sha1": "13c31278dcfe"
+  },
+  "circle-pause": {
+   "bytes": 1126,
+   "figma": "icon/circle-pause",
+   "mono": true,
+   "sha1": "a0222f3fb303"
+  },
+  "circle-play": {
+   "bytes": 1692,
+   "figma": "icon/circle-play",
+   "mono": true,
+   "sha1": "d833c1b97028"
+  },
+  "circle-plus": {
+   "bytes": 1300,
+   "figma": "icon/circle-plus",
+   "mono": true,
+   "sha1": "4e930ef88523"
+  },
+  "circle-question": {
+   "bytes": 1907,
+   "figma": "icon/circle-question",
+   "mono": true,
+   "sha1": "8b1e7c603f0b"
+  },
+  "circle-stop": {
+   "bytes": 1787,
+   "figma": "icon/circle-stop",
+   "mono": true,
+   "sha1": "192a629a9d09"
+  },
+  "circle-x": {
+   "bytes": 1387,
+   "figma": "icon/circle-x",
+   "mono": true,
+   "sha1": "832d9456803a"
+  },
+  "clock": {
+   "bytes": 807,
+   "figma": "icon/clock",
+   "mono": true,
+   "sha1": "dd85d7720e49"
+  },
+  "close": {
+   "bytes": 436,
+   "figma": "icon/close",
+   "mono": true,
+   "sha1": "6011f71f5b9e"
+  },
+  "cloud": {
+   "bytes": 2333,
+   "figma": "icon/cloud",
+   "mono": true,
+   "sha1": "9bef13e094d5"
+  },
+  "cloud-security": {
+   "bytes": 1409,
+   "figma": "icon/cloud-security",
+   "mono": true,
+   "sha1": "7b919ead2cef"
+  },
+  "coaching": {
+   "bytes": 2189,
+   "figma": "icon/coaching",
+   "mono": true,
+   "sha1": "743afcb8219f"
+  },
+  "code": {
+   "bytes": 728,
+   "figma": "icon/code",
+   "mono": true,
+   "sha1": "17382fc953f0"
+  },
+  "code-exchange": {
+   "bytes": 2796,
+   "figma": "icon/code-exchange",
+   "mono": true,
+   "sha1": "3796e188861d"
+  },
+  "collapse": {
+   "bytes": 821,
+   "figma": "icon/collapse",
+   "mono": true,
+   "sha1": "02991d6cb3f3"
+  },
+  "color-complexity-complex": {
+   "bytes": 1675,
+   "figma": "icon/color/complexity-complex",
+   "mono": false,
+   "sha1": "01aa5aa0ef44"
+  },
+  "color-complexity-easy": {
+   "bytes": 1521,
+   "figma": "icon/color/complexity-easy",
+   "mono": false,
+   "sha1": "db13e521d85a"
+  },
+  "color-complexity-moderate": {
+   "bytes": 1919,
+   "figma": "icon/color/complexity-moderate",
+   "mono": false,
+   "sha1": "1125e814d487"
+  },
+  "color-cursor": {
+   "bytes": 849,
+   "figma": "icon/color/cursor",
+   "mono": true,
+   "sha1": "28a39e6fa6f7"
+  },
+  "color-service-now": {
+   "bytes": 854,
+   "figma": "icon/color/service-now",
+   "mono": true,
+   "sha1": "664369d3a644"
+  },
+  "color-teams": {
+   "bytes": 2217,
+   "figma": "icon/color/teams",
+   "mono": true,
+   "sha1": "ddd0d2614b33"
+  },
+  "color-vimeo": {
+   "bytes": 2759,
+   "figma": "icon/color/vimeo",
+   "mono": true,
+   "sha1": "207597adcbea"
+  },
+  "color-webex": {
+   "bytes": 2929,
+   "figma": "icon/color/webex",
+   "mono": false,
+   "sha1": "afdfa126fb2f"
+  },
+  "color-zoom": {
+   "bytes": 828,
+   "figma": "icon/color/zoom",
+   "mono": true,
+   "sha1": "03abaec9d91d"
+  },
+  "column-five-image": {
+   "bytes": 2397,
+   "figma": "icon/column-five-image",
+   "mono": true,
+   "sha1": "2d16c3fb3c99"
+  },
+  "column-four-card": {
+   "bytes": 1592,
+   "figma": "icon/column-four-card",
+   "mono": true,
+   "sha1": "dd5d757738c1"
+  },
+  "column-two-card": {
+   "bytes": 1652,
+   "figma": "icon/column-two-card",
+   "mono": true,
+   "sha1": "1943382e0abd"
+  },
+  "column-two-center-text": {
+   "bytes": 1090,
+   "figma": "icon/column-two-center-text",
+   "mono": true,
+   "sha1": "95cf1a31eb5b"
+  },
+  "column-two-iframe": {
+   "bytes": 1187,
+   "figma": "icon/column-two-iframe",
+   "mono": true,
+   "sha1": "482bbd4707c6"
+  },
+  "column-two-image": {
+   "bytes": 2276,
+   "figma": "icon/column-two-image",
+   "mono": true,
+   "sha1": "70086945df9b"
+  },
+  "column-two-see-more": {
+   "bytes": 2060,
+   "figma": "icon/column-two-see-more",
+   "mono": true,
+   "sha1": "7e6d2963f47f"
+  },
+  "column-two-text": {
+   "bytes": 1860,
+   "figma": "icon/column-two-text",
+   "mono": true,
+   "sha1": "df0e03c3c6cb"
+  },
+  "column-two-wysiwyg": {
+   "bytes": 2528,
+   "figma": "icon/column-two-wysiwyg",
+   "mono": true,
+   "sha1": "175cb5efe22a"
+  },
+  "command-line-interface": {
+   "bytes": 536,
+   "figma": "icon/command-line-interface",
+   "mono": true,
+   "sha1": "ffa01f4a27be"
+  },
+  "comment-edit": {
+   "bytes": 2506,
+   "figma": "icon/comment-edit",
+   "mono": true,
+   "sha1": "7b9395674615"
+  },
+  "comment-fill": {
+   "bytes": 886,
+   "figma": "icon/comment/fill",
+   "mono": true,
+   "sha1": "122db99e2257"
+  },
+  "comment-slash": {
+   "bytes": 1983,
+   "figma": "icon/comment-slash",
+   "mono": true,
+   "sha1": "1bf7cfcff440"
+  },
+  "comment-stroke": {
+   "bytes": 1384,
+   "figma": "icon/comment-stroke",
+   "mono": true,
+   "sha1": "815c1ab81aee"
+  },
+  "commit": {
+   "bytes": 691,
+   "figma": "icon/commit",
+   "mono": true,
+   "sha1": "56e24aedd31d"
+  },
+  "compare": {
+   "bytes": 1709,
+   "figma": "icon/compare",
+   "mono": true,
+   "sha1": "3794eaa1674a"
+  },
+  "compare-add": {
+   "bytes": 1404,
+   "figma": "icon/compare-add",
+   "mono": true,
+   "sha1": "abf831a9f3c4"
+  },
+  "compare-check": {
+   "bytes": 1390,
+   "figma": "icon/compare-check",
+   "mono": true,
+   "sha1": "29b9a553f83d"
+  },
+  "complexity-complex": {
+   "bytes": 1625,
+   "figma": "icon/complexity-complex",
+   "mono": true,
+   "sha1": "645861f024bf"
+  },
+  "complexity-easy": {
+   "bytes": 1468,
+   "figma": "icon/complexity-easy",
+   "mono": true,
+   "sha1": "e175970a3bea"
+  },
+  "complexity-moderate": {
+   "bytes": 1868,
+   "figma": "icon/complexity-moderate",
+   "mono": true,
+   "sha1": "b5281c6dda58"
+  },
+  "compose": {
+   "bytes": 1313,
+   "figma": "icon/compose",
+   "mono": true,
+   "sha1": "d6ce673a2f0a"
+  },
+  "computer-chip": {
+   "bytes": 1170,
+   "figma": "icon/computer-chip",
+   "mono": true,
+   "sha1": "e485692e74f3"
+  },
+  "connect-social": {
+   "bytes": 2024,
+   "figma": "icon/connect-social",
+   "mono": true,
+   "sha1": "628e3d229e0e"
+  },
+  "consulting": {
+   "bytes": 5619,
+   "figma": "icon/consulting",
+   "mono": true,
+   "sha1": "da90b9d55e7a"
+  },
+  "contract": {
+   "bytes": 1705,
+   "figma": "icon/contract",
+   "mono": true,
+   "sha1": "d16988540def"
+  },
+  "copy": {
+   "bytes": 1805,
+   "figma": "icon/copy",
+   "mono": true,
+   "sha1": "4adb3b78e28d"
+  },
+  "corner-bottom-left": {
+   "bytes": 834,
+   "figma": "icon/corner-bottom-left",
+   "mono": true,
+   "sha1": "62b8b9087187"
+  },
+  "corner-bottom-right": {
+   "bytes": 826,
+   "figma": "icon/corner-bottom-right",
+   "mono": true,
+   "sha1": "bc736e3a667d"
+  },
+  "corner-top-left": {
+   "bytes": 831,
+   "figma": "icon/corner-top-left",
+   "mono": true,
+   "sha1": "7f50108a6c0e"
+  },
+  "corner-top-right": {
+   "bytes": 839,
+   "figma": "icon/corner-top-right",
+   "mono": true,
+   "sha1": "89ab86e53ee5"
+  },
+  "corners": {
+   "bytes": 960,
+   "figma": "icon/corners",
+   "mono": true,
+   "sha1": "4c62cd54dda2"
+  },
+  "credit-card": {
+   "bytes": 2360,
+   "figma": "icon/credit-card",
+   "mono": true,
+   "sha1": "8f55b8a648ee"
+  },
+  "cut": {
+   "bytes": 3000,
+   "figma": "icon/cut",
+   "mono": true,
+   "sha1": "59697bb3180f"
+  },
+  "cyber-range": {
+   "bytes": 2159,
+   "figma": "icon/cyber range",
+   "mono": true,
+   "sha1": "42d1740ef579"
+  },
+  "dark-mode": {
+   "bytes": 1610,
+   "figma": "icon/dark-mode",
+   "mono": true,
+   "sha1": "bb49aa554222"
+  },
+  "dashboard": {
+   "bytes": 3551,
+   "figma": "icon/dashboard",
+   "mono": true,
+   "sha1": "3df3e4b9646a"
+  },
+  "data-center": {
+   "bytes": 2183,
+   "figma": "icon/data-center",
+   "mono": true,
+   "sha1": "198fcd864789"
+  },
+  "database": {
+   "bytes": 2026,
+   "figma": "icon/database",
+   "mono": true,
+   "sha1": "6572fd16ade1"
+  },
+  "delete": {
+   "bytes": 988,
+   "figma": "icon/delete",
+   "mono": true,
+   "sha1": "e15421f8e75b"
+  },
+  "desktop": {
+   "bytes": 1555,
+   "figma": "icon/desktop",
+   "mono": true,
+   "sha1": "7ccc1c4e55d1"
+  },
+  "discussions-fill": {
+   "bytes": 1579,
+   "figma": "icon/discussions-fill",
+   "mono": true,
+   "sha1": "4d97ada775d0"
+  },
+  "discussions-stroke": {
+   "bytes": 2790,
+   "figma": "icon/discussions-stroke",
+   "mono": true,
+   "sha1": "cfc630329dfb"
+  },
+  "diversity": {
+   "bytes": 2948,
+   "figma": "icon/diversity",
+   "mono": true,
+   "sha1": "3259ab460d41"
+  },
+  "dna": {
+   "bytes": 4174,
+   "figma": "icon/dna",
+   "mono": true,
+   "sha1": "520df7f540a8"
+  },
+  "document-archive": {
+   "bytes": 3503,
+   "figma": "icon/document-archive",
+   "mono": true,
+   "sha1": "8b31303c19cd"
+  },
+  "document-audio": {
+   "bytes": 3183,
+   "figma": "icon/document-audio",
+   "mono": true,
+   "sha1": "69fa4098e3dc"
+  },
+  "document-code": {
+   "bytes": 2317,
+   "figma": "icon/document-code",
+   "mono": true,
+   "sha1": "3a0aab62d52c"
+  },
+  "document-csv": {
+   "bytes": 3900,
+   "figma": "icon/document-csv",
+   "mono": true,
+   "sha1": "e1eabd5cb7bd"
+  },
+  "document-excel": {
+   "bytes": 1821,
+   "figma": "icon/document-excel",
+   "mono": true,
+   "sha1": "e6b0b3720934"
+  },
+  "document-pdf": {
+   "bytes": 3036,
+   "figma": "icon/document-pdf",
+   "mono": true,
+   "sha1": "81328031fc77"
+  },
+  "document-plain": {
+   "bytes": 1588,
+   "figma": "icon/document-plain",
+   "mono": true,
+   "sha1": "38442787fb7e"
+  },
+  "document-powerpoint": {
+   "bytes": 2506,
+   "figma": "icon/document-powerpoint",
+   "mono": true,
+   "sha1": "66a7b541b9dd"
+  },
+  "document-publish": {
+   "bytes": 1123,
+   "figma": "icon/document-publish",
+   "mono": true,
+   "sha1": "0b783e8bbaa8"
+  },
+  "document-swap": {
+   "bytes": 1571,
+   "figma": "icon/document-swap",
+   "mono": true,
+   "sha1": "d87020fb4620"
+  },
+  "document-text": {
+   "bytes": 1644,
+   "figma": "icon/document-text",
+   "mono": true,
+   "sha1": "d75e4c5eeadf"
+  },
+  "document-video": {
+   "bytes": 3069,
+   "figma": "icon/document-video",
+   "mono": true,
+   "sha1": "6f3d39383fce"
+  },
+  "document-visio": {
+   "bytes": 1735,
+   "figma": "icon/document-visio",
+   "mono": true,
+   "sha1": "f4b91c922c9d"
+  },
+  "document-word": {
+   "bytes": 1653,
+   "figma": "icon/document-word",
+   "mono": true,
+   "sha1": "bd0c9df6c3e3"
+  },
+  "download": {
+   "bytes": 872,
+   "figma": "icon/download",
+   "mono": true,
+   "sha1": "bf420cc45554"
+  },
+  "downvote-stroke": {
+   "bytes": 1301,
+   "figma": "icon/downvote-stroke",
+   "mono": true,
+   "sha1": "6a1e5c2aa1c2"
+  },
+  "drag": {
+   "bytes": 1587,
+   "figma": "icon/drag",
+   "mono": true,
+   "sha1": "a4f5dfe7f873"
+  },
+  "edit": {
+   "bytes": 1098,
+   "figma": "icon/edit",
+   "mono": true,
+   "sha1": "4442a2dd7aea"
+  },
+  "ellipsis": {
+   "bytes": 872,
+   "figma": "icon/ellipsis",
+   "mono": true,
+   "sha1": "704dff5f8aca"
+  },
+  "enablement": {
+   "bytes": 5975,
+   "figma": "icon/enablement",
+   "mono": true,
+   "sha1": "4546ca8a186d"
+  },
+  "end-to-end": {
+   "bytes": 2343,
+   "figma": "icon/end-to-end",
+   "mono": true,
+   "sha1": "c95e1f10d406"
+  },
+  "enterprise-architecture": {
+   "bytes": 1600,
+   "figma": "icon/enterprise-architecture",
+   "mono": true,
+   "sha1": "a03e43cf9174"
+  },
+  "entertainment": {
+   "bytes": 3828,
+   "figma": "icon/entertainment",
+   "mono": true,
+   "sha1": "e7b02c97a5c4"
+  },
+  "entitlement": {
+   "bytes": 3029,
+   "figma": "icon/entitlement",
+   "mono": true,
+   "sha1": "d43d81ded73d"
+  },
+  "esg": {
+   "bytes": 3288,
+   "figma": "icon/esg",
+   "mono": true,
+   "sha1": "290cb43c3242"
+  },
+  "executive": {
+   "bytes": 2455,
+   "figma": "icon/executive",
+   "mono": true,
+   "sha1": "28a4b2e4d908"
+  },
+  "expand": {
+   "bytes": 861,
+   "figma": "icon/expand",
+   "mono": true,
+   "sha1": "39d3f20bc52d"
+  },
+  "export": {
+   "bytes": 733,
+   "figma": "icon/export",
+   "mono": true,
+   "sha1": "0adc42a202b4"
+  },
+  "external-link": {
+   "bytes": 1203,
+   "figma": "icon/external-link",
+   "mono": true,
+   "sha1": "54535b4a5765"
+  },
+  "federal-government": {
+   "bytes": 1970,
+   "figma": "icon/federal-government",
+   "mono": true,
+   "sha1": "c1e2c10f371c"
+  },
+  "feed-fill": {
+   "bytes": 683,
+   "figma": "icon/feed-fill",
+   "mono": true,
+   "sha1": "86c372784253"
+  },
+  "feed-slash": {
+   "bytes": 3033,
+   "figma": "icon/feed-slash",
+   "mono": true,
+   "sha1": "869409547587"
+  },
+  "feed-stroke": {
+   "bytes": 3007,
+   "figma": "icon/feed-stroke",
+   "mono": true,
+   "sha1": "9b2b1fb15145"
+  },
+  "feedback": {
+   "bytes": 1616,
+   "figma": "icon/feedback",
+   "mono": true,
+   "sha1": "305005dfe3cd"
+  },
+  "filter": {
+   "bytes": 1411,
+   "figma": "icon/filter",
+   "mono": true,
+   "sha1": "5e8965c59fd7"
+  },
+  "fire-extinguisher": {
+   "bytes": 1724,
+   "figma": "icon/fire-extinguisher",
+   "mono": true,
+   "sha1": "c178bdc2e7df"
+  },
+  "first-aid-kit": {
+   "bytes": 1486,
+   "figma": "icon/first-aid-kit",
+   "mono": true,
+   "sha1": "abb0d07a09ea"
+  },
+  "flag": {
+   "bytes": 1234,
+   "figma": "icon/flag",
+   "mono": true,
+   "sha1": "dbcc3e6c2703"
+  },
+  "flag-fill": {
+   "bytes": 979,
+   "figma": "icon/flag-fill",
+   "mono": true,
+   "sha1": "4f57c3af1457"
+  },
+  "flag-split": {
+   "bytes": 1448,
+   "figma": "icon/flag-split",
+   "mono": false,
+   "sha1": "197a2fe1a315"
+  },
+  "flow": {
+   "bytes": 3830,
+   "figma": "icon/flow",
+   "mono": true,
+   "sha1": "05b80c61d348"
+  },
+  "folder-closed": {
+   "bytes": 1350,
+   "figma": "icon/folder-closed",
+   "mono": true,
+   "sha1": "ba9591e7bfe9"
+  },
+  "folder-open": {
+   "bytes": 1780,
+   "figma": "icon/folder-open",
+   "mono": true,
+   "sha1": "9179eaa67f60"
+  },
+  "forward": {
+   "bytes": 646,
+   "figma": "icon/forward",
+   "mono": true,
+   "sha1": "e346214937e9"
+  },
+  "frown-face": {
+   "bytes": 2431,
+   "figma": "icon/frown-face",
+   "mono": true,
+   "sha1": "14a975cdbbd5"
+  },
+  "fullscreen-enter": {
+   "bytes": 1572,
+   "figma": "icon/fullscreen-enter",
+   "mono": true,
+   "sha1": "f45b06a9d969"
+  },
+  "fullscreen-exit": {
+   "bytes": 1557,
+   "figma": "icon/fullscreen-exit",
+   "mono": true,
+   "sha1": "a48c6d77bad4"
+  },
+  "gas": {
+   "bytes": 1274,
+   "figma": "icon/gas",
+   "mono": true,
+   "sha1": "c95a84d5f7af"
+  },
+  "gear": {
+   "bytes": 6024,
+   "figma": "icon/gear",
+   "mono": true,
+   "sha1": "c02c9a6b404c"
+  },
+  "github": {
+   "bytes": 4205,
+   "figma": "icon/github",
+   "mono": true,
+   "sha1": "45f35a9c7b78"
+  },
+  "globe": {
+   "bytes": 1909,
+   "figma": "icon/globe",
+   "mono": true,
+   "sha1": "e307e527f0f5"
+  },
+  "goals": {
+   "bytes": 1453,
+   "figma": "icon/goals",
+   "mono": true,
+   "sha1": "9c89a86cbdd5"
+  },
+  "graph-pie-empty": {
+   "bytes": 1057,
+   "figma": "icon/graph-pie-empty",
+   "mono": true,
+   "sha1": "4c8acc24e0ae"
+  },
+  "graph-pie-full": {
+   "bytes": 1313,
+   "figma": "icon/graph-pie-full",
+   "mono": true,
+   "sha1": "0afde051dfec"
+  },
+  "graph-pie-half": {
+   "bytes": 1468,
+   "figma": "icon/graph-pie-half",
+   "mono": true,
+   "sha1": "3aab356e6837"
+  },
+  "graph-pie-one-fourth": {
+   "bytes": 1302,
+   "figma": "icon/graph-pie-one-fourth",
+   "mono": true,
+   "sha1": "faae0a160605"
+  },
+  "graph-pie-three-fourths": {
+   "bytes": 1360,
+   "figma": "icon/graph-pie-three-fourths",
+   "mono": true,
+   "sha1": "827beca8292d"
+  },
+  "grid-view": {
+   "bytes": 3459,
+   "figma": "icon/grid-view",
+   "mono": true,
+   "sha1": "303360fcaa00"
+  },
+  "grid-view-fill": {
+   "bytes": 3283,
+   "figma": "icon/grid-view-fill",
+   "mono": true,
+   "sha1": "2495a3041623"
+  },
+  "hamburger-collapsed": {
+   "bytes": 433,
+   "figma": "icon/hamburger-collapsed",
+   "mono": true,
+   "sha1": "15a0eba8d945"
+  },
+  "hamburger-open": {
+   "bytes": 433,
+   "figma": "icon/hamburger-open",
+   "mono": true,
+   "sha1": "5ced5325f25b"
+  },
+  "hand": {
+   "bytes": 2500,
+   "figma": "icon/hand",
+   "mono": true,
+   "sha1": "419023fd9551"
+  },
+  "happy-face": {
+   "bytes": 2018,
+   "figma": "icon/happy-face",
+   "mono": true,
+   "sha1": "eb93eec9fe02"
+  },
+  "happy-hour": {
+   "bytes": 1587,
+   "figma": "icon/happy-hour",
+   "mono": true,
+   "sha1": "cc2d3a97e087"
+  },
+  "hdd": {
+   "bytes": 1565,
+   "figma": "icon/hdd",
+   "mono": true,
+   "sha1": "f0bdfb673065"
+  },
+  "heart": {
+   "bytes": 1823,
+   "figma": "icon/heart",
+   "mono": true,
+   "sha1": "8611ab92b042"
+  },
+  "heartbeat": {
+   "bytes": 2474,
+   "figma": "icon/heartbeat",
+   "mono": true,
+   "sha1": "6094f8b1bb5e"
+  },
+  "hide": {
+   "bytes": 2471,
+   "figma": "icon/hide",
+   "mono": true,
+   "sha1": "b90bc03c9890"
+  },
+  "hide-video": {
+   "bytes": 1582,
+   "figma": "icon/hide-video",
+   "mono": true,
+   "sha1": "1135f659f2d7"
+  },
+  "home": {
+   "bytes": 2419,
+   "figma": "icon/home",
+   "mono": true,
+   "sha1": "af55ecf59d6f"
+  },
+  "id-badge": {
+   "bytes": 2950,
+   "figma": "icon/id-badge",
+   "mono": true,
+   "sha1": "a1fe4460435d"
+  },
+  "image": {
+   "bytes": 2536,
+   "figma": "icon/image",
+   "mono": true,
+   "sha1": "ac2f9ac81811"
+  },
+  "image-break": {
+   "bytes": 2785,
+   "figma": "icon/image-break",
+   "mono": true,
+   "sha1": "8162b9351a88"
+  },
+  "image-link": {
+   "bytes": 4190,
+   "figma": "icon/image-link",
+   "mono": true,
+   "sha1": "8b105b27794d"
+  },
+  "image-repeater": {
+   "bytes": 3428,
+   "figma": "icon/image-repeater",
+   "mono": true,
+   "sha1": "20ca89d39f4c"
+  },
+  "import": {
+   "bytes": 755,
+   "figma": "icon/import",
+   "mono": true,
+   "sha1": "5f4a59308400"
+  },
+  "industry": {
+   "bytes": 4138,
+   "figma": "icon/industry",
+   "mono": true,
+   "sha1": "497278edb3ec"
+  },
+  "infrastructure-modernization": {
+   "bytes": 2972,
+   "figma": "icon/infrastructure-modernization",
+   "mono": true,
+   "sha1": "15a73e01a98b"
+  },
+  "infrastructure-services": {
+   "bytes": 6403,
+   "figma": "icon/infrastructure-services",
+   "mono": true,
+   "sha1": "26b607119288"
+  },
+  "instagram": {
+   "bytes": 3554,
+   "figma": "icon/instagram",
+   "mono": true,
+   "sha1": "c4800060f299"
+  },
+  "interactive-demo": {
+   "bytes": 1478,
+   "figma": "icon/interactive-demo",
+   "mono": true,
+   "sha1": "354a266e5468"
+  },
+  "inventory": {
+   "bytes": 1935,
+   "figma": "icon/inventory",
+   "mono": true,
+   "sha1": "e8594306123e"
+  },
+  "inventory-management": {
+   "bytes": 4608,
+   "figma": "icon/inventory-management",
+   "mono": true,
+   "sha1": "5788a2a90147"
+  },
+  "inventory-move": {
+   "bytes": 1076,
+   "figma": "icon/inventory-move",
+   "mono": true,
+   "sha1": "f6c9f81d93ad"
+  },
+  "invite": {
+   "bytes": 1520,
+   "figma": "icon/invite",
+   "mono": true,
+   "sha1": "25b3f9d28bde"
+  },
+  "invoice": {
+   "bytes": 1485,
+   "figma": "icon/invoice",
+   "mono": true,
+   "sha1": "76f2faa9130a"
+  },
+  "ip-management": {
+   "bytes": 1735,
+   "figma": "icon/ip-management",
+   "mono": true,
+   "sha1": "1a022328b454"
+  },
+  "italic": {
+   "bytes": 574,
+   "figma": "icon/italic",
+   "mono": true,
+   "sha1": "c685e042c989"
+  },
+  "jet": {
+   "bytes": 2579,
+   "figma": "icon/jet",
+   "mono": true,
+   "sha1": "319e8f564f79"
+  },
+  "key": {
+   "bytes": 2753,
+   "figma": "icon/key",
+   "mono": true,
+   "sha1": "ac5d8bedadb2"
+  },
+  "keyboard": {
+   "bytes": 1821,
+   "figma": "icon/keyboard",
+   "mono": true,
+   "sha1": "ffe050270c68"
+  },
+  "laptop": {
+   "bytes": 1860,
+   "figma": "icon/laptop",
+   "mono": true,
+   "sha1": "9894286cc549"
+  },
+  "learn": {
+   "bytes": 2469,
+   "figma": "icon/learn",
+   "mono": true,
+   "sha1": "b5a4a03c554a"
+  },
+  "learning-path-2": {
+   "bytes": 1516,
+   "figma": "icon/learning-path-2",
+   "mono": true,
+   "sha1": "dc11f6c2b89e"
+  },
+  "learning-series": {
+   "bytes": 4475,
+   "figma": "icon/learning-series",
+   "mono": true,
+   "sha1": "e96ea4863ceb"
+  },
+  "lifecycle-management": {
+   "bytes": 1361,
+   "figma": "icon/lifecycle-management",
+   "mono": true,
+   "sha1": "5100f13c83e0"
+  },
+  "lifecycle-management-bold": {
+   "bytes": 1436,
+   "figma": "icon/lifecycle-management-bold",
+   "mono": true,
+   "sha1": "f70fc1ead926"
+  },
+  "light-mode": {
+   "bytes": 1560,
+   "figma": "icon/light-mode",
+   "mono": true,
+   "sha1": "0b0df20bb687"
+  },
+  "line-graph-down": {
+   "bytes": 1125,
+   "figma": "icon/line-graph-down",
+   "mono": true,
+   "sha1": "42b4ac2ee5fe"
+  },
+  "line-graph-up": {
+   "bytes": 1168,
+   "figma": "icon/line-graph-up",
+   "mono": true,
+   "sha1": "b68fadb24b4d"
+  },
+  "link": {
+   "bytes": 2375,
+   "figma": "icon/link",
+   "mono": true,
+   "sha1": "51fff067337f"
+  },
+  "list-ordered": {
+   "bytes": 1608,
+   "figma": "icon/list-ordered",
+   "mono": true,
+   "sha1": "12c685209023"
+  },
+  "list-unordered": {
+   "bytes": 1129,
+   "figma": "icon/list-unordered",
+   "mono": true,
+   "sha1": "c25d1139e42e"
+  },
+  "list-view": {
+   "bytes": 3475,
+   "figma": "icon/list-view",
+   "mono": true,
+   "sha1": "068d780462b5"
+  },
+  "list-view-fill": {
+   "bytes": 3298,
+   "figma": "icon/list-view-fill",
+   "mono": true,
+   "sha1": "fc5a54e97b51"
+  },
+  "log-in": {
+   "bytes": 1487,
+   "figma": "icon/log-in",
+   "mono": true,
+   "sha1": "3b64ea8c5b6a"
+  },
+  "log-out": {
+   "bytes": 1432,
+   "figma": "icon/log-out",
+   "mono": true,
+   "sha1": "a28f5ad38a59"
+  },
+  "logistics": {
+   "bytes": 2204,
+   "figma": "icon/logistics",
+   "mono": true,
+   "sha1": "c2c5c57dcfd6"
+  },
+  "mail-fill": {
+   "bytes": 942,
+   "figma": "icon/mail-fill",
+   "mono": true,
+   "sha1": "3d1a0fbf6ed7"
+  },
+  "mail-stroke": {
+   "bytes": 1073,
+   "figma": "icon/mail-stroke",
+   "mono": true,
+   "sha1": "6e5607a414ca"
+  },
+  "makeup": {
+   "bytes": 3034,
+   "figma": "icon/makeup",
+   "mono": true,
+   "sha1": "3bce9555fcad"
+  },
+  "map-pin": {
+   "bytes": 2415,
+   "figma": "icon/map-pin",
+   "mono": true,
+   "sha1": "b1e4b71ddc6e"
+  },
+  "mark-as-read": {
+   "bytes": 1411,
+   "figma": "icon/mark-as-read",
+   "mono": true,
+   "sha1": "843c05aac0d0"
+  },
+  "meh-face": {
+   "bytes": 1283,
+   "figma": "icon/meh-face",
+   "mono": true,
+   "sha1": "eb54526098bf"
+  },
+  "merge": {
+   "bytes": 1536,
+   "figma": "icon/merge",
+   "mono": true,
+   "sha1": "f4aad391ebd0"
+  },
+  "mining": {
+   "bytes": 2431,
+   "figma": "icon/mining",
+   "mono": true,
+   "sha1": "e8f899e337d7"
+  },
+  "mission": {
+   "bytes": 3188,
+   "figma": "icon/mission",
+   "mono": true,
+   "sha1": "df596b1f5709"
+  },
+  "mobile": {
+   "bytes": 1299,
+   "figma": "icon/mobile",
+   "mono": true,
+   "sha1": "803a36d50966"
+  },
+  "money": {
+   "bytes": 3408,
+   "figma": "icon/money",
+   "mono": true,
+   "sha1": "1211da0ba95e"
+  },
+  "monitor": {
+   "bytes": 1699,
+   "figma": "icon/monitor",
+   "mono": true,
+   "sha1": "1818e5513e70"
+  },
+  "my-data": {
+   "bytes": 2316,
+   "figma": "icon/my-data",
+   "mono": true,
+   "sha1": "8301ded4b69a"
+  },
+  "networking": {
+   "bytes": 1118,
+   "figma": "icon/networking",
+   "mono": true,
+   "sha1": "0aa336c4b635"
+  },
+  "notification": {
+   "bytes": 2907,
+   "figma": "icon/notification",
+   "mono": true,
+   "sha1": "bf6901cfa80d"
+  },
+  "offline": {
+   "bytes": 1519,
+   "figma": "icon/offline",
+   "mono": true,
+   "sha1": "462d13dc79b8"
+  },
+  "oil": {
+   "bytes": 3397,
+   "figma": "icon/oil",
+   "mono": true,
+   "sha1": "b5ada65523d4"
+  },
+  "order-status": {
+   "bytes": 2055,
+   "figma": "icon/order-status",
+   "mono": true,
+   "sha1": "bbeeb3c9a40d"
+  },
+  "org-chart": {
+   "bytes": 1571,
+   "figma": "icon/org-chart",
+   "mono": true,
+   "sha1": "b1ff3698efc7"
+  },
+  "outline": {
+   "bytes": 929,
+   "figma": "icon/outline",
+   "mono": true,
+   "sha1": "2b91979a0e35"
+  },
+  "overview": {
+   "bytes": 2334,
+   "figma": "icon/overview",
+   "mono": true,
+   "sha1": "5d42ab2a5b6a"
+  },
+  "padlock-locked": {
+   "bytes": 2039,
+   "figma": "icon/padlock-locked",
+   "mono": true,
+   "sha1": "09cc90bc7928"
+  },
+  "padlock-unlocked": {
+   "bytes": 2287,
+   "figma": "icon/padlock-unlocked",
+   "mono": true,
+   "sha1": "4410ec967992"
+  },
+  "paintbrush": {
+   "bytes": 1994,
+   "figma": "icon/paintbrush",
+   "mono": true,
+   "sha1": "114221ea35f7"
+  },
+  "paper-airplane": {
+   "bytes": 1653,
+   "figma": "icon/paper-airplane",
+   "mono": true,
+   "sha1": "eb2e00bc46cb"
+  },
+  "partners": {
+   "bytes": 7827,
+   "figma": "icon/partners",
+   "mono": true,
+   "sha1": "f406c4086bc2"
+  },
+  "paste": {
+   "bytes": 1688,
+   "figma": "icon/paste",
+   "mono": true,
+   "sha1": "82bc13fa6275"
+  },
+  "payroll": {
+   "bytes": 2165,
+   "figma": "icon/payroll",
+   "mono": true,
+   "sha1": "ee6705ca3936"
+  },
+  "percent": {
+   "bytes": 3381,
+   "figma": "icon/percent",
+   "mono": true,
+   "sha1": "0fd5ec99022a"
+  },
+  "phone": {
+   "bytes": 1889,
+   "figma": "icon/phone",
+   "mono": true,
+   "sha1": "df6d2b378862"
+  },
+  "playlist": {
+   "bytes": 3095,
+   "figma": "icon/playlist",
+   "mono": true,
+   "sha1": "1d4f405a0435"
+  },
+  "podcast": {
+   "bytes": 3115,
+   "figma": "icon/podcast",
+   "mono": true,
+   "sha1": "3b20b3121279"
+  },
+  "pointer": {
+   "bytes": 3449,
+   "figma": "icon/pointer",
+   "mono": false,
+   "sha1": "9186c6ff3c38"
+  },
+  "press-release": {
+   "bytes": 2203,
+   "figma": "icon/press-release",
+   "mono": true,
+   "sha1": "a7a3de476ec1"
+  },
+  "pricing-rules": {
+   "bytes": 3243,
+   "figma": "icon/pricing-rules",
+   "mono": true,
+   "sha1": "1566ee452302"
+  },
+  "print": {
+   "bytes": 2244,
+   "figma": "icon/print",
+   "mono": true,
+   "sha1": "1fe3b9de4f72"
+  },
+  "privately-held": {
+   "bytes": 2627,
+   "figma": "icon/privately-held",
+   "mono": true,
+   "sha1": "0d3c3be1a1bb"
+  },
+  "process": {
+   "bytes": 1633,
+   "figma": "icon/process",
+   "mono": true,
+   "sha1": "b023b31428c4"
+  },
+  "project": {
+   "bytes": 2490,
+   "figma": "icon/project",
+   "mono": true,
+   "sha1": "bbfdde6c1fab"
+  },
+  "proposal-studio": {
+   "bytes": 1701,
+   "figma": "icon/proposal-studio",
+   "mono": true,
+   "sha1": "ef103720dac8"
+  },
+  "pto": {
+   "bytes": 2703,
+   "figma": "icon/pto",
+   "mono": true,
+   "sha1": "ff96b1ae0e5f"
+  },
+  "pull-request": {
+   "bytes": 1785,
+   "figma": "icon/pull-request",
+   "mono": true,
+   "sha1": "847d24b317e0"
+  },
+  "pushpin": {
+   "bytes": 3285,
+   "figma": "icon/pushpin",
+   "mono": true,
+   "sha1": "de1f7550e8a3"
+  },
+  "puzzle": {
+   "bytes": 5061,
+   "figma": "icon/puzzle",
+   "mono": true,
+   "sha1": "6a83507bdcd7"
+  },
+  "qr-code": {
+   "bytes": 2523,
+   "figma": "icon/qr-code",
+   "mono": true,
+   "sha1": "ffdb714fb0ae"
+  },
+  "quick-report": {
+   "bytes": 971,
+   "figma": "icon/quick-report",
+   "mono": true,
+   "sha1": "51d0c128b574"
+  },
+  "quotation": {
+   "bytes": 724,
+   "figma": "icon/quotation",
+   "mono": true,
+   "sha1": "6d8a203aab87"
+  },
+  "quote": {
+   "bytes": 2081,
+   "figma": "icon/quote",
+   "mono": true,
+   "sha1": "b951c3d5a338"
+  },
+  "quote-integration": {
+   "bytes": 2217,
+   "figma": "icon/quote-integration",
+   "mono": true,
+   "sha1": "9cbfb25d6ef7"
+  },
+  "quotes-favicon": {
+   "bytes": 1406,
+   "figma": "icon/quotes-favicon",
+   "mono": true,
+   "sha1": "78e2e2fa23c9"
+  },
+  "recover": {
+   "bytes": 1057,
+   "figma": "icon/recover",
+   "mono": true,
+   "sha1": "a27cc741e015"
+  },
+  "rectangle": {
+   "bytes": 613,
+   "figma": "icon/rectangle",
+   "mono": true,
+   "sha1": "2a32801e6731"
+  },
+  "rectangle-slash": {
+   "bytes": 845,
+   "figma": "icon/rectangle-slash",
+   "mono": true,
+   "sha1": "d2f54649f6c4"
+  },
+  "redirects": {
+   "bytes": 1910,
+   "figma": "icon/redirects",
+   "mono": true,
+   "sha1": "fbfcccebb938"
+  },
+  "reload": {
+   "bytes": 1391,
+   "figma": "icon/reload",
+   "mono": true,
+   "sha1": "bdef27cd2640"
+  },
+  "remove-user": {
+   "bytes": 1565,
+   "figma": "icon/remove-user",
+   "mono": true,
+   "sha1": "6705bf35f368"
+  },
+  "repeat": {
+   "bytes": 1513,
+   "figma": "icon/repeat",
+   "mono": true,
+   "sha1": "3fc83e68bf33"
+  },
+  "request": {
+   "bytes": 2861,
+   "figma": "icon/request",
+   "mono": true,
+   "sha1": "757f864f5b49"
+  },
+  "research": {
+   "bytes": 1407,
+   "figma": "icon/research",
+   "mono": true,
+   "sha1": "8cbfa1b0ea77"
+  },
+  "return-to-location": {
+   "bytes": 2216,
+   "figma": "icon/return-to-location",
+   "mono": true,
+   "sha1": "ddc8799b6ba8"
+  },
+  "reward": {
+   "bytes": 769,
+   "figma": "icon/reward",
+   "mono": true,
+   "sha1": "c01cd1ef5541"
+  },
+  "rewind-time": {
+   "bytes": 1201,
+   "figma": "icon/rewind-time",
+   "mono": true,
+   "sha1": "8dab6244b8bb"
+  },
+  "rfp-assistant": {
+   "bytes": 1451,
+   "figma": "icon/rfp-assistant",
+   "mono": true,
+   "sha1": "945ba51a89e5"
+  },
+  "rocket": {
+   "bytes": 2857,
+   "figma": "icon/rocket",
+   "mono": true,
+   "sha1": "9d52944d7fdb"
+  },
+  "rocketship": {
+   "bytes": 2488,
+   "figma": "icon/rocketship",
+   "mono": true,
+   "sha1": "50973c56de56"
+  },
+  "room": {
+   "bytes": 1017,
+   "figma": "icon/room",
+   "mono": true,
+   "sha1": "125682f3e7bc"
+  },
+  "room-add": {
+   "bytes": 1127,
+   "figma": "icon/room-add",
+   "mono": true,
+   "sha1": "0d777a02ee1c"
+  },
+  "runner": {
+   "bytes": 3809,
+   "figma": "icon/runner",
+   "mono": true,
+   "sha1": "a6906a874690"
+  },
+  "sales-playbook": {
+   "bytes": 2666,
+   "figma": "icon/sales-playbook",
+   "mono": true,
+   "sha1": "6130a9c2c681"
+  },
+  "sandbox": {
+   "bytes": 4684,
+   "figma": "icon/sandbox",
+   "mono": true,
+   "sha1": "e0350675e729"
+  },
+  "save": {
+   "bytes": 1599,
+   "figma": "icon/save",
+   "mono": true,
+   "sha1": "51667477d0ae"
+  },
+  "save-search": {
+   "bytes": 3035,
+   "figma": "icon/save-search",
+   "mono": true,
+   "sha1": "3de8cc00551d"
+  },
+  "scalability": {
+   "bytes": 1368,
+   "figma": "icon/scalability",
+   "mono": true,
+   "sha1": "8d7dbffa821b"
+  },
+  "scale": {
+   "bytes": 2166,
+   "figma": "icon/scale",
+   "mono": true,
+   "sha1": "523ee07bee1e"
+  },
+  "search": {
+   "bytes": 2137,
+   "figma": "icon/search",
+   "mono": true,
+   "sha1": "34a9fe01c0a1"
+  },
+  "series": {
+   "bytes": 2370,
+   "figma": "icon/series",
+   "mono": true,
+   "sha1": "368b90233f05"
+  },
+  "service-now": {
+   "bytes": 856,
+   "figma": "icon/service-now",
+   "mono": true,
+   "sha1": "d56c21fa698b"
+  },
+  "share-android": {
+   "bytes": 3304,
+   "figma": "icon/share-android",
+   "mono": true,
+   "sha1": "839e9b4e7b92"
+  },
+  "share-ios": {
+   "bytes": 1516,
+   "figma": "icon/share-ios",
+   "mono": true,
+   "sha1": "1c5a923f454b"
+  },
+  "shield": {
+   "bytes": 1477,
+   "figma": "icon/shield",
+   "mono": true,
+   "sha1": "e59c3c147bdd"
+  },
+  "shipping": {
+   "bytes": 3938,
+   "figma": "icon/shipping",
+   "mono": true,
+   "sha1": "7a60fd4a6ae0"
+  },
+  "show": {
+   "bytes": 2719,
+   "figma": "icon/show",
+   "mono": true,
+   "sha1": "b7d6f8b08ee5"
+  },
+  "shuttle": {
+   "bytes": 2277,
+   "figma": "icon/shuttle",
+   "mono": true,
+   "sha1": "59aa7b72728f"
+  },
+  "side-bottom": {
+   "bytes": 520,
+   "figma": "icon/side-bottom",
+   "mono": true,
+   "sha1": "f7545f5ba12f"
+  },
+  "side-left": {
+   "bytes": 512,
+   "figma": "icon/side-left",
+   "mono": true,
+   "sha1": "d4ece7919d43"
+  },
+  "side-right": {
+   "bytes": 519,
+   "figma": "icon/side-right",
+   "mono": true,
+   "sha1": "50ee3c59ce2a"
+  },
+  "side-top": {
+   "bytes": 521,
+   "figma": "icon/side-top",
+   "mono": true,
+   "sha1": "ea47417cfa79"
+  },
+  "sidebar-closed": {
+   "bytes": 1019,
+   "figma": "icon/sidebar-closed",
+   "mono": true,
+   "sha1": "eb70c532e8d1"
+  },
+  "sidebar-open": {
+   "bytes": 1010,
+   "figma": "icon/sidebar-open",
+   "mono": true,
+   "sha1": "a81d9b0fb409"
+  },
+  "silverware": {
+   "bytes": 3333,
+   "figma": "icon/silverware",
+   "mono": true,
+   "sha1": "e0a253e569f3"
+  },
+  "slideshow": {
+   "bytes": 1797,
+   "figma": "icon/slideshow",
+   "mono": true,
+   "sha1": "7132a20b4f20"
+  },
+  "snowflake": {
+   "bytes": 1253,
+   "figma": "icon/snowflake",
+   "mono": true,
+   "sha1": "82cf4d3bda8d"
+  },
+  "software-development": {
+   "bytes": 2174,
+   "figma": "icon/software-development",
+   "mono": true,
+   "sha1": "9090a14ff665"
+  },
+  "sort": {
+   "bytes": 856,
+   "figma": "icon/sort",
+   "mono": true,
+   "sha1": "cb3975668c03"
+  },
+  "sound": {
+   "bytes": 1488,
+   "figma": "icon/sound",
+   "mono": true,
+   "sha1": "aab51d0ed3b3"
+  },
+  "sound-off": {
+   "bytes": 1655,
+   "figma": "icon/sound-off",
+   "mono": true,
+   "sha1": "bc52efbac7d9"
+  },
+  "space": {
+   "bytes": 765,
+   "figma": "icon/space",
+   "mono": true,
+   "sha1": "33dde84f8886"
+  },
+  "speaker": {
+   "bytes": 3280,
+   "figma": "icon/speaker",
+   "mono": true,
+   "sha1": "0bfedb2d3a89"
+  },
+  "square": {
+   "bytes": 875,
+   "figma": "icon/square",
+   "mono": true,
+   "sha1": "6e9437d82128"
+  },
+  "square-check": {
+   "bytes": 1265,
+   "figma": "icon/square-check",
+   "mono": true,
+   "sha1": "0a6624be8226"
+  },
+  "square-feet": {
+   "bytes": 1927,
+   "figma": "icon/square-feet",
+   "mono": true,
+   "sha1": "b18a470e6ea6"
+  },
+  "star-fill": {
+   "bytes": 1724,
+   "figma": "icon/star-fill",
+   "mono": true,
+   "sha1": "7314c6c430fe"
+  },
+  "star-stroke": {
+   "bytes": 3276,
+   "figma": "icon/star-stroke",
+   "mono": true,
+   "sha1": "fc84eb896bcc"
+  },
+  "state-government": {
+   "bytes": 2101,
+   "figma": "icon/state-government",
+   "mono": true,
+   "sha1": "965e752c559f"
+  },
+  "status-caret-down": {
+   "bytes": 436,
+   "figma": "icon/status-caret-down",
+   "mono": true,
+   "sha1": "e9d402a62efc"
+  },
+  "status-caret-up": {
+   "bytes": 443,
+   "figma": "icon/status-caret-up",
+   "mono": true,
+   "sha1": "22879e7f7fad"
+  },
+  "store": {
+   "bytes": 4031,
+   "figma": "icon/store",
+   "mono": true,
+   "sha1": "c1e396fb7083"
+  },
+  "strategy": {
+   "bytes": 2062,
+   "figma": "icon/strategy",
+   "mono": true,
+   "sha1": "d540a211e1ab"
+  },
+  "strikethrough": {
+   "bytes": 913,
+   "figma": "icon/strikethrough",
+   "mono": true,
+   "sha1": "9e82ac64f94e"
+  },
+  "summary": {
+   "bytes": 787,
+   "figma": "icon/summary",
+   "mono": true,
+   "sha1": "6be0e49236ae"
+  },
+  "support": {
+   "bytes": 3174,
+   "figma": "icon/support",
+   "mono": true,
+   "sha1": "4d99f465cee2"
+  },
+  "support-bold": {
+   "bytes": 2104,
+   "figma": "icon/support-bold",
+   "mono": true,
+   "sha1": "8636ede2a652"
+  },
+  "sustainability": {
+   "bytes": 2757,
+   "figma": "icon/sustainability",
+   "mono": true,
+   "sha1": "e379da9fa02e"
+  },
+  "t-shirt": {
+   "bytes": 2305,
+   "figma": "icon/t-shirt",
+   "mono": true,
+   "sha1": "a802f5bc9a8b"
+  },
+  "tabbed-block": {
+   "bytes": 1420,
+   "figma": "icon/tabbed-block",
+   "mono": true,
+   "sha1": "0490a7a8cda0"
+  },
+  "tablet": {
+   "bytes": 857,
+   "figma": "icon/tablet",
+   "mono": true,
+   "sha1": "5cb63001b414"
+  },
+  "tag": {
+   "bytes": 1581,
+   "figma": "icon/tag",
+   "mono": true,
+   "sha1": "73eb7dcc18f1"
+  },
+  "tasks": {
+   "bytes": 1850,
+   "figma": "icon/tasks",
+   "mono": true,
+   "sha1": "1215cdcb769b"
+  },
+  "teams": {
+   "bytes": 2157,
+   "figma": "icon/teams",
+   "mono": true,
+   "sha1": "b2a687de1ffc"
+  },
+  "test-runner": {
+   "bytes": 4398,
+   "figma": "icon/test-runner",
+   "mono": true,
+   "sha1": "4bb892d09eed"
+  },
+  "test-tube": {
+   "bytes": 2076,
+   "figma": "icon/test-tube",
+   "mono": true,
+   "sha1": "6afa29b61a97"
+  },
+  "text-cursor": {
+   "bytes": 1105,
+   "figma": "icon/text-cursor",
+   "mono": true,
+   "sha1": "564f842823e3"
+  },
+  "text-title": {
+   "bytes": 799,
+   "figma": "icon/text-title",
+   "mono": true,
+   "sha1": "678c59bec331"
+  },
+  "thumbs-down-fill": {
+   "bytes": 1869,
+   "figma": "icon/thumbs-down-fill",
+   "mono": true,
+   "sha1": "58d8e0441e3a"
+  },
+  "thumbs-down-stroke": {
+   "bytes": 3867,
+   "figma": "icon/thumbs-down-stroke",
+   "mono": true,
+   "sha1": "b0e9a867a33c"
+  },
+  "thumbs-up-fill": {
+   "bytes": 1873,
+   "figma": "icon/thumbs-up-fill",
+   "mono": true,
+   "sha1": "4ae934a05ba7"
+  },
+  "thumbs-up-stroke": {
+   "bytes": 3890,
+   "figma": "icon/thumbs-up-stroke",
+   "mono": true,
+   "sha1": "94d526bfa945"
+  },
+  "toggle-off": {
+   "bytes": 2945,
+   "figma": "icon/toggle-off",
+   "mono": true,
+   "sha1": "9de9ce445cb1"
+  },
+  "toggle-on": {
+   "bytes": 1641,
+   "figma": "icon/toggle-on",
+   "mono": true,
+   "sha1": "7dd4fbe40fe7"
+  },
+  "topic": {
+   "bytes": 4179,
+   "figma": "icon/topic",
+   "mono": true,
+   "sha1": "7982270c3bb9"
+  },
+  "translation": {
+   "bytes": 2330,
+   "figma": "icon/translation",
+   "mono": true,
+   "sha1": "911dd6e3e983"
+  },
+  "trophy": {
+   "bytes": 3133,
+   "figma": "icon/trophy",
+   "mono": true,
+   "sha1": "afad4f9c47bb"
+  },
+  "truck": {
+   "bytes": 1693,
+   "figma": "icon/truck",
+   "mono": true,
+   "sha1": "1485c6bd3d82"
+  },
+  "undo": {
+   "bytes": 1403,
+   "figma": "icon/undo",
+   "mono": true,
+   "sha1": "8bf3f1acdaa3"
+  },
+  "unlink": {
+   "bytes": 1941,
+   "figma": "icon/unlink",
+   "mono": true,
+   "sha1": "4c9256554559"
+  },
+  "upload": {
+   "bytes": 1812,
+   "figma": "icon/upload",
+   "mono": true,
+   "sha1": "9b703682f367"
+  },
+  "upvote-stroke": {
+   "bytes": 1368,
+   "figma": "icon/upvote-stroke",
+   "mono": true,
+   "sha1": "f4a6543e66ec"
+  },
+  "user": {
+   "bytes": 1493,
+   "figma": "icon/user",
+   "mono": true,
+   "sha1": "03db0c67aee1"
+  },
+  "users": {
+   "bytes": 3527,
+   "figma": "icon/users",
+   "mono": true,
+   "sha1": "a245042456db"
+  },
+  "utilities": {
+   "bytes": 3940,
+   "figma": "icon/utilities",
+   "mono": true,
+   "sha1": "cee65cb9b1cf"
+  },
+  "ux": {
+   "bytes": 2502,
+   "figma": "icon/ux",
+   "mono": true,
+   "sha1": "0ecd827b5dde"
+  },
+  "video": {
+   "bytes": 1523,
+   "figma": "icon/video",
+   "mono": true,
+   "sha1": "881bb04f77b2"
+  },
+  "vimeo": {
+   "bytes": 2752,
+   "figma": "icon/vimeo",
+   "mono": true,
+   "sha1": "fe56e4f8b8e0"
+  },
+  "virtual-attendee": {
+   "bytes": 3451,
+   "figma": "icon/virtual-attendee",
+   "mono": true,
+   "sha1": "271809774b76"
+  },
+  "volt": {
+   "bytes": 1037,
+   "figma": "icon/volt",
+   "mono": true,
+   "sha1": "fcdf424257d2"
+  },
+  "volt-fill": {
+   "bytes": 799,
+   "figma": "icon/volt-fill",
+   "mono": true,
+   "sha1": "e894ad51dd2e"
+  },
+  "volt-fill-slash": {
+   "bytes": 1032,
+   "figma": "icon/volt-fill-slash",
+   "mono": true,
+   "sha1": "ebc57bc93498"
+  },
+  "warning": {
+   "bytes": 1072,
+   "figma": "icon/warning",
+   "mono": true,
+   "sha1": "485b2ff28f53"
+  },
+  "water": {
+   "bytes": 1045,
+   "figma": "icon/water",
+   "mono": true,
+   "sha1": "885446c88490"
+  },
+  "webex": {
+   "bytes": 1262,
+   "figma": "icon/webex",
+   "mono": true,
+   "sha1": "08087e418228"
+  },
+  "white-papers": {
+   "bytes": 2032,
+   "figma": "icon/white-papers",
+   "mono": true,
+   "sha1": "2e8e986d3aa9"
+  },
+  "wifi": {
+   "bytes": 3917,
+   "figma": "icon/wifi",
+   "mono": true,
+   "sha1": "14f4fde93981"
+  },
+  "wifi-lost": {
+   "bytes": 3053,
+   "figma": "icon/wifi-lost",
+   "mono": true,
+   "sha1": "b5b8f21a4504"
+  },
+  "work-from-home": {
+   "bytes": 2941,
+   "figma": "icon/work-from-home",
+   "mono": true,
+   "sha1": "6d648a67b57a"
+  },
+  "wrench": {
+   "bytes": 2634,
+   "figma": "icon/wrench",
+   "mono": true,
+   "sha1": "74763fa914e8"
+  },
+  "x": {
+   "bytes": 490,
+   "figma": "icon/x",
+   "mono": true,
+   "sha1": "f8babefa8ff8"
+  },
+  "x-fill": {
+   "bytes": 3552,
+   "figma": "icon/x-fill",
+   "mono": false,
+   "sha1": "e75ccd6ecebe"
+  },
+  "zoom": {
+   "bytes": 821,
+   "figma": "icon/zoom",
+   "mono": true,
+   "sha1": "8da2f340454b"
+  },
+  "zoom-in": {
+   "bytes": 1254,
+   "figma": "icon/zoom-in",
+   "mono": true,
+   "sha1": "193853de08b0"
+  },
+  "zoom-out": {
+   "bytes": 1166,
+   "figma": "icon/zoom-out",
+   "mono": true,
+   "sha1": "f92bc4410696"
+  }
+ },
+ "source": {
+  "file_key": "FRSoTvo9VDJyXyE38XwbhL",
+  "file_name": "Blue Steel Design System",
+  "grid": 16,
+  "library": "Blue Steel 3.0",
+  "node": "87131:514",
+  "node_name": "Icons",
+  "note": "Names are the Figma component names with the icon/ prefix dropped. Branded icons carry an orange label (#c33d04) on the source sheet, which says they are specific to a product or service and not for universal use. That colour was read out of the export, not judged by eye.",
+  "payload": "assets/icons/icons.json",
+  "payload_note": "The markup lives in one file, not 497. A skill package is capped at 200 files and the loose SVGs put it at 610. Split in two on purpose: this manifest stays small so lint_source.py can parse it inside its 30ms budget, and the megabyte of markup sits in icons.json, which only the inliner and the teardown ever open.",
+  "pulled": "2026-09-23"
+ }
+}

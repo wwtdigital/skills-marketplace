@@ -39,9 +39,13 @@ site/scripts/lib.ts               shared loaders (marketplace, manifests, SKILL.
 .github/CODEOWNERS                one GitHub team per category (teams don't exist yet)
 ```
 
-Plugins (one per category): `presentation`, `research`, `ops`, `admin`, `tech`. Only `admin` has
-skills so far (`wwt-skill-author`, `marketplace-smoke-test`). These replaced the original discipline
-plugins on 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
+Plugins: one bundle per category (`presentation`, `research`, `ops`, `admin`, `tech`), plus
+standalone opt-in plugins that belong to a category but install separately because they bring
+hooks or MCP servers most of that category won't want. Skills so far: `admin` has
+`wwt-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer`; the standalone
+`wwtdigital-deck-design` (category `presentation`, from Toby Gerber) has `wwtdigital-deck-design` and
+`wwtdigital-deck-design-doctor`. The category plugins replaced the original discipline plugins on
+2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
 
 ## Commands
 
@@ -91,8 +95,10 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 - `marketplace.json` is the single source of truth. Both scripts iterate its `plugins[]` and resolve
   each `source` (only relative-path sources are supported) via `common.plugin_dir`. A plugin folder
   that isn't listed there is invisible to validation, the site and Claude.
-- `metadata.category` must be one of `CATEGORIES` in `site/scripts/lib.ts` *and* equal the plugin
-  folder the skill lives in. It's redundant in the repo but travels with a downloaded `.skill`.
+- `metadata.category` must be one of `CATEGORIES` in `site/scripts/lib.ts` *and* equal the category
+  of the plugin the skill lives in: the plugin's own name for a category bundle, or the marketplace
+  entry's `category` for a standalone plugin (which must name one of `CATEGORIES`). It's redundant
+  in the repo but travels with a downloaded `.skill`.
   Adding a category means updating `CATEGORIES`, `marketplace.json`, `CODEOWNERS`, the template,
   and the table in `CONTRIBUTING.md`.
 - There is no GitHub Actions (not allowed here). The Vercel build is the CI: `npm run build` runs
@@ -173,6 +179,23 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   anchor ids.
 - When copying `templates/skill-template/`, rename the frontmatter `name: skill-template` and cut
   the `category`/`status` option lists down to single values. Otherwise the validator fails.
+
+- `wwtdigital-deck-design` ships **no Aptos fonts**: they're Microsoft's and the repo is public. Its
+  `scripts/brand_assets.py` finds Aptos on the machine by the name inside each file (PowerPoint.app
+  on Mac carries the five sans cuts; Aptos Serif is an Office cloud font, only needed for pull
+  quotes; Microsoft's free download has all of them). It deliberately skips Office's Mac cloud-font
+  cache (`~/Library/Group Containers/UBF8T346G9.Office`): reading another app's container from the
+  Claude desktop app raises a macOS "access data from other apps" prompt and blocks until answered. Don't re-add the font files. WWT brand
+  material (photos, logos, icons, the recipe 12 solution matrix) is fine in the repo (owner, 2026-09-24). Its SKILL.md is a short router: the sections live in `references/`, and its scripts
+  that parse the document read it through `scripts/skilldoc.py`.
+  Users are assumed non-technical with no working Python, so the plugin has **no hooks** (hooks run in
+  whatever shell exists, PowerShell on Windows without Git Bash, and a bare `python3` on a Mac without
+  developer tools pops an install dialog). Instead `setup/setup.sh` / `setup.ps1` (run once, with the
+  user's OK, offered by the skill) installs uv, a uv-managed Python 3.12 and `setup/requirements.txt`
+  into `~/.wwtdigital-deck-design/venv`, and a browser only if there's no Chrome/Edge; every script runs
+  via `setup/run.sh` / `run.ps1`, which exits 3 with "SETUP NEEDED" instead of touching system
+  Python. `scripts/browser.py` launches installed Chrome/Edge first. Where scripts execute in Cowork
+  (host vs VM) is unverified; if it's a VM, the PowerPoint.app font lookup won't find anything.
 
 ## Do not touch without asking
 

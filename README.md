@@ -46,6 +46,7 @@ Or download any skill as a `.skill` file from the site and drop it into Cowork
 | `ops` | Status reports, staffing, risks, SOWs and estimates | `/plugin install ops@wwtdigital` |
 | `admin` | Everyday admin, and tools for contributing to this marketplace | `/plugin install admin@wwtdigital` |
 | `tech` | Code review, architecture, repo hygiene, prototyping | `/plugin install tech@wwtdigital` |
+| `wwtdigital-deck-design` | The WWT deck design system (a Presentation add-on; brings the Figma MCP and a one-time setup) | `/plugin install wwtdigital-deck-design@wwtdigital` |
 
 ## Repo layout
 

@@ -1,0 +1,146 @@
+{
+ "ground-light-mesh-diag": {
+  "file": "assets/export/ground-light-mesh-diag.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": false
+ },
+ "ground-light-mesh-center": {
+  "file": "assets/export/ground-light-mesh-center.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": false
+ },
+ "ground-light-mesh-h": {
+  "file": "assets/export/ground-light-mesh-h.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": false
+ },
+ "ground-dark-mesh": {
+  "file": "assets/export/ground-dark-mesh.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": false
+ },
+ "ground-grad-diag": {
+  "file": "assets/export/ground-grad-diag.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": false
+ },
+ "ground-grad-v": {
+  "file": "assets/export/ground-grad-v.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": false
+ },
+ "ground-white": {
+  "file": "assets/export/ground-white.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": false
+ },
+ "ground-light": {
+  "file": "assets/export/ground-light.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": false
+ },
+ "brandx-cover": {
+  "file": "assets/export/brandx-cover.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": true
+ },
+ "brandx-r10": {
+  "file": "assets/export/brandx-r10.png",
+  "px": [
+   1920,
+   1080
+  ],
+  "alpha": true
+ },
+ "lockup-white": {
+  "file": "assets/export/lockup-white.png",
+  "px": [
+   210,
+   44
+  ],
+  "alpha": true
+ },
+ "lockup-ink": {
+  "file": "assets/export/lockup-ink.png",
+  "px": [
+   210,
+   44
+  ],
+  "alpha": true
+ },
+ "arrow-down": {
+  "file": "assets/export/arrow-down.png",
+  "px": [
+   93,
+   93
+  ],
+  "alpha": true
+ },
+ "arrow-up": {
+  "file": "assets/export/arrow-up.png",
+  "px": [
+   93,
+   93
+  ],
+  "alpha": true
+ },
+ "tri-left": {
+  "file": "assets/export/tri-left.png",
+  "px": [
+   1329,
+   907
+  ],
+  "alpha": true
+ },
+ "tri-right": {
+  "file": "assets/export/tri-right.png",
+  "px": [
+   1329,
+   907
+  ],
+  "alpha": true
+ },
+ "bug-light": {
+  "file": "assets/export/bug-light.png",
+  "px": [
+   275,
+   286
+  ],
+  "alpha": true
+ },
+ "bug-dark": {
+  "file": "assets/export/bug-dark.png",
+  "px": [
+   275,
+   286
+  ],
+  "alpha": true
+ }
+}
