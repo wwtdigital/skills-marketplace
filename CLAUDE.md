@@ -43,8 +43,8 @@ Plugins: one bundle per category (`presentation`, `research`, `ops`, `admin`, `t
 standalone opt-in plugins that belong to a category but install separately because they bring
 hooks or MCP servers most of that category won't want. Skills so far: `admin` has
 `wwt-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer`; the standalone
-`wwtdigital-design` (category `presentation`, from Toby Gerber) has `wwtdigital-design-system` and
-`wwtdigital-design-doctor`. The category plugins replaced the original discipline plugins on
+`wwtdigital-deck-design` (category `presentation`, from Toby Gerber) has `wwtdigital-deck-design` and
+`wwtdigital-deck-design-doctor`. The category plugins replaced the original discipline plugins on
 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
 
 ## Commands
@@ -180,7 +180,7 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 - When copying `templates/skill-template/`, rename the frontmatter `name: skill-template` and cut
   the `category`/`status` option lists down to single values. Otherwise the validator fails.
 
-- `wwtdigital-design` ships **no Aptos fonts**: they're Microsoft's and the repo is public. Its
+- `wwtdigital-deck-design` ships **no Aptos fonts**: they're Microsoft's and the repo is public. Its
   `scripts/brand_assets.py` finds Aptos on the machine by the name inside each file (PowerPoint.app
   on Mac carries the five sans cuts; Aptos Serif is an Office cloud font, only needed for pull
   quotes; Microsoft's free download has all of them). It deliberately skips Office's Mac cloud-font
@@ -192,7 +192,7 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   whatever shell exists, PowerShell on Windows without Git Bash, and a bare `python3` on a Mac without
   developer tools pops an install dialog). Instead `setup/setup.sh` / `setup.ps1` (run once, with the
   user's OK, offered by the skill) installs uv, a uv-managed Python 3.12 and `setup/requirements.txt`
-  into `~/.wwtdigital-design/venv`, and a browser only if there's no Chrome/Edge; every script runs
+  into `~/.wwtdigital-deck-design/venv`, and a browser only if there's no Chrome/Edge; every script runs
   via `setup/run.sh` / `run.ps1`, which exits 3 with "SETUP NEEDED" instead of touching system
   Python. `scripts/browser.py` launches installed Chrome/Edge first. Where scripts execute in Cowork
   (host vs VM) is unverified; if it's a VM, the PowerPoint.app font lookup won't find anything.

@@ -1,5 +1,5 @@
 # What the design system's scripts need, installed by setup.sh / setup.ps1 into
-# ~/.wwtdigital-design/venv. The static lint and the teardown need none of these.
+# ~/.wwtdigital-deck-design/venv. The static lint and the teardown need none of these.
 playwright>=1.45
 pillow>=10.0
 numpy>=1.26

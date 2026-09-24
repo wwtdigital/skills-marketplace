@@ -134,10 +134,12 @@ FORMAT = {".woff2": ("font/woff2", "woff2"), ".ttf": ("font/ttf", "truetype"),
 
 
 def uses_serif(html):
-    """Aptos Serif is only for pull quotes, and it is the cut most machines lack (Office
-    fetches it on first use). Require it only when the deck sets one. Checked before the
-    stylesheet is inlined, because system.css defines .t-quote whether it is used or not."""
-    return bool(re.search(r"""class\s*=\s*["'][^"']*\bt-quote\b|var\(\s*--font-serif|Aptos Serif""", html))
+    """Aptos Serif is only for pull quotes, and it is the cut most machines lack (it is an
+    Office cloud font). Require it only when the markup uses it: a .t-quote element, or the
+    serif named in an inline style. <style> blocks are ignored, because system.css (inlined or
+    pasted) defines .t-quote and the serif token whether the deck uses them or not."""
+    body = re.sub(r"(?is)<style\b.*?</style>", "", html)
+    return bool(re.search(r"\bt-quote\b|--font-serif|Aptos Serif", body))
 
 
 def font_faces(serif=True):

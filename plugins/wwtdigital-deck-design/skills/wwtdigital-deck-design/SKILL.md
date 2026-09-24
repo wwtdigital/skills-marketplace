@@ -1,5 +1,5 @@
 ---
-name: "wwtdigital-design-system"
+name: "wwtdigital-deck-design"
 description: "Build WWTDigital presentations, slides, decks, and branded visual documents using the Figma-derived WWT design system v4.10, and validate any output against it. Use when the user asks for a WWT, WWTDigital or WWT Digital slide, deck, presentation, pitch, divider, cover, or branded HTML/PPTX visual; when they say \"match our template\", \"use the WWT brand\", \"apply the design system\", or \"make it look like WWT\"; when composing a custom WWT slide layout no template covers; or when checking a WWT deck for design-system compliance. Consult this before writing any WWT-branded markup. Not for other brands, generic slide advice, or documents that are not visual (use the presentation skills for copy)."
 license: Proprietary
 metadata:
@@ -46,7 +46,7 @@ it and do not skim it.
 
 ## Before the first deck on a machine
 
-Run the doctor (`python3 scripts/doctor.py`, or the `wwtdigital-design-doctor` skill). **The Aptos
+Run the doctor (`python3 scripts/doctor.py`, or the `wwtdigital-deck-design-doctor` skill). **The Aptos
 fonts are not shipped with this plugin**; they are Microsoft's, and `scripts/brand_assets.py` finds
 them on the machine. If the doctor says BLOCKED, relay its fix and stop. Never substitute another
 typeface.
@@ -64,8 +64,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/setup
 
 If it prints **SETUP NEEDED** (exit 3), the person has not run the one-time setup. Assume they are
 not technical. Say in plain words that it is a one-time step of a few minutes, needs no admin
-password, and downloads a private copy of Python and its tools (about 120 MB, more only if they
-have neither Chrome nor Edge) into a `.wwtdigital-design` folder in their home folder. Ask before
+password, and downloads a private copy of Python and its tools (about 330 MB of disk space, more only if they
+have neither Chrome nor Edge) into a `.wwtdigital-deck-design` folder in their home folder. Ask before
 running it, then run `setup/setup.sh` (Windows: `setup/setup.ps1`) the same way and relay any
 "Setup stopped" message as written.
 

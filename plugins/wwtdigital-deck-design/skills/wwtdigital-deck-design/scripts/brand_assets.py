@@ -12,7 +12,7 @@ looks nearly right.
 
 WHERE FONTS ARE LOOKED FOR, in order:
   $WWT_FONTS_DIR                 one or more folders, separated like PATH
-  ~/.wwtdigital-design/fonts
+  ~/.wwtdigital-deck-design/fonts
   assets/fonts                   an internal copy that still bundles them
   Microsoft Office itself        PowerPoint/Word/Excel/Outlook for Mac carry the sans cuts
                                  inside the app bundle; Office's cloud-font cache on Windows
@@ -32,7 +32,7 @@ import os, struct, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 HOME = os.path.expanduser("~")
-USER_DIR = os.path.join(HOME, ".wwtdigital-design")
+USER_DIR = os.path.join(HOME, ".wwtdigital-deck-design")
 
 FONT_DOWNLOAD = "https://www.microsoft.com/en-us/download/details.aspx?id=106087"
 
@@ -144,7 +144,7 @@ def fonts_help(missing):
         "  - Mac with Microsoft 365: nothing to do for the five sans cuts, they are read from\n"
         "    inside PowerPoint.app. Aptos Serif is not there; install it from the link below.\n"
         "  - Install the family from Microsoft (free; open the zip, then double-click the fonts): %s\n"
-        "  - Put the .ttf files in ~/.wwtdigital-design/fonts, or point WWT_FONTS_DIR at them.\n"
+        "  - Put the .ttf files in ~/.wwtdigital-deck-design/fonts, or point WWT_FONTS_DIR at them.\n"
         "  Run `python3 scripts/brand_assets.py` to see what was found."
         % (", ".join(missing), FONT_DOWNLOAD))
 

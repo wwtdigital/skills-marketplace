@@ -71,7 +71,7 @@ the scale factor, never type. Measure contrast at native 1920 resolution.
 
 Aptos is Microsoft's, so the plugin does not ship it. `scripts/brand_assets.py` finds the cuts on the
 machine by the name inside each file: inside PowerPoint/Word for Mac, in the system font folders, in
-Office's cloud-font cache on Windows, in `~/.wwtdigital-design/fonts`, or wherever `WWT_FONTS_DIR`
+Office's cloud-font cache on Windows, in `~/.wwtdigital-deck-design/fonts`, or wherever `WWT_FONTS_DIR`
 points. (Not Office's cache on a Mac: reading it raises a macOS privacy prompt.) `inline_assets.py`
 writes them in as `@font-face` rules and **stops with instructions if a cut is missing.** **Do not
 link Google Fonts and do not name a webfont fallback.** If the doctor reports Aptos missing, tell the

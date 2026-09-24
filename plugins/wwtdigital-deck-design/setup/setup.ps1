@@ -4,24 +4,27 @@
 #
 # Written for people who have never installed Python and should not have to. It needs no
 # admin rights, changes nothing system-wide and touches nothing outside
-# %USERPROFILE%\.wwtdigital-design:
+# %USERPROFILE%\.wwtdigital-deck-design:
 #
 #   1. uv, a small self-contained tool that manages Python (astral.sh/uv). Used from PATH if
-#      it is already installed, otherwise downloaded into .wwtdigital-design\uv.
-#   2. A private Python and the packages in requirements.txt, in .wwtdigital-design\venv.
+#      it is already installed, otherwise downloaded into .wwtdigital-deck-design\uv.
+#   2. A private Python and the packages in requirements.txt, in .wwtdigital-deck-design\venv.
 #      uv fetches its own Python, so a missing Python or the Microsoft Store shortcut does
 #      not matter.
 #   3. A browser for rendering. Microsoft Edge (on every Windows machine) or Google Chrome is
 #      used if present; otherwise Playwright's Chromium (~150 MB) is downloaded.
 #
-# Safe to run again: finished steps are skipped. Delete .wwtdigital-design\venv to redo it.
+# Safe to run again: finished steps are skipped. Delete .wwtdigital-deck-design\venv to redo it.
 $ErrorActionPreference = "Stop"
 
 $Here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$HomeDir = if ($env:WWT_DESIGN_HOME) { $env:WWT_DESIGN_HOME } else { Join-Path $env:USERPROFILE ".wwtdigital-design" }
+$HomeDir = if ($env:WWT_DESIGN_HOME) { $env:WWT_DESIGN_HOME } else { Join-Path $env:USERPROFILE ".wwtdigital-deck-design" }
 $Venv = Join-Path $HomeDir "venv"
 $Py = Join-Path $Venv "Scripts\python.exe"
 $env:PLAYWRIGHT_BROWSERS_PATH = Join-Path $HomeDir "browsers"
+# Keep uv's Python and download cache inside HomeDir too, instead of AppData.
+$env:UV_PYTHON_INSTALL_DIR = Join-Path $HomeDir "python"
+$env:UV_CACHE_DIR = Join-Path $HomeDir "cache"
 
 function Say($m) { Write-Host "`n==> $m" }
 function Fail($m) { Write-Host "`nSetup stopped: $m" -ForegroundColor Red; exit 1 }
@@ -38,6 +41,7 @@ else {
   try {
     $env:UV_INSTALL_DIR = Join-Path $HomeDir "uv"
     $env:UV_NO_MODIFY_PATH = "1"
+    $env:XDG_CONFIG_HOME = Join-Path $HomeDir "config"
     Invoke-RestMethod https://astral.sh/uv/install.ps1 | Invoke-Expression | Out-Null
   } catch { Fail "uv could not be downloaded. Check the network connection and try again." }
   $Uv = $localUv
@@ -58,6 +62,7 @@ if ((Test-Path $Py) -and (Test-Path $Marker) -and ((Get-Content $Marker -Raw).Tr
   & $Uv pip install --quiet --python $Py -r $Req
   if ($LASTEXITCODE -ne 0) { Fail "the packages could not be installed. Check the network connection and try again." }
   Set-Content -Path $Marker -Value $Hash
+  & $Uv cache clean --quiet 2>$null   # the download cache is ~230 MB and not needed again
   Write-Host "Installed."
 }
 
@@ -78,5 +83,5 @@ if ($browsers | Where-Object { $_ -and (Test-Path $_) }) {
 }
 
 Say "Checking the result"
-& $Py (Join-Path $Here "..\skills\wwtdigital-design-system\scripts\doctor.py")
+& $Py (Join-Path $Here "..\skills\wwtdigital-deck-design\scripts\doctor.py")
 exit 0

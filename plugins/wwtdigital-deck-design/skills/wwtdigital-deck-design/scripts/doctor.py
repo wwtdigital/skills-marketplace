@@ -216,8 +216,8 @@ def main():
     # because the one thing a builder should do before anything else is look at the system,
     # and on a DOCUMENTATION-only machine it is the only thing that still works.
     print("  Before your first deck, whatever the verdict above:")
-    print("    python3 scripts/teardown.py -o WWT-teardown.html   # then open it")
-    print("  Standard library only, so it renders here. Two decks came back wrong from")
+    print("    sh setup/run.sh teardown.py -o WWT-teardown.html   # then open it")
+    print("  (Windows: setup\\run.ps1.) Two decks came back wrong from")
     print("  builders who had the skill and had never seen the system.")
     print()
     if not full:

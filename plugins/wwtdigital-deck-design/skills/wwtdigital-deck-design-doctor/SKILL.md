@@ -1,5 +1,5 @@
 ---
-name: "wwtdigital-design-doctor"
+name: "wwtdigital-deck-design-doctor"
 description: "Check what this machine can actually enforce for the WWT design system, and report whether a deck built here will be validated, lint-checked only, or unchecked. Use when starting any WWT deck (run it before building); when the user asks whether the validator will run, why their output differs from someone else's, or what they need installed, including whether the Aptos fonts are on the machine; when a WWT script fails to launch; and when handing a deck over and needing to state honestly how much of it was checked. Not for checking a finished deck's design (that is the design system's validator)."
 license: Proprietary
 metadata:
@@ -42,8 +42,8 @@ On Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGI
 **If it prints SETUP NEEDED**, this machine has never been set up. Assume the person is not
 technical and may have no Python at all; that is fine, setup brings its own. Explain in plain
 words: a one-time step of a few minutes, no admin password, downloads a private copy of Python
-and its tools (about 120 MB, more only if they have neither Chrome nor Edge) into a
-`.wwtdigital-design` folder in their home folder, and changes nothing else. Ask, then run
+and its tools (about 330 MB of disk space, more only if they have neither Chrome nor Edge) into a
+`.wwtdigital-deck-design` folder in their home folder, and changes nothing else. Ask, then run
 `setup/setup.sh` (Windows: `setup/setup.ps1`) the same way. It ends by running the doctor. If it
 prints "Setup stopped", relay that message as written; it says what to do.
 

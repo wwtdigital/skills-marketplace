@@ -15,7 +15,7 @@ would be wrong within a month.
 
 ### Install and check, once
 
-Install the `wwtdigital-design` plugin (`/plugin install wwtdigital-design@wwtdigital`), make
+Install the `wwtdigital-deck-design` plugin (`/plugin install wwtdigital-deck-design@wwtdigital`), make
 sure Aptos is on the machine (see the plugin README), then run two things
 before asking for anything.
 

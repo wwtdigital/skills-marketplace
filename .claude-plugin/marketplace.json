@@ -29,9 +29,9 @@
       }
     },
     {
-      "name": "wwtdigital-design",
-      "displayName": "WWTDigital Design System",
-      "source": "./plugins/wwtdigital-design",
+      "name": "wwtdigital-deck-design",
+      "displayName": "WWTDigital Deck Design",
+      "source": "./plugins/wwtdigital-deck-design",
       "description": "The WWT deck design system: build and validate WWT-branded slides as HTML and PowerPoint. Opt-in, separate from the Presentation bundle because it brings the Figma MCP server and a toolkit with a one-time setup (no Python needed beforehand).",
       "category": "presentation",
       "tags": [

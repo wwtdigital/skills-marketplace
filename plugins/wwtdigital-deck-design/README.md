@@ -8,12 +8,12 @@ whole thing rather than half of it. One piece is installed separately, once per 
 
 **Two skills.**
 
-`wwtdigital-design-doctor` reports what your machine can actually enforce. **Run it first.** It ends
+`wwtdigital-deck-design-doctor` reports what your machine can actually enforce. **Run it first.** It ends
 on one of three verdicts: ENFORCED, PARTIAL, or DOCUMENTATION ONLY. Knowing which one you
 are is the single most useful thing in this package, because a deck built under PARTIAL is
 not a validated deck and should not be described as one.
 
-`wwtdigital-design-system` is the system itself. Tokens, a twelve-column grid on a
+`wwtdigital-deck-design` is the system itself. Tokens, a twelve-column grid on a
 1920 × 1080 canvas, twenty layout recipes with their real geometry, four grounds including a
 dark emphasis ground capped at one slide in five, nineteen approved photographs with measured
 scrim recommendations, 497 icons from Blue Steel 3.0 that inherit the slide's
@@ -41,7 +41,7 @@ In Claude Code:
 
 ```
 /plugin marketplace add wwtdigital/skills-marketplace
-/plugin install wwtdigital-design@wwtdigital
+/plugin install wwtdigital-deck-design@wwtdigital
 ```
 
 It is a separate plugin rather than part of the `presentation` bundle because it brings the
@@ -57,8 +57,8 @@ sh "${CLAUDE_PLUGIN_ROOT}/setup/setup.sh"
 ```
 
 On Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File setup\setup.ps1`. It needs
-no admin rights and writes only to `~/.wwtdigital-design`: a private Python and its packages
-(installed with [uv](https://docs.astral.sh/uv/), about 120 MB), and a browser only if the
+no admin rights and writes only to `~/.wwtdigital-deck-design`: a private Python and its packages
+(installed with [uv](https://docs.astral.sh/uv/), about 330 MB of disk space), and a browser only if the
 machine has neither Chrome nor Edge. Run it again any time; finished steps are skipped. It ends
 by running the doctor. After that, run any script through `setup/run.sh` (or `run.ps1`), which
 uses that private Python.
@@ -67,7 +67,7 @@ uses that private Python.
 read from inside PowerPoint. Aptos Serif (pull quotes only) isn't there. For it, and on any
 other machine, install the family from
 [Microsoft](https://www.microsoft.com/en-us/download/details.aspx?id=106087) (free: open the zip,
-double-click the fonts), or put the `.ttf` files in `~/.wwtdigital-design/fonts` (or point
+double-click the fonts), or put the `.ttf` files in `~/.wwtdigital-deck-design/fonts` (or point
 `WWT_FONTS_DIR` at them).
 
 `sh setup/run.sh brand_assets.py` shows exactly what was found and where.
@@ -127,7 +127,7 @@ produced three of this system's worst defects.
 ## Working on the system itself
 
 ```bash
-cd skills/wwtdigital-design-system
+cd skills/wwtdigital-deck-design
 sh ../../setup/run.sh lint_source.py deck.html                 # 30ms, no dependencies
 sh ../../setup/run.sh inline_assets.py deck.html -o Deck.html  # resolve the assets and fonts
 sh ../../setup/run.sh wwt_validate.py Deck.html                # the gate. 0 FAIL, WARNs with reasons
