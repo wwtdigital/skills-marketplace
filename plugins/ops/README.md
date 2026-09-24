@@ -14,7 +14,7 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 
 | Skill | What it does |
 | --- | --- |
-| _(none yet)_ | |
+| `wwtdigital-onboarding` | Answers new-hire onboarding questions from the live Notion onboarding wiki, with sources (from Staci Powell). Needs the Notion connector |
 
 ## Owners
 

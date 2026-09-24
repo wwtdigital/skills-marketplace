@@ -42,7 +42,8 @@ site/scripts/lib.ts               shared loaders (marketplace, manifests, SKILL.
 Plugins: one bundle per category (`presentation`, `research`, `ops`, `admin`, `tech`), plus
 standalone opt-in plugins that belong to a category but install separately because they bring
 hooks or MCP servers most of that category won't want. Skills so far: `admin` has
-`wwt-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer`; the standalone
+`wwt-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer`; `ops` has
+`wwtdigital-onboarding` (Staci Powell); the standalone
 `wwtdigital-deck-design` (category `presentation`, from Toby Gerber) has `wwtdigital-deck-design` and
 `wwtdigital-deck-design-doctor`. The category plugins replaced the original discipline plugins on
 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
