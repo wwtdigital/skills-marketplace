@@ -1,22 +1,24 @@
 ---
 name: humanizer
 description: |
-  Remove AI writing patterns from text. Use when editing or reviewing any
-  piece of writing to make it sound like a person actually wrote it. Catches
-  hard bans (em dashes, Claude-isms, negative parallelism, bold-first bullets),
-  frequency violations (rule of three, rhetorical questions, short punchy
-  fragments used repeatedly), and voice problems (corporate jargon, inflated
-  stakes, sycophantic tone, vague attributions). Applies a tiered audit process:
-  hard ban pass, frequency check, voice calibration, self-critique, final.
-  Not for flagging AI writing in a document without changing it, or for
-  checking brand or visual style.
+  Remove AI writing patterns from text: hard bans (em dashes, Claude-isms,
+  negative parallelism, bold-first bullets), frequency violations (rule of
+  three, rhetorical questions, repeated punchy fragments) and voice problems
+  (corporate jargon, inflated stakes, sycophantic tone, vague attributions),
+  through a tiered audit: hard ban pass, frequency check, voice calibration,
+  self-critique, final. Use when someone asks for it directly: "humanize this",
+  "make it sound less like AI", "de-AI this", "does this read as AI?", "make
+  this sound like a person wrote it", "clean up the AI tells", or when someone
+  asks for a final pass on text before it goes to a real person. Not for
+  flagging AI writing in a document without changing it (a separate skill),
+  for brand or visual style, or for writing new content from scratch.
 license: MIT
 metadata:
   owner: toby.gerber@wwt.com
   category: presentation
   status: beta
   connectors: []
-  version: 4.0.0
+  version: 4.1.0
 ---
 
 # Humanizer v4.0
