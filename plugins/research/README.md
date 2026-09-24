@@ -14,7 +14,7 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 
 | Skill | What it does |
 | --- | --- |
-| _(none yet)_ | |
+| [`brand-scan`](skills/brand-scan/SKILL.md) | Run or read a brandscanner assessment of a company: security posture, tech stack, app reviews, public financials, cohort benchmarks and the saved scorecard. |
 
 ## MCP servers
 
@@ -22,7 +22,7 @@ Installing this plugin also connects these MCP servers. The first time a tool is
 
 | Server | What it does |
 | --- | --- |
-| `brandscanner` | Brand research: scorecards, tech stack, security posture, app reviews and public financials. |
+| `brandscanner` | Brand research: scorecards, tech stack, security posture, app reviews and public financials. Driven by the [`brand-scan`](skills/brand-scan/SKILL.md) skill. |
 
 ## Owners
 
