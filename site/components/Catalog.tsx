@@ -48,7 +48,7 @@ export function Catalog({ plugins }: { plugins: Plugin[] }) {
           <div>
             <h2 id="browse-title">Skills by category</h2>
             <p className="counts">
-              {plural(plugins.length, "bundle")}, {plural(nSkills, "skill")} and {plural(nServers, "MCP server")}.
+              {plural(plugins.length, "plugin")}, {plural(nSkills, "skill")} and {plural(nServers, "MCP server")}.
             </p>
           </div>
           <div className="toolbar">
@@ -82,6 +82,11 @@ export function Catalog({ plugins }: { plugins: Plugin[] }) {
         {populated.map(({ plugin: p, skills, servers }) => (
           <article key={p.name} className="category" id={p.name} aria-labelledby={`${p.name}-title`}>
             <div className="category-meta">
+              {p.category && p.category !== p.name && (
+                <p className="addon">
+                  {plugins.find((c) => c.name === p.category)?.displayName ?? p.category} add-on, installed separately
+                </p>
+              )}
               <h3 id={`${p.name}-title`}>{p.displayName}</h3>
               <p>{p.description}</p>
               <div className="facts">
@@ -148,7 +153,7 @@ function McpBlock({ servers }: { servers: McpServer[] }) {
       <div>
         <h4>{servers.length === 1 ? "Includes an MCP server" : "Includes MCP servers"}</h4>
         <p>
-          Connected when you install this bundle. If it asks you to sign in, run <code>/mcp</code>.
+          Connected when you install this plugin. If it asks you to sign in, run <code>/mcp</code>.
         </p>
         <ul>
           {servers.map((m) => (

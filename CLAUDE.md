@@ -39,9 +39,13 @@ site/scripts/lib.ts               shared loaders (marketplace, manifests, SKILL.
 .github/CODEOWNERS                one GitHub team per category (teams don't exist yet)
 ```
 
-Plugins (one per category): `presentation`, `research`, `ops`, `admin`, `tech`. Only `admin` has
-skills so far (`wwt-skill-author`, `marketplace-smoke-test`). These replaced the original discipline
-plugins on 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
+Plugins: one bundle per category (`presentation`, `research`, `ops`, `admin`, `tech`), plus
+standalone opt-in plugins that belong to a category but install separately because they bring
+hooks or MCP servers most of that category won't want. Skills so far: `admin` has
+`wwt-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer`; the standalone
+`wwtdigital-design` (category `presentation`, from Toby Gerber) has `wwtdigital-design-system` and
+`wwtdigital-design-doctor`. The category plugins replaced the original discipline plugins on
+2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
 
 ## Commands
 
@@ -91,8 +95,10 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 - `marketplace.json` is the single source of truth. Both scripts iterate its `plugins[]` and resolve
   each `source` (only relative-path sources are supported) via `common.plugin_dir`. A plugin folder
   that isn't listed there is invisible to validation, the site and Claude.
-- `metadata.category` must be one of `CATEGORIES` in `site/scripts/lib.ts` *and* equal the plugin
-  folder the skill lives in. It's redundant in the repo but travels with a downloaded `.skill`.
+- `metadata.category` must be one of `CATEGORIES` in `site/scripts/lib.ts` *and* equal the category
+  of the plugin the skill lives in: the plugin's own name for a category bundle, or the marketplace
+  entry's `category` for a standalone plugin (which must name one of `CATEGORIES`). It's redundant
+  in the repo but travels with a downloaded `.skill`.
   Adding a category means updating `CATEGORIES`, `marketplace.json`, `CODEOWNERS`, the template,
   and the table in `CONTRIBUTING.md`.
 - There is no GitHub Actions (not allowed here). The Vercel build is the CI: `npm run build` runs
@@ -173,6 +179,14 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   anchor ids.
 - When copying `templates/skill-template/`, rename the frontmatter `name: skill-template` and cut
   the `category`/`status` option lists down to single values. Otherwise the validator fails.
+
+- `wwtdigital-design` ships **no Aptos fonts**: they're Microsoft's and the repo is public. Its
+  `scripts/brand_assets.py` finds Aptos on the machine by the name inside each file (PowerPoint.app
+  on Mac carries the five sans cuts; Aptos Serif is an Office cloud font, only needed for pull
+  quotes; Microsoft's free download has all of them). Don't re-add the font files. WWT brand
+  material (photos, logos, icons, the recipe 12 solution matrix) is fine in the repo (owner, 2026-09-24). Its SKILL.md is a short router: the sections live in `references/`, and its scripts
+  that parse the document read it through `scripts/skilldoc.py`. Its own checks (`selftest.py`,
+  `wwt_validate.py`, `check_documents.py`) need Playwright + Chromium.
 
 ## Do not touch without asking
 

@@ -1,0 +1,510 @@
+/* ============================================================
+   WWT DIGITAL PRESENTATION DESIGN SYSTEM  ·  system.css
+   Source of truth: Figma "AI Presentation Templates"
+   file lZ1TThUNRxNN6junV3Sxnk
+
+   THIS FILE IS THE STYLESHEET. Paste it into a <style> block, or link it, but do not
+   retype any of it. Every value here is measured off a Figma node; a value typed from
+   memory is a value that has drifted.
+
+   It carries double-brace tokens for the bundled assets. Resolve them with
+   scripts/inline_assets.py, which fails the build on any that are left over.
+
+   The spec book's own document chrome is deliberately NOT here: navigation, cards,
+   swatches and specimen furniture belong to the reference document, not to a deck.
+   ============================================================ */
+
+/* ============================================================
+   WWT DIGITAL PRESENTATION DESIGN SYSTEM  v1.0
+   Source of truth: Figma "AI Presentation Templates"
+   file lZ1TThUNRxNN6junV3Sxnk  ·  frame 1659:786 "Logo Bug Test"
+   ============================================================ */
+
+:root{
+  /* ---------- 1. CORE PALETTE ---------- */
+  --wwt-blue:#0086EA;          /* WWT Light Blue - primary accent */
+  --wwt-purple:#330072;        /* gradient terminus, never flat-fill alone */
+  --wwt-red:#EE282A;           /* WWT Bright Red - motif only, never a fill */
+  --wwt-blue-93:rgba(0,134,234,.93);   /* accent over photography */
+
+  --ink-900:#000000;           /* headline emphasis span */
+  --ink-800:#1F1F1F;           /* headline base */
+  --ink-600:#404040;           /* body copy on light */
+  --ink-500:#656565;           /* supporting / caption copy */
+  --ink-400:#808080;           /* metadata, disabled */
+  --ink-200:#BFBFBF;           /* mesh pattern, hairlines */
+  --ink-100:#E4E4E4;           /* rules, table strokes */
+
+  --surface:#F6F6F6;           /* the deck's default ground */
+  --surface-raised:#FFFFFF;    /* panels, cards */
+  --scrim:rgba(0,0,0,.36);     /* flat scrim over full-bleed photography */
+
+  /* ---------- 2. GRADIENTS ---------- */
+  --grad-brand-v:linear-gradient(180deg,#0086EA 0%,#330072 100%);
+  --grad-brand-v-93:linear-gradient(180deg,rgba(0,134,234,.93) 0%,rgba(51,0,114,.93) 100%);
+  --grad-brand-diag:linear-gradient(164deg,#0086EA 8%,#330072 63%);
+  /* DARK MODE GROUND, node 1892:32 "Darkmode Background". Its own colours, NOT the brand
+     gradient darkened: measured #1D569E and #28115C against the brand's #0086EA and #330072.
+     Lower chroma and much lower luminance, which is what lets it carry white type at 7.3:1
+     at its lightest point and 15.9:1 at its darkest. An emphasis ground, capped at one slide
+     in five by PAT-09. */
+  --wwt-blue-dark:#1D569E;
+  --wwt-purple-dark:#28115C;
+  --grad-dark-diag:linear-gradient(165.47deg,#1D569E 8.95%,#28115C 76.88%);
+  --grad-brand-h:linear-gradient(90deg,#0086EA 0%,#330072 100%);
+  --grad-photo-scrim:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(0,0,0,.30) 49%,rgba(0,0,0,.62) 100%);
+  --grad-bug:linear-gradient(180deg,#F6F6F6 0%,#FFFFFF 100%);
+
+  /* ---------- 3. ELEVATION ---------- */
+  --shadow-panel:0 1px 25px 7px rgba(0,0,0,.10);
+  --shadow-float:0 2px 40px 4px rgba(0,0,0,.14);
+
+  /* ---------- 4. GEOMETRY (canvas units, 1920x1080) ---------- */
+  --canvas-w:1920px; --canvas-h:1080px;
+  --margin-x:72px;   /* 3.75% - hard edge for all type and panels */
+  --rail-top:56px;   /* running header band */
+  --rail-bottom:56px;/* logo bug reservation */
+  --content-top:156px;
+  --col:126px;       /* 12 columns */
+  --gutter:24px;
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:40px;
+  --s6:56px; --s7:72px; --s8:96px; --s9:120px;
+
+  /* ---------- 5. TYPE ---------- */
+  /* Aptos is embedded below as @font-face. Every weight in the ladder resolves to a real
+     cut — nothing here is synthesized. Do not add a webfont fallback: Archivo at 900 is
+     visibly lighter than Aptos Black and silently changes every headline's measure. */
+  --font-sans:'Aptos',system-ui,sans-serif;
+  --font-serif:'Aptos Serif',Georgia,serif;
+  --font-mono:ui-monospace,'DejaVu Sans Mono',Menlo,Consolas,monospace;
+}
+
+/* ============================================================
+   STAGE  —  scales a 1920x1080 slide into the doc column
+   ============================================================ */
+.stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:8px;
+       background:var(--surface);box-shadow:0 18px 50px -18px rgba(0,0,0,.8);
+       border:1px solid #24242E}
+.stage>.slide{position:absolute;top:0;left:0;transform-origin:top left;transform:scale(var(--k,1))}
+.slidecap{display:flex;justify-content:space-between;gap:16px;align-items:baseline;
+          margin:14px 0 40px;font-size:13.5px;color:#8E8E9E}
+.slidecap b{color:#fff;font-weight:800;font-size:14.5px;letter-spacing:-.01em}
+.slidecap .tag{font-family:var(--font-mono);font-size:11px;color:#6E6E80;white-space:nowrap}
+
+/* ============================================================
+   THE DECK SYSTEM  —  everything below ships in the deck
+   ============================================================ */
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;
+       background:var(--surface);color:var(--ink-600);font-family:var(--font-sans);
+       font-size:26px;line-height:1.38;isolation:isolate}
+.slide *{box-sizing:border-box}
+
+/* -- absolute placement helper: everything positions off the 12-col grid -- */
+.slide .abs{position:absolute}
+/* A hyphen is a break opportunity, so a hyphenated compound can split across a line
+   and strand its tail. Wrap the compound in .nb wherever it lands near a measure end. */
+.nb{white-space:nowrap}
+
+/* ---- LAYER 0: GROUND ---- */
+.g-light{background:var(--surface)}
+.g-white{background:#fff}
+.g-grad{background:var(--grad-brand-v)}
+.g-grad-diag{background:var(--grad-brand-diag)}
+/* The dark ground ships as a PAIR: the gradient and .mesh--dark together are the device.
+   Node 1892:32 is a background frame, not a layout, so it composes with any recipe whose
+   type is white. It is an EMPHASIS ground: PAT-09 caps it at one slide in five, because a
+   deck where every page shouts has no emphasis left. */
+.g-dark{background:var(--grad-dark-diag);color:#fff}
+
+/* ---- LAYER 1: BACKGROUND PATTERN ---- */
+/* DIAMOND MESH — supplied Figma vectors, used verbatim. Half-drop tessellation of
+   down-pointing triangles (base 53.53, height 26.96), every row offset half a base from the row
+   above. Rows abut, they never overlap. One userSpace linearGradient shared by every triangle
+   produces the fade, so THE FADE IS BAKED INTO ABSOLUTE COORDINATES: exporting the same node
+   from a different position on the artboard returns a byte-identical file. Placement is therefore
+   the only lever, and picking the wrong variant for a placement is what produces a hard stop —
+   the gradient's terminus landing inside the canvas instead of past its edge.
+
+     .mesh--diag    VectorPattern.svg   1205 x 1080, LEFT-JUSTIFIED only (Figma node 1659:1172
+                    sits at x 0, y 0). Its band runs off the left edge of its own box, so that
+                    box edge has to be the page edge. Dense top-left, widening down and right.
+     .mesh--center  the same 882 paths extended by one lattice period (14 x 53.528 = 749.389)
+                    to span the full 1920, with the gradient axis re-centred on the page centre.
+                    Band runs corner to corner and is clipped only by the page edges.
+     .mesh--h       VectorPattern2.svg  1182 x 1080, RIGHT-ANCHORED with a 32px bleed. Even
+                    density down the right edge, no diagonal terminus at all. The default when
+                    content sits left and the right side must stay clean to the top.
+
+   Opacity 11% and plus-lighter live in CSS, never in the asset: the Figma export carries its own
+   opacity="0.11" wrapper, which double-attenuates, and its blend mode does nothing inside an img.
+
+   BACKGROUND ONLY. A .mesh is a direct child of .slide and nothing else. Never inside a .panel, a
+   .card, a .media, a .statband or any other container, and never as a background-image painted onto
+   one. Three reasons, in order of how badly each bites:
+     1. plus-lighter composites against whatever is behind it. On the page surface that is #F6F6F6
+        and the lattice reads at 11%. On a panel fill it composites against the panel and reads as a
+        texture swatch inside a box, which is not what this pattern is.
+     2. The box clips it. The fade is baked into absolute coordinates in the asset (see above), so a
+        1205 x 1080 field cropped to a 426 x 200 card shows an arbitrary slice of the gradient
+        terminus rather than the intended density run.
+     3. It does not survive export. The PPTX path blends the mesh into a single flat ground plate,
+        because PowerPoint has no blend modes (REG-17). A mesh inside a container is not part of the
+        ground, so it is dropped on export with no error.
+   PAT-05 fails on both routes in: the nesting and the background-image. */
+.mesh{position:absolute;top:0;height:1080px;pointer-events:none;opacity:.11;
+      mix-blend-mode:plus-lighter;background-repeat:no-repeat}
+.mesh--diag{left:0;width:1205px;background-image:url("{{MESH_DIAG}}");background-size:1205px 1080px}
+.mesh--center{left:0;width:1920px;background-image:url("{{MESH_CENTER}}");background-size:1920px 1080px}
+.mesh--h{right:-32px;top:-8px;width:1182px;background-image:url("{{MESH_H}}");background-size:1182px 1080px}
+/* a third placement, measured off node 1659:988: the diag field pushed right so
+   the fade runs off the right edge instead of the left */
+.mesh--r{left:728px;top:6px;width:1192px;height:1068px;background-image:url("{{MESH_DIAG}}");background-size:1192px 1068px}
+/* The dark ground's own placement, node 1892:34. The SAME 1764-path lattice as mesh--center,
+   but a separate export at 2409 x 1092 with its own gradient axis (1022.28,938.512 ->
+   1683.67,394.525 against the centre asset's 677.5,810.9 -> 1265,247.4), so it is NOT
+   mesh-center stretched and must never be substituted for it. Normalised from x -265 /
+   2409 x 1092 to left -262 / 2384 x 1080: it bleeds 262 off the left and 202 off the right.
+   Opacity and blend live here, never in the asset; the Figma export carries its own
+   opacity="0.11" plus-lighter wrapper and both were stripped (REG-04). */
+.mesh--dark{left:-262px;width:2384px;height:1080px;background-image:url("{{MESH_DARK}}");background-size:2384px 1080px}
+
+/* Brand X, recipe 10 instance. Source board 1659:1020 is authored at 1920 x 1080, so its
+   coordinates are ALREADY FINAL: Subtract 1964 x 2344.21 at 839/-676, mirrored, taken raw.
+   This note used to claim a normalisation "to 1943 x 2318 at 830/-668" that was neither
+   applied nor correct, because sx 0.989487 / sy 0.988649 only apply to the 1940.4 x 1092.4
+   boards and this one is not one of them. The built geometry was right and the comment was
+   wrong, which is the harder kind to catch. See assets/provenance.json, artboard.exceptions.
+   Its lower edge exits through the bottom-right corner of the canvas. */
+/* Recipe 10 wedge. Calibrated to the source render rather than to the exported Subtract: once the
+   shape is cropped by the canvas the export's own transform does not reproduce the silhouette.
+   Measured edge passes (1920, 174) with dx/dy -1.04, so it meets the bottom edge at x 978 and
+   fills the bottom-right corner. */
+.brandx.brandx--r10{inset:0;width:auto;height:auto;background:var(--grad-brand-diag);
+  clip-path:polygon(100% 16.1%,100% 100%,50.9% 100%)}
+
+/* BRAND X — the logo chevron blown past the frame. Cover and divider only.
+   ONE grouped vector from node 1799:46, not two hand-clipped divs. The two bars are
+   NOT the same weight: 536.2px and 273.3px, a deliberate 0.51 ratio. Reconstructing
+   them as two copies of one clip-path made them 536 and 518, so the X read as two
+   equal bars and the thin one was 90% too heavy. See REG-25.
+   2130 x 2595.531 at left 349 / top -920, normalised to the canvas. Gradients and
+   opacity are baked into the asset; do not add opacity on top. */
+.brandx-x{position:absolute;pointer-events:none;left:345px;top:-910px;
+          width:2108px;height:2566px;
+          background:url("{{BRANDX_X}}") 0 0/100% 100% no-repeat}
+
+/* the old two-div form is kept ONLY for recipe 10's cropped wedge, which is a
+   different shape from a different node */
+.brandx{position:absolute;pointer-events:none;
+  background:var(--grad-brand-diag);
+  clip-path:polygon(0 83.2%,20.1% 100%,100% 33.5%,100% 0)}
+
+
+/* FLEX TRIANGLE — the WWT chevron blown past the frame and gradient-filled.
+   Measured from node 1659:964: 1329 x 907, sitting at left -519 / top 245 so
+   the head peeks in at upper-left and the body fills the lower corner. The
+   source applies rotate(180) + scaleX(-1), which is a vertical flip; the right
+   variant mirrors that horizontally. Gradient is baked into the asset in
+   userSpace coordinates, so it never needs re-deriving. */
+.tri{position:absolute;width:1329px;height:907px;pointer-events:none;
+     background:url("{{TRI}}") 0 0/100% 100% no-repeat}
+.tri--l{left:-519px;top:245px;transform:scaleY(-1)}
+.tri--r{right:-519px;top:245px;transform:scaleY(-1) scaleX(-1)}
+
+/* RING — a percentage read as a ring. From the source component parts-pie,
+   node 1138:2700: 208 outer on a 12.48 stroke, so r 97.76 and circumference
+   614.2. The value is set with stroke-dasharray so the number is a parameter
+   rather than a redrawn path. */
+.ring{position:absolute;width:206px;height:206px}
+.ring svg{width:100%;height:100%;display:block;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:12.48}
+.ring .trk{stroke:var(--ink-200)}
+.ring .val{stroke:var(--wwt-blue);stroke-linecap:butt}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;
+        font-weight:900;font-size:64px;line-height:1;letter-spacing:-.02em;
+        color:var(--ink-900)}
+
+/* STATBAND — a single figure and its explanation on one gradient bar. Used at
+   full width inside a card (recipes 19, 20) and standalone under a photo (21). */
+.statband{position:absolute;background:var(--grad-brand-h);display:flex;
+          align-items:center;gap:40px;padding:0 48px}
+.statband .fig{font-weight:900;font-size:96px;line-height:.64;letter-spacing:-.07em;
+               color:#fff;margin:0;flex:0 0 auto}
+.statband p{font-weight:400;font-size:24px;line-height:32px;color:#fff;margin:0}
+
+/* STATROW — label left, explanation right, stacked inside a card. */
+/* the source centres each row in a fixed 167px box, which is what gives the
+   rows their air either side of the gradient band */
+.statrow{position:absolute;display:flex;align-items:center;height:167px;gap:0}
+.statrow .lab{flex:0 0 297px;font-weight:700;font-size:36px;line-height:1.15;
+              letter-spacing:-.05em;color:var(--ink-900);margin:0}
+.statrow p{flex:1 1 auto;font-weight:400;font-size:24px;line-height:33px;
+           color:var(--ink-600);margin:0}
+
+/* ---- LAYER 2: MEDIA ---- */
+.media{position:absolute;overflow:hidden;background:#111111}
+.media>img{width:100%;height:100%;object-fit:cover;display:block}
+.media--bleed{inset:0}
+.media--band{left:0;right:0;top:0;height:473px}       /* 4.06:1 */
+.media--half{left:0;top:0;width:1103px;height:1080px} /* 57.4% */
+.media--card{aspect-ratio:525/260}                    /* 2.02:1 */
+/* SCRIMS COMPOSE. Each scrim sets a custom property rather than owning ::after outright,
+   because an element has only one ::after and two scrim classes on the same image would
+   silently cancel each other — the later rule wins and the earlier scrim disappears.
+   Directional scrims occupy slot 1, the running-header scrim occupies slot 2. */
+.media::after{content:"";position:absolute;inset:0;pointer-events:none;
+              background:var(--scrim-1,none),var(--scrim-2,none)}
+.scrim-flat{--scrim-1:linear-gradient(rgba(0,0,0,.36),rgba(0,0,0,.36))}
+.scrim-grad{--scrim-1:var(--grad-photo-scrim)}
+.scrim-r{--scrim-1:linear-gradient(90deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.18) 46%,transparent 72%)}
+/* top scrim: for a white running header sitting on a bright band crop */
+.scrim-t{--scrim-2:linear-gradient(180deg,rgba(0,0,0,.58) 0%,rgba(0,0,0,.20) 34%,transparent 62%)}
+
+/* full-surface scrim wash: a scrim painted as its own element rather than a ::after,
+   used when the scrim must cover only part of a bleeding image */
+.scrim-wash{position:absolute;pointer-events:none}
+/* hero stat: a display-scale number acting as the slide's entry point in place of a headline */
+.stat-hero{font-weight:900;font-size:200px;line-height:.80;letter-spacing:-.07em;margin:0}
+
+
+
+/* ---- LAYER 3: TYPE ---- */
+.t-display1{font-weight:900;font-size:200px;line-height:.80;letter-spacing:-.07em;
+            text-transform:uppercase;margin:0;white-space:nowrap}
+.t-display2{font-weight:900;font-size:128px;line-height:.875;letter-spacing:-.07em;
+            text-transform:uppercase;margin:0;white-space:nowrap}
+.t-h1{font-weight:900;font-size:96px;line-height:.875;letter-spacing:-.06em;
+      text-transform:uppercase;margin:0;color:var(--ink-800)}
+.t-h1-lg{font-weight:900;font-size:112px;line-height:.86;letter-spacing:-.065em;
+         text-transform:uppercase;margin:0;color:var(--ink-800)}
+/* Sentence-case statement setting, measured off node 1839:55. A modifier on t-h1 rather than a token
+   of its own: the size is the same 96, and the scale earns a new entry only when two slides need it.
+   The source changes exactly three things, so exactly three things are written here. Leading tightens
+   to a flat 80px (0.833, below the 0.875 the uppercase step uses, because sentence case has
+   descenders but no run of caps to open up), tracking eases to -.05em, and the case cap comes off.
+   Doubled selector per REG-08. */
+.t-h1.t-h1--stmt{line-height:80px;letter-spacing:-.05em;text-transform:none}
+.t-h2{font-weight:900;font-size:80px;line-height:.95;letter-spacing:-.06em;
+      text-transform:uppercase;margin:0;color:var(--ink-800)}
+.t-h3{font-weight:700;font-size:48px;line-height:1.08;letter-spacing:-.03em;margin:0;color:var(--ink-800)}
+.t-label{font-weight:700;font-size:36px;line-height:1.11;letter-spacing:-.02em;margin:0;color:var(--ink-900)}
+.t-lede{font-weight:400;font-size:45px;line-height:1.24;margin:0}
+.t-body-l{font-weight:400;font-size:32px;line-height:1.38;margin:0}
+.t-body{font-weight:400;font-size:26px;line-height:1.38;margin:0;color:var(--ink-600)}
+.t-body-s{font-weight:400;font-size:24px;line-height:1.38;margin:0;color:var(--ink-600)}
+.t-caption{font-family:var(--font-sans);font-weight:400;font-size:20px;line-height:1.4;
+           margin:0;color:var(--ink-500)}
+.t-source{font-family:var(--font-sans);font-weight:400;font-size:22px;line-height:1.35;
+          margin:0;color:var(--ink-500)}
+.t-micro{font-weight:700;font-size:22px;line-height:1.27;margin:0;color:var(--ink-600)}
+.t-quote{font-family:var(--font-serif);font-weight:700;font-style:italic;font-size:64px;
+         line-height:1.19;letter-spacing:-.05em;margin:0}
+.t-coversub{font-family:var(--font-sans);font-weight:400;font-size:40px;line-height:1.3;margin:0}
+.on-dark,.on-dark .t-h1,.on-dark .t-h1-lg,.on-dark .t-h2,.on-dark .t-h3,.on-dark .t-label,
+.on-dark .t-body,.on-dark .t-body-s,.on-dark .t-caption,.on-dark .t-micro{color:#fff}
+.ink{color:var(--ink-800)} .ink-max{color:var(--ink-900)} .ink-mid{color:var(--ink-600)}
+.ink-soft{color:var(--ink-500)} .white{color:#fff} .blue{color:var(--wwt-blue)}
+/* headline emphasis: the last clause steps from ink-800 to pure black */
+.t-h1 em,.t-h1-lg em,.t-h2 em,.t-display1 em,.t-display2 em{font-style:normal;color:var(--ink-900)}
+.on-dark .t-h1 em,.on-dark .t-h1-lg em,.on-dark .t-h2 em,
+.white.t-h1 em,.white.t-h1-lg em,.white.t-h2 em,.white.t-display1 em,.white.t-display2 em,
+.on-dark .t-display1 em,.on-dark .t-display2 em{color:#fff;opacity:.72}
+
+/* ---- LAYER 4: COMPONENTS ---- */
+
+/* running header — every slide except the cover */
+/* Running header. Bold throughout, not SemiBold: at 22px, weight 600 is not WCAG
+   large-scale, so over photography it needs 4.5:1 and measures 4.35:1. Bold clears it. */
+.rail{position:absolute;top:56px;right:72px;text-align:right;font-size:22px;
+      line-height:1.2;color:var(--ink-600);font-weight:700}
+.rail b{font-weight:700}
+.rail.on-photo{color:#fff}
+
+/* logo lockup — cover, dividers, closing */
+.lockup{position:absolute;left:44px;top:52px;width:210px;height:44px}
+.lockup img{width:100%;height:100%;display:block}
+
+/* LOGO BUG — stripe and mark are ONE unit, positioned exactly as the Figma source.
+   Measured from frame 1659:861 on the 1940.4 x 1092.4 artboard and normalised to 1920 x 1080:
+     unit   x 1772.198 y 783    w 278.001 h 289.099   ->  1754, 774, 275 x 286
+     mark   x 1829.199 y 1025   w 73.776  h 38.300    ->  1810, 1013, 73 x 38
+   Two consequences the earlier build had wrong: the unit BLEEDS 109px off the right edge,
+   and it stops 20px above the bottom, not 56. The mark therefore sits low and near the
+   corner, at 37px from the right edge and 29px from the bottom.
+   Clip polygon is the Intersect path M278 145.688L140.019 289.099H0L278 0V145.688Z
+   expressed as percentages of the 275 x 286 box. Band thickness is 101 perpendicular,
+   and the mark centroid lands at 47% across it, which is the centreline. */
+.bug{position:absolute;right:-109px;bottom:20px;width:275px;height:286px;pointer-events:none}
+.bug .stripe{position:absolute;inset:0;background:var(--grad-bug);
+             clip-path:polygon(100% 0,100% 50.39%,50.37% 100%,0 100%)}
+.bug .mark{position:absolute;left:56px;top:239px;width:73px;height:38px}
+.bug .mark img{width:100%;height:100%;display:block}
+.bug--dark .stripe{background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.09))}
+.bug--dark .mark img{filter:brightness(0) invert(1)}
+
+/* eyebrow / kicker */
+.eyebrow{font-family:var(--font-sans);font-weight:700;font-size:24px;letter-spacing:.16em;
+         text-transform:uppercase;color:var(--wwt-blue);margin:0 0 20px}
+.eyebrow--white{color:#fff;opacity:.8}
+
+/* panels */
+/* PANELS CARRY THEIR OWN INSET. This used to have no padding at all, and only twelve of
+   the twenty-three panels in the recipes set one inline, so a builder copying the wrong
+   recipe got a label flush against the panel's top-left corner and nothing objected.
+   40/48 is the modal inset across the recipes that did set it. Override it when a source
+   node genuinely differs, and use .panel--flush for a panel that holds a bleed image or a
+   band rather than text. GEO-08 fails text inset less than 24px from a panel edge. */
+.panel{position:absolute;background:#fff;box-shadow:var(--shadow-panel);padding:40px 48px}
+.panel--flush{padding:0}
+.panel--grad{background:var(--grad-brand-v);color:#fff;box-shadow:none}
+.panel--grad93{background:var(--grad-brand-v-93);color:#fff}
+.panel--soft{background:var(--surface);box-shadow:var(--shadow-panel)}
+.pad{padding:56px}
+.pad-s{padding:40px}
+
+/* stat */
+.stat .val{font-weight:900;font-size:96px;line-height:.92;letter-spacing:-.04em;
+           color:var(--wwt-blue-93);margin:0}
+.stat .lab{font-weight:700;font-size:36px;line-height:1.11;letter-spacing:-.02em;
+           color:var(--ink-900);margin:10px 0 0}
+.stat .note{font-weight:400;font-size:26px;line-height:1.34;color:var(--ink-600);margin:14px 0 0}
+.stat--m .val{font-size:64px}
+.stat--s .val{font-size:48px}
+.stat--s .lab{font-size:30px}
+.stat--s .note{font-size:24px}
+.on-dark .stat .val,.on-dark .stat .lab,.on-dark .stat .note{color:#fff}
+.stat .val .dir{color:var(--wwt-red);font-size:.5em;vertical-align:.25em;margin-left:.08em}
+
+/* chips */
+.chip{display:inline-block;font-weight:900;font-size:32px;letter-spacing:-.01em;
+      padding:18px 28px;background:#fff;color:var(--wwt-blue-93)}
+.chip--blue{background:var(--wwt-blue-93);color:#fff}
+.chip--sm{font-size:24px;padding:12px 20px}
+
+/* numbered badge */
+.badge{display:grid;place-items:center;width:96px;height:96px;font-weight:900;font-size:48px;
+       letter-spacing:-.03em;color:#fff;background:var(--grad-brand-v-93)}
+
+/* buttons / CTA */
+.btn{display:inline-flex;align-items:center;gap:14px;font-weight:700;font-size:30px;
+     letter-spacing:-.02em;padding:20px 34px;background:var(--wwt-blue);color:#fff;
+     text-decoration:none;border:0}
+.btn--ghost{background:transparent;color:var(--wwt-blue);box-shadow:inset 0 0 0 3px var(--wwt-blue)}
+.btn--ghost-w{background:transparent;color:#fff;box-shadow:inset 0 0 0 3px rgba(255,255,255,.75)}
+.btn .ar{font-size:.8em;line-height:1}
+
+/* medallion: white disc riding the process rail. Two concentric white circles, each with its
+   own drop shadow, exactly as Figma Group 14/15/16 — outer r 95.04, inner r 76.70 in a 254 box. */
+.medallion{width:249px;height:249px;background:url("{{RING}}") 0 0/249px 249px no-repeat}
+/* process chevron: the Figma Subtract path, 53.56 x 26.80, rotated -90 to point right */
+.chev{width:27px;height:53px;background:url("{{CHEVRON}}") center/53px 27px no-repeat;
+      transform:rotate(-90deg);transform-origin:center}
+/* stat numeral sitting on the process rail: 57px, between stat-m and stat-s */
+.stat-rail{font-weight:900;font-size:57px;line-height:1;letter-spacing:-.07em;margin:0;
+           color:var(--wwt-blue-93);text-align:center}
+
+/* rules */
+.rule-h{height:3px;background:var(--ink-100)}
+/* .rule-h--brand, a 240 x 6 horizontal brand gradient, was RETIRED at v4.8 by direction.
+   It was never intended as an element. It had drifted into the component gallery, into
+   recipe 10, into the GTM deck and into three test decks, and on one of those it was
+   placed inside a gradient panel where it could not read against its own ground. Do not
+   reintroduce it: lint_source.py fails any reference to the class. Where a label needs
+   separating from its supporting copy, the copy sits under the label with the spacing
+   scale doing the work. See REG-47. */
+.rule-v{width:2px;background:var(--ink-100)}
+.rule-v--w{background:rgba(255,255,255,.35)}
+
+/* bullets */
+ul.b{list-style:none;margin:0;padding:0}
+ul.b li{position:relative;padding:0 0 22px 40px;font-size:28px;line-height:1.32;color:var(--ink-500)}
+ul.b li:last-child{padding-bottom:0}
+ul.b li::before{content:"";position:absolute;left:6px;top:12px;width:14px;height:14px;
+                border-radius:50%;background:var(--wwt-blue)}
+.on-dark ul.b li{color:rgba(255,255,255,.86)}
+.on-dark ul.b li::before{background:#fff}
+
+/* -------------------------------------------------------------------------
+   ICONS. 497 marks from Blue Steel 3.0, Figma node 87131:514, recorded in
+   assets/icons/manifest.json. Every one is a 16-unit viewBox with its ink
+   centred, so a size class is the only thing that sets scale.
+
+   THE ICON INHERITS ITS INK. 422 of the 429 universal marks are monochrome and
+   painted with `currentColor`, so one file works on the light surface and on
+   the dark emphasis ground. Set `color`, never `fill`. The seven multi-colour
+   marks ignore this and keep their own palette, which is why a coloured icon
+   cannot go on the dark ground.
+
+   THE LADDER IS FIXED. These five sizes, nothing between them. They are the
+   sizes the deck work actually needs: 96 anchors a card, 64 heads a column, 48
+   sits in a list, 32 pairs with a label, 24 runs inline with body copy. An
+   arbitrary size is how a set of icons stops looking like a set.
+
+   NOTHING BELOW 24px. At 1.1px line weight on a 16 grid, a mark under 24px on
+   a 1920 canvas is a smudge at the back of a room. ICO-04 fails it. */
+.ico{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
+     color:var(--ink-800);line-height:0}
+.ico svg{width:100%;height:100%;display:block}
+.ico--24{width:24px;height:24px}
+.ico--32{width:32px;height:32px}
+.ico--48{width:48px;height:48px}
+.ico--64{width:64px;height:64px}
+.ico--96{width:96px;height:96px}
+/* Variants are doubled per REG-08: equal specificity loses on source order. */
+.ico.ico--blue{color:var(--wwt-blue)}
+.ico.ico--mid{color:var(--ink-500)}
+.on-dark .ico,.ico.ico--white{color:#fff}
+
+/* feature row: dot + label + supporting copy */
+.feat{position:relative;padding-left:48px}
+.feat::before{content:"";position:absolute;left:0;top:14px;width:18px;height:18px;
+              border-radius:50%;background:var(--wwt-blue)}
+.feat h5{margin:0 0 8px;font-weight:700;font-size:36px;line-height:1.06;
+         letter-spacing:-.025em;color:var(--ink-800)}
+.feat p{margin:0;font-family:var(--font-sans);font-size:28px;line-height:1.16;color:var(--ink-500)}
+
+/* arrow motif — one per slide, maximum */
+.arrow{position:absolute;width:93px;height:93px}
+.arrow svg{width:100%;height:100%;display:block}
+/* The mark is drawn pointing up and to the right. .arrow--down mirrors it vertically so it
+   points down and to the right, which is how it sits on the cover. */
+.arrow--down{transform:scaleY(-1)}
+/* connector arrow: structural, joins steps in a process row, exempt from the one-mark rule */
+.arrow--link{position:relative}
+
+/* quote marks */
+.qmark{font-weight:900;font-size:200px;line-height:.6;color:#fff;margin:0;
+       font-family:var(--font-sans)}
+.qmark--close{transform:rotate(180deg)}
+
+/* table / matrix */
+table.deck{width:100%;border-collapse:collapse;font-size:22px}
+/* One gradient across the whole header row, not one per cell. Painting the ramp on each th
+   restarts it in every column, which reads as a set of coloured chips rather than a header. */
+table.deck thead tr{background:var(--grad-brand-h)}
+table.deck th{background:transparent;color:#fff;font-weight:700;font-size:22px;
+   letter-spacing:-.01em;text-align:left;padding:18px 20px}
+table.deck td{padding:14px 20px;border-bottom:1px solid var(--ink-100);color:var(--ink-600)}
+table.deck tbody tr:nth-child(even){background:#fff}
+table.deck tbody tr:nth-child(odd){background:#FAFAFB}
+table.deck .pill{display:inline-block;font-weight:700;font-size:22px;padding:6px 16px;
+                 background:var(--wwt-blue-93);color:#fff}
+table.deck .pill--soft{background:var(--ink-100);color:var(--ink-600)}
+
+/* device frames */
+.device{position:absolute;background:#111;box-shadow:0 30px 80px -20px rgba(0,0,0,.45)}
+.device--phone{width:300px;height:610px;border-radius:44px;padding:14px}
+.device--tab{width:760px;height:520px;border-radius:26px;padding:16px}
+.device>.scr{width:100%;height:100%;overflow:hidden;border-radius:32px;background:#fff}
+.device--tab>.scr{border-radius:12px}
+.device>.scr img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* grid overlay used only in the spec pages */
+.gridover{position:absolute;inset:0;pointer-events:none}
+.gridover .colc{position:absolute;top:0;bottom:0;width:126px;background:rgba(238,40,42,.13);
+                border-left:1px solid rgba(238,40,42,.45);border-right:1px solid rgba(238,40,42,.45)}
+.gridover .safe{position:absolute;inset:56px 72px;outline:2px dashed rgba(0,134,234,.75)}
+.gridover .lbl{position:absolute;font-family:var(--font-mono);font-size:20px;color:#EE282A;
+               font-weight:600}
+.gridover .resv{position:absolute;right:0;bottom:56px;width:240px;height:200px;
+                outline:2px dashed rgba(238,40,42,.85)}

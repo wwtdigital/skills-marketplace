@@ -11,3 +11,6 @@
 /plugins/ops/             @wwtdigital/skills-ops
 /plugins/admin/           @wwtdigital/skills-admins
 /plugins/tech/            @wwtdigital/skills-tech
+
+# Standalone plugins: owned by the team of the category they belong to
+/plugins/wwtdigital-design/  @wwtdigital/skills-presentation

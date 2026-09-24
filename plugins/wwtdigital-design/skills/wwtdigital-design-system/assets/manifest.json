@@ -1,0 +1,283 @@
+{
+ "atc-lobby": {
+  "file": "assets/photos/atc-lobby.jpg",
+  "family": "Evidence",
+  "crops": [
+   "card",
+   "band"
+  ],
+  "px": [
+   1682,
+   1010
+  ],
+  "ratio": 1.665,
+  "note": "ATC lobby with visitors",
+  "covers_bleed": false
+ },
+ "conversation": {
+  "file": "assets/photos/conversation.jpg",
+  "family": "Evidence",
+  "crops": [
+   "card",
+   "panel inset"
+  ],
+  "px": [
+   1712,
+   843
+  ],
+  "ratio": 2.031,
+  "note": "Colleagues mid-conversation",
+  "covers_bleed": false
+ },
+ "datacenter-aisle": {
+  "file": "assets/photos/datacenter-aisle.jpg",
+  "family": "Signal",
+  "crops": [
+   "half",
+   "band",
+   "card"
+  ],
+  "px": [
+   1536,
+   1024
+  ],
+  "ratio": 1.5,
+  "note": "Data center aisle, blue and red. The source image on node 1839:55. Native 1536 wide, so a 1623 crop is a 6% upscale and a full 1920 bleed is 25%. Use it at half or smaller",
+  "covers_bleed": false
+ },
+ "eyes-closed": {
+  "file": "assets/photos/eyes-closed.jpg",
+  "family": "Signal",
+  "crops": [
+   "half"
+  ],
+  "px": [
+   1920,
+   2040
+  ],
+  "ratio": 0.941,
+  "note": "Near-square. Hero left or right without recropping",
+  "covers_bleed": true
+ },
+ "gaze-rb": {
+  "file": "assets/photos/gaze-rb.jpg",
+  "family": "Signal",
+  "crops": [
+   "bleed",
+   "band"
+  ],
+  "px": [
+   2006,
+   1080
+  ],
+  "ratio": 1.857,
+  "note": "The Figma cover frame. Face right of centre, headline goes left",
+  "covers_bleed": true
+ },
+ "hq-confetti": {
+  "file": "assets/photos/hq-confetti.jpg",
+  "family": "Evidence",
+  "crops": [
+   "half",
+   "panel inset"
+  ],
+  "px": [
+   1671,
+   1114
+  ],
+  "ratio": 1.5,
+  "note": "HQ exterior. The St. Louis proof shot",
+  "covers_bleed": false
+ },
+ "keyboard": {
+  "file": "assets/photos/keyboard.jpg",
+  "family": "Evidence",
+  "crops": [
+   "band",
+   "inset"
+  ],
+  "px": [
+   1920,
+   1278
+  ],
+  "ratio": 1.502,
+  "note": "Neutral, works under any headline",
+  "covers_bleed": true
+ },
+ "neon-tall": {
+  "file": "assets/photos/neon-tall.jpg",
+  "family": "Signal",
+  "crops": [
+   "half"
+  ],
+  "px": [
+   1793,
+   3197
+  ],
+  "ratio": 0.561,
+  "note": "Tall portrait, magenta and blue",
+  "covers_bleed": false
+ },
+ "network": {
+  "file": "assets/photos/network.jpg",
+  "family": "Signal",
+  "crops": [
+   "card",
+   "inset"
+  ],
+  "px": [
+   2829,
+   1080
+  ],
+  "ratio": 2.619,
+  "note": "Reads as literal networking. Use sparingly, it dates fastest",
+  "covers_bleed": true
+ },
+ "pair-laptop": {
+  "file": "assets/photos/pair-laptop.jpg",
+  "family": "Evidence",
+  "crops": [
+   "band",
+   "bleed"
+  ],
+  "px": [
+   1798,
+   772
+  ],
+  "ratio": 2.329,
+  "note": "The default working shot",
+  "covers_bleed": false
+ },
+ "phone-street": {
+  "file": "assets/photos/phone-street.jpg",
+  "family": "Evidence",
+  "crops": [
+   "card"
+  ],
+  "px": [
+   1800,
+   1201
+  ],
+  "ratio": 1.499,
+  "note": "For device and product slides",
+  "covers_bleed": false
+ },
+ "profile-band": {
+  "file": "assets/photos/profile-band.jpg",
+  "family": "Signal",
+  "crops": [
+   "inset",
+   "band"
+  ],
+  "px": [
+   3291,
+   1080
+  ],
+  "ratio": 3.047,
+  "note": "The only frame wide enough for the inset band",
+  "covers_bleed": true
+ },
+ "profile-blue": {
+  "file": "assets/photos/profile-blue.jpg",
+  "family": "Signal",
+  "crops": [
+   "bleed",
+   "card"
+  ],
+  "px": [
+   1927,
+   1080
+  ],
+  "ratio": 1.784,
+  "note": "Faces right. Mirror rather than recrop when the layout flips",
+  "covers_bleed": true
+ },
+ "profile-wide": {
+  "file": "assets/photos/profile-wide.jpg",
+  "family": "Signal",
+  "crops": [
+   "card",
+   "inset"
+  ],
+  "px": [
+   2238,
+   1080
+  ],
+  "ratio": 2.072,
+  "note": "Native 2.07 lands on the card crop with no crop at all",
+  "covers_bleed": true
+ },
+ "team-desks": {
+  "file": "assets/photos/team-desks.jpg",
+  "family": "Evidence",
+  "crops": [
+   "band",
+   "card"
+  ],
+  "px": [
+   1800,
+   1200
+  ],
+  "ratio": 1.5,
+  "note": "Team at adjoining desks",
+  "covers_bleed": false
+ },
+ "twin-rb": {
+  "file": "assets/photos/twin-rb.jpg",
+  "family": "Signal",
+  "crops": [
+   "half",
+   "bleed"
+  ],
+  "px": [
+   1920,
+   1781
+  ],
+  "ratio": 1.078,
+  "note": "The Figma closing frame. Strongest red-blue split",
+  "covers_bleed": true
+ },
+ "upward": {
+  "file": "assets/photos/upward.jpg",
+  "family": "Signal",
+  "crops": [
+   "half"
+  ],
+  "px": [
+   1920,
+   1955
+  ],
+  "ratio": 0.982,
+  "note": "Square, subject centred, wants type beside it",
+  "covers_bleed": true
+ },
+ "wall-touch": {
+  "file": "assets/photos/wall-touch.jpg",
+  "family": "Evidence",
+  "crops": [
+   "bleed"
+  ],
+  "px": [
+   1920,
+   1081
+  ],
+  "ratio": 1.776,
+  "note": "Darkest frame in the set. The divider frame",
+  "covers_bleed": true
+ },
+ "wave-portrait": {
+  "file": "assets/photos/wave-portrait.jpg",
+  "family": "Signal",
+  "crops": [
+   "bleed",
+   "band"
+  ],
+  "px": [
+   1920,
+   1507
+  ],
+  "ratio": 1.274,
+  "note": "Portrait dissolving into red and blue waves",
+  "covers_bleed": true
+ }
+}

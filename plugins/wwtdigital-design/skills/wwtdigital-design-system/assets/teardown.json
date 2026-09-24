@@ -1,0 +1,365 @@
+{
+ "_comment": [
+  "The authored prose the teardown page asserts, as data rather than as code.",
+  "Every VALUE on the page comes from assets/tokens.json, the manifest or the",
+  "provenance map. This file carries only the sentences, so what the page claims is",
+  "auditable in one place and editable without touching the renderer.",
+  "SKILL.md governs. If a sentence here disagrees with SKILL.md, SKILL.md is right and",
+  "this file is stale."
+ ],
+ "brand": "WWTDigital",
+ "promise": "Strategy to execution, thinking and doing and everything in between.",
+ "promise_source": "the cover subhead on the system's own cover, so it is the brand's words rather than a summary of them",
+ "traits": [
+  "warm",
+  "direct",
+  "plain, no pretension",
+  "aspirational only when earned"
+ ],
+ "traits_source": "Taken verbatim from the house style, not inferred.",
+ "signature": {
+  "title": "The signature device · the emphasis clause",
+  "headline_base": "INVESTMENT IS UP.",
+  "headline_clause": "VALUE ISN'T.",
+  "rule": "Every headline carries one emphasis clause, and it is always the last two to four words. The clause steps from #1F1F1F to pure #000000 on a light ground, or to white at 72% opacity on a dark one. It is a value step, never a colour change and never a weight change. On the type ladder it is the only place &lt;em&gt; appears."
+ },
+ "arrow": {
+  "title": "The arrow is the second signature, and it is rarer",
+  "body": "A single red arrow pointing into the first line of the cover headline. One per deck, on the cover only, and its horizontal placement is recomputed per word: at 176px Black, \"AI\" overhangs its box by 2px and \"MAKE\" sits 11px inside it. Never copy an arrow's position from another cover."
+ },
+ "logo": {
+  "lead": "Two marks, and they never appear together. The full lockup takes the cover, dividers and the closing slide. The corner bug takes every interior slide.",
+  "construction_title": "Construction · measured from frame 1659:861",
+  "geometry": [
+   [
+    "artboard",
+    "1940.4 × 1092.4, normalised to 1920 × 1080 at sx 0.989487, sy 0.988649"
+   ],
+   [
+    "bug unit",
+    "275 × 286 at x 1754, y 774. Bleeds 109px off the right edge and stops 20px above the bottom, not 56"
+   ],
+   [
+    "mark",
+    "73 × 38, inset 56, 239 inside the unit. Lands 37px from the right edge and 29px from the bottom"
+   ],
+   [
+    "clip",
+    "polygon(100% 0, 100% 50.39%, 50.37% 100%, 0 100%). Band thickness 101 perpendicular, mark centroid at 47% across it"
+   ],
+   [
+    "lockup",
+    "210 × 44 at 44, 52"
+   ]
+  ],
+  "construction_note": "This geometry was reconstructed by eye once and was wrong on all four axes for three revisions. It comes from the node now.",
+  "variant_note": "The bug ships in two variants and the choice is made by measuring the plate behind it, not by reading the ground class. A light ground carries <span class=\"mono\">.bug</span> with the #F6F6F6 to #FFFFFF stripe; a gradient or photographic ground carries <span class=\"mono\">.bug--dark</span>, whose stripe is white at 22% to 9% and whose mark inverts. One recipe has a light ground with a brand wedge in that corner, which is why the class is not the test.",
+  "files": [
+   [
+    "logo-full.svg",
+    "The horizontal lockup. Cover, dividers, closing. White on dark, #1F1F1F on light"
+   ],
+   [
+    "bug-mark.svg",
+    "The mark inside the corner bug. Every interior slide"
+   ],
+   [
+    "bug-mark-white.svg",
+    "The same mark pre-inverted, for the export path where a CSS filter has no PowerPoint equivalent"
+   ],
+   [
+    "bug-intersect.svg",
+    "The stripe's clip path, baked for export"
+   ],
+   [
+    "brandx-cover.svg",
+    "The Brand X wedge pair on a cover. Bleeds off two edges on purpose"
+   ],
+   [
+    "arrow-red.svg",
+    "The cover arrow. One per deck"
+   ]
+  ],
+  "clearspace": [
+   [
+    "bug reservation",
+    "The bottom-right 200 × 160 of every interior slide stays clear"
+   ],
+   [
+    "lockup",
+    "210 × 44 on a 1920 canvas. Never scaled below it in a deck"
+   ],
+   [
+    "bleeds",
+    "Four things leave the canvas on purpose: the two Brand X wedges, the horizontal mesh at 32px right and 8px up, and the bug at 109px right"
+   ]
+  ],
+  "never": [
+   "No stretch, skew, rotation, mirror or recolour",
+   "Never both marks on one slide. The lockup and the bug are alternatives, not a set",
+   "Never the bug reconstructed as polygons in an export. Five CSS features have no PowerPoint equivalent and ship pre-rendered",
+   "Never a lockup on an interior slide, and never a bug on the cover"
+  ]
+ },
+ "color": {
+  "lead": "One blue, one purple that exists only as a gradient terminus, one red that is never a fill, and seven steps of ink. The system's colour is carried by gradients rather than by a palette.",
+  "purple_callout_title": "The purple is not a colour you may use",
+  "purple_callout": "#330072 appears only as the far stop of a gradient. There is no flat purple fill anywhere in the system, and the red is the same: it is the arrow and the stat direction mark, never a background and never type. One accent job, one red mark, one gradient surface per slide.",
+  "dark_note": "The dark ground is the one to read twice. It is <strong>not</strong> the brand gradient darkened: #1D569E and #28115C are their own measured colours, lower in chroma and much lower in luminance, which is what lets it carry white type at 7.30:1 at its lightest point. Darkening the brand gradient instead gives you something that looks close and fails.",
+  "worst_title": "The thinnest margin in the palette, and what it is not",
+  "worst_body": "Against the gradient's light stop on its own this measures 3.75:1, which fails AA. No text ever sits on that stop alone, though: type spans a range of the surface, and the validator samples the rendered backdrop rather than a hex, so white body copy at the top of a tall <span class=\"mono\">--grad-brand-v</span> panel measures 4.48:1 in situ and passes. The number to respect is the second one. Where the palette figure does bite is a SHORT element filled from the light end, a chip, a badge or a thin band, where the whole surface sits near the light stop and there is no range to fall into. At 20px or below, white on that surface needs 4.5:1 and does not have it. COL-04 catches it, measured, every time.",
+  "table_note": "WCAG 2.0 relative luminance, computed at render time from the token values. These are PALETTE ratios, flat colour against flat colour. Every ratio the validator enforces is measured from the rendered backdrop instead, at the 90th percentile for light type and the 10th for dark, because a gradient and a photograph have no single hex. Read this table for the shape of the palette, never as the number a given slide will score. \"AA large only\" means the pairing clears 3:1 and is legal at 24px regular or 18.66px bold and above."
+ },
+ "type": {
+  "faces": [
+   [
+    "Aptos Black",
+    "Every headline, every display step, every stat. A separate family, not a weight."
+   ],
+   [
+    "Aptos",
+    "Body, lede, caption, source. Bold at 700 for labels and the running header."
+   ],
+   [
+    "Aptos Serif",
+    "Bold italic, one job: the pull quote at 64px. Nothing else."
+   ]
+  ],
+  "retired_title": "Aptos ships its heavy cuts as separate families",
+  "retired_body": "<span class=\"mono\">font-family:'Aptos'; font-weight:900</span> finds nothing, and the browser fakes a bold from Bold. Every headline renders light and every width you measure is fiction. That invalidated every measurement in this system until v1.7 and hid twenty-one real widows. Aptos Narrow was removed at v2.0 by direction: the token and both files are gone, so a reference to it is a bug, not a fallback.",
+  "scale_note": "Set on a 1920 × 1080 canvas, so the steps above 76px are shown reduced to fit this page. The reduction is stated per row and the real size is the first number in the spec column. The two display steps are set <span class=\"mono\">white-space:nowrap</span> on a real slide and wrap here only because this column is narrower than 1776.",
+  "rules": [
+   "One headline per slide, three lines maximum, one emphasis clause on the last two to four words",
+   "Headlines are uppercase. Sentence case is one declared modifier, <span class=\"mono\">.t-h1--stmt</span>, measured off node 1839:55, which changes exactly three things: leading to a flat 80px, tracking to -.05em, case off",
+   "Body copy holds one size step per job. Across a deck, no more than two steps of drift",
+   "Measure caps at 1176px left-aligned and 1776px centred, measured on the rendered line rects rather than the box",
+   "A hyphenated compound near the end of a measure is wrapped in <span class=\"mono\">.nb</span>. Aptos has no U+2011, and a hyphen is its own break opportunity",
+   "A centred headline centres on 960 unless the source node genuinely sits off axis"
+  ],
+  "contexts": [
+   [
+    "cover",
+    "display1 200 over coversub 40"
+   ],
+   [
+    "divider",
+    "display2 128 with the rail at 22"
+   ],
+   [
+    "statement",
+    "h1--stmt 96 over lede 45"
+   ],
+   [
+    "content",
+    "h1 96, lede 45, body 26, source 22"
+   ],
+   [
+    "card",
+    "h3 48, body-s 24, caption 20"
+   ],
+   [
+    "data",
+    "stat value 96, label 36, note 26, source 22"
+   ]
+  ],
+  "samples": {
+   "t-display1": "MAKE A NEW WORLD HAPPEN.",
+   "t-display2": "INVESTMENT IS UP.",
+   "t-h1-lg": "EVERYONE IS BUYING AI.",
+   "t-h1": "THE AI VALUE GAP.",
+   "t-h1--stmt": "AI is only valuable when people trust it.",
+   "t-h2": "FOUR WAYS AI STALLS.",
+   "t-quote": "We proved it on their data first.",
+   "t-h3": "Run AI your people rely on.",
+   "t-lede": "Strategy to execution, and everything in between.",
+   "t-coversub": "Thinking and doing and everything in between.",
+   "t-label": "Time to first value",
+   "t-body-l": "Four hours a week, per analyst, measured over a quarter.",
+   "t-body": "We ran it against three quarters of their own ticket data.",
+   "t-body-s": "Same model, their data, no synthetic benchmark.",
+   "t-source": "Source: WWT ATC benchmark, Q2 2026",
+   "t-micro": "Proof of value",
+   "t-caption": "Measured on the rendered page, not inferred from the CSS.",
+   "eyebrow": "FORWARD DEPLOYED UNIT",
+   "stat-hero": "38%"
+  }
+ },
+ "shape": {
+  "lead": "Square by default. Two shadows, and a gradient surface gets neither.",
+  "radii": [
+   [
+    "0",
+    "the default: panels, bands, chips and badges are square"
+   ],
+   [
+    "12px",
+    "the device frame on recipe 15"
+   ],
+   [
+    "26px",
+    "the inner screen of that device"
+   ],
+   [
+    "32px",
+    "the pill on recipe 19"
+   ],
+   [
+    "44px",
+    "the CTA pill on recipe 20"
+   ],
+   [
+    "50%",
+    "the process medallion and the ring"
+   ]
+  ],
+  "radius_note": "Every non-zero radius belongs to one named component. There is no general radius token, because a panel is square.",
+  "rules": [
+   "A white panel carries <span class=\"mono\">--shadow-panel</span> and its own 40/48 inset. Text closer than 24px to a panel edge is a warning, closer than 12px a failure",
+   "A gradient panel carries no shadow. A coloured surface does not need lifting off a grey one",
+   "No grey card on a white ground. Elevation runs light-on-light, and inverting it reads as a disabled state",
+   "No panel more than 35% empty below its last line of content. An empty panel is ground, not content"
+  ],
+  "gap": "The template this page is derived from asks for an interaction signature and a working hover demo. A slide has no hover. The buttons in this system are drawn objects, not controls, and the deck ships as HTML or PPTX with no interaction layer at all. The motion section is deleted for the same reason."
+ },
+ "space": {
+  "lead": "A twelve-column grid on a fixed 1920 × 1080 canvas. Spans sum to twelve, and nothing but photography and the Brand X crosses the margin.",
+  "rhythm": [
+   [
+    "panel inset",
+    "40px vertical, 48px horizontal. The modal inset across the recipes"
+   ],
+   [
+    "card row",
+    "Three 525-wide panels on 547 centres"
+   ],
+   [
+    "eyebrow",
+    "24px, 20px of space below it, then the headline"
+   ],
+   [
+    "stat stack",
+    "value, 10px, label, 14px, note"
+   ]
+  ],
+  "note": "The nine-step scale is the spacing vocabulary. Anything between two steps is a number somebody typed."
+ },
+ "dark": {
+  "title": "The dark emphasis surface",
+  "lead": "A second ground, and a rationed one. Node 1892:32, capped at one slide in five and never two in a row.",
+  "headline_base": "WE HAVE BEEN DOING THIS",
+  "headline_clause": "LONGER THAN MOST.",
+  "note": "The ground ships as a pair: the gradient and its own mesh, <span class=\"mono\">.mesh--dark</span> at 2384px wide and offset -262px left, are one device. The emphasis clause inverts on this surface, stepping to white at 72% rather than to black, and the bug switches to its dark variant. It is an emphasis ground rather than a theme: there is no dark mode of the whole system, and a deck that runs dark throughout has no emphasis left to spend."
+ },
+ "imagery": {
+  "do_title": "The library, and how much of it to use",
+  "do": [
+   "Real people at real work: an engineer at an equipment wall, two people at one laptop, the ATC lobby. Each photograph carries its own crop list.",
+   "Holographic red-and-blue light is the house AI treatment and it is the one abstract family allowed, because it is the brand's own commissioned art rather than stock.",
+   "One in five slides carries a photograph at a real crop, and never more than six slides in a row without one. IMG-05 and IMG-06 fail a deck that drops below it.",
+   "Type over a photograph carries a measured scrim. The ratio is sampled from the rendered backdrop at the 90th percentile, never inferred from the CSS."
+  ],
+  "never": [
+   "No crop outside the ones in the manifest. A new crop is a new ratio nobody measured.",
+   "No photograph used above its native resolution. Three in the library carry a warning and cannot fill the crops they are listed for.",
+   "No type baked into an image. Everything is live and selectable, or the PPTX is a screenshot deck.",
+   "No mesh inside a panel, a card, a media box or a band. Background only, and a direct child of the slide."
+  ],
+  "mesh_note": "The real vector, all 882 diamond paths, windowed onto the middle of the artwork. The first attempt at this specimen took the first 150 paths and rendered an empty box, which is the whole point of the variant rule: the fade to transparent at both ends is <em>baked into the artwork in absolute page coordinates</em>, so the paths at the top-left of the file are genuinely invisible. That is why the same node exported from three positions returns three byte-identical files, and why the variant has to match the placement rather than the filename. Half-drop tessellation, one lattice period 53.528px.",
+  "mesh_variants": [
+   [
+    ".mesh--diag",
+    "1205 × 1080",
+    "left:0 only. Left-justified content"
+   ],
+   [
+    ".mesh--center",
+    "1920 × 1080",
+    "The extended asset, one lattice period wider. Centred content"
+   ],
+   [
+    ".mesh--h",
+    "1182 × 1080",
+    "Right-anchored with a 32px bleed and 8px up"
+   ],
+   [
+    ".mesh--r",
+    "1192 × 1068",
+    "left:728, for a right-weighted composition"
+   ],
+   [
+    ".mesh--dark",
+    "2384 × 1080",
+    "left:-262. Pairs with the dark ground and only with it"
+   ]
+  ],
+  "mesh_footer": "Opacity .11, and the blend is plus-lighter against the page surface. Half the recipes carry a mesh; every light-ground content slide carries some background device, and a deck that carries none is not using the system, it is using the grid."
+ },
+ "voice": {
+  "lead": "Warm and direct. Blue-collar rather than boardroom. Aspirational only where it has been earned, and never performed.",
+  "use": "Their nouns",
+  "use_list": "ticket, analyst, quarter, shop floor, procurement",
+  "avoid": "Not ours",
+  "avoid_list": "leverage, transform, seamless, robust, synergy, cutting-edge, game-changing, AI-powered as a bare adjective",
+  "emdash": "<strong>No em dashes anywhere.</strong> A comma, or two sentences. It applies to slide copy exactly as it applies to a memo, and it is the rule most often broken by whoever is drafting fast.",
+  "headlines": [
+   "Everyone is buying AI. <strong>Fewer than 1 in 4 is getting paid back.</strong>",
+   "Investment is up. <strong>Value isn't.</strong>",
+   "See it work on your data <strong>before you commit.</strong>",
+   "AI is only valuable when <strong>people trust it.</strong>"
+  ],
+  "headline_note": "Two beats, the second one shorter, and the emphasis clause carries the payoff. Every claim gets a number or a name: \"saves time\" is banned, \"four hours a week per analyst\" is the standard.",
+  "proof_note": "Counted from the system at render time. These are facts about the system rather than client-facing proof numbers: the brand's verified claims live in each deck's source material and none are hard-coded here."
+ },
+ "hard_rules": [
+  [
+   "Never retype a value",
+   "Every number in the system was measured off a Figma node. A value typed from memory is a value that has drifted."
+  ],
+  [
+   "Nothing is correct because it looks correct",
+   "A headline at 1.16:1, a logo wrong on four axes, twenty-one widows and a whole deck in a substituted typeface all passed visual review first."
+  ],
+  [
+   "No design is bad design",
+   "An empty page is a defect in the same way an overfull one is, and it is the more common one. Ninety-one slides once passed with 8% median coverage."
+  ],
+  [
+   "One background device per slide",
+   "One accent job, one red mark, one gradient surface, one background device. Two devices on a page is two arguments."
+  ],
+  [
+   "The mesh is background only",
+   "Nested in a panel its plus-lighter blend composites against the panel fill instead of the page, and the PPTX path drops it entirely."
+  ],
+  [
+   "The dark ground is capped at one slide in five",
+   "It is an emphasis ground. A deck where every page shouts has no emphasis left, and two dark slides in a row are emphatic against nothing."
+  ],
+  [
+   "Margins at 72px",
+   "Nothing but photography and the Brand X crosses them. Spans sum to twelve, no orphan columns."
+  ],
+  [
+   "Contrast is measured, never assumed",
+   "Sampled from the rendered backdrop on every type-over-image and type-over-gradient pairing. WCAG 2.0 AA is the floor."
+  ],
+  [
+   "No em dashes in any WWT prose",
+   "House style. A comma or two sentences. It applies to slide copy as much as to a memo."
+  ]
+ ],
+ "gaps": [
+  [
+   "Positioning",
+   "This system has no positioning work behind it. Nobody has written down where WWTDigital sits between any two poles, so the identity section states the promise and the traits and stops. Inventing axes would put a guess into everything downstream."
+  ],
+  [
+   "Motion",
+   "A 1920 × 1080 static page has no durations and no easings. If the system ever ships an animated export, this is the section that has to be written first."
+  ],
+  [
+   "off-grid",
+   "The one unchecked exemption in the rule set. It excuses an element from the margin and centring rules on the claim that the Figma node genuinely sits off the grid, which is a fact about the source the validator cannot see. Twelve of the twenty recipes use it legitimately, so a ceiling on it would fail correct work."
+  ]
+ ]
+}

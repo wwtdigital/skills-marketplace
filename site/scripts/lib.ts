@@ -9,7 +9,8 @@ import type { Catalog, McpServer } from "../lib/catalog.ts";
 
 export const ROOT = path.resolve(import.meta.dirname, "../..");
 export const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-// One plugin per category; a skill's metadata.category must name the plugin it lives in.
+// One bundle plugin per category, plus standalone plugins that declare a category in their
+// marketplace entry. A skill's metadata.category must match the category of the plugin it's in.
 export const CATEGORIES = ["presentation", "research", "ops", "admin", "tech"];
 export const STATUSES = ["beta", "draft", "stable"];
 // Changes to these don't alter what Claude loads, so they don't count as a change needing a bump.

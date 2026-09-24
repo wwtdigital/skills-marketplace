@@ -1,7 +1,7 @@
 {
   "name": "wwtdigital",
   "description": "WWTDigital's shared catalog of Claude skills, grouped by category: presentation, research, ops, admin and tech. Install the bundles you need, or browse and download individual skills at the marketplace site.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "owner": {
     "name": "WWTDigital",
     "url": "https://github.com/wwtdigital"
@@ -23,6 +23,24 @@
         "documents",
         "writing",
         "brand"
+      ],
+      "author": {
+        "name": "WWTDigital"
+      }
+    },
+    {
+      "name": "wwtdigital-design",
+      "displayName": "WWTDigital Design System",
+      "source": "./plugins/wwtdigital-design",
+      "description": "The WWT deck design system: build and validate WWT-branded slides as HTML and PowerPoint. Opt-in, separate from the Presentation bundle because it adds a save hook and the Figma MCP server.",
+      "category": "presentation",
+      "tags": [
+        "presentation",
+        "decks",
+        "design-system",
+        "pptx",
+        "brand",
+        "figma"
       ],
       "author": {
         "name": "WWTDigital"

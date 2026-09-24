@@ -24,7 +24,10 @@ const SECRET_PATTERNS = [
   /AKIA[0-9A-Z]{16}/, // AWS
   /-----BEGIN [A-Z ]*PRIVATE KEY-----/,
 ];
-const BINARY = new Set([".png", ".jpg", ".jpeg", ".gif", ".pdf", ".pptx", ".docx", ".xlsx", ".zip"]);
+const BINARY = new Set([
+  ".png", ".jpg", ".jpeg", ".gif", ".webp", ".pdf", ".pptx", ".docx", ".xlsx", ".zip",
+  ".woff", ".woff2", ".ttf", ".otf",
+]);
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -61,13 +64,18 @@ function checkPlugin(entry: MarketplaceEntry) {
   checkMcp(n, pdir);
   if (!existsSync(path.join(pdir, "README.md"))) warn(`plugin '${n}': no README.md`);
   if (!entry.description) warn(`plugin '${n}': no description in marketplace entry`);
+  // A plugin is either a category bundle (named for its category) or a standalone opt-in plugin
+  // that belongs to one, for skills that bring hooks or MCP servers not everyone in the category wants.
+  const category = pluginCategory(entry);
+  if (!CATEGORIES.includes(n) && !CATEGORIES.includes(category))
+    err(`plugin '${n}': a standalone plugin needs a marketplace 'category' from ${list(CATEGORIES)} (got '${category}')`);
 
   const skills = iterSkills(entry);
   if (!skills.length) notes.push(`plugin '${n}': contains no skills yet`); // expected for new categories
   for (const sk of skills) {
     for (const p of sk.problems) err(`${n}/${sk.name}: ${p}`);
     if (sk.problems.length && !sk.description) continue;
-    checkSkill(n, sk);
+    checkSkill(n, category, sk);
   }
 }
 
@@ -102,7 +110,13 @@ function checkMcp(plugin: string, pdir: string) {
   }
 }
 
-function checkSkill(plugin: string, sk: SkillSource) {
+// The category a plugin's skills must declare: its own name for a category bundle, otherwise the
+// marketplace entry's `category`.
+function pluginCategory(entry: MarketplaceEntry): string {
+  return CATEGORIES.includes(entry.name) ? entry.name : String(entry.category ?? "");
+}
+
+function checkSkill(plugin: string, category: string, sk: SkillSource) {
   const tag = `${plugin}/${sk.name}`;
   if (!KEBAB.test(sk.name)) err(`${tag}: skill folder must be kebab-case`);
   const d = sk.description;
@@ -110,7 +124,7 @@ function checkSkill(plugin: string, sk: SkillSource) {
   else {
     if (d.length > 1024) err(`${tag}: description is ${d.length} chars (max 1024)`);
     if (d.length < 80) warn(`${tag}: description is short (${d.length} chars) — say when to use it, with trigger phrases`);
-    if (!/\buse (this |it )?when\b|\btrigger/i.test(d)) warn(`${tag}: description doesn't say when to use it ('Use when …')`);
+    if (!/\buse (this |it )?when(ever)?\b|\btrigger/i.test(d)) warn(`${tag}: description doesn't say when to use it ('Use when …')`);
   }
   const md = sk.metadata;
   if (!Object.keys(md).length) warn(`${tag}: no metadata block (owner, category, status)`);
@@ -118,7 +132,8 @@ function checkSkill(plugin: string, sk: SkillSource) {
     const owner = String(md.owner ?? "");
     if (!owner.endsWith("@wwt.com")) err(`${tag}: metadata.owner must be a @wwt.com address (got '${owner}')`);
     if (!CATEGORIES.includes(md.category as string)) err(`${tag}: metadata.category must be one of ${list(CATEGORIES)}`);
-    else if (md.category !== plugin) err(`${tag}: metadata.category is '${md.category}' but the skill is in the '${plugin}' plugin`);
+    else if (md.category !== category)
+      err(`${tag}: metadata.category is '${md.category}' but the '${plugin}' plugin belongs to '${category}'`);
     if ("discipline" in md) err(`${tag}: metadata.discipline was replaced by metadata.category`);
     if (!STATUSES.includes(md.status as string)) err(`${tag}: metadata.status must be one of ${list(STATUSES)}`);
     if (!("version" in md)) warn(`${tag}: metadata.version missing`);
