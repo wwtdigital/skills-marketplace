@@ -63,8 +63,15 @@ npm run catalog -- --check             # dry-run the catalog build
 claude plugin validate ..              # official validator (not run automatically)
 ```
 
-There is no test suite. `validate.ts` is the lint/test gate, and it always checks the whole repo
-(you can't point it at one skill).
+`validate.ts` is the lint gate, and it always checks the whole repo (you can't point it at one skill).
+Trigger tests are `claude plugin eval` cases in `plugins/<plugin>/evals/<skill>-should-N/` and
+`<skill>-shouldnt-N/` (prompt.md + a `tool_used: Skill` grader; see CONTRIBUTING "Trigger tests").
+Run from the plugin dir: `claude plugin eval . --ablation none --case '<skill>-*' --no-publish`. Each
+run is a real `claude` session on the runner's own credential (a few cents per skill), so they run
+locally, not in the Vercel build. `validate.ts` prints a NOTE for skills without them; make that a
+warning once every skill has cases. Evals ship inside the plugin (the CLI can run an installed
+copy's suite), so adding them changes the plugin hash and needs a plugin bump. `evals/results/` is
+gitignored. Only `humanizer` has cases so far (4 cases, 12/12 runs passing on 2026-09-24).
 
 Test the marketplace itself: `/plugin marketplace add ./` from the repo root, then
 `/plugin install admin@wwtdigital`.

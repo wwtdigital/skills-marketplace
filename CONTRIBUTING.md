@@ -32,7 +32,8 @@ Not sure? Pick the closest one and say so when you submit it. A reviewer will mo
    and fill in `SKILL.md` yourself, using the checklist further down this page.
 2. Zip the skill folder.
 3. Send it to the marketplace admin, scott.cullum@wwt.com, or post it in #wwtd-claude-skills.
-   Include two prompts that *should* make Claude use the skill and one that *shouldn't*.
+   Include two prompts that *should* make Claude use the skill and one that *shouldn't*
+   (a maintainer turns them into [trigger tests](#trigger-tests)).
    A maintainer adds it to the repo and credits you as the owner.
 
 ## With git
@@ -50,8 +51,36 @@ Not sure? Pick the closest one and say so when you submit it. A reviewer will mo
    npm ci --prefix site           # once
    npm --prefix site run validate -- --strict --base origin/main
    ```
-6. Open a PR with the test prompts. The Vercel preview build is the CI: it fails if anything
-   doesn't pass the checks.
+6. Add the trigger tests (see [Trigger tests](#trigger-tests)) and run them once.
+7. Open a PR. The Vercel preview build is the CI: it fails if anything doesn't pass the checks.
+
+## Trigger tests
+
+The description is the only thing Claude reads when deciding whether to use a skill, so every
+skill gets tests that check it fires on the right requests and stays quiet on the wrong ones.
+They are `claude plugin eval` cases in the plugin's `evals/` folder, one folder per case:
+
+```
+plugins/<category>/evals/
+  <skill>-should-1/prompt.md          a request a person would type, never naming the skill
+  <skill>-should-1/graders/skill-fired.md
+  <skill>-should-2/...
+  <skill>-shouldnt-1/prompt.md        a nearby request the skill is NOT for
+  <skill>-shouldnt-1/graders/skill-not-fired.md
+```
+
+Copy the `humanizer-*` cases in `plugins/presentation/evals/` and change the prompts and the
+skill name in the grader. Run them from the plugin folder; each case runs three times on your
+own Claude account and costs a few cents:
+
+```
+claude plugin eval . --ablation none --case '<skill>-*' --no-publish
+```
+
+Every case must score 1.00. If a should-case fails, the description needs clearer trigger
+phrases; if a shouldn't-case fails, it needs a sharper not-for line. Two should-cases and one
+shouldn't-case is the minimum; the build notes which skills are missing them. Results land in
+`evals/results/`, which is gitignored.
 
 ## Adding an MCP server
 
@@ -84,8 +113,7 @@ context, so only add servers most people in that category will use.
 
 - **Repeatable.** Someone will run it more than once. One-off analyses are not skills.
 - **Triggers cleanly.** The description makes it obvious when Claude should and
-  shouldn't reach for it. Reviewers test with prompts that *should* and *shouldn't*
-  trigger it.
+  shouldn't reach for it, and the trigger tests prove it.
 - **Handles a missing connector.** If it needs Notion, Slack or another connector, its first
   step checks for it and tells the person how to connect it, instead of failing vaguely. The
   build checks for this, and the site shows "Needs Notion" on the skill.
@@ -134,7 +162,7 @@ and to `.github/CODEOWNERS`.
 ## Review checklist (for owners)
 
 - [ ] Description answers what / when / not-for, with trigger phrases
-- [ ] Tested with two prompts that should trigger, one that shouldn't
+- [ ] Trigger tests added under `evals/` and passing (`claude plugin eval`)
 - [ ] No secrets, client data or PII anywhere in the folder
 - [ ] Verification step present
 - [ ] Site build passes (the Vercel preview, or `npm --prefix site run build`)

@@ -6,8 +6,22 @@ metadata:
   category: ops
   status: beta
   connectors: [notion]
-  version: 1.1.0
+  version: 1.1.1
 ---
+
+## Contacts (roles, not names)
+
+Everything below escalates to a role. Who holds it is written here once, so it is one edit
+when the role changes hands or the person is away:
+
+| Role | Currently | Covers |
+|---|---|---|
+| BizOps lead | Staci Powell | General onboarding content, the Onboarding articles in Notion, anything unmatched |
+| Discipline lead | Varies by team (named on each Disciplines page) | Team-specific pages and processes |
+| The person's manager | Whoever that is | Anything personal: pay, benefits, leave, their own onboarding board |
+
+If this table looks stale (the BizOps lead has changed), still point to the role, say the
+table may be out of date, and suggest the manager as the fallback.
 
 ## What this does
 
@@ -36,11 +50,11 @@ Then stop. Glean is optional: if it isn't connected, open or cite the SharePoint
 2. Fetch the matched article page(s) in full with `notion-fetch` — don't answer from search snippets alone.
 3. If the question is purely a term/acronym lookup (e.g. "what does SSA mean", "what's a DPM", "what is a NERF"), check the Digital Terms & Acronyms glossary article first — it's built for exactly this and is faster than searching the narrative articles. For general company-wide terms not specific to Digital, point to WWT Terms on United instead (linked from the glossary) rather than guessing.
 4. If the question is specific to a particular discipline/team rather than general onboarding (team-specific tools, processes, or resources), use the Discipline-specific reference section below instead of guessing from the general articles.
-5. Check the article's `Status` property. If it's "Needs Update" or "Draft" rather than "Published", say so in your answer and suggest confirming with Staci Powell (BizOps) rather than presenting it as current.
+5. Check the article's `Status` property. If it's "Needs Update" or "Draft" rather than "Published", say so in your answer and suggest confirming with the BizOps lead (see Contacts) rather than presenting it as current.
 6. Answer from the article's content first. If the question needs more detail than the Notion summary gives, open the SharePoint page in its "Source" callout too (Glean search with an `o365sharepoint` app filter, or fetch the URL directly) rather than guessing at what's on it.
 7. Cite both the Notion article and the SharePoint source link you used (the glossary article and discipline pages are Notion-only — no SharePoint source to cite there).
 8. Before replying, check that every fact in your answer (numbers, deadlines, contacts, codes) appears in a page you fetched in this conversation. Drop or flag anything that doesn't.
-9. If nothing in the Onboarding category or Disciplines database answers the question, don't guess — say so plainly and point to the Global Service Desk / ServiceNow ticket portal for IT-flavored questions, or suggest asking Staci Powell or the person's manager. Never guess on pay, benefits, or policy specifics.
+9. If nothing in the Onboarding category or Disciplines database answers the question, don't guess — say so plainly and point to the Global Service Desk / ServiceNow ticket portal for IT-flavored questions, or suggest asking the BizOps lead or the person's manager (see Contacts). Never guess on pay, benefits, or policy specifics.
 
 ## Discipline-specific reference (ask which team, then fetch live)
 
@@ -50,7 +64,7 @@ Beyond the six general onboarding articles below, WWTDigital maintains a separat
 - Known discipline pages (as of September 2026 — query the database directly rather than assuming this list is complete, since leads can add new ones): Digital Operations, Product, COE, CSD, DPMD, Design Studio, Tech
 - Welcome & Team Overview also links out to this database directly, for anyone browsing Notion rather than asking this skill.
 
-If the person's discipline/team isn't already clear from context, ask before answering — don't guess which page applies. Once you know the team, fetch that page live (never reuse cached content from a previous run) and answer from it. If a discipline doesn't have a page yet, or its page doesn't cover the question, say so plainly and fall back to the general onboarding articles or suggest asking Staci Powell / the person's manager.
+If the person's discipline/team isn't already clear from context, ask before answering — don't guess which page applies. Once you know the team, fetch that page live (never reuse cached content from a previous run) and answer from it. If a discipline doesn't have a page yet, or its page doesn't cover the question, say so plainly and fall back to the general onboarding articles or suggest asking the discipline lead or the person's manager (see Contacts).
 
 ## What this is NOT for
 
@@ -74,7 +88,7 @@ If the person's discipline/team isn't already clear from context, ask before ans
 
 ## Known gaps (confirmed as of September 2026 — check again, this list will go stale)
 
-Dress code and remote-work policy are not covered in these six articles. There's no buddy/mentor program at the general Digital level — some individual teams informally pair new hires with a buddy, others don't, so don't assume one exists or point someone to it; if asked, say it varies by team and suggest checking with their manager. There's no orientation video for Notion itself yet (MyTime, SharePoint, and Slack have one each) — though Tools & Systems now links out to the Notion Training page for a 101 recording. The glossary's WWTHC entry flags its literal expansion as unconfirmed. Discipline pages vary in completeness since each is owned by that team's leads, not BizOps — don't assume a discipline page is exhaustive just because it exists. If asked about any of these, say so plainly, check whether the answer lives elsewhere in Notion or SharePoint before assuming it's missing entirely, and suggest to the user that this looks like a gap worth flagging to Staci Powell (for general onboarding content) or the discipline lead (for team-specific content).
+Dress code and remote-work policy are not covered in these six articles. There's no buddy/mentor program at the general Digital level — some individual teams informally pair new hires with a buddy, others don't, so don't assume one exists or point someone to it; if asked, say it varies by team and suggest checking with their manager. There's no orientation video for Notion itself yet (MyTime, SharePoint, and Slack have one each) — though Tools & Systems now links out to the Notion Training page for a 101 recording. The glossary's WWTHC entry flags its literal expansion as unconfirmed. Discipline pages vary in completeness since each is owned by that team's leads, not BizOps — don't assume a discipline page is exhaustive just because it exists. If asked about any of these, say so plainly, check whether the answer lives elsewhere in Notion or SharePoint before assuming it's missing entirely, and suggest to the user that this looks like a gap worth flagging to the BizOps lead (for general onboarding content) or the discipline lead (for team-specific content); see Contacts.
 
 ## Escalation defaults
 
@@ -85,7 +99,7 @@ Dress code and remote-work policy are not covered in these six articles. There's
 - Expense reports: the WWT Expenses App for US employees (see Time Entry, PTO & Payroll for the process and deadlines) or the Travel & Expense SharePoint site; non-US employees use different country-specific tools/forms.
 - Discipline/team-specific questions: the relevant discipline's page in the Disciplines database (see above), or that discipline's lead if the page doesn't cover it.
 - New people managers: point to the New Leader Program (see Continuous Learning & Professional Development) rather than guessing at manager-specific onboarding.
-- Anything else unmatched: Staci Powell (BizOps) or the person's manager — never guess on policy, pay, or benefits specifics.
+- Anything else unmatched: the BizOps lead or the person's manager (see Contacts) — never guess on policy, pay, or benefits specifics.
 
 ## Maintenance
 

@@ -48,6 +48,9 @@ production systems, invent data). Keep this short and specific.
 **Claude does:** …
 
 <!--
+Trigger tests go in the PLUGIN's evals/ folder, not here: plugins/<category>/evals/<skill>-should-1/
+etc. See the Trigger tests section of the contribution guide.
+
 Optional folders next to this file:
   scripts/      deterministic helpers Claude can run (Python/Node/shell)
   references/   long docs Claude reads on demand; keep SKILL.md itself short

@@ -8,7 +8,7 @@
 //                       site catalog (path, URL, or "auto" for the live site). Defaults to "auto" on
 //                       Vercel, whose clone has no origin/main to diff against.
 // Exit code 1 on any error.
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import {
   CATEGORIES, contentHash, git, iterSkills, KEBAB, loadMarketplace, loadMcpConfig, loadPluginManifest,
@@ -86,7 +86,19 @@ function checkPlugin(entry: MarketplaceEntry) {
     for (const p of sk.problems) err(`${n}/${sk.name}: ${p}`);
     if (sk.problems.length && !sk.description) continue;
     checkSkill(n, category, bundled, sk);
+    checkEvals(n, pdir, sk.name);
   }
+}
+
+// Trigger tests live in <plugin>/evals/<skill>-should-N/ and <skill>-shouldnt-N/ (see CONTRIBUTING),
+// run by `claude plugin eval`. A NOTE rather than a warning until every skill has them; then make it warn.
+function checkEvals(plugin: string, pdir: string, skill: string) {
+  const dir = path.join(pdir, "evals");
+  const cases = existsSync(dir) ? readdirSync(dir).filter((d) => existsSync(path.join(dir, d, "prompt.md"))) : [];
+  const should = cases.filter((c) => c.startsWith(`${skill}-should-`)).length;
+  const shouldnt = cases.filter((c) => c.startsWith(`${skill}-shouldnt-`)).length;
+  if (should < 2 || shouldnt < 1)
+    notes.push(`${plugin}/${skill}: no trigger tests yet (${should} should, ${shouldnt} shouldn't; want 2 and 1 under ${rel(dir)}/)`);
 }
 
 // MCP servers connect as soon as the plugin is installed, for everyone who installs it, and the

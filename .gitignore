@@ -14,3 +14,6 @@ site/public/marketplace.json
 
 # Claude desktop app agent worktrees
 .claude/worktrees/
+
+# claude plugin eval output
+plugins/*/evals/results/

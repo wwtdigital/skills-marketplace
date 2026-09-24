@@ -15,7 +15,7 @@ metadata:
   category: admin
   status: beta
   connectors: []
-  version: 0.2.0
+  version: 0.2.1
 ---
 
 # WWTDigital Skill Author
@@ -105,9 +105,15 @@ Ask for these one at a time, before writing anything:
     the plugin get nothing until it rises, and the build fails if the plugin changed without
     it. The skill's `metadata.version` is informational (the site shows it). A **new skill**
     needs the plugin bump only. A **change to an existing skill** needs both.
-13. Draft the PR from `.github/PULL_REQUEST_TEMPLATE.md`, with two prompts that should
-    trigger the skill and one that shouldn't. The Vercel preview build is the CI. Leave the
-    commit, push and PR creation to the contributor.
+13. Add the trigger tests: copy the `humanizer-*` case folders from
+    `plugins/presentation/evals/` into `plugins/<category>/evals/` as `<skill>-should-1`,
+    `<skill>-should-2` and `<skill>-shouldnt-1`, rewrite each `prompt.md` as something a
+    person would type without naming the skill, and change the skill name in each grader.
+    Run them from the plugin folder (`claude plugin eval . --ablation none --case '<skill>-*'
+    --no-publish`; a few cents on the contributor's account) and fix the description until
+    every case scores 1.00.
+14. Draft the PR from `.github/PULL_REQUEST_TEMPLATE.md`, noting the eval result. The Vercel
+    preview build is the CI. Leave the commit, push and PR creation to the contributor.
 
 ### B. No checkout
 
