@@ -11,3 +11,6 @@ site/.env*
 site/public/data/
 site/public/downloads/
 site/public/marketplace.json
+
+# Claude desktop app agent worktrees
+.claude/worktrees/

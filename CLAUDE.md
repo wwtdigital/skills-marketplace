@@ -42,8 +42,9 @@ site/scripts/lib.ts               shared loaders (marketplace, manifests, SKILL.
 Plugins: one bundle per category (`presentation`, `research`, `ops`, `admin`, `tech`), plus
 standalone opt-in plugins that belong to a category but install separately because they bring
 hooks or MCP servers most of that category won't want. Skills so far: `admin` has
-`wwt-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer`; `ops` has
-`wwtdigital-onboarding` (Staci Powell); the standalone
+`wwtdigital-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer` (Toby Gerber)
+and `publish-page` (wraps the bundled artifact-publisher MCP); `research` has `brand-scan` (wraps the
+bundled brandscanner MCP); `ops` has `wwtdigital-onboarding` (Staci Powell); the standalone
 `wwtdigital-deck-design` (category `presentation`, from Toby Gerber) has `wwtdigital-deck-design` and
 `wwtdigital-deck-design-doctor`. The category plugins replaced the original discipline plugins on
 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
@@ -70,7 +71,11 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 
 ## Conventions
 
-- Skill folder name == frontmatter `name`, kebab-case. Prefix `wwt-` only for WWT-brand-specific skills.
+- Skill folder name == frontmatter `name`, kebab-case. Prefix `wwtdigital-` only for WWT-brand-specific
+  skills (WWT templates, process, vocabulary); general-purpose skills get no prefix. (`wwt-skill-author`
+  was renamed `wwtdigital-skill-author` 2026-09-24; there are no redirects for skill pages, so a rename
+  retires `/skills/<old>` and `downloads/<old>.skill`, and the bump checkers treat the new name as a
+  new skill.)
 - Frontmatter `metadata`: `owner` (@wwt.com), `category`, `status` (draft|beta|stable),
   `connectors` (list), `version`. Validator enforces owner/category/status.
 - Description: what + when (with trigger phrases) + not-for. ≤1024 chars. This is the only

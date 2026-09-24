@@ -56,7 +56,9 @@ Not sure? Pick the closest one and say so when you submit it. A reviewer will mo
 ## Adding an MCP server
 
 A category plugin can also bring the team's MCP servers: installing the bundle connects them.
-Today `presentation` includes the artifact publisher and `research` includes brandscanner.
+Today `presentation` includes the artifact publisher (used by the `publish-page` skill) and
+`research` includes brandscanner (used by `brand-scan`). A bundled server should come with a
+skill that says what to do with it; tools with no instructions are hard to use well.
 
 To add one, send the server's name, URL and what it does to the marketplace admin (no git), or
 add it to `plugins/<category>/.mcp.json` yourself and list it in that plugin's README:
