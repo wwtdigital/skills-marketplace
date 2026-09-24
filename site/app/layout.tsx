@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
+import { Analytics } from "@vercel/analytics/next";
 import { REPO_URL } from "@/lib/catalog";
 import { loadCatalog } from "@/lib/load";
 import "./globals.css";
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
         {children}
+        <Analytics />
       </body>
     </html>
   );
