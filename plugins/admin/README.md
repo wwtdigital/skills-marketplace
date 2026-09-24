@@ -14,8 +14,8 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 
 | Skill | What it does |
 | --- | --- |
-| `wwt-skill-author` | Turn a workflow into a marketplace skill, run the checks, draft the PR |
-| `marketplace-smoke-test` | Confirm the marketplace install works end to end (draft; test skill) |
+| `wwtdigital-skill-author` | Turn a workflow into a marketplace skill, with or without a git checkout: writes it in the marketplace format, runs the checks (or walks them by hand), drafts the PR or the zip-and-send handoff |
+| `marketplace-smoke-test` | Confirm the marketplace install works end to end: install type, skill and plugin versions, read from its own files (nothing to run) |
 
 ## Owners
 
