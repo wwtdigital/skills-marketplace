@@ -67,3 +67,13 @@ export const asset = (p: string) => "/" + p.replace(/^\/+/, "");
 // Fixed locale + UTC so the static HTML doesn't depend on the build machine.
 export const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" });
+
+// Connectors a skill needs. Ones the plugin bundles in .mcp.json connect on install (sign in once
+// with /mcp); anything else the person has to connect in the Claude app before the skill works.
+const CONNECTOR_NAMES: Record<string, string> = {
+  notion: "Notion", figma: "Figma", slack: "Slack", sharepoint: "SharePoint", glean: "Glean",
+  "microsoft-365": "Microsoft 365", outlook: "Outlook", jira: "Jira", confluence: "Confluence",
+};
+export const connectorName = (c: string) =>
+  CONNECTOR_NAMES[c] ?? c.replace(/(^|-)(\w)/g, (_, dash: string, ch: string) => (dash ? " " : "") + ch.toUpperCase());
+export const isBundled = (p: Plugin, c: string) => p.mcp_servers.some((m) => m.name === c);

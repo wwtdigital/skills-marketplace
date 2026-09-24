@@ -24,6 +24,10 @@ const SECRET_PATTERNS = [
   /AKIA[0-9A-Z]{16}/, // AWS
   /-----BEGIN [A-Z ]*PRIVATE KEY-----/,
 ];
+// A skill that needs a connector must say what to do when it isn't connected, or people without
+// it get an improvised failure instead of instructions.
+const MISSING_CONNECTOR = /\b(isn't|isn’t|is not|aren't|aren’t|are not|not)\s+(connected|set up)\b|\bconnector\s+(is\s+)?(missing|unavailable)\b/i;
+
 const BINARY = new Set([
   ".png", ".jpg", ".jpeg", ".gif", ".webp", ".pdf", ".pptx", ".docx", ".xlsx", ".zip",
   ".woff", ".woff2", ".ttf", ".otf",
@@ -70,12 +74,18 @@ function checkPlugin(entry: MarketplaceEntry) {
   if (!CATEGORIES.includes(n) && !CATEGORIES.includes(category))
     err(`plugin '${n}': a standalone plugin needs a marketplace 'category' from ${list(CATEGORIES)} (got '${category}')`);
 
+  let bundled: string[] = [];
+  try {
+    bundled = Object.keys(loadMcpConfig(pdir) ?? {});
+  } catch {
+    // reported by checkMcp
+  }
   const skills = iterSkills(entry);
   if (!skills.length) notes.push(`plugin '${n}': contains no skills yet`); // expected for new categories
   for (const sk of skills) {
     for (const p of sk.problems) err(`${n}/${sk.name}: ${p}`);
     if (sk.problems.length && !sk.description) continue;
-    checkSkill(n, category, sk);
+    checkSkill(n, category, bundled, sk);
   }
 }
 
@@ -116,7 +126,7 @@ function pluginCategory(entry: MarketplaceEntry): string {
   return CATEGORIES.includes(entry.name) ? entry.name : String(entry.category ?? "");
 }
 
-function checkSkill(plugin: string, category: string, sk: SkillSource) {
+function checkSkill(plugin: string, category: string, bundled: string[], sk: SkillSource) {
   const tag = `${plugin}/${sk.name}`;
   if (!KEBAB.test(sk.name)) err(`${tag}: skill folder must be kebab-case`);
   const d = sk.description;
@@ -137,6 +147,11 @@ function checkSkill(plugin: string, category: string, sk: SkillSource) {
     if ("discipline" in md) err(`${tag}: metadata.discipline was replaced by metadata.category`);
     if (!STATUSES.includes(md.status as string)) err(`${tag}: metadata.status must be one of ${list(STATUSES)}`);
     if (!("version" in md)) warn(`${tag}: metadata.version missing`);
+    // Connectors the plugin bundles in .mcp.json connect on install; anything else the person has to add.
+    const external = (Array.isArray(md.connectors) ? md.connectors.map(String) : []).filter((c) => !bundled.includes(c));
+    if (external.length && !MISSING_CONNECTOR.test(sk.body))
+      warn(`${tag}: needs ${external.join(", ")} but never says what to do when it isn't connected — ` +
+        "add a first step that checks for its tools and tells the person how to connect it");
   }
   const lines = sk.body.split("\n").length - 1;
   if (lines > 250) warn(`${tag}: SKILL.md body is ${lines} lines — move detail into references/`);

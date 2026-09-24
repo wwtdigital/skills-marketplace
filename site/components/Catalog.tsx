@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowUpRightIcon, DownloadSimpleIcon, MagnifyingGlassIcon, PlugsConnectedIcon } from "@phosphor-icons/react";
-import { asset, type McpServer, type Plugin, type Skill } from "@/lib/catalog";
+import { asset, connectorName, isBundled, type McpServer, type Plugin, type Skill } from "@/lib/catalog";
 import { CopyCmd } from "./CopyCmd";
 
 const STATUSES = ["stable", "beta", "draft"] as const;
@@ -115,7 +115,7 @@ export function Catalog({ plugins }: { plugins: Plugin[] }) {
               {skills.length > 0 && (
                 <div className="skills">
                   {skills.map((s) => (
-                    <SkillCard key={s.name} skill={s} />
+                    <SkillCard key={s.name} skill={s} plugin={p} />
                   ))}
                 </div>
               )}
@@ -168,7 +168,7 @@ function McpBlock({ servers }: { servers: McpServer[] }) {
   );
 }
 
-function SkillCard({ skill: s }: { skill: Skill }) {
+function SkillCard({ skill: s, plugin: p }: { skill: Skill; plugin: Plugin }) {
   return (
     <article className="skill">
       <div className="top">
@@ -181,8 +181,8 @@ function SkillCard({ skill: s }: { skill: Skill }) {
       <div className="foot">
         {s.version && <span className="mono">v{s.version}</span>}
         {s.connectors.map((c) => (
-          <span key={c} className="tag">
-            {c}
+          <span key={c} className="tag" title={isBundled(p, c) ? "Connects when you install the plugin" : "Connect it in the Claude app first"}>
+            {isBundled(p, c) ? `${connectorName(c)} included` : `Needs ${connectorName(c)}`}
           </span>
         ))}
         <a className="btn btn-sm" href={asset(s.download)} download aria-label={`Download ${s.name}.skill`}>

@@ -5,7 +5,7 @@ import { ArrowUpRightIcon, CaretRightIcon, DownloadSimpleIcon } from "@phosphor-
 import { CopyCmd } from "@/components/CopyCmd";
 import { Footer } from "@/components/Footer";
 import { Prose } from "@/components/Prose";
-import { asset, formatDate } from "@/lib/catalog";
+import { asset, connectorName, formatDate, isBundled } from "@/lib/catalog";
 import { findSkill, loadCatalog } from "@/lib/load";
 
 type Props = { params: Promise<{ name: string }> };
@@ -28,6 +28,9 @@ export default async function SkillPage({ params }: Props) {
   if (!found) notFound();
   const { plugin: p, skill: s } = found;
   const includes = [s.has_scripts && "scripts", s.has_references && "references"].filter(Boolean).join(", ");
+  const needed = s.connectors.filter((c) => !isBundled(p, c)).map(connectorName);
+  const included = s.connectors.filter((c) => isBundled(p, c)).map(connectorName);
+  const list = (xs: string[]) => xs.join(xs.length > 2 ? ", " : " and ");
 
   return (
     <>
@@ -64,7 +67,7 @@ export default async function SkillPage({ params }: Props) {
                 {s.connectors.length
                   ? s.connectors.map((c) => (
                       <span key={c} className="tag">
-                        {c}
+                        {isBundled(p, c) ? `${connectorName(c)} included` : `Needs ${connectorName(c)}`}
                       </span>
                     ))
                   : "None"}
@@ -80,6 +83,19 @@ export default async function SkillPage({ params }: Props) {
                 </a>
               </dd>
             </dl>
+            {needed.length > 0 && (
+              <p className="aside-note">
+                <b>Connect {list(needed)} first.</b> In the Claude app, open Connectors in settings and connect{" "}
+                {needed.length > 1 ? "them" : "it"}; in Claude Code, check with <code>/mcp</code>. Without{" "}
+                {needed.length > 1 ? "them" : "it"} this skill can&apos;t do its job.
+              </p>
+            )}
+            {included.length > 0 && (
+              <p className="aside-note">
+                {list(included)} {included.length > 1 ? "connect" : "connects"} when you install the bundle. Sign in the
+                first time with <code>/mcp</code> in Claude Code, or when the Claude app asks.
+              </p>
+            )}
           </aside>
         </div>
       </main>

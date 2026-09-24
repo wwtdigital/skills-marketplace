@@ -84,6 +84,9 @@ context, so only add servers most people in that category will use.
 - **Triggers cleanly.** The description makes it obvious when Claude should and
   shouldn't reach for it. Reviewers test with prompts that *should* and *shouldn't*
   trigger it.
+- **Handles a missing connector.** If it needs Notion, Slack or another connector, its first
+  step checks for it and tells the person how to connect it, instead of failing vaguely. The
+  build checks for this, and the site shows "Needs Notion" on the skill.
 - **Verifies its own output.** The workflow includes a check step (open the file, run
   the script, recount the numbers).
 - **Safe.** No credentials, no client names or data, no irreversible actions without

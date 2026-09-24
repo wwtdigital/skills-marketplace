@@ -243,6 +243,12 @@ code, pre, .mono { font-family: var(--font-mono), ui-monospace, Menlo, monospace
 .kv dt { color: var(--muted); }
 .kv dd { margin: 0; overflow-wrap: anywhere; display: flex; gap: 6px; flex-wrap: wrap; }
 .aside-label { font-size: 13px; color: var(--muted); margin: 0 0 -10px; }
+.aside-note {
+  margin: 0; padding: 12px 14px; font-size: 13.5px; line-height: 1.5; color: var(--muted);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+}
+.aside-note b { color: var(--text); font-weight: 600; }
+.aside-note code { font-size: 12.5px; }
 .toc { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
 .toc a { color: var(--muted); text-decoration: none; padding: 5px 0 5px 12px; border-left: 1px solid var(--line); transition: color .2s var(--ease), border-color .2s var(--ease); }
 .toc a:hover { color: var(--text); border-color: var(--text); }

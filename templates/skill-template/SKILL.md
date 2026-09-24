@@ -9,7 +9,8 @@ metadata:
   owner: your-name@wwt.com
   category: presentation | research | ops | admin | tech   # must match the plugin folder it lives in
   status: draft | beta | stable
-  connectors: []          # e.g. [slack, notion, microsoft-365] — connectors this skill needs
+  connectors: []          # e.g. [slack, notion, microsoft-365] — connectors this skill needs;
+                          # if any, add a step for when one isn't connected (see Steps)
   version: 0.1.0
 ---
 
@@ -27,6 +28,9 @@ up front vs. infer or default?
 1. Numbered, concrete, in the order Claude should do them.
 2. Name the tools or connectors to use at each step.
 3. Include the verification step (check the numbers, open the file, run the test).
+4. If the skill needs a connector, make the first step check for it: if its tools aren't
+   available, tell the person how to connect it (Connectors in the Claude app's settings;
+   `/mcp` in Claude Code) and stop, rather than answering without it.
 
 ## Output
 

@@ -6,7 +6,7 @@ metadata:
   category: ops
   status: beta
   connectors: [notion]
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 ## What this does
@@ -14,6 +14,21 @@ metadata:
 Answers new-hire and early-tenure questions about WWTDigital onboarding — IT/equipment setup, tool access, benefits/payroll/time entry, PTO, expense reports, team structure, culture/ways-of-working, the 30/60/90-day plan, Digital-specific acronyms/vocabulary, discipline/team-specific reference, and learning & development — by pulling live from the Digital Engagement Wiki's Onboarding articles in Notion, the separate Disciplines database for team-specific content, and the SharePoint pages those articles source from.
 
 The content lives in Notion and SharePoint, not in this skill. Facts like phone numbers, deadlines, time codes, and team/org names can and do change (each article tracks its own Last Reviewed date), so always fetch live rather than relying on anything memorized from a previous run of this skill.
+
+## Before the first answer: check the Notion connector
+
+This skill can't answer anything without Notion. If no Notion tools are available (no
+`notion-search`, `notion-ai-search` or `notion-fetch`), the connector isn't set up. Don't try
+to answer from memory. Tell the person, in plain words:
+
+- In the Claude app (desktop or claude.ai): open the Connectors page in settings, find
+  **Notion**, choose **Connect**, sign in with their WWT account, then ask again.
+- In Claude Code: run `/mcp` to see whether Notion is listed and signed in. Connectors added
+  in the Claude app show up there too.
+- If Notion isn't offered at all, their workspace admin controls which connectors are
+  available.
+
+Then stop. Glean is optional: if it isn't connected, open or cite the SharePoint link directly.
 
 ## How to answer a question
 

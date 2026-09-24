@@ -109,7 +109,9 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   Production keeps serving the last good build.
 - `--strict` makes warnings errors: a description with no "Use when…"/"trigger" wording, a
   description under 80 chars, no "verif"/"check" in the body, a body over 250 lines, a missing
-  `metadata.version`. Empty plugins print a `NOTE`, not a warning.
+  `metadata.version`, or a `metadata.connectors` entry (other than one the plugin bundles in
+  `.mcp.json`) with no "if it isn't connected" guidance in the body. The site labels connectors
+  "Needs X" or "X included" on that same bundled/not basis. Empty plugins print a `NOTE`, not a warning.
 - Version bumps: any change under `plugins/<p>/` other than `README.md`/`.gitkeep` needs a higher
   `plugin.json` version, and a changed existing skill needs a higher `metadata.version`. Adding or
   removing a plugin needs a higher marketplace `version`. New plugins and new skills don't need a
