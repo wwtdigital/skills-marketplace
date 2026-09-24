@@ -16,8 +16,8 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 | --- | --- |
 | `humanizer` | Rewrites AI-sounding text so it reads like a person wrote it (from Toby Gerber) |
 
-Building WWT-branded decks? The design system is a separate add-on, because it brings a save
-hook and the Figma MCP server: `/plugin install wwtdigital-design@wwtdigital`.
+Building WWT-branded decks? The design system is a separate add-on, because it brings the
+Figma MCP server and a toolkit with its own one-time setup: `/plugin install wwtdigital-design@wwtdigital`.
 
 ## MCP servers
 

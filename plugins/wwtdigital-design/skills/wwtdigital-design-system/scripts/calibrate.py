@@ -28,8 +28,9 @@ PHOTO_MIN_AREA = 0.06
 
 def probe(path):
     from playwright.sync_api import sync_playwright
+    from browser import launch
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = launch(p)
         pg = b.new_page(viewport={"width": 1980, "height": 1200})
         pg.goto("file://" + os.path.abspath(path))
         pg.wait_for_timeout(2500)

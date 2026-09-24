@@ -24,14 +24,12 @@ insets, dead space inside a box, the bug variant against its measured backdrop, 
 that no component has been reinvented under a new name. Every recipe traces to a
 Figma node id in `assets/provenance.json`, with a documented refresh procedure.
 
-**A hook.** Every time a `.html` file containing slide markup is written or edited, a static
-lint runs against it. It takes about 30 milliseconds, needs nothing but the Python standard
-library, and catches continuation slides, placeholder copy, an inverted panel on a white
-ground, a centred headline off the canvas axis, a mesh nested inside a container, a
-side-by-side set with unequal bottoms, retired classes and missing alt text.
-
-The hook **reports, it does not block.** It can never wedge your work. To make it blocking,
-remove `|| true` from the end of the command in `hooks/hooks.json`.
+**A static lint** in the build workflow. It takes about 30 milliseconds and catches
+continuation slides, placeholder copy, an inverted panel on a white ground, a centred headline
+off the canvas axis, a mesh nested inside a container, a side-by-side set with unequal bottoms,
+retired classes and missing alt text. (Earlier versions ran it as a save hook. Hooks run in
+whatever shell the machine has, which on Windows may be PowerShell with no Python at all, so it
+is now a workflow step instead.)
 
 **An optional Figma connection.** `.mcp.json` declares Figma's remote MCP server for the two
 jobs that need it. **Everything else works without it**, because the recipes carry their own
@@ -46,32 +44,33 @@ In Claude Code:
 /plugin install wwtdigital-design@wwtdigital
 ```
 
-It is a separate plugin rather than part of the `presentation` bundle because it brings a hook
-and the Figma MCP server with it, which only people building WWT decks want.
+It is a separate plugin rather than part of the `presentation` bundle because it brings the
+Figma MCP server and a large toolkit, which only people building WWT decks want.
 
 ## First run, in order
 
+**Setup, once per machine.** Ask Claude for a WWT deck and it will offer to do this for you;
+nothing needs to be installed first, including Python. To run it yourself:
+
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/skills/wwtdigital-design-system/scripts/doctor.py"
+sh "${CLAUDE_PLUGIN_ROOT}/setup/setup.sh"
 ```
+
+On Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File setup\setup.ps1`. It needs
+no admin rights and writes only to `~/.wwtdigital-design`: a private Python and its packages
+(installed with [uv](https://docs.astral.sh/uv/), about 120 MB), and a browser only if the
+machine has neither Chrome nor Edge. Run it again any time; finished steps are skipped. It ends
+by running the doctor. After that, run any script through `setup/run.sh` (or `run.ps1`), which
+uses that private Python.
 
 **Fonts.** On a Mac with Microsoft 365 there is usually nothing to do: the five sans cuts are
-read from inside PowerPoint. Aptos Serif (pull quotes only) is an Office cloud font; use it once
-in PowerPoint and Office downloads it. Anywhere else, install the family from
-[Microsoft](https://www.microsoft.com/en-us/download/details.aspx?id=106087), or put the `.ttf`
-files in `~/.wwtdigital-design/fonts` (or point `WWT_FONTS_DIR` at them).
+read from inside PowerPoint. Aptos Serif (pull quotes only) isn't there. For it, and on any
+other machine, install the family from
+[Microsoft](https://www.microsoft.com/en-us/download/details.aspx?id=106087) (free: open the zip,
+double-click the fonts), or put the `.ttf` files in `~/.wwtdigital-design/fonts` (or point
+`WWT_FONTS_DIR` at them).
 
-`python3 scripts/brand_assets.py` shows exactly what was found and where.
-
-If the verdict is not ENFORCED the doctor prints the commands that fix it:
-
-```bash
-python3 -m pip install --user playwright pillow numpy fonttools brotli python-pptx
-python3 -m playwright install chromium
-```
-
-If pip refuses with "externally managed environment" (Homebrew Python, recent Linux), install
-into a virtualenv instead. Don't override that guard with `--break-system-packages`.
+`sh setup/run.sh brand_assets.py` shows exactly what was found and where.
 
 Then read `THE CONTRACT`, the first page of the design system skill. It holds the defaults,
 the ratios, the anti-gaming doctrine and the planning gate. Everything after it is reference
@@ -129,15 +128,15 @@ produced three of this system's worst defects.
 
 ```bash
 cd skills/wwtdigital-design-system
-python3 scripts/lint_source.py deck.html                 # 30ms, no dependencies
-python3 scripts/inline_assets.py deck.html -o Deck.html  # resolve the assets and fonts
-python3 scripts/wwt_validate.py Deck.html                # the gate. 0 FAIL, WARNs with reasons
-python3 scripts/export_pptx.py Deck.html -o Deck.pptx    # live text, baked decoration
-python3 scripts/verify_pptx.py Deck.pptx --html Deck.html # refuses a screenshot deck
-python3 scripts/selftest.py                              # after ANY rule change
-python3 scripts/check_documents.py Spec.html Teardown.html  # the two references agree
-python3 scripts/check_package.py                         # 200-file cap, BEFORE shipping
-python3 scripts/calibrate.py good1.html good2.html       # re-derive the deck-level ratios
+sh ../../setup/run.sh lint_source.py deck.html                 # 30ms, no dependencies
+sh ../../setup/run.sh inline_assets.py deck.html -o Deck.html  # resolve the assets and fonts
+sh ../../setup/run.sh wwt_validate.py Deck.html                # the gate. 0 FAIL, WARNs with reasons
+sh ../../setup/run.sh export_pptx.py Deck.html -o Deck.pptx    # live text, baked decoration
+sh ../../setup/run.sh verify_pptx.py Deck.pptx --html Deck.html # refuses a screenshot deck
+sh ../../setup/run.sh selftest.py                              # after ANY rule change
+sh ../../setup/run.sh check_documents.py Spec.html Teardown.html  # the two references agree
+sh ../../setup/run.sh check_package.py                         # 200-file cap, BEFORE shipping
+sh ../../setup/run.sh calibrate.py good1.html good2.html       # re-derive the deck-level ratios
 ```
 
 `selftest.py` is the one people skip and should not. It builds thirteen decks that each try

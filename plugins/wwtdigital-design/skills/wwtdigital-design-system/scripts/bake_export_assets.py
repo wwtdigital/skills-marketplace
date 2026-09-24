@@ -99,11 +99,12 @@ def shoot(pg, html, sel, path, opaque):
 def main():
     os.makedirs(OUT, exist_ok=True)
     from playwright.sync_api import sync_playwright
+    from browser import launch
     from PIL import Image
 
     made = []
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = launch(p)
         pg = b.new_page(viewport={"width": 1920, "height": 1200},
                         device_scale_factor=SCALE)
 

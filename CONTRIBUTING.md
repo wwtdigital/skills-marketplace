@@ -112,8 +112,8 @@ changed without a bump (it compares against the live site). README-only edits do
 
 A skill that brings a hook, an MCP server or a large toolkit that most people in its category
 won't want can ship as its own opt-in plugin instead of inside the category bundle. The WWT
-deck design system (`wwtdigital-design`) is the example: it belongs to `presentation` but adds
-a save hook and the Figma MCP, so it installs separately. Ask in #wwtd-claude-skills first.
+deck design system (`wwtdigital-design`) is the example: it belongs to `presentation` but brings
+the Figma MCP and a toolkit with its own one-time setup, so it installs separately. Ask in #wwtd-claude-skills first.
 
 It lives in `plugins/<name>/` like any plugin. Its marketplace entry sets `category` to the
 category it belongs to, and its skills set `metadata.category` to that same category. The

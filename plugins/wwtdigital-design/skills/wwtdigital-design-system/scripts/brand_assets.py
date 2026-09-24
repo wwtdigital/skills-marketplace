@@ -14,13 +14,18 @@ WHERE FONTS ARE LOOKED FOR, in order:
   $WWT_FONTS_DIR                 one or more folders, separated like PATH
   ~/.wwtdigital-design/fonts
   assets/fonts                   an internal copy that still bundles them
-  Microsoft Office itself        PowerPoint/Word/Excel/Outlook for Mac carry Aptos inside
-                                 the app bundle; Office's cloud-font cache on Mac and Windows
+  Microsoft Office itself        PowerPoint/Word/Excel/Outlook for Mac carry the sans cuts
+                                 inside the app bundle; Office's cloud-font cache on Windows
   the system font folders        where the Microsoft download or a manual install puts them
 
-Fonts are matched by the name stored INSIDE the file, not by its filename. Office's cloud
-cache names files by number (CloudFonts/Aptos Serif/48155170935.ttf), so a filename match
-would miss the most common place the serif lives.
+NOT Office's cloud-font cache on a Mac (~/Library/Group Containers/UBF8T346G9.Office). macOS
+guards other apps' containers: reading it from Claude's app raises an "access data from other
+apps" permission prompt and blocks until someone answers, which is the last thing a
+non-technical user should meet. The sans cuts are in PowerPoint.app anyway; the serif comes
+from the Microsoft download.
+
+Fonts are matched by the name stored INSIDE the file, not by its filename, because Office's
+Windows cloud cache names files by number (CloudFonts/Aptos Serif/48155170935.ttf).
 """
 import os, struct, sys
 
@@ -49,8 +54,7 @@ def _dirs():
     if sys.platform == "darwin":
         out += ["/Applications/Microsoft %s.app/Contents/Resources/DFonts" % app
                 for app in ("PowerPoint", "Word", "Excel", "Outlook")]
-        out += [os.path.join(HOME, "Library/Group Containers/UBF8T346G9.Office/FontCache"),
-                os.path.join(HOME, "Library/Fonts"), "/Library/Fonts"]
+        out += [os.path.join(HOME, "Library/Fonts"), "/Library/Fonts"]
     elif os.name == "nt":
         local = os.environ.get("LOCALAPPDATA", "")
         out += [os.path.join(local, "Microsoft", "FontCache"),
@@ -138,8 +142,8 @@ def fonts_help(missing):
         "Aptos is not installed where this skill can find it. Missing: %s\n"
         "  The fonts are Microsoft's and are not shipped with the plugin. Any one of these fixes it:\n"
         "  - Mac with Microsoft 365: nothing to do for the five sans cuts, they are read from\n"
-        "    inside PowerPoint.app. For Aptos Serif, use it once in PowerPoint so Office downloads it.\n"
-        "  - Install the family from Microsoft: %s\n"
+        "    inside PowerPoint.app. Aptos Serif is not there; install it from the link below.\n"
+        "  - Install the family from Microsoft (free; open the zip, then double-click the fonts): %s\n"
         "  - Put the .ttf files in ~/.wwtdigital-design/fonts, or point WWT_FONTS_DIR at them.\n"
         "  Run `python3 scripts/brand_assets.py` to see what was found."
         % (", ".join(missing), FONT_DOWNLOAD))

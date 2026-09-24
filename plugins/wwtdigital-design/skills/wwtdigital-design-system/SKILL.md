@@ -51,6 +51,24 @@ fonts are not shipped with this plugin**; they are Microsoft's, and `scripts/bra
 them on the machine. If the doctor says BLOCKED, relay its fix and stop. Never substitute another
 typeface.
 
+## How to run the scripts
+
+Never call `python3` directly: on a Mac without Apple's developer tools it opens an install
+dialog, and on Windows it is often a Store shortcut. Every `python3 scripts/X.py ...` in these
+references means:
+
+```
+sh "${CLAUDE_PLUGIN_ROOT}/setup/run.sh" X.py ...                                        # macOS, Linux
+powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/setup/run.ps1" X.py ...   # Windows
+```
+
+If it prints **SETUP NEEDED** (exit 3), the person has not run the one-time setup. Assume they are
+not technical. Say in plain words that it is a one-time step of a few minutes, needs no admin
+password, and downloads a private copy of Python and its tools (about 120 MB, more only if they
+have neither Chrome nor Edge) into a `.wwtdigital-design` folder in their home folder. Ask before
+running it, then run `setup/setup.sh` (Windows: `setup/setup.ps1`) the same way and relay any
+"Setup stopped" message as written.
+
 ## The gates, which the contract explains
 
 Nothing ships without 0 FAIL from `scripts/wwt_validate.py`, and no PPTX ships without 0 FAIL from

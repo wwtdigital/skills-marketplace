@@ -98,9 +98,10 @@ def css_type_sizes():
 
 def read(paths):
     from playwright.sync_api import sync_playwright
+    from browser import launch
     txt = {}
     with sync_playwright() as pw:
-        b = pw.chromium.launch()
+        b = launch(pw)
         for label, p in paths.items():
             pg = b.new_page(viewport={"width": 1500, "height": 1000})
             pg.goto("file://" + os.path.abspath(p))

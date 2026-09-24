@@ -30,11 +30,22 @@ of the rules ran.
 
 ## What to do
 
-Run the doctor:
+Run the doctor. Never call `python3` directly: on a Mac without Apple's developer tools it
+opens an install dialog, and on Windows it is often a Store shortcut.
 
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/skills/wwtdigital-design-system/scripts/doctor.py"
+sh "${CLAUDE_PLUGIN_ROOT}/setup/run.sh" doctor.py
 ```
+
+On Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/setup/run.ps1" doctor.py`.
+
+**If it prints SETUP NEEDED**, this machine has never been set up. Assume the person is not
+technical and may have no Python at all; that is fine, setup brings its own. Explain in plain
+words: a one-time step of a few minutes, no admin password, downloads a private copy of Python
+and its tools (about 120 MB, more only if they have neither Chrome nor Edge) into a
+`.wwtdigital-design` folder in their home folder, and changes nothing else. Ask, then run
+`setup/setup.sh` (Windows: `setup/setup.ps1`) the same way. It ends by running the doctor. If it
+prints "Setup stopped", relay that message as written; it says what to do.
 
 Report the verdict to the user in plain language, then act on it. **First, if the doctor
 prints BLOCKED**, the Aptos fonts are missing. They are Microsoft's and the plugin does not ship
@@ -47,14 +58,14 @@ system skill. The deck will be gated by `wwt_validate.py` before it ships and by
 
 **PARTIAL.** The static lint runs; the rendering validator does not. Continue, but tell the
 user explicitly which rules are live and which are not, and repeat it when handing the deck
-over. Offer the two install commands the doctor prints, because getting to ENFORCED is
-usually thirty seconds of work rather than a project. Never describe a PARTIAL deck as
+over. Offer to run the setup, because getting to ENFORCED is usually a few minutes of
+waiting rather than a project. Never describe a PARTIAL deck as
 validated.
 
 **DOCUMENTATION ONLY.** Say so before building anything. The person has a stylesheet and a
 reference document, which is genuinely useful, but nothing is being checked and the output
-must not be described as validated. Ask whether they want to install the prerequisites or
-proceed knowingly.
+must not be described as validated. Ask whether they want to run the setup or proceed
+knowingly.
 
 ## Figma
 

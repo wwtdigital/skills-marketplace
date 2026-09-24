@@ -71,6 +71,7 @@ BAKED = ("mesh", "brandx", "brandx-x", "bug", "stripe", "mark", "arrow",
 def probe(path):
     """Walk the rendered deck and return a plain description of every slide."""
     from playwright.sync_api import sync_playwright
+    from browser import launch
     js = r"""
     () => {
       const px = v => Math.round(parseFloat(v) || 0);
@@ -374,7 +375,7 @@ def probe(path):
     }
     """
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = launch(p)
         pg = b.new_page(viewport={"width": W, "height": H})
         pg.goto("file://" + os.path.abspath(path))
         pg.wait_for_timeout(5000)
@@ -668,12 +669,13 @@ def prerender_icons(recs, tmp):
         return 0
     try:
         from playwright.sync_api import sync_playwright
+        from browser import launch
         from PIL import Image
     except Exception:
         return 0
     S = 4
     with sync_playwright() as pw:
-        b = pw.chromium.launch()
+        b = launch(pw)
         pg = b.new_page(viewport={"width": 900, "height": 900})
         for n, (key, ic) in enumerate(jobs.items()):
             w, h = max(1, int(ic["w"])), max(1, int(ic["h"]))

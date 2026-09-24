@@ -70,11 +70,12 @@ the scale factor, never type. Measure contrast at native 1920 resolution.
 ### The face is Aptos, and it comes from the machine
 
 Aptos is Microsoft's, so the plugin does not ship it. `scripts/brand_assets.py` finds the cuts on the
-machine by the name inside each file: inside PowerPoint/Word for Mac, in Office's cloud-font cache,
-in the system font folders, in `~/.wwtdigital-design/fonts`, or wherever `WWT_FONTS_DIR` points.
-`inline_assets.py` writes them in as `@font-face` rules and **stops with instructions if a cut is
-missing.** **Do not link Google Fonts and do not name a webfont fallback.** If the doctor reports Aptos
-missing, tell the person how to install it (Microsoft's free download:
+machine by the name inside each file: inside PowerPoint/Word for Mac, in the system font folders, in
+Office's cloud-font cache on Windows, in `~/.wwtdigital-design/fonts`, or wherever `WWT_FONTS_DIR`
+points. (Not Office's cache on a Mac: reading it raises a macOS privacy prompt.) `inline_assets.py`
+writes them in as `@font-face` rules and **stops with instructions if a cut is missing.** **Do not
+link Google Fonts and do not name a webfont fallback.** If the doctor reports Aptos missing, tell the
+person how to install it (Microsoft's free download:
 https://www.microsoft.com/en-us/download/details.aspx?id=106087) and stop; do not build around it.
 
 | CSS weight | Cut | Found by full name |
@@ -86,9 +87,9 @@ https://www.microsoft.com/en-us/download/details.aspx?id=106087) and stop; do no
 | 900 | **Aptos Black** | `Aptos Black` |
 | 700 italic | Aptos Serif Bold Italic | `Aptos Serif Bold Italic` |
 
-The five sans cuts come with Microsoft 365. **Aptos Serif is a cloud font**: Office downloads it the
-first time someone uses it, so it is often absent. It is only required when a deck sets a pull quote
-(`.t-quote`); using it once in PowerPoint, or the Microsoft download, installs it.
+The five sans cuts come with Microsoft 365. **Aptos Serif does not**: it is an Office cloud font, so
+on most machines it is absent until the Microsoft download is installed. It is only required when a
+deck sets a pull quote (`.t-quote`).
 
 **Why the explicit map exists.** Aptos ships its heavy cuts as *separate families*: the Black file
 reports family "Aptos Black", subfamily "Regular", not weight 900 of family "Aptos". So

@@ -195,11 +195,12 @@ def html_paint_order(path):
     """
     try:
         from playwright.sync_api import sync_playwright
+        from browser import launch
     except Exception:
         return None
     try:
         with sync_playwright() as pw:
-            b = pw.chromium.launch()
+            b = launch(pw)
             pg = b.new_page(viewport={"width": 1980, "height": 1200})
             pg.goto("file://" + os.path.abspath(path))
             pg.wait_for_timeout(2200)
@@ -259,11 +260,12 @@ def html_text_per_slide(path):
     """How many words each source slide holds, so TXT-02 knows what to expect."""
     try:
         from playwright.sync_api import sync_playwright
+        from browser import launch
     except Exception:
         return None
     try:
         with sync_playwright() as pw:
-            b = pw.chromium.launch()
+            b = launch(pw)
             pg = b.new_page(viewport={"width": 1980, "height": 1200})
             pg.goto("file://" + os.path.abspath(path))
             pg.wait_for_timeout(2000)

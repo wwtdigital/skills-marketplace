@@ -319,7 +319,7 @@ assets/provenance.json        THE SOURCE MAP. Every recipe's Figma node id, ever
                               every artboard exception, and the date of the last pull
 scripts/check_provenance.py   checks the map against itself, and against a fresh pull
 scripts/lint_source.py        static markup lint, 30ms, zero dependencies, hookable
-scripts/lint_hook.py          the plugin's PostToolUse hook: lints slide HTML after each save
+scripts/browser.py            starts the installed Chrome or Edge, Playwright's Chromium as fallback
 scripts/wwt_validate.py       the validator in section 14
 references/triage.md          worked examples of cutting a document down to a deck
 references/failure-modes.md   every way this system has failed, and what closed each one

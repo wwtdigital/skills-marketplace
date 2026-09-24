@@ -1212,6 +1212,7 @@ def validate_slide(s, rep, plate=None, judge_density=True):
 # ---------------------------------------------------------------- driver
 def run(path, roles=None, only=None, quiet=False, json_out=None, shots=False):
     from playwright.sync_api import sync_playwright
+    from browser import launch
     from PIL import Image
     import numpy as np
 
@@ -1220,7 +1221,7 @@ def run(path, roles=None, only=None, quiet=False, json_out=None, shots=False):
     url = path if path.startswith("http") else "file://" + os.path.abspath(path)
 
     with sync_playwright() as p:
-        b = p.chromium.launch(args=["--no-sandbox"])
+        b = launch(p, args=["--no-sandbox"])
         pg = b.new_page(viewport={"width": 1600, "height": 1100})
         pg.goto(url, wait_until="load", timeout=120000)
         pg.wait_for_timeout(3500)

@@ -20,9 +20,12 @@ sure Aptos is on the machine (see the plugin README), then run two things
 before asking for anything.
 
 ```bash
-python3 scripts/doctor.py                            # what this machine can enforce
-python3 scripts/teardown.py -o WWT-teardown.html     # the system, rendered. Open it
+sh setup/run.sh doctor.py                            # what this machine can enforce
+sh setup/run.sh teardown.py -o WWT-teardown.html     # the system, rendered. Open it
 ```
+
+(If it says SETUP NEEDED, run `sh setup/setup.sh` once; Claude will offer to do it for you.
+On Windows use `setup\run.ps1` and `setup\setup.ps1`.)
 
 The doctor answers ENFORCED, PARTIAL or DOCUMENTATION. ENFORCED means the validator runs and measures
 your deck. PARTIAL means only the fast static lint runs, leaving contrast, rendered measure, widows,

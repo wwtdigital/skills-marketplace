@@ -183,10 +183,19 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 - `wwtdigital-design` ships **no Aptos fonts**: they're Microsoft's and the repo is public. Its
   `scripts/brand_assets.py` finds Aptos on the machine by the name inside each file (PowerPoint.app
   on Mac carries the five sans cuts; Aptos Serif is an Office cloud font, only needed for pull
-  quotes; Microsoft's free download has all of them). Don't re-add the font files. WWT brand
+  quotes; Microsoft's free download has all of them). It deliberately skips Office's Mac cloud-font
+  cache (`~/Library/Group Containers/UBF8T346G9.Office`): reading another app's container from the
+  Claude desktop app raises a macOS "access data from other apps" prompt and blocks until answered. Don't re-add the font files. WWT brand
   material (photos, logos, icons, the recipe 12 solution matrix) is fine in the repo (owner, 2026-09-24). Its SKILL.md is a short router: the sections live in `references/`, and its scripts
-  that parse the document read it through `scripts/skilldoc.py`. Its own checks (`selftest.py`,
-  `wwt_validate.py`, `check_documents.py`) need Playwright + Chromium.
+  that parse the document read it through `scripts/skilldoc.py`.
+  Users are assumed non-technical with no working Python, so the plugin has **no hooks** (hooks run in
+  whatever shell exists, PowerShell on Windows without Git Bash, and a bare `python3` on a Mac without
+  developer tools pops an install dialog). Instead `setup/setup.sh` / `setup.ps1` (run once, with the
+  user's OK, offered by the skill) installs uv, a uv-managed Python 3.12 and `setup/requirements.txt`
+  into `~/.wwtdigital-design/venv`, and a browser only if there's no Chrome/Edge; every script runs
+  via `setup/run.sh` / `run.ps1`, which exits 3 with "SETUP NEEDED" instead of touching system
+  Python. `scripts/browser.py` launches installed Chrome/Edge first. Where scripts execute in Cowork
+  (host vs VM) is unverified; if it's a VM, the PowerPoint.app font lookup won't find anything.
 
 ## Do not touch without asking
 

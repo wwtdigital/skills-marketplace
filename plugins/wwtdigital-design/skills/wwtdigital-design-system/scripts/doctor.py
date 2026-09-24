@@ -29,9 +29,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
 OK, WARN, BAD = "ok", "warn", "bad"
-# --user keeps packages out of the system Python. If pip refuses with "externally managed"
-# (Homebrew, recent Debian/Ubuntu), use a virtualenv rather than overriding the guard.
-PIP = "python3 -m pip install --user"
+# The plugin's setup script installs everything into a private Python, so there is one fix
+# for every missing package and nobody has to know what pip is.
+SETUP = ("run the one-time setup: sh setup/setup.sh (Windows: "
+         "powershell -ExecutionPolicy Bypass -File setup\\setup.ps1)")
 rows = []
 
 
@@ -53,7 +54,7 @@ def check_module(mod, label, why, needed_for):
         add(label, OK, ("%s %s" % (label, ver)).strip(), "")
         return True
     except Exception:
-        add(label, BAD, "not installed", "%s %s   (%s)" % (PIP, why, needed_for))
+        add(label, BAD, "not installed", "%s   (needed for %s)" % (SETUP, needed_for))
         return False
 
 
@@ -61,20 +62,21 @@ def check_chromium():
     """Launch it. Importing playwright proves nothing; the launch is what fails."""
     try:
         from playwright.sync_api import sync_playwright
+        from browser import launch
     except Exception:
         add("Chromium", BAD, "playwright not installed",
-            PIP + " playwright && python3 -m playwright install chromium")
+            SETUP)
         return False
     try:
         with sync_playwright() as p:
-            b = p.chromium.launch()
+            b = launch(p)
             ver = b.version
             b.close()
         add("Chromium", OK, "launches, %s" % ver, "")
         return True
     except Exception as e:
         msg = str(e)
-        fix = "python3 -m playwright install chromium"
+        fix = "install Google Chrome or Microsoft Edge, or " + SETUP
         if "libXdamage" in msg or "shared libraries" in msg:
             fix = ("system libraries are missing. On a sandbox without apt, fetch the .deb "
                    "files for libxdamage1, libxext6, libxfixes3, libxrandr2, libgbm1, "
@@ -157,7 +159,7 @@ def check_brand():
         add("Aptos Serif", OK, "found", "")
     else:
         add("Aptos Serif", WARN, "missing, needed only for pull quotes",
-            "use it once in PowerPoint so Office downloads it, or install the family from Microsoft")
+            "install the Aptos family from " + brand_assets.FONT_DOWNLOAD)
     return not missing
 
 
@@ -220,8 +222,7 @@ def main():
     print()
     if not full:
         print("  To get to ENFORCED:")
-        print("    %s playwright pillow numpy fonttools brotli python-pptx" % PIP)
-        print("    python3 -m playwright install chromium")
+        print("    " + SETUP)
         print()
     return code
 
