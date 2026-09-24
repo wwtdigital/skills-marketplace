@@ -5,7 +5,7 @@ Skills for engineers and technologists: code review, architecture documentation,
 Install:
 
 ```
-/plugin install tech@wwt-digital
+/plugin install tech@wwtdigital
 ```
 
 ## Skills

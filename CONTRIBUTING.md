@@ -25,7 +25,7 @@ Not sure? Pick the closest one and say so when you submit it. A reviewer will mo
 
    ```
    /plugin marketplace add https://skills-marketplace.wwtdigital.io/marketplace.json
-   /plugin install admin@wwt-digital
+   /plugin install admin@wwtdigital
    ```
 
    Or start from the [skill template](https://skills-marketplace.wwtdigital.io/downloads/skill-template.zip)

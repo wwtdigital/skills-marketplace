@@ -36,7 +36,7 @@ export default function Home() {
             </div>
             <InstallTabs
               repo={repo}
-              marketplace={catalog?.marketplace.name || "wwt-digital"}
+              marketplace={catalog?.marketplace.name || "wwtdigital"}
               marketplaceUrl={catalog?.marketplace.site ? `${catalog.marketplace.site}/marketplace.json` : null}
             />
           </section>

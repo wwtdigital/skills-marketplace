@@ -5,7 +5,7 @@ Skills for anything you put in front of people: decks, documents, reports and co
 Install:
 
 ```
-/plugin install presentation@wwt-digital
+/plugin install presentation@wwtdigital
 ```
 
 ## Skills

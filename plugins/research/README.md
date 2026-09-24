@@ -5,7 +5,7 @@ Skills for finding things out and making sense of them: desk and market research
 Install:
 
 ```
-/plugin install research@wwt-digital
+/plugin install research@wwtdigital
 ```
 
 ## Skills

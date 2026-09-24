@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A Claude Code / Cowork **plugin marketplace** for WWTDigital. Marketplace name `wwt-digital`.
+A Claude Code / Cowork **plugin marketplace** for WWTDigital. Marketplace name `wwtdigital`.
 Skills are grouped into one plugin per category; users install the bundles they need.
 A Next.js site (`site/`, deployed to Vercel) lets people browse and download skills without GitHub.
 
@@ -61,7 +61,7 @@ There is no test suite. `validate.ts` is the lint/test gate, and it always check
 (you can't point it at one skill).
 
 Test the marketplace itself: `/plugin marketplace add ./` from the repo root, then
-`/plugin install admin@wwt-digital`.
+`/plugin install admin@wwtdigital`.
 
 ## Conventions
 
@@ -137,6 +137,16 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   Both use the same marketplace name, so plugin ids are the same. Claude Code only accepts https
   archive URLs on non-loopback hosts, so you can't test it on localhost, and previews are behind
   Vercel auth. Zips are deterministic (fixed mtime), so a `sha256` only changes when content does.
+- The marketplace's own top-level `name` (`wwtdigital`, renamed 2026-09-24 from `wwt-digital` for
+  consistency with the GitHub org and domain) is what Claude Code registers locally, taken from
+  `marketplace.json`'s `name` field, not from the repo slug or URL. Renaming it, unlike renaming a
+  *plugin* (which the `renames` map smooths over), has no migration path: anyone who already added
+  the marketplace under the old name has it registered as `wwt-digital` locally and needs to
+  `/plugin marketplace remove wwt-digital` then re-add before `@wwtdigital` install commands work
+  for them, or they'll hit "its network source differs from the one declared" or simply not find
+  the new name. Confirmed hands-on: switching a plugin's *source* (URL vs GitHub) under the same
+  marketplace name hits that same error and needs the same remove-then-re-add fix, and also drops
+  every plugin installed under the old registration (reinstall them after).
 - Cowork / desktop app install, corrected 2026-09-23 after testing against the real UI twice (first
   pass was wrong, see below). Customize > Plugins > + Add > **Add marketplace** is a single field
   that only accepts a GitHub `owner/repo` or a git-clone URL to github.com/gitlab.com/bitbucket.org

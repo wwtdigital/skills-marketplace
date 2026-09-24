@@ -5,7 +5,7 @@ Everyday admin skills, plus tools for contributing to this marketplace: author a
 Install:
 
 ```
-/plugin install admin@wwt-digital
+/plugin install admin@wwtdigital
 ```
 
 ## Skills

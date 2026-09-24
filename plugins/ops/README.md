@@ -5,7 +5,7 @@ Skills for running projects and teams: status reporting, staffing, risk tracking
 Install:
 
 ```
-/plugin install ops@wwt-digital
+/plugin install ops@wwtdigital
 ```
 
 ## Skills

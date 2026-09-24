@@ -13,11 +13,11 @@ Browse the catalog and get step-by-step install help at **https://skills-marketp
 
 ```
 /plugin marketplace add wwtdigital/skills-marketplace
-/plugin install presentation@wwt-digital
+/plugin install presentation@wwtdigital
 ```
 
-Repeat `/plugin install <plugin>@wwt-digital` for each bundle you want. Run
-`/plugin marketplace update wwt-digital` to pull new skills.
+Repeat `/plugin install <plugin>@wwtdigital` for each bundle you want. Run
+`/plugin marketplace update wwtdigital` to pull new skills.
 
 **Cowork / Claude desktop**
 
@@ -31,7 +31,7 @@ GitHub entirely, add the marketplace from the site instead in Claude Code:
 
 ```
 /plugin marketplace add https://skills-marketplace.wwtdigital.io/marketplace.json
-/plugin install presentation@wwt-digital
+/plugin install presentation@wwtdigital
 ```
 
 Or download any skill as a `.skill` file from the site and drop it into Cowork
@@ -41,11 +41,11 @@ Or download any skill as a `.skill` file from the site and drop it into Cowork
 
 | Plugin | For | Install |
 | --- | --- | --- |
-| `presentation` | Decks, documents, reports, copy, house style | `/plugin install presentation@wwt-digital` |
-| `research` | Desk research, interviews, analysis, synthesis | `/plugin install research@wwt-digital` |
-| `ops` | Status reports, staffing, risks, SOWs and estimates | `/plugin install ops@wwt-digital` |
-| `admin` | Everyday admin, and tools for contributing to this marketplace | `/plugin install admin@wwt-digital` |
-| `tech` | Code review, architecture, repo hygiene, prototyping | `/plugin install tech@wwt-digital` |
+| `presentation` | Decks, documents, reports, copy, house style | `/plugin install presentation@wwtdigital` |
+| `research` | Desk research, interviews, analysis, synthesis | `/plugin install research@wwtdigital` |
+| `ops` | Status reports, staffing, risks, SOWs and estimates | `/plugin install ops@wwtdigital` |
+| `admin` | Everyday admin, and tools for contributing to this marketplace | `/plugin install admin@wwtdigital` |
+| `tech` | Code review, architecture, repo hygiene, prototyping | `/plugin install tech@wwtdigital` |
 
 ## Repo layout
 
