@@ -90,6 +90,20 @@ code, pre, .mono { font-family: var(--font-mono), ui-monospace, Menlo, monospace
 .nav-links { display: flex; gap: 24px; align-items: center; }
 .nav-links a { color: var(--muted); text-decoration: none; font-size: 14.5px; transition: color .2s var(--ease); display: inline-flex; align-items: center; gap: 4px; }
 .nav-links a:hover { color: var(--text); }
+.theme-toggle {
+  display: inline-grid; place-items: center; width: 34px; height: 34px; margin-left: -12px;
+  border: 1px solid var(--line); border-radius: var(--r); background: transparent; color: var(--muted);
+  cursor: pointer; transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.theme-toggle:hover { color: var(--text); border-color: var(--line-strong); }
+/* show the icon for the theme you'd switch to */
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+}
 
 /* ---------- buttons ---------- */
 .btn {
@@ -303,8 +317,9 @@ code, pre, .mono { font-family: var(--font-mono), ui-monospace, Menlo, monospace
 }
 @media (max-width: 640px) {
   .wrap { padding: 0 16px; }
-  .nav { gap: 16px; }
-  .nav-links { gap: 16px; }
+  .nav { gap: 12px; }
+  .nav-links { gap: 14px; }
+  .theme-toggle { margin-left: 0; }
   .nav-links .hide-sm { display: none; }
   .hero h1 { max-width: none; }
   .panel { padding: 18px 16px 20px; min-height: 0; }

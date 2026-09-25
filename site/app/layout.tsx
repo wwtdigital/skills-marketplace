@@ -5,6 +5,8 @@ import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
 import { Analytics } from "@vercel/analytics/next";
 import { REPO_URL } from "@/lib/catalog";
 import { loadCatalog } from "@/lib/load";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -18,7 +20,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const repo = loadCatalog()?.marketplace.repo || REPO_URL;
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <header className="site-header">
           <div className="wrap nav">
@@ -28,13 +33,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <span className="sp" />
             <nav className="nav-links" aria-label="Primary">
-              <Link href="/#install">Install</Link>
+              <Link className="hide-sm" href="/#install">Install</Link>
               <Link href="/#browse">Browse</Link>
               <Link href="/contribute">Contribute</Link>
               <a className="hide-sm" href={repo} target="_blank" rel="noopener">
                 GitHub <ArrowUpRightIcon size={13} weight="bold" aria-hidden="true" />
               </a>
             </nav>
+            <ThemeToggle />
           </div>
         </header>
         {children}
