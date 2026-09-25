@@ -2,6 +2,7 @@
 description: Publish a finished report as a link for a client. Should fire.
 tags: [trigger, publish-page]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill, Read, Glob, Grep]
 ---
 

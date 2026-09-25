@@ -2,6 +2,7 @@
 description: A plain copy-edit request (typos and grammar). Before v4.1.0 the description said "use when editing any writing", which would have fired here. Should not fire.
 tags: [trigger, humanizer, negative]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill]
 ---
 

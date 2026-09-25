@@ -2,6 +2,7 @@
 description: Direct request to humanize a paragraph that has obvious AI tells. Should fire.
 tags: [trigger, humanizer]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill]
 ---
 

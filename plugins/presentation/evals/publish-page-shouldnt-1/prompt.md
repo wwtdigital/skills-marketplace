@@ -2,6 +2,7 @@
 description: A Claude.ai Artifact for the person's own use, named in the not-for line.
 tags: [trigger, publish-page, negative]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill, Read, Glob, Grep]
 ---
 

@@ -2,6 +2,7 @@
 description: Asks how to contribute a skill. Should fire.
 tags: [trigger, wwtdigital-skill-author]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill, Read, Glob, Grep]
 ---
 

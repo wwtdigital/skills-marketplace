@@ -88,6 +88,12 @@ function checkPlugin(entry: MarketplaceEntry) {
     checkSkill(n, category, bundled, sk);
     checkEvals(n, pdir, sk.name);
   }
+  // Eval prompts are published in the repo like everything else, so scan them too.
+  for (const f of walk(path.join(pdir, "evals"), [])) {
+    if (BINARY.has(path.extname(f).toLowerCase())) continue;
+    const hit = SECRET_PATTERNS.find((p) => p.test(readFileSync(f, "utf8")));
+    if (hit) err(`plugin '${n}': possible secret in ${rel(f)} (pattern ${hit.source.slice(0, 30)}…)`);
+  }
 }
 
 // Trigger tests live in <plugin>/evals/<skill>-should-N/ and <skill>-shouldnt-N/ (see CONTRIBUTING),

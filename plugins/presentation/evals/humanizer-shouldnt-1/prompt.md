@@ -2,6 +2,7 @@
 description: Writing new content from scratch. The humanizer is not for this and should stay out of the way.
 tags: [trigger, humanizer, negative]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill]
 ---
 

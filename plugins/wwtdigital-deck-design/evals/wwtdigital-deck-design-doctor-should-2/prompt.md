@@ -2,6 +2,7 @@
 description: Asks what needs installing for the deck tooling. Should fire.
 tags: [trigger, wwtdigital-deck-design-doctor]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill, Read, Glob, Grep]
 ---
 

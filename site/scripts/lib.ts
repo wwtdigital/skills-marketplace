@@ -121,13 +121,19 @@ export function iterSkills(entry: MarketplaceEntry): SkillSource[] {
 }
 
 /** Every file under dir, sorted by path segments (so a/b sorts before a-b/c). */
-export function walk(dir: string): string[] {
+// Directories left out of content hashes and downloads. `evals/` holds the plugin's trigger tests
+// (see CONTRIBUTING): they're for the repo, not for installed users, and a test-only change
+// shouldn't force a plugin release. Pass [] to walk everything.
+export const SKIP_DIRS: readonly string[] = ["evals", "__pycache__"];
+
+export function walk(dir: string, skipDirs: readonly string[] = SKIP_DIRS): string[] {
   const out: string[] = [];
   const visit = (d: string) => {
     for (const name of readdirSync(d)) {
       const p = path.join(d, name);
-      if (statSync(p).isDirectory()) visit(p);
-      else out.push(p);
+      if (statSync(p).isDirectory()) {
+        if (!skipDirs.includes(name)) visit(p);
+      } else out.push(p);
     }
   };
   if (isDir(dir)) visit(dir);

@@ -2,6 +2,7 @@
 description: General desk research without the tool, named in the not-for line.
 tags: [trigger, brand-scan, negative]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill, Read, Glob, Grep]
 ---
 

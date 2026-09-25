@@ -70,9 +70,11 @@ Run from the plugin dir: `claude plugin eval . --ablation none --case '<skill>-*
 run is a real `claude` session on the runner's own credential (a few cents per skill), so they run
 locally, not in the Vercel build. `validate.ts` warns (fatal under --strict) when a skill has fewer than 2 should-cases and 1
 shouldn't-case. Keep `max_turns` low (4): the grader only needs the Skill call, and a skill that goes
-on to do the task burns money for nothing. Evals ship inside the plugin (the CLI can run an installed
-copy's suite), so adding them changes the plugin hash and needs a plugin bump. `evals/results/` is
-gitignored. All 8 skills have cases (25 total); 84/84 runs passed on 2026-09-24, about $8 for the lot.
+on to do the task burns money for nothing. `walk()` in `lib.ts` skips `evals/`, so they're left
+out of content hashes and downloads: an eval-only change needs no plugin bump, and installed users
+don't get them (run them from a checkout). `evals/results/` is gitignored. All 8 skills have cases (25 total); 84/84 runs passed on 2026-09-24 at 8 turns, about $8 for the lot. Known
+flake: `wwtdigital-deck-design-should-2` ("match our WWT template") missed once in seven runs at 4 turns
+with the skill never loaded; owner to decide whether the description needs a sharper phrase.
 
 Test the marketplace itself: `/plugin marketplace add ./` from the repo root, then
 `/plugin install admin@wwtdigital`.

@@ -2,6 +2,7 @@
 description: Asks for a WWT deck. Should fire.
 tags: [trigger, wwtdigital-deck-design]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill, Read, Glob, Grep]
 ---
 

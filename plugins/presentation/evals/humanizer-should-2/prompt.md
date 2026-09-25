@@ -2,6 +2,7 @@
 description: Asks whether text reads as AI-written and to fix it if so. Should fire.
 tags: [trigger, humanizer]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill]
 ---
 

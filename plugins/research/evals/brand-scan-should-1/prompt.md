@@ -2,6 +2,7 @@
 description: Direct ask to scan a brand. Should fire.
 tags: [trigger, brand-scan]
 max_turns: 4
+timeout_seconds: 120
 allowed_tools: [Skill, Read, Glob, Grep]
 ---
 
