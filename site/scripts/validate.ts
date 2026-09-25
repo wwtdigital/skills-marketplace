@@ -13,7 +13,7 @@ import path from "node:path";
 import {
   CATEGORIES, contentHash, git, iterSkills, KEBAB, loadMarketplace, loadMcpConfig, loadPluginManifest,
   loadPrevCatalog, type Marketplace, type MarketplaceEntry, NO_BUMP_NEEDED, opt, parseSkillMd,
-  pluginDir, rel, type SkillSource, STATUSES, walk,
+  pluginDir, rel, SKIP_DIRS, type SkillSource, STATUSES, walk,
 } from "./lib.ts";
 
 const SECRET_PATTERNS = [
@@ -225,7 +225,10 @@ function checkVersionBumps(mp: Marketplace, base: string) {
   }
   for (const entry of mp.plugins ?? []) {
     const prel = rel(pluginDir(entry));
-    const shipped = [...changed].filter((f) => f.startsWith(prel + "/") && !NO_BUMP_NEEDED.has(path.basename(f))).sort();
+    const shipped = [...changed]
+      .filter((f) => f.startsWith(prel + "/") && !NO_BUMP_NEEDED.has(path.basename(f)))
+      .filter((f) => !f.slice(prel.length + 1).split("/").some((seg) => SKIP_DIRS.includes(seg))) // evals/ etc. aren't shipped
+      .sort();
     if (!shipped.length) continue;
     const oldManifest = atBase(`${prel}/.claude-plugin/plugin.json`);
     if (oldManifest === null) continue; // new plugin: nothing installed to update

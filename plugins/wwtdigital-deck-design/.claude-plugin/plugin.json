@@ -1,7 +1,7 @@
 {
   "name": "wwtdigital-deck-design",
   "displayName": "WWTDigital Deck Design",
-  "version": "4.11.1",
+  "version": "4.11.2",
   "description": "The WWTDigital presentation design system: tokens, twenty layout recipes traced to Figma, nineteen approved photographs, the Aptos type ladder, an HTML-to-PowerPoint exporter with live text, and a validator that gates a deck on measured rules including density, photography and diversity. Uses the Aptos fonts installed on your machine (Office carries them); they are not shipped.",
   "author": {
     "name": "WWTDigital Product Design",

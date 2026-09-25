@@ -72,7 +72,10 @@ locally, not in the Vercel build. `validate.ts` warns (fatal under --strict) whe
 shouldn't-case. Keep `max_turns` low (4): the grader only needs the Skill call, and a skill that goes
 on to do the task burns money for nothing. `walk()` in `lib.ts` skips `evals/`, so they're left
 out of content hashes and downloads: an eval-only change needs no plugin bump, and installed users
-don't get them (run them from a checkout). `evals/results/` is gitignored. All 8 skills have cases (25 total); 84/84 runs passed on 2026-09-24 at 8 turns, about $8 for the lot. Known
+don't get them (run them from a checkout). `evals/results/` is gitignored. Changing what `contentHash` covers (as excluding `evals/` did
+on 2026-09-24) makes every affected plugin look changed against the live catalog, so it needs a
+one-time bump of each; the deploy fails otherwise. Always gate a push on
+`node scripts/validate.ts --strict --prev-catalog auto`, the same check Vercel runs. All 8 skills have cases (25 total); 84/84 runs passed on 2026-09-24 at 8 turns, about $8 for the lot. Known
 flake: `wwtdigital-deck-design-should-2` ("match our WWT template") missed once in seven runs at 4 turns
 with the skill never loaded; owner to decide whether the description needs a sharper phrase.
 
