@@ -1,7 +1,7 @@
 ---
 description: Direct request to humanize a paragraph that has obvious AI tells. Should fire.
 tags: [trigger, humanizer]
-max_turns: 8
+max_turns: 4
 allowed_tools: [Skill]
 ---
 

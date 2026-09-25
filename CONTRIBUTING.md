@@ -79,7 +79,7 @@ claude plugin eval . --ablation none --case '<skill>-*' --no-publish
 
 Every case must score 1.00. If a should-case fails, the description needs clearer trigger
 phrases; if a shouldn't-case fails, it needs a sharper not-for line. Two should-cases and one
-shouldn't-case is the minimum; the build notes which skills are missing them. Results land in
+shouldn't-case is the minimum, and the build fails without them. Results land in
 `evals/results/`, which is gitignored.
 
 ## Adding an MCP server

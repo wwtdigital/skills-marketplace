@@ -68,10 +68,11 @@ Trigger tests are `claude plugin eval` cases in `plugins/<plugin>/evals/<skill>-
 `<skill>-shouldnt-N/` (prompt.md + a `tool_used: Skill` grader; see CONTRIBUTING "Trigger tests").
 Run from the plugin dir: `claude plugin eval . --ablation none --case '<skill>-*' --no-publish`. Each
 run is a real `claude` session on the runner's own credential (a few cents per skill), so they run
-locally, not in the Vercel build. `validate.ts` prints a NOTE for skills without them; make that a
-warning once every skill has cases. Evals ship inside the plugin (the CLI can run an installed
+locally, not in the Vercel build. `validate.ts` warns (fatal under --strict) when a skill has fewer than 2 should-cases and 1
+shouldn't-case. Keep `max_turns` low (4): the grader only needs the Skill call, and a skill that goes
+on to do the task burns money for nothing. Evals ship inside the plugin (the CLI can run an installed
 copy's suite), so adding them changes the plugin hash and needs a plugin bump. `evals/results/` is
-gitignored. Only `humanizer` has cases so far (4 cases, 12/12 runs passing on 2026-09-24).
+gitignored. All 8 skills have cases (25 total); 84/84 runs passed on 2026-09-24, about $8 for the lot.
 
 Test the marketplace itself: `/plugin marketplace add ./` from the repo root, then
 `/plugin install admin@wwtdigital`.

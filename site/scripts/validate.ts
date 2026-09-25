@@ -91,14 +91,14 @@ function checkPlugin(entry: MarketplaceEntry) {
 }
 
 // Trigger tests live in <plugin>/evals/<skill>-should-N/ and <skill>-shouldnt-N/ (see CONTRIBUTING),
-// run by `claude plugin eval`. A NOTE rather than a warning until every skill has them; then make it warn.
+// run by `claude plugin eval`. Every skill has them since 2026-09-24, so a missing set fails --strict.
 function checkEvals(plugin: string, pdir: string, skill: string) {
   const dir = path.join(pdir, "evals");
   const cases = existsSync(dir) ? readdirSync(dir).filter((d) => existsSync(path.join(dir, d, "prompt.md"))) : [];
   const should = cases.filter((c) => c.startsWith(`${skill}-should-`)).length;
   const shouldnt = cases.filter((c) => c.startsWith(`${skill}-shouldnt-`)).length;
   if (should < 2 || shouldnt < 1)
-    notes.push(`${plugin}/${skill}: no trigger tests yet (${should} should, ${shouldnt} shouldn't; want 2 and 1 under ${rel(dir)}/)`);
+    warn(`${plugin}/${skill}: needs trigger tests (${should} should, ${shouldnt} shouldn't; want at least 2 and 1 under ${rel(dir)}/)`);
 }
 
 // MCP servers connect as soon as the plugin is installed, for everyone who installs it, and the
