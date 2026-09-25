@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRightIcon, CaretRightIcon, DownloadSimpleIcon } from "@phosphor-icons/react/ssr";
+import { ConnectorTag } from "@/components/ConnectorTag";
 import { CopyCmd } from "@/components/CopyCmd";
 import { Footer } from "@/components/Footer";
 import { Prose } from "@/components/Prose";
@@ -65,11 +66,7 @@ export default async function SkillPage({ params }: Props) {
               <dt>Connectors</dt>
               <dd>
                 {s.connectors.length
-                  ? s.connectors.map((c) => (
-                      <span key={c} className="tag">
-                        {isBundled(p, c) ? `${connectorName(c)} included` : `Needs ${connectorName(c)}`}
-                      </span>
-                    ))
+                  ? s.connectors.map((c) => <ConnectorTag key={c} plugin={p} connector={c} />)
                   : "None"}
               </dd>
               <dt>Includes</dt>

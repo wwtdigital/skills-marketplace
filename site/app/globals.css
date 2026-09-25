@@ -217,21 +217,23 @@ code, pre, .mono { font-family: var(--font-mono), ui-monospace, Menlo, monospace
 .skill h4 a::after { content: ""; position: absolute; inset: 0; } /* whole card links to the skill page */
 .skill { position: relative; }
 .skill p { margin: 0; color: var(--muted); font-size: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.skill .foot { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 4px; font-size: 13px; color: var(--muted); }
+.skill .foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: auto; padding-top: 4px; font-size: 13px; color: var(--muted); }
 .skill .foot .btn { position: relative; z-index: 1; margin-left: auto; }
 
 .badge { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; }
 .badge.stable { background: var(--text); color: var(--bg); }
 .badge.beta { border: 1px solid var(--text); color: var(--text); }
 .badge.draft { border: 1px dashed var(--line-strong); color: var(--muted); }
-.tag { font-size: 12.5px; padding: 1px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); }
+.tag { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; padding: 1px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.tag svg { flex: none; color: var(--text); }
+.tag-icon { padding: 3px; }
 
 .mcp { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); }
 .mcp > svg { flex: none; color: var(--accent); margin-top: 2px; }
 .mcp h4 { margin: 0 0 2px; font-size: 14.5px; font-weight: 600; }
 .mcp p { margin: 0 0 8px; font-size: 13.5px; color: var(--muted); }
 .mcp ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
-.mcp li { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; font-size: 14px; }
+.mcp li { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 14px; }
 .mcp li code { font-weight: 500; }
 .mcp li .mono { font-size: 12.5px; color: var(--muted); }
 

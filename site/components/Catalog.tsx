@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowUpRightIcon, DownloadSimpleIcon, MagnifyingGlassIcon, PlugsConnectedIcon } from "@phosphor-icons/react";
-import { asset, connectorName, isBundled, type McpServer, type Plugin, type Skill } from "@/lib/catalog";
+import { asset, type McpServer, type Plugin, type Skill } from "@/lib/catalog";
+import { ConnectorIcon, ConnectorTag } from "./ConnectorTag";
 import { CopyCmd } from "./CopyCmd";
 
 const STATUSES = ["stable", "beta", "draft"] as const;
@@ -158,6 +159,7 @@ function McpBlock({ servers }: { servers: McpServer[] }) {
         <ul>
           {servers.map((m) => (
             <li key={m.name}>
+              <ConnectorIcon name={m.name} size={14} />
               <code>{m.name}</code>
               {m.url && <span className="mono">{new URL(m.url).host}</span>}
             </li>
@@ -181,9 +183,7 @@ function SkillCard({ skill: s, plugin: p }: { skill: Skill; plugin: Plugin }) {
       <div className="foot">
         {s.version && <span className="mono">v{s.version}</span>}
         {s.connectors.map((c) => (
-          <span key={c} className="tag" title={isBundled(p, c) ? "Connects when you install the plugin" : "Connect it in the Claude app first"}>
-            {isBundled(p, c) ? `${connectorName(c)} included` : `Needs ${connectorName(c)}`}
-          </span>
+          <ConnectorTag key={c} plugin={p} connector={c} />
         ))}
         <a className="btn btn-sm" href={asset(s.download)} download aria-label={`Download ${s.name}.skill`}>
           <DownloadSimpleIcon size={15} aria-hidden="true" /> .skill
