@@ -38,23 +38,24 @@ than Aptos Black and would misrepresent the half of this review that matters mos
 is internal tooling; see the licensing note in SKILL.md before sending it outside WWT.
 """
 import argparse, base64, json, os, re, sys
-
+import sys as _s; _s.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import skilldoc
-
 import brand_assets
+
+
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 A = lambda *p: os.path.join(ROOT, "assets", *p)
 
-# (family, face to resolve, weight, style). Read from this machine by brand_assets.py;
-# the serif is optional because Office only fetches it on first use.
+# Face NAMES, resolved on this machine by brand_assets.py. The cuts stopped shipping with
+# the package at v4.12: Aptos is Microsoft's, and a subscription grants use rather than
+# redistribution. Four cuts here rather than six, because this page sets specimens and does
+# not need SemiBold or ExtraBold to do it.
 FONTS = [("Aptos", "Aptos", "400", "normal"),
          ("Aptos", "Aptos Bold", "700", "normal"),
          ("Aptos Black", "Aptos Black", "900", "normal"),
-         ("Aptos Serif", brand_assets.SERIF, "700", "italic")]
-FONT_MIME = {".woff2": ("font/woff2", "woff2"), ".ttf": ("font/ttf", "truetype"),
-             ".otf": ("font/otf", "opentype")}
+         ("Aptos Serif", "Aptos Serif Bold Italic", "700", "italic")]
 
 TYPE_CAP = 76          # the widest step this page can hold; above it, shown reduced
 SPEC_ORDER = ["t-display1", "t-display2", "t-h1-lg", "t-h1", "t-h1--stmt", "t-h2",
@@ -285,14 +286,21 @@ def build():
                      red=col["wwt-red"], shadow=shad["shadow-panel"],
                      gradv=grad["grad-brand-v"], graddark=grad["grad-dark-diag"])
 
-    paths = brand_assets.require_fonts([f for _, f, _, _ in FONTS if f != brand_assets.SERIF])
-    paths[brand_assets.SERIF] = brand_assets.font_path(brand_assets.SERIF)
-    faces = "".join(
-        "@font-face{font-family:'%s';src:url('%s') format('%s');font-weight:%s;"
-        "font-style:%s;font-display:swap}"
-        % (fam, b64(paths[f], FONT_MIME[os.path.splitext(paths[f])[1].lower()][0]),
-           FONT_MIME[os.path.splitext(paths[f])[1].lower()][1], w, st)
-        for fam, f, w, st in FONTS if paths[f])
+    # Whatever cuts this machine has. A missing one is skipped rather than fatal: the
+    # teardown's job is to show the system to a human, and three cuts of four still does
+    # that, where refusing to render shows nothing at all. The validator is where a
+    # missing face has to stop the work.
+    import inline_assets as _ia
+    face_rules = []
+    for fam, name, w, st in FONTS:
+        src = brand_assets.font_path(name)
+        if not src:
+            continue
+        uri = "data:font/woff2;base64," + base64.b64encode(_ia._woff2(src)).decode()
+        face_rules.append(
+            "@font-face{font-family:'%s';src:url('%s') format('woff2');font-weight:%s;"
+            "font-style:%s;font-display:swap}" % (fam, uri, w, st))
+    faces = "".join(face_rules)
 
     logo_w = svg(A("vectors", "logo-full.svg"))
     logo_i = logo_w.replace('fill="white"', 'fill="%s"' % col["ink-800"])

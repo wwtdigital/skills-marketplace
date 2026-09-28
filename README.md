@@ -34,8 +34,9 @@ GitHub entirely, add the marketplace from the site instead in Claude Code:
 /plugin install presentation@wwtdigital
 ```
 
-Or download any skill as a `.skill` file from the site and drop it into Cowork
-(*Customize → Skills → Add*), or unzip it into `~/.claude/skills/` for Claude Code.
+Or download a skill as a `.skill` file from the site and drop it into Cowork
+(*Customize → Skills → Add*), or unzip it into `~/.claude/skills/` for Claude Code. Skills that
+need the rest of their plugin (setup scripts, shared files) are offered only as the whole bundle.
 
 ## Plugins
 

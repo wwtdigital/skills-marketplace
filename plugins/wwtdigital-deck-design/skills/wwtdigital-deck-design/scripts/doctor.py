@@ -21,6 +21,9 @@ The output ends in one of three verdicts:
 Exit code is 0 for ENFORCED, 1 for PARTIAL, 2 for DOCUMENTATION, so a hook or a CI step can
 branch on it.
 """
+import os as _os2, sys as _sys2
+_sys2.path.insert(0, _os2.path.dirname(_os2.path.abspath(__file__)))
+from browser import launch as _launch   # Chrome or Edge if present, Chromium as fallback
 import importlib, json, os, shutil, subprocess, sys
 
 import brand_assets
@@ -62,14 +65,13 @@ def check_chromium():
     """Launch it. Importing playwright proves nothing; the launch is what fails."""
     try:
         from playwright.sync_api import sync_playwright
-        from browser import launch
     except Exception:
         add("Chromium", BAD, "playwright not installed",
             SETUP)
         return False
     try:
         with sync_playwright() as p:
-            b = launch(p)
+            b = _launch(p)
             ver = b.version
             b.close()
         add("Chromium", OK, "launches, %s" % ver, "")
@@ -124,6 +126,7 @@ def check_assets():
             ("scripts/teardown.py", "the teardown renderer"),
             ("scripts/tokens.py", "the token generator"),
             ("assets/manifest.json", "the photography library"),
+            ("scripts/brand_assets.py", "the font finder"),
             ("assets/export", "baked decoration for PPTX"),
             ("scripts/wwt_validate.py", "the validator"),
             ("scripts/lint_source.py", "the static lint"),

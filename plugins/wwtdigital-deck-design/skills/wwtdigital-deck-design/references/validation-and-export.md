@@ -118,6 +118,34 @@ A skill package is capped at **200 files**. Run `scripts/check_package.py` befor
 | PKG-02 | No caches or OS junk in the package | FAIL |
 | PKG-03 | `SKILL.md` is at the package root | FAIL |
 
+### System integrity
+
+`check_provenance.py`. These check the system against itself rather than a deck against the
+system, which is why they are listed apart. They found every source-map defect this project has
+had, and they were invisible to `GEN-02` until v4.11 because the script did not scan itself.
+
+| Rule | What it checks | Severity |
+|---|---|---|
+| MAP-02 | Every recipe in `recipes.html` has a manifest entry, and the reverse | FAIL |
+| MAP-03 | Every node id cited in the markup is one the manifest knows | FAIL |
+| MAP-04 | No recipe cites a board the manifest assigns to another recipe | FAIL |
+| MAP-05 | Every node a recipe claims is also cited in its markup | WARN |
+| MAP-06 | Every node a recipe claims is a real board | FAIL |
+| MAP-07 | No board is claimed by two recipes | FAIL |
+| MAP-08 | No board points at a recipe that does not exist | FAIL |
+| MAP-09 | An uncovered board records why it is uncovered | FAIL |
+| ART-01 | An artboard exception matches the board's recorded size | WARN |
+| ART-02 | A board off the standard artboard has a declared exception, and the reverse | FAIL |
+| DRIFT-01 | A fresh pull has no board the manifest is missing (`--inventory`) | FAIL |
+| DRIFT-02 | A fresh pull still has every board the manifest claims (`--inventory`) | FAIL |
+| DRIFT-03 | No board has been resized since the manifest was written (`--inventory`) | FAIL |
+| GEN-01 | The generated files still match what generated them | FAIL |
+| GEN-02 | The documented rule set and the implemented rule set are the same set | FAIL |
+| GEN-03 | The numbers on THE CONTRACT page are the numbers in the code | FAIL |
+| ICO-06 | The icon manifest and the icon payload are the same set | FAIL |
+| PHO-01 | `covers_bleed` agrees with the pixels, and every named file is on disk | FAIL |
+| SKL-01 | Every rule-bearing `references/` file is in `skilldoc.PARTS`, and every listed part exists | FAIL |
+
 ### The two reference documents
 
 There are two, they are kept, and each does a job the other cannot. The teardown is for
@@ -269,8 +297,7 @@ PPTX, and getting it wrong is invisible because Bold and Black differ by only 4.
 **Verify by measuring, not looking:** "INVESTMENT IS UP." at 96px sets 767px in Black and 735px in
 Bold.
 
-**The export embeds the fonts** it finds on the machine (TTF only; see section 3). All Aptos cuts,
-including the ones Office installs, are `fsType 0x0008`, Editable Embedding, which is
+**The export embeds the fonts.** All six Aptos cuts are `fsType 0x0008`, Editable Embedding, which is
 precisely the permission document embedding needs. `export_pptx.py` writes only the faces the deck
 actually uses, full rather than subset, because the point of this path is editable text and a subset
 breaks the moment someone types a glyph outside it. A seven-slide deck uses three faces and gains
@@ -291,9 +318,8 @@ boldItalic** — sorting them alphabetically puts bold first and the schema reje
 embedded fonts, so treat this as belt-and-braces for Windows recipients rather than a guarantee. When
 a deck must look identical everywhere, send PDF.
 
-PowerPoint cannot read WOFF2, so the export embeds TTFs. A face the deck uses and the machine lacks
-is reported by name when the export runs, and `verify_pptx.py` FNT-01 fails the deck. Without Aptos
-present on the opening machine the type reflows: in testing,
+The HTML embeds WOFF2, which PowerPoint cannot read. `assets/fonts/ttf/` holds the same cuts for
+installing locally. Without Aptos present the type reflows: in testing,
 the eyebrow wrapped through the headline and three layer labels broke mid-word. Nothing else changed,
 which is a useful signal — if the artwork is right and only the text is wrong, it is the font.
 

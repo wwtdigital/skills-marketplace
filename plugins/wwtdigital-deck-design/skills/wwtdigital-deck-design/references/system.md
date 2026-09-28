@@ -67,29 +67,19 @@ the scale factor, never type. Measure contrast at native 1920 resolution.
 
 ## 3. Typography ladder
 
-### The face is Aptos, and it comes from the machine
+### The face is Aptos, and it is bundled
 
-Aptos is Microsoft's, so the plugin does not ship it. `scripts/brand_assets.py` finds the cuts on the
-machine by the name inside each file: inside PowerPoint/Word for Mac, in the system font folders, in
-Office's cloud-font cache on Windows, in `~/.wwtdigital-deck-design/fonts`, or wherever `WWT_FONTS_DIR`
-points. (Not Office's cache on a Mac: reading it raises a macOS privacy prompt.) `inline_assets.py`
-writes them in as `@font-face` rules and **stops with instructions if a cut is missing.** **Do not
-link Google Fonts and do not name a webfont fallback.** If the doctor reports Aptos missing, tell the
-person how to install it (Microsoft's free download:
-https://www.microsoft.com/en-us/download/details.aspx?id=106087) and stop; do not build around it.
+Six cuts ship in `assets/fonts` as subsetted WOFF2, 168KB for the set. `inline_assets.py` writes
+them in as `@font-face` rules. **Do not link Google Fonts and do not name a webfont fallback.**
 
-| CSS weight | Cut | Found by full name |
+| CSS weight | Cut | File |
 |---|---|---|
-| 400 | Aptos Regular | `Aptos` |
-| 600 | Aptos SemiBold | `Aptos SemiBold` |
-| 700 | Aptos Bold | `Aptos Bold` |
-| 800 | Aptos ExtraBold | `Aptos ExtraBold` |
-| 900 | **Aptos Black** | `Aptos Black` |
-| 700 italic | Aptos Serif Bold Italic | `Aptos Serif Bold Italic` |
-
-The five sans cuts come with Microsoft 365. **Aptos Serif does not**: it is an Office cloud font, so
-on most machines it is absent until the Microsoft download is installed. It is only required when a
-deck sets a pull quote (`.t-quote`).
+| 400 | Aptos Regular | `Aptos.woff2` |
+| 600 | Aptos SemiBold | `Aptos-SemiBold.woff2` |
+| 700 | Aptos Bold | `Aptos-Bold.woff2` |
+| 800 | Aptos ExtraBold | `Aptos-ExtraBold.woff2` |
+| 900 | **Aptos Black** | `Aptos-Black.woff2` |
+| 700 italic | Aptos Serif Bold Italic | `Aptos-Serif-Bold-Italic.woff2` |
 
 **Why the explicit map exists.** Aptos ships its heavy cuts as *separate families*: the Black file
 reports family "Aptos Black", subfamily "Regular", not weight 900 of family "Aptos". So
@@ -263,7 +253,7 @@ our people, labs and buildings — for something we actually did.
 
 | ID | Family | Crops | Pixels | Note |
 |---|---|---|---|---|
-| `gaze-rb` | Signal | bleed, band | 2006 × 1080 | The Figma cover frame. Face right of centre, headline goes left |
+| `gaze-rb` | Signal | bleed, band | 1690 × 919 ⚠ | The cover frame. Face centre-left, bokeh right, headline reads across the lower third. Enlarged about 18% to fill a bleed, so it does not cover at native size |
 | `twin-rb` | Signal | half, bleed | 1920 × 1781 | The Figma closing frame. Strongest red-blue split |
 | `eyes-closed` | Signal | half | 1920 × 2040 | Near-square. Hero left or right without recropping |
 | `profile-blue` | Signal | bleed, card | 1927 × 1080 | Faces right. Mirror rather than recrop when the layout flips |
@@ -271,10 +261,9 @@ our people, labs and buildings — for something we actually did.
 | `profile-band` | Signal | inset, band | 3291 × 1080 | The only frame wide enough for the inset band |
 | `upward` | Signal | half | 1920 × 1955 | Square, subject centred, wants type beside it |
 | `network` | Signal | card, inset | 2829 × 1080 | Reads as literal networking. Use sparingly, it dates fastest |
-| `neon-tall` | Signal | half | 1793 × 3197 | Tall portrait, magenta and blue |
 | `datacenter-aisle` | Signal | half, band, card | 1536 × 1024 ⚠ | Data center aisle, blue and red. The source frame on node `1839:55` and the darkest in the library: p90 luminance 0.09, so white type clears with no scrim. p99 is 0.55 on the specular lights, so keep a headline off the bright rack faces |
 | `wave-portrait` | Signal | bleed, band | 1920 × 1507 | Portrait dissolving into red and blue waves |
-| `wall-touch` | Evidence | bleed | 1920 × 1081 | Darkest frame in the set. The divider frame |
+| `wall-touch` | Evidence | bleed | 1900 × 1080 | The divider frame. A visitor at a lit touch wall. Enlarged 1% to fill a bleed, which is its only crop |
 | `keyboard` | Evidence | band, inset | 1920 × 1278 | Neutral, works under any headline |
 | `pair-laptop` | Evidence | band, bleed | 1798 × 772 ⚠ | The default working shot |
 | `conversation` | Evidence | card, panel inset | 1712 × 843 | Colleagues mid-conversation |
@@ -638,7 +627,7 @@ repeat. And a **reference document is exempt in full** — the spec book shows s
 row and a component gallery after them, and consecutive sameness is what a gallery is. Detected by
 `section.doc` or `[data-gallery]`.
 
-**Where this stands today.** The AI GTM deck has no repeats. The AI Built for Success deck has three
+**Where this stands today.** The AI Built for Success deck has three
 slides on one layout, AI Native Engineering then Workforce AI then Mission AI, cleared by B2 as a
 parallel set and reported as WARN so the judgment stays visible.
 

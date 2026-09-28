@@ -185,9 +185,21 @@ function SkillCard({ skill: s, plugin: p }: { skill: Skill; plugin: Plugin }) {
         {s.connectors.map((c) => (
           <ConnectorTag key={c} plugin={p} connector={c} />
         ))}
-        <a className="btn btn-sm" href={asset(s.download)} download aria-label={`Download ${s.name}.skill`}>
-          <DownloadSimpleIcon size={15} aria-hidden="true" /> .skill
-        </a>
+        {s.download ? (
+          <a className="btn btn-sm" href={asset(s.download)} download aria-label={`Download ${s.name}.skill`}>
+            <DownloadSimpleIcon size={15} aria-hidden="true" /> .skill
+          </a>
+        ) : (
+          <a
+            className="btn btn-sm"
+            href={asset(p.download)}
+            download
+            aria-label={`Download the ${p.displayName} bundle`}
+            title="Needs the rest of its plugin, so it comes as the whole bundle"
+          >
+            <DownloadSimpleIcon size={15} aria-hidden="true" /> Bundle
+          </a>
+        )}
       </div>
     </article>
   );

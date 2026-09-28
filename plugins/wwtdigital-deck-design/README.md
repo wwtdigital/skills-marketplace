@@ -15,9 +15,9 @@ not a validated deck and should not be described as one.
 
 `wwtdigital-deck-design` is the system itself. Tokens, a twelve-column grid on a
 1920 × 1080 canvas, twenty layout recipes with their real geometry, four grounds including a
-dark emphasis ground capped at one slide in five, nineteen approved photographs with measured
-scrim recommendations, 497 icons from Blue Steel 3.0 that inherit the slide's
-ink, the Aptos type ladder, an HTML-to-PowerPoint exporter that produces live
+dark emphasis ground capped at one slide in five, eighteen approved photographs with measured
+scrim recommendations, 497 icons from Blue Steel 3.0 that inherit the slide's ink, the six Aptos cuts found on your own machine rather than
+shipped, an HTML-to-PowerPoint exporter that produces live
 editable text, and a validator with about seventy-eight measured rules, every one of them
 implemented and documented (check_provenance.py proves it in both directions), including craft rules for panel
 insets, dead space inside a box, the bug variant against its measured backdrop, and a check
@@ -136,6 +136,8 @@ sh ../../setup/run.sh verify_pptx.py Deck.pptx --html Deck.html # refuses a scre
 sh ../../setup/run.sh selftest.py                              # after ANY rule change
 sh ../../setup/run.sh check_documents.py Spec.html Teardown.html  # the two references agree
 sh ../../setup/run.sh check_package.py                         # 200-file cap, BEFORE shipping
+sh ../../setup/run.sh harvest_logos.py Source.pptx -o logos/  # partner marks from a source deck
+sh ../../setup/run.sh brand_assets.py                         # where Aptos was found, or was not
 sh ../../setup/run.sh calibrate.py good1.html good2.html       # re-derive the deck-level ratios
 ```
 

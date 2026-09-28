@@ -16,17 +16,20 @@ Placeholders recognised in the source HTML:
     {{ARROW_SVG}}     raw inline SVG, not a data URI, so CSS can recolour it
     {{BRANDX}} {{BRANDX10}}  {{RING}} {{RING2}} {{RING3}} {{CHEVRON}} {{RULE}}
     {{MATRIX}}        {{ICO_INVENTORY}} {{ICO_MISSION}} {{ICO_SHIPPING}}
-    {{FONT_FACES}}    a <style> block embedding the Aptos cuts, read from this machine
-                      (scripts/brand_assets.py says where it looks; they are not shipped)
+    {{FONT_FACES}}    a <style> block of the Aptos cuts, found on THIS machine by
+                      brand_assets.py and compressed to woff2. Not shipped: the
+                      font is Microsoft's. The serif is only required if the
+                      deck has a pull quote
     {{SYSTEM_CSS}}    assets/system.css verbatim, the one copy of the stylesheet
     {{SPEC_CHROME_CSS}}  assets/spec-chrome.css, the reference document's own furniture
 
 Exits non-zero if any placeholder is left unresolved, so a typo fails the
 build instead of shipping a broken image.
 """
-import argparse, base64, json, os, re, sys
-
+import argparse, base64, io, json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import brand_assets
+from deps import need as _need
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 A = lambda *p: os.path.join(ROOT, "assets", *p)
@@ -43,7 +46,7 @@ def uri(path):
         return "data:%s;base64,%s" % (MIME[ext], base64.b64encode(fh.read()).decode())
 
 
-def build_map(html=""):
+def build_map(serif=True):
     m = {}
     # Raw CSS, not a data URI. assets/system.css is the single copy of the stylesheet;
     # anything that carries its own frozen duplicate drifts (REG-28).
@@ -107,8 +110,7 @@ def build_map(html=""):
             for name, svg in json.load(fh).items():
                 m["{{ICON_%s}}" % name] = svg.strip()
 
-    if "{{FONT_FACES}}" in html:
-        m["{{FONT_FACES}}"] = font_faces(uses_serif(html))
+    m["{{FONT_FACES}}"] = font_faces(serif)
     return m
 
 
@@ -119,8 +121,13 @@ def build_map(html=""):
 # Aptos Narrow was removed at v2.0 by direction: the design does not use it. Dropping the
 # faces as well as the token means nothing can quietly fall back into it.
 #
-# The files come from this machine, not the package (brand_assets.py). A bundled WOFF2 is
-# used if there is one; otherwise the TTF that Office or the Microsoft download installed.
+# THE FILES COME FROM THE MACHINE, NOT THE PACKAGE. Aptos is Microsoft's. A 365
+# subscription grants use of the font, not the right to redistribute it, so shipping the
+# six cuts inside a plugin that gets passed around is the wrong act even internally.
+# `brand_assets.py` finds them: inside PowerPoint.app on a Mac, the font folders on Windows,
+# ~/.wwtdigital-deck-design/fonts, or WWT_FONTS_DIR (not Office's Mac cloud-font cache,
+# which raises a macOS permission prompt). The faces are named by the name INSIDE the file,
+# not by filename, because Windows caches Aptos Serif under a number.
 FACES = [
     ("Aptos",        400, "normal", "Aptos"),
     ("Aptos",        600, "normal", "Aptos SemiBold"),
@@ -129,33 +136,75 @@ FACES = [
     ("Aptos",        900, "normal", "Aptos Black"),
     ("Aptos Serif",  700, "italic", brand_assets.SERIF),
 ]
-FORMAT = {".woff2": ("font/woff2", "woff2"), ".ttf": ("font/ttf", "truetype"),
-          ".otf": ("font/otf", "opentype")}
 
 
 def uses_serif(html):
-    """Aptos Serif is only for pull quotes, and it is the cut most machines lack (it is an
-    Office cloud font). Require it only when the markup uses it: a .t-quote element, or the
-    serif named in an inline style. <style> blocks are ignored, because system.css (inlined or
-    pasted) defines .t-quote and the serif token whether the deck uses them or not."""
+    """Aptos Serif is for pull quotes only, and it is the cut most machines lack: it is an
+    Office cloud font rather than part of the base install. Require it only when the markup
+    actually uses it. <style> blocks are ignored, because system.css defines `.t-quote` and
+    the serif token whether or not any slide reaches for them, so scanning the whole
+    document would demand the serif on every deck ever built."""
     body = re.sub(r"(?is)<style\b.*?</style>", "", html)
     return bool(re.search(r"\bt-quote\b|--font-serif|Aptos Serif", body))
+
+
+def _woff2(path):
+    """The font as woff2 bytes, converting from TTF in memory if needed.
+
+    Reading TTFs off the machine and embedding them raw makes every built deck about 2.6x
+    larger: measured at 0.96 MB against 2.46 MB on the same one-slide fixture, roughly
+    +1.5 MB per deck. woff2 is the same outlines at about a third of the bytes, and these
+    documents are already megabytes of base64 photography without adding uncompressed
+    fonts on top.
+
+    Cached on disk by path, size and mtime, because the conversion is about 400ms a cut
+    and six cuts on every build would be two and a half seconds of pure repetition.
+    """
+    ext = os.path.splitext(path)[1].lower()
+    if ext == ".woff2":
+        with open(path, "rb") as fh:
+            return fh.read()
+    st = os.stat(path)
+    key = "%s-%d-%d.woff2" % (os.path.basename(path).rsplit(".", 1)[0], st.st_size,
+                              int(st.st_mtime))
+    cdir = os.path.join(os.path.expanduser("~"), ".wwtdigital-deck-design", "woff2")
+    try:
+        os.makedirs(cdir, exist_ok=True)
+        hit = os.path.join(cdir, key)
+        if os.path.exists(hit):
+            with open(hit, "rb") as fh:
+                return fh.read()
+    except OSError:
+        hit = None                       # read-only home: convert every time rather than fail
+    TTFont = _need("fontTools.ttLib", "TTFont", pkg="fonttools")
+    buf = io.BytesIO()
+    f = TTFont(path)
+    f.flavor = "woff2"
+    f.save(buf)
+    data = buf.getvalue()
+    if hit:
+        try:
+            with open(hit, "wb") as fh:
+                fh.write(data)
+        except OSError:
+            pass
+    return data
 
 
 def font_faces(serif=True):
     faces = [f for f in FACES if serif or f[3] != brand_assets.SERIF]
     paths = brand_assets.require_fonts([f[3] for f in faces])
+    # If the serif is not needed but IS present, include it anyway: it costs one face and
+    # saves a rebuild the moment somebody adds a pull quote.
     if not serif and brand_assets.font_path(brand_assets.SERIF):
         faces = FACES
         paths[brand_assets.SERIF] = brand_assets.font_path(brand_assets.SERIF)
     out = ["<style>"]
     for fam, weight, style, face in faces:
-        mime, fmt = FORMAT[os.path.splitext(paths[face])[1].lower()]
-        with open(paths[face], "rb") as fh:
-            b64 = base64.b64encode(fh.read()).decode()
+        b64 = base64.b64encode(_woff2(paths[face])).decode()
         out.append(
             "@font-face{font-family:'%s';font-style:%s;font-weight:%d;font-display:block;"
-            "src:url(data:%s;base64,%s) format('%s')}" % (fam, style, weight, mime, b64, fmt))
+            "src:url(data:font/woff2;base64,%s) format('woff2')}" % (fam, style, weight, b64))
     # No synthetic bolding or slanting anywhere. If a weight is missing it should look
     # wrong in review, not be quietly faked at render time.
     out.append("html{font-synthesis:none;-webkit-font-smoothing:antialiased}")
@@ -193,7 +242,10 @@ def main():
 
     with open(args.source) as fh:
         html = fh.read()
-    for k, v in build_map(html).items():
+    # Only demand Aptos Serif if this deck actually has a pull quote. It is an
+    # Office cloud font, so it is the cut most likely to be absent, and failing a
+    # build over a face the deck never uses is a wrong answer.
+    for k, v in build_map(uses_serif(html)).items():
         html = html.replace(k, v)
 
     left = sorted(set(re.findall(r"\{\{[A-Za-z0-9_\-]+\}\}", html)))

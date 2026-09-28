@@ -30,6 +30,18 @@ const ZIP_EPOCH = new Date(1980, 0, 2); // local time: zip stores local dates an
 
 const nowIso = () => new Date().toISOString().replace(/\.\d{3}Z$/, "+00:00");
 
+// A skill that references ${CLAUDE_PLUGIN_ROOT} uses files outside its own folder (setup scripts,
+// hooks, shared assets), so it only works installed as part of its plugin. No .skill for it.
+function needsPlugin(dir: string): boolean {
+  return walk(dir).some((f) => {
+    try {
+      return readFileSync(f, "utf8").includes("CLAUDE_PLUGIN_ROOT");
+    } catch {
+      return false;
+    }
+  });
+}
+
 function lastModified(dir: string): string {
   return (git("log", "-1", "--format=%cI", "--", rel(dir)) ?? "").trim() || nowIso();
 }
@@ -100,7 +112,8 @@ export function build(out: string, prev: Catalog | null): Catalog {
     const skills: Skill[] = [];
     for (const sk of iterSkills(entry)) {
       if (sk.problems.length) continue;
-      const [size] = zipDir(sk.dir, path.join(dl, `${sk.name}.skill`), sk.name);
+      const bundleOnly = needsPlugin(sk.dir);
+      const [size] = bundleOnly ? [0] : zipDir(sk.dir, path.join(dl, `${sk.name}.skill`), sk.name);
       const digest = contentHash(sk.dir);
       const old = prevSkills.get(sk.name);
       const md = sk.metadata;
@@ -117,8 +130,9 @@ export function build(out: string, prev: Catalog | null): Catalog {
         has_references: existsSync(path.join(sk.dir, "references")),
         updated: old?.content_hash === digest ? old.updated : lastModified(sk.dir),
         source: `${REPO_URL}/tree/main/${rel(sk.dir)}`,
-        download: `downloads/${sk.name}.skill`,
+        download: bundleOnly ? null : `downloads/${sk.name}.skill`,
         download_bytes: size,
+        bundle_only: bundleOnly,
         content_hash: digest,
       });
     }

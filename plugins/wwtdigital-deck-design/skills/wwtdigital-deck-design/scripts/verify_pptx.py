@@ -34,6 +34,9 @@ one. Found by check_provenance.py GEN-02.
 
 Exit code 1 on any failure. Run it after export_pptx.py, every time.
 """
+import os as _os2, sys as _sys2
+_sys2.path.insert(0, _os2.path.dirname(_os2.path.abspath(__file__)))
+from browser import launch as _launch   # Chrome or Edge if present, Chromium as fallback
 import argparse, glob, hashlib, os, re, sys, zipfile
 from collections import Counter
 
@@ -200,7 +203,7 @@ def html_paint_order(path):
         return None
     try:
         with sync_playwright() as pw:
-            b = launch(pw)
+            b = _launch(pw)
             pg = b.new_page(viewport={"width": 1980, "height": 1200})
             pg.goto("file://" + os.path.abspath(path))
             pg.wait_for_timeout(2200)
@@ -265,7 +268,7 @@ def html_text_per_slide(path):
         return None
     try:
         with sync_playwright() as pw:
-            b = launch(pw)
+            b = _launch(pw)
             pg = b.new_page(viewport={"width": 1980, "height": 1200})
             pg.goto("file://" + os.path.abspath(path))
             pg.wait_for_timeout(2000)

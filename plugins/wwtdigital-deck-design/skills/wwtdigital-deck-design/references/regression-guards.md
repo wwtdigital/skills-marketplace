@@ -496,12 +496,12 @@ and the wrong artwork; identity is the test, not arity.
 Every photography rule in the set was about whether an image is used WELL: the crop list, the
 native resolution, the measured scrim, the share of slides, the gap between them. Not one
 asked whether it is used TWICE. A twelve-slide deck came back with one frame on a single slide
-twice and another frame on two slides, having drawn on eight of nineteen available
+twice and another frame on two slides, having drawn on eight of eighteen available
 photographs, and it returned zero failures. The rule was not broken. It had never been
 written, which is the harder kind to notice.
 
 **Verify:** `IMG-07` fails the same photograph twice on one slide, always, because that reads
-as a mistake rather than a motif. `IMG-08` is arithmetic: nineteen frames cannot carry forty
+as a mistake rather than a motif. `IMG-08` is arithmetic: eighteen frames cannot carry forty
 slides, so a deck longer than the library warns and a deck no longer than it fails. Both run
 in `lint_source.py` off the `{{IMG_*}}` placeholder and in the validator off a fingerprint of
 the inlined blob, because after inlining the library name is gone.
@@ -541,6 +541,84 @@ first run. `IMG-01` is implemented now, in `lint_source.py` rather than the vali
 time the assets are inlined every `src` is a base64 blob and the library name is gone: the
 placeholder is the only place the claim is checkable. The PPTX family is documented as its own table,
 and the canvas rule in `verify_pptx.py` is `PPT-01`.
+
+### REG-56 · Two copies of a rule agree until the day one of them moves
+`calibrate.py` derives the deck-level floors and `wwt_validate.py` enforces them. They held
+two copies of the same measurement. `calibrate.py` had `PHOTO_MIN_AREA = 0.06` and its own
+`qualifying_photo` taking the LARGEST image on a slide; the validator moved to 0.15 and a SUM
+at v4.7 and the calibration tool did not. So the numbers printed in THE CONTRACT's ratios
+table were produced by a rule the gate had stopped using two releases earlier.
+
+It survived because it agreed. On the reference deck both rules returned 38%, and two
+constants that match by luck look exactly like one constant. Fixing the threshold alone moved
+it to 23%, which was still wrong, because the threshold was only half the duplication; the
+function was the other half. Importing both gives 31%, which is what the validator reports.
+
+**Verify:** `calibrate.py` imports `PHOTO_MIN_AREA` and `qualifying_photo` from
+`wwt_validate.py` and defines neither. A calibration tool that measures by a different rule
+from the gate is deriving floors from a fiction, and the only safe number of copies is one.
+
+### REG-57 · A reference that breaks the rules teaches that the rules are optional
+The ratios table was calibrated off two decks. One of them, AI GTM 2026, fails `IMG-05`:
+measured against the current rules it carries photography on 14% of slides against a 30%
+floor. Deriving the floor partly from a deck that cannot meet it is circular, and citing that
+deck as an exemplar tells the next reader the floor is aspirational.
+
+Its column was also stale in a second way: it read 29%, a figure produced under the pre-v4.7
+measurement. `GEN-03` did not catch it because those columns are measurements of specific
+decks rather than thresholds, and nothing compares a recorded measurement against a
+re-measurement.
+
+The deck is not deleted. It stays in this register as the deck that exposed the frozen
+stylesheet copy, the renamed Brand X class and the emphasis-ceiling case, which is a real and
+honest job. What it stopped being is a source of truth.
+
+**Verify:** the ratios table cites one deck, `references/contract.md` says why in the body
+rather than in a footnote, and `wwt_validate.py`'s calibration comment names the same reason.
+The remaining mentions of that deck are all failure history.
+
+### REG-58 · A router can point at an empty room
+SKILL.md was 2,200 lines and 137 KB, loaded before any work began on every deck: about 35,000
+tokens spent before reading the brief. Splitting it into `references/` saves roughly 34,000
+of those per activation, and the token ceiling is the most common complaint this skill gets.
+
+The danger is not the split. It is that `GEN-02` and `GEN-03` read the document to find rule
+tables and stated numbers, and a check pointed at a smaller document finds fewer problems
+while reporting exactly the same clean result. Nothing distinguishes "found none" from
+"looked at almost nothing", which is REG-46 at a larger scale.
+
+So `skilldoc.py` reassembles the parts in document order and every check reads through it.
+After the split `GEN-02` still sees all **106** rule ids and `GEN-03` still finds all six of
+its contract anchors, which was verified by counting rather than by the gate coming back
+green.
+
+**Verify:** `SKL-01` fails when `skilldoc.PARTS` names a file that is not on disk, and when a
+`references/*.md` exists that `PARTS` does not read. Both proved. The second matters more: it
+is the one that happens by accident, when somebody adds a section six months from now and the
+checks quietly stop covering it.
+
+### REG-55 · A field nobody reads is a claim nobody checks
+`covers_bleed` had sat in the photography manifest since the library was written. It answers the
+one question that matters when a frame is chosen for a cover: can this fill 1920 x 1080 without
+being enlarged? Nothing read it. Not the validator, not the linter, not the exporter. It was
+documentation wearing the costume of a data field, which is IMG-01 before GEN-02 found it.
+
+It went unnoticed because it had never been wrong. Every frame in the library was catalogued in
+one pass, the flags were set correctly that day, and nothing changed afterwards. The first swap
+of a cover frame is what made it matter: the incoming render was 1690 x 919 against the
+2006 x 1080 it replaced, which needs an 18% enlargement to fill the crop it is listed for. Copying
+the old entry forward would have carried `covers_bleed: true` onto a frame that does not, on the
+single image in the set most likely to be used at full bleed, and a builder reading the manifest
+would have had no way to know.
+
+This is the same shape as REG-54 one release earlier. Both were correct-by-accident for as long
+as nothing moved, and both became wrong the moment one input changed. **A property that has always
+been true is not the same as a property something enforces**, and the difference only shows up on
+the day it changes.
+
+**Verify:** `PHO-01` derives `covers_bleed` from `px` rather than trusting it, in both directions,
+so claiming a small frame covers and claiming a large one does not are both failures. It also
+fails a manifest entry naming a file that is not on disk. Proved with all three.
 
 ### REG-54 · The packaging step was reviewed for size and never for shape
 v4.10.0 shipped 610 files into a format capped at 200. The icon library went in as 497 loose

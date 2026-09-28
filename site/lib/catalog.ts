@@ -14,8 +14,11 @@ export type Skill = {
   has_references: boolean;
   updated: string;
   source: string;
-  download: string;
+  /** Null when the skill only works inside its plugin (see bundle_only); download the plugin zip instead. */
+  download: string | null;
   download_bytes: number;
+  /** The skill reaches outside its own folder (${CLAUDE_PLUGIN_ROOT}), so a lone .skill would be broken. */
+  bundle_only: boolean;
   content_hash: string;
 };
 

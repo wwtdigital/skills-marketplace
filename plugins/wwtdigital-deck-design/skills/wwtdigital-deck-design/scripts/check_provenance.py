@@ -27,8 +27,9 @@ A name is a claim. A node id is checkable. This checks it.
 Exit 1 on any FAIL.
 """
 import argparse, json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import skilldoc   # SKILL.md is a router; the checks read the document whole
 
-import skilldoc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -207,8 +208,13 @@ def main():
     # v4.10 and GEN-02 immediately failed its four DOC rules as undocumented, which
     # is the check doing its job: a new rule-emitting script has to be declared here
     # or its rules read as promises nothing keeps.
+    # Including this file. It was the only rule-emitting script GEN-02 did not scan, on the
+    # quiet assumption that a checker does not need checking. Its own MAP, ART, DRIFT, GEN,
+    # ICO and PHO rules were invisible to it for as long as none of them appeared in a rule
+    # table; the first one that did was reported as unimplemented while sitting twenty lines
+    # above the code that reports it.
     for fn in ("wwt_validate.py", "lint_source.py", "verify_pptx.py",
-               "check_documents.py", "check_package.py"):
+               "check_documents.py", "check_package.py", "check_provenance.py"):
         p = os.path.join(HERE, fn)
         if not os.path.exists(p):
             continue
@@ -233,6 +239,33 @@ def main():
     for rid in sorted(code_ids - doc_ids):
         fails.append(("GEN-02", f"{rid} can fire and is not in the SKILL.md rule table, so "
                                 f"somebody will hit it with nothing to read"))
+
+    # ---- PHO-01: covers_bleed has to be true of the pixels.
+    #
+    # The field said "this frame can fill a 1920 x 1080 bleed at native resolution" and
+    # nothing read it, which makes it the same shape as IMG-01 before GEN-02 caught it: a
+    # claim a builder trusts and no code checks. It mattered the first time a cover frame
+    # was swapped. The replacement was 1690 x 919 against the 2006 x 1080 it replaced, so
+    # it needs an 18% enlargement to fill the crop it is listed for, and a covers_bleed
+    # left at true would have said the opposite on the one frame most likely to be used
+    # at full bleed.
+    pm = os.path.join(ROOT, "assets", "manifest.json")
+    if os.path.exists(pm):
+        with open(pm, encoding="utf-8") as fh:
+            pd = json.load(fh)
+        for pid, meta in sorted(pd.items()):
+            if not (isinstance(meta, dict) and "crops" in meta and "px" in meta):
+                continue
+            w, h = meta["px"]
+            covers = w >= 1920 and h >= 1080
+            if bool(meta.get("covers_bleed")) != covers:
+                fails.append(("PHO-01", f"{pid} is {w} x {h} and covers_bleed is "
+                                        f"{str(meta.get('covers_bleed')).lower()}. It should "
+                                        f"be {str(covers).lower()}: a frame covers a bleed "
+                                        f"only at 1920 x 1080 or larger"))
+            f = os.path.join(ROOT, meta["file"])
+            if not os.path.exists(f):
+                fails.append(("PHO-01", f"{pid} names {meta['file']}, which is not on disk"))
 
     # ---- ICO-06: the icon manifest and the icon payload are the same set.
     #
@@ -277,6 +310,23 @@ def main():
             if not src.get(k):
                 fails.append(("ICO-06", f"the icon manifest does not record {k}. A set with "
                                         f"no provenance cannot be re-pulled or checked"))
+
+    # ---- SKL-01: every rule-bearing reference file is actually read.
+    #
+    # SKILL.md is a router and the sections live in references/. That saves about 34,000
+    # tokens an activation and costs one new way to fail: add a reference file carrying a
+    # rule table or a contract number, forget to list it in skilldoc.PARTS, and GEN-02 and
+    # GEN-03 stop seeing it. They would not complain. They would report clean, because a
+    # check pointed at a smaller document finds fewer problems and cannot tell that from
+    # finding none.
+    for p in skilldoc.missing():
+        fails.append(("SKL-01", f"skilldoc.PARTS lists {p} and it is not on disk, so the "
+                                f"checks are reading a document with a hole in it"))
+    for f in skilldoc.unlisted():
+        fails.append(("SKL-01", f"references/{f} exists and skilldoc.PARTS does not read "
+                                f"it. Any rule table or contract number in it is invisible "
+                                f"to GEN-02 and GEN-03. Add it to PARTS, or to the prose "
+                                f"exemption there if it carries neither"))
 
     # ---- GEN-03: the numbers on THE CONTRACT page are the numbers in the code.
     #

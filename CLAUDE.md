@@ -150,6 +150,9 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   it from a `"use client"` component.
 - Skill pages live at `/skills/<name>`, and downloads are `<name>.skill`, so skill names must be
   unique across all plugins. `validate.ts` enforces this.
+- A skill whose files mention `${CLAUDE_PLUGIN_ROOT}` reaches outside its own folder, so build-index
+  marks it `bundle_only`, writes no `.skill` for it, and the site offers the plugin zip instead
+  (currently both `wwtdigital-deck-design` skills). Automatic: no flag to set.
 - MCP servers live in `plugins/<category>/.mcp.json` (not `plugin.json`, which the validator
   rejects) and connect for everyone who installs that category. `presentation` has
   `artifact-publisher`, `research` has `brandscanner`; both are OAuth-backed http servers, so the

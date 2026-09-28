@@ -1,283 +1,269 @@
 {
  "atc-lobby": {
-  "file": "assets/photos/atc-lobby.jpg",
-  "family": "Evidence",
+  "covers_bleed": false,
   "crops": [
    "card",
    "band"
   ],
+  "family": "Evidence",
+  "file": "assets/photos/atc-lobby.jpg",
+  "note": "ATC lobby with visitors",
   "px": [
    1682,
    1010
   ],
-  "ratio": 1.665,
-  "note": "ATC lobby with visitors",
-  "covers_bleed": false
+  "ratio": 1.665
  },
  "conversation": {
-  "file": "assets/photos/conversation.jpg",
-  "family": "Evidence",
+  "covers_bleed": false,
   "crops": [
    "card",
    "panel inset"
   ],
+  "family": "Evidence",
+  "file": "assets/photos/conversation.jpg",
+  "note": "Colleagues mid-conversation",
   "px": [
    1712,
    843
   ],
-  "ratio": 2.031,
-  "note": "Colleagues mid-conversation",
-  "covers_bleed": false
+  "ratio": 2.031
  },
  "datacenter-aisle": {
-  "file": "assets/photos/datacenter-aisle.jpg",
-  "family": "Signal",
+  "covers_bleed": false,
   "crops": [
    "half",
    "band",
    "card"
   ],
+  "family": "Signal",
+  "file": "assets/photos/datacenter-aisle.jpg",
+  "note": "Data center aisle, blue and red. The source image on node 1839:55. Native 1536 wide, so a 1623 crop is a 6% upscale and a full 1920 bleed is 25%. Use it at half or smaller",
   "px": [
    1536,
    1024
   ],
-  "ratio": 1.5,
-  "note": "Data center aisle, blue and red. The source image on node 1839:55. Native 1536 wide, so a 1623 crop is a 6% upscale and a full 1920 bleed is 25%. Use it at half or smaller",
-  "covers_bleed": false
+  "ratio": 1.5
  },
  "eyes-closed": {
-  "file": "assets/photos/eyes-closed.jpg",
-  "family": "Signal",
+  "covers_bleed": true,
   "crops": [
    "half"
   ],
+  "family": "Signal",
+  "file": "assets/photos/eyes-closed.jpg",
+  "note": "Near-square. Hero left or right without recropping",
   "px": [
    1920,
    2040
   ],
-  "ratio": 0.941,
-  "note": "Near-square. Hero left or right without recropping",
-  "covers_bleed": true
+  "ratio": 0.941
  },
  "gaze-rb": {
-  "file": "assets/photos/gaze-rb.jpg",
-  "family": "Signal",
+  "covers_bleed": false,
   "crops": [
    "bleed",
    "band"
   ],
+  "family": "Signal",
+  "file": "assets/photos/gaze-rb.jpg",
+  "note": "The cover frame. Face centre-left, red glitch down the left edge, bokeh right, so the headline reads across the lower third. Replaced at v4.11: the supplied render is 1690 x 919 and is enlarged about 18% to fill a bleed, so a larger source is worth having",
   "px": [
-   2006,
-   1080
+   1690,
+   919
   ],
-  "ratio": 1.857,
-  "note": "The Figma cover frame. Face right of centre, headline goes left",
-  "covers_bleed": true
+  "ratio": 1.839
  },
  "hq-confetti": {
-  "file": "assets/photos/hq-confetti.jpg",
-  "family": "Evidence",
+  "covers_bleed": false,
   "crops": [
    "half",
    "panel inset"
   ],
+  "family": "Evidence",
+  "file": "assets/photos/hq-confetti.jpg",
+  "note": "HQ exterior. The St. Louis proof shot",
   "px": [
    1671,
    1114
   ],
-  "ratio": 1.5,
-  "note": "HQ exterior. The St. Louis proof shot",
-  "covers_bleed": false
+  "ratio": 1.5
  },
  "keyboard": {
-  "file": "assets/photos/keyboard.jpg",
-  "family": "Evidence",
+  "covers_bleed": true,
   "crops": [
    "band",
    "inset"
   ],
+  "family": "Evidence",
+  "file": "assets/photos/keyboard.jpg",
+  "note": "Neutral, works under any headline",
   "px": [
    1920,
    1278
   ],
-  "ratio": 1.502,
-  "note": "Neutral, works under any headline",
-  "covers_bleed": true
- },
- "neon-tall": {
-  "file": "assets/photos/neon-tall.jpg",
-  "family": "Signal",
-  "crops": [
-   "half"
-  ],
-  "px": [
-   1793,
-   3197
-  ],
-  "ratio": 0.561,
-  "note": "Tall portrait, magenta and blue",
-  "covers_bleed": false
+  "ratio": 1.502
  },
  "network": {
-  "file": "assets/photos/network.jpg",
-  "family": "Signal",
+  "covers_bleed": true,
   "crops": [
    "card",
    "inset"
   ],
+  "family": "Signal",
+  "file": "assets/photos/network.jpg",
+  "note": "Reads as literal networking. Use sparingly, it dates fastest",
   "px": [
    2829,
    1080
   ],
-  "ratio": 2.619,
-  "note": "Reads as literal networking. Use sparingly, it dates fastest",
-  "covers_bleed": true
+  "ratio": 2.619
  },
  "pair-laptop": {
-  "file": "assets/photos/pair-laptop.jpg",
-  "family": "Evidence",
+  "covers_bleed": false,
   "crops": [
    "band",
    "bleed"
   ],
+  "family": "Evidence",
+  "file": "assets/photos/pair-laptop.jpg",
+  "note": "The default working shot",
   "px": [
    1798,
    772
   ],
-  "ratio": 2.329,
-  "note": "The default working shot",
-  "covers_bleed": false
+  "ratio": 2.329
  },
  "phone-street": {
-  "file": "assets/photos/phone-street.jpg",
-  "family": "Evidence",
+  "covers_bleed": false,
   "crops": [
    "card"
   ],
+  "family": "Evidence",
+  "file": "assets/photos/phone-street.jpg",
+  "note": "For device and product slides",
   "px": [
    1800,
    1201
   ],
-  "ratio": 1.499,
-  "note": "For device and product slides",
-  "covers_bleed": false
+  "ratio": 1.499
  },
  "profile-band": {
-  "file": "assets/photos/profile-band.jpg",
-  "family": "Signal",
+  "covers_bleed": true,
   "crops": [
    "inset",
    "band"
   ],
+  "family": "Signal",
+  "file": "assets/photos/profile-band.jpg",
+  "note": "The only frame wide enough for the inset band",
   "px": [
    3291,
    1080
   ],
-  "ratio": 3.047,
-  "note": "The only frame wide enough for the inset band",
-  "covers_bleed": true
+  "ratio": 3.047
  },
  "profile-blue": {
-  "file": "assets/photos/profile-blue.jpg",
-  "family": "Signal",
+  "covers_bleed": true,
   "crops": [
    "bleed",
    "card"
   ],
+  "family": "Signal",
+  "file": "assets/photos/profile-blue.jpg",
+  "note": "Faces right. Mirror rather than recrop when the layout flips",
   "px": [
    1927,
    1080
   ],
-  "ratio": 1.784,
-  "note": "Faces right. Mirror rather than recrop when the layout flips",
-  "covers_bleed": true
+  "ratio": 1.784
  },
  "profile-wide": {
-  "file": "assets/photos/profile-wide.jpg",
-  "family": "Signal",
+  "covers_bleed": true,
   "crops": [
    "card",
    "inset"
   ],
+  "family": "Signal",
+  "file": "assets/photos/profile-wide.jpg",
+  "note": "Native 2.07 lands on the card crop with no crop at all",
   "px": [
    2238,
    1080
   ],
-  "ratio": 2.072,
-  "note": "Native 2.07 lands on the card crop with no crop at all",
-  "covers_bleed": true
+  "ratio": 2.072
  },
  "team-desks": {
-  "file": "assets/photos/team-desks.jpg",
-  "family": "Evidence",
+  "covers_bleed": false,
   "crops": [
    "band",
    "card"
   ],
+  "family": "Evidence",
+  "file": "assets/photos/team-desks.jpg",
+  "note": "Team at adjoining desks",
   "px": [
    1800,
    1200
   ],
-  "ratio": 1.5,
-  "note": "Team at adjoining desks",
-  "covers_bleed": false
+  "ratio": 1.5
  },
  "twin-rb": {
-  "file": "assets/photos/twin-rb.jpg",
-  "family": "Signal",
+  "covers_bleed": true,
   "crops": [
    "half",
    "bleed"
   ],
+  "family": "Signal",
+  "file": "assets/photos/twin-rb.jpg",
+  "note": "The Figma closing frame. Strongest red-blue split",
   "px": [
    1920,
    1781
   ],
-  "ratio": 1.078,
-  "note": "The Figma closing frame. Strongest red-blue split",
-  "covers_bleed": true
+  "ratio": 1.078
  },
  "upward": {
-  "file": "assets/photos/upward.jpg",
-  "family": "Signal",
+  "covers_bleed": true,
   "crops": [
    "half"
   ],
+  "family": "Signal",
+  "file": "assets/photos/upward.jpg",
+  "note": "Square, subject centred, wants type beside it",
   "px": [
    1920,
    1955
   ],
-  "ratio": 0.982,
-  "note": "Square, subject centred, wants type beside it",
-  "covers_bleed": true
+  "ratio": 0.982
  },
  "wall-touch": {
-  "file": "assets/photos/wall-touch.jpg",
-  "family": "Evidence",
+  "covers_bleed": false,
   "crops": [
    "bleed"
   ],
+  "family": "Evidence",
+  "file": "assets/photos/wall-touch.jpg",
+  "note": "The divider frame. A visitor at a lit interactive touch wall. Replaced at v4.13; 1900 x 1080, so it is enlarged about 1% to fill a bleed, which is its only crop. Twenty more pixels of width and it would be native. White type clears 3:1 on it unscrimmed and 5.9:1 with the flat .36",
   "px": [
-   1920,
-   1081
+   1900,
+   1080
   ],
-  "ratio": 1.776,
-  "note": "Darkest frame in the set. The divider frame",
-  "covers_bleed": true
+  "ratio": 1.759
  },
  "wave-portrait": {
-  "file": "assets/photos/wave-portrait.jpg",
-  "family": "Signal",
+  "covers_bleed": true,
   "crops": [
    "bleed",
    "band"
   ],
+  "family": "Signal",
+  "file": "assets/photos/wave-portrait.jpg",
+  "note": "Portrait dissolving into red and blue waves",
   "px": [
    1920,
    1507
   ],
-  "ratio": 1.274,
-  "note": "Portrait dissolving into red and blue waves",
-  "covers_bleed": true
+  "ratio": 1.274
  }
 }

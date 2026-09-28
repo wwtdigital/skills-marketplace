@@ -17,6 +17,11 @@ check in this file that touches the exporter, and it needs python-pptx.
 Run this after any threshold change. Exit code 1 if the control is dirty, any gaming
 move slips through, or the export loses its paint order.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from deps import need as _need   # NOT `need`: wwt_validate has a local `need`
+                                 # holding a required contrast ratio, and importing
+                                 # under that name shadowed it at module scope.
 import argparse, os, subprocess, sys, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -129,8 +134,8 @@ def main():
         if r.returncode != 0:
             raise RuntimeError("export_pptx.py failed: %s" % r.stderr.strip()[-300:])
 
-        from pptx import Presentation
-        from pptx.enum.shapes import MSO_SHAPE_TYPE
+        Presentation = _need("pptx", "Presentation", pkg="python-pptx")
+        MSO_SHAPE_TYPE = _need("pptx.enum.shapes", "MSO_SHAPE_TYPE", pkg="python-pptx")
 
         brandx_path = os.path.join(ROOT, "assets", "export", "brandx-cover.png")
         brandx_blob = open(brandx_path, "rb").read()
@@ -242,7 +247,7 @@ def main():
         if r.returncode != 0:
             raise RuntimeError("export_pptx.py failed: %s" % r.stderr.strip()[-200:])
 
-        from pptx import Presentation as _P
+        _P = _need("pptx", "Presentation", pkg="python-pptx")
         EMU = 6350
         sh2 = list(_P(fxp).slides[0].shapes)
         dots = [s for s in sh2 if not (s.has_text_frame and s.text_frame.text.strip())
@@ -307,8 +312,8 @@ def main():
                  icons_html, "-o", icons_pptx, "--no-embed"])
         if r.returncode != 0:
             raise RuntimeError("export_pptx.py failed: %s" % r.stderr.strip()[-200:])
-        from pptx import Presentation as _P
-        from pptx.enum.shapes import MSO_SHAPE_TYPE as _T
+        _P = _need("pptx", "Presentation", pkg="python-pptx")
+        _T = _need("pptx.enum.shapes", "MSO_SHAPE_TYPE", pkg="python-pptx")
         prs = _P(icons_pptx)
         npic = [sum(1 for sh in sl.shapes if sh.shape_type == _T.PICTURE)
                 for sl in prs.slides]

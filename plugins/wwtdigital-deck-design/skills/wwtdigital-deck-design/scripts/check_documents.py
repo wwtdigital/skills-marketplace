@@ -49,6 +49,13 @@ so as a failure, not as a silence: see PRB-01 and REG-50.
 
 Exit 1 on any FAIL.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from deps import need as _need
+from browser import launch as _launch   # Chrome or Edge if present,
+                                        # Playwright's Chromium only as a fallback   # NOT `need`: wwt_validate has a local `need`
+                                 # holding a required contrast ratio, and importing
+                                 # under that name shadowed it at module scope.
 import argparse, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -97,11 +104,10 @@ def css_type_sizes():
 
 
 def read(paths):
-    from playwright.sync_api import sync_playwright
-    from browser import launch
+    sync_playwright = _need("playwright.sync_api", "sync_playwright")
     txt = {}
     with sync_playwright() as pw:
-        b = launch(pw)
+        b = _launch(pw)
         for label, p in paths.items():
             pg = b.new_page(viewport={"width": 1500, "height": 1000})
             pg.goto("file://" + os.path.abspath(p))

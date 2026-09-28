@@ -23,18 +23,32 @@ returned zero failures.** Everything below is what should have been on the first
 | Body copy | **26px**, the default step | 24px inside a card, 20px for a source line. Nothing below 20px, ever |
 | Headline measure | **1176px**, eight columns | A centred headline may run the full 1776 |
 
-### 2. The ratios, measured off the two decks we accepted
+### 2. The ratios, measured off the deck we accept
 
 Not chosen. Derived, and re-derivable with `scripts/calibrate.py`.
 
-| | AI GTM (7 slides) | Built for Success (13) | Floor |
-|---|---|---|---|
-| Slides carrying a photograph | 29% | 38% | **30%**, and never more than 6 in a row without one |
-| Light-ground slides with a background device | 100% | 91% | **every one**, tables and charts excepted |
-| Content coverage, thinnest slide | 0.39 | 0.22 | **0.15** |
-| Content atoms, thinnest slide | 22 | 11 | **8** |
-| Largest share on one architecture | 29% | 23% | **40% ceiling** |
-| Slides on the dark emphasis ground | — | — | **20% ceiling**, and never two in a row |
+| | Built for Success (13 slides) | Floor |
+|---|---|---|
+| Slides carrying a photograph | 31% | **30%**, and never more than 6 in a row without one |
+| Light-ground slides with a background device | 91% | **every one**, tables and charts excepted |
+| Content coverage, thinnest slide | 0.22 | **0.15** |
+| Content atoms, thinnest slide | 5 | **8** |
+| Largest share on one architecture | 23% | **40% ceiling** |
+| Slides on the dark emphasis ground | — | **20% ceiling**, and never two in a row |
+
+**One deck, not two, and the column is thinner than it was.** The AI GTM deck used to sit
+beside this one. It was removed at v4.12: measured against the current rules it carries
+photography on 14% of slides, well under its own floor, so citing it as a source for the
+floors was circular. A reference that breaks the rules teaches that the rules are optional.
+It survives in the regression register as the deck several defects were found on, which is
+a different and honest job.
+
+**The atoms figure is below its own floor and that is not a typo.** One slide in the
+reference deck carries five content atoms. The floor is eight. The floor was set from a
+wider sample than this table shows and the reference deck has a thin cover, which is
+allowed for a cover. Derived numbers are reported as measured, including when they are
+inconvenient; rounding them up to meet the rule would be the exact dishonesty the rest of
+this page exists to prevent.
 
 **Every ratio above is a floor except the last two, and the difference matters more than it
 looks.** A floor is gamed by doing nothing: no photography, no device, an empty page. A
@@ -283,9 +297,7 @@ off-system, which is most of the way to the 91-slide RFP failure. Send anyone bu
 
 ### What ships in this skill
 
-The assets are bundled, with one exception: **the Aptos fonts are not in the package.** They are
-Microsoft's and this plugin is published publicly. `scripts/brand_assets.py` finds them on the
-machine, and `doctor.py` reports them. Nothing else needs to be re-derived, re-exported or asked for.
+The assets are bundled. Nothing here needs to be re-derived, re-exported or asked for.
 
 ```
 assets/system.css             THE STYLESHEET. One copy. Edit this, not a duplicate
@@ -294,9 +306,10 @@ assets/tokens.css             GENERATED custom properties only, no layout. A pal
 assets/teardown.json          the prose the teardown page asserts. Values come from tokens.json
 assets/recipes.html           GENERATED from the spec book source. The twenty recipes, real geometry
 assets/spec-chrome.css        the reference document's own furniture, not part of the system
-scripts/brand_assets.py       finds the Aptos cuts on this machine (NOT SHIPPED)
+assets/fonts/*.woff2          the six Aptos cuts the ladder resolves to
+assets/fonts/ttf/*.ttf        the same cuts for PowerPoint, which cannot read WOFF2
 assets/export/*.png           decoration baked flat for PPTX (see section 17)
-assets/manifest.json          19 photographs: id, family, crops, pixels, ratio
+assets/manifest.json          18 photographs: id, family, crops, pixels, ratio
 assets/photos/*.jpg           the library itself, sized for the 1920 canvas
 assets/vectors/               mesh-diag, mesh-center, mesh-h, mesh-dark, logo-full,
                               bug-mark, bug-mark-white, arrow-red, x-big,
@@ -319,7 +332,6 @@ assets/provenance.json        THE SOURCE MAP. Every recipe's Figma node id, ever
                               every artboard exception, and the date of the last pull
 scripts/check_provenance.py   checks the map against itself, and against a fresh pull
 scripts/lint_source.py        static markup lint, 30ms, zero dependencies, hookable
-scripts/browser.py            starts the installed Chrome or Edge, Playwright's Chromium as fallback
 scripts/wwt_validate.py       the validator in section 14
 references/triage.md          worked examples of cutting a document down to a deck
 references/failure-modes.md   every way this system has failed, and what closed each one

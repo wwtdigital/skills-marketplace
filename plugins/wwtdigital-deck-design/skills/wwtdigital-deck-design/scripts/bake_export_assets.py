@@ -28,6 +28,13 @@ What it makes, and why each one is shaped the way it is:
 Everything is rendered at 2x and downsampled, so edges on the diagonals are
 clean rather than stair-stepped.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from deps import need as _need
+from browser import launch as _launch   # Chrome or Edge if present,
+                                        # Playwright's Chromium only as a fallback   # NOT `need`: wwt_validate has a local `need`
+                                 # holding a required contrast ratio, and importing
+                                 # under that name shadowed it at module scope.
 import base64, json, os, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -98,13 +105,12 @@ def shoot(pg, html, sel, path, opaque):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    from playwright.sync_api import sync_playwright
-    from browser import launch
-    from PIL import Image
+    sync_playwright = _need("playwright.sync_api", "sync_playwright")
+    Image = _need("PIL", "Image", pkg="pillow")
 
     made = []
     with sync_playwright() as p:
-        b = launch(p)
+        b = _launch(p)
         pg = b.new_page(viewport={"width": 1920, "height": 1200},
                         device_scale_factor=SCALE)
 

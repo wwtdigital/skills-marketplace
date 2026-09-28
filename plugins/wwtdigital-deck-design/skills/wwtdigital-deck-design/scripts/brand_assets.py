@@ -129,6 +129,13 @@ def find_fonts():
     return _found
 
 
+def survey():
+    """(found, missing) face-name lists. For the doctor, which reports rather than stops."""
+    got = find_fonts()
+    order = list(BUNDLED_NAME)
+    return [f for f in order if f in got], [f for f in order if f not in got]
+
+
 def font_path(face, formats=(".woff2", ".ttf", ".otf")):
     got = find_fonts().get(face, {})
     for ext in formats:

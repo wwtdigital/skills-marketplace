@@ -11,6 +11,8 @@ import { findSkill, loadCatalog } from "@/lib/load";
 
 type Props = { params: Promise<{ name: string }> };
 
+const kb = (bytes: number) => `${Math.max(1, Math.round(bytes / 1024)).toLocaleString("en-US")} KB`;
+
 // Only skills in the catalog exist; anything else is a 404.
 export const dynamicParams = false;
 
@@ -56,10 +58,23 @@ export default async function SkillPage({ params }: Props) {
           <aside className="aside" aria-label="Install and details">
             <p className="aside-label">Install the {p.displayName} bundle</p>
             <CopyCmd text={p.install} />
-            <a className="btn btn-primary" href={asset(s.download)} download>
-              <DownloadSimpleIcon size={16} aria-hidden="true" />
-              Download .skill ({Math.max(1, Math.round(s.download_bytes / 1024))} KB)
-            </a>
+            {s.download ? (
+              <a className="btn btn-primary" href={asset(s.download)} download>
+                <DownloadSimpleIcon size={16} aria-hidden="true" />
+                Download .skill ({kb(s.download_bytes)})
+              </a>
+            ) : (
+              <>
+                <a className="btn btn-primary" href={asset(p.download)} download>
+                  <DownloadSimpleIcon size={16} aria-hidden="true" />
+                  Download the bundle ({kb(p.download_bytes)})
+                </a>
+                <p className="aside-note">
+                  This skill uses setup scripts and files from the rest of its plugin, so it isn&rsquo;t offered as a
+                  single .skill.
+                </p>
+              </>
+            )}
             <dl className="kv">
               <dt>Owner</dt>
               <dd>{s.owner ? <a href={`mailto:${s.owner}`}>{s.owner}</a> : "Not set"}</dd>

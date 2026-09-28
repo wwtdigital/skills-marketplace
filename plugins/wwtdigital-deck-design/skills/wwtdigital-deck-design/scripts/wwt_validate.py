@@ -18,6 +18,13 @@ mark rules still apply, composition rules do not.
 
 Requires: playwright, pillow, numpy.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from deps import need as _need
+from browser import launch as _launch   # Chrome or Edge if present,
+                                        # Playwright's Chromium only as a fallback   # NOT `need`: wwt_validate has a local `need`
+                                 # holding a required contrast ratio, and importing
+                                 # under that name shadowed it at module scope.
 import argparse, json, sys, os, math
 import re
 import collections
@@ -68,7 +75,9 @@ INK = {}   # slide index -> measured ink coverage
 # Every number here was measured off the two decks we have accepted rather than chosen.
 # Re-run scripts/calibrate.py after any change and keep the thresholds outside the spread.
 #
-#   measured, AI GTM (7 slides) and AI Built for Success (13 slides):
+#   measured off AI Built for Success (13 slides). The AI GTM deck was the second
+#   source until v4.12 and was dropped: it fails IMG-05 under the current rules,
+#   so deriving the floors from it was circular:
 #     photography share            29% / 38%
 #     longest photo-free run        5  /  4
 #     device on light grounds     100% / 91%   (the one exception is a table slide)
@@ -811,7 +820,7 @@ def validate_slide(s, rep, plate=None, judge_density=True):
 
     # ---- COL-04 / IMG-04 contrast, measured off the backdrop plate
     if plate is not None:
-        import numpy as np
+        np = _need("numpy")
         img, ox, oy, scale = plate
         scrimmed = any(has(m, "scrim-flat", "scrim-grad", "scrim-r") for m in nodes) or any(
             "gradient" in (m["bgImg"] or "") and m["box"]["w"] > 1500 and m["box"]["h"] > 900
@@ -906,7 +915,7 @@ def validate_slide(s, rep, plate=None, judge_density=True):
     # brand wedge across the bottom-right corner, so the bug genuinely sits on dark purple.
     # Inferring the backdrop from a class is the same mistake as inferring contrast from CSS.
     if not spec and plate is not None:
-        import numpy as np
+        np = _need("numpy")
         img, ox, oy, scale = plate
         for n in nodes:
             if not has(n, "bug"):
@@ -1211,17 +1220,16 @@ def validate_slide(s, rep, plate=None, judge_density=True):
 
 # ---------------------------------------------------------------- driver
 def run(path, roles=None, only=None, quiet=False, json_out=None, shots=False):
-    from playwright.sync_api import sync_playwright
-    from browser import launch
-    from PIL import Image
-    import numpy as np
+    sync_playwright = _need("playwright.sync_api", "sync_playwright")
+    Image = _need("PIL", "Image", pkg="pillow")
+    np = _need("numpy")
 
     roles = roles or {}
     rep = Report()
     url = path if path.startswith("http") else "file://" + os.path.abspath(path)
 
     with sync_playwright() as p:
-        b = launch(p, args=["--no-sandbox"])
+        b = _launch(p, args=["--no-sandbox"])
         pg = b.new_page(viewport={"width": 1600, "height": 1100})
         pg.goto(url, wait_until="load", timeout=120000)
         pg.wait_for_timeout(3500)
@@ -1530,8 +1538,8 @@ def norm_entropy(counts):
 
 def dhash(arr, size=16):
     """Perceptual hash of a rendered slide, for near-duplicate detection."""
-    from PIL import Image
-    import numpy as np
+    Image = _need("PIL", "Image", pkg="pillow")
+    np = _need("numpy")
     im = Image.fromarray(arr.astype("uint8")).convert("L").resize((size + 1, size),
                                                                   Image.LANCZOS)
     g = np.asarray(im, dtype=int)

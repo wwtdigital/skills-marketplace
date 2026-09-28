@@ -12,6 +12,13 @@ worse to guess at than a slide-level one, because it fails whole documents.
 Run it on decks we have accepted, read the spread, then set the threshold outside
 the spread with margin. Re-run it after any rule change.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from deps import need as _need
+from browser import launch as _launch   # Chrome or Edge if present,
+                                        # Playwright's Chromium only as a fallback   # NOT `need`: wwt_validate has a local `need`
+                                 # holding a required contrast ratio, and importing
+                                 # under that name shadowed it at module scope.
 import argparse, json, math, os, sys, collections
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -23,14 +30,24 @@ CANVAS_W, CANVAS_H = 1920, 1080
 # A photograph counts only at a real size. The crop table's smallest entry is the
 # card at 525 x 260, which is 6.6% of the canvas, so 6% is the floor below which an
 # image is a thumbnail or an icon rather than photography.
-PHOTO_MIN_AREA = 0.06
+# Imported, never redefined. This file held its own PHOTO_MIN_AREA = 0.06, the threshold
+# retired at v4.7 when the per-slide test moved to "imagery SUMS to 15% of the canvas".
+# So the tool that DERIVES the floors was measuring by one rule while the tool that
+# ENFORCES them measured by another, and the numbers in THE CONTRACT's ratios table were
+# produced by the wrong one. It happened to agree on the reference deck, which is how it
+# survived: two constants that match by luck look exactly like one constant.
+import importlib.util as _ilu
+_spec = _ilu.spec_from_file_location(
+    "_wv", os.path.join(os.path.dirname(os.path.abspath(__file__)), "wwt_validate.py"))
+_wv = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(_wv)
+PHOTO_MIN_AREA = _wv.PHOTO_MIN_AREA
 
 
 def probe(path):
-    from playwright.sync_api import sync_playwright
-    from browser import launch
+    sync_playwright = _need("playwright.sync_api", "sync_playwright")
     with sync_playwright() as p:
-        b = launch(p)
+        b = _launch(p)
         pg = b.new_page(viewport={"width": 1980, "height": 1200})
         pg.goto("file://" + os.path.abspath(path))
         pg.wait_for_timeout(2500)
@@ -50,19 +67,13 @@ def has(n, *names):
     return any(x in cl for x in names)
 
 
-def qualifying_photo(s):
-    """An <img> inside a .media at a real crop. Icons, logos and marks do not count."""
-    best = 0.0
-    for n in s["nodes"]:
-        if n["tag"] != "img":
-            continue
-        if has(n, "mark") or (n["parentSel"] or "").find("lockup") >= 0:
-            continue
-        b = n["box"]
-        area = (b["w"] * b["h"]) / float(CANVAS_W * CANVAS_H)
-        if area > best:
-            best = area
-    return best
+# The validator's own function, not a copy. This file had its own qualifying_photo that
+# took the LARGEST image on a slide; the validator sums them. Those are different rules
+# and they give different answers on the same deck: 23% against 38% on the reference deck.
+# Importing the constant alone was not enough, because the constant was only half the
+# duplication. A calibration tool that measures by a rule the gate does not use derives
+# floors from a fiction.
+qualifying_photo = _wv.qualifying_photo
 
 
 def substance(s):

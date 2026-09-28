@@ -32,9 +32,16 @@ Fonts: the HTML may embed WOFF2, which PowerPoint cannot read, so the deck embed
 Aptos TTFs found on this machine (Office carries them; see brand_assets.py, which also
 says how to install them). They are not shipped with the skill.
 """
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+import brand_assets
+from deps import need as _need
+from browser import launch as _launch   # Chrome or Edge if present,
+                                        # Playwright's Chromium only as a fallback   # NOT `need`: wwt_validate has a local `need`
+                                 # holding a required contrast ratio, and importing
+                                 # under that name shadowed it at module scope.
 import argparse, base64, json, os, re, sys
 
-import brand_assets
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -70,8 +77,7 @@ BAKED = ("mesh", "brandx", "brandx-x", "bug", "stripe", "mark", "arrow",
 
 def probe(path):
     """Walk the rendered deck and return a plain description of every slide."""
-    from playwright.sync_api import sync_playwright
-    from browser import launch
+    sync_playwright = _need("playwright.sync_api", "sync_playwright")
     js = r"""
     () => {
       const px = v => Math.round(parseFloat(v) || 0);
@@ -375,7 +381,7 @@ def probe(path):
     }
     """
     with sync_playwright() as p:
-        b = launch(p)
+        b = _launch(p)
         pg = b.new_page(viewport={"width": W, "height": H})
         pg.goto("file://" + os.path.abspath(path))
         pg.wait_for_timeout(5000)
@@ -394,7 +400,7 @@ def probe(path):
         # it always sits on a white panel, and an opaque PNG avoids the alpha that
         # LibreOffice composited against black when the lockup was done this way.
         import tempfile as _tf
-        from PIL import Image as _I
+        _I = _need("PIL", "Image", pkg="pillow")
         shots = _tf.mkdtemp(prefix="wwtring")
         n = 0
         for si in range(len(slides)):
@@ -552,7 +558,7 @@ def apply_gradient(shape, css, force=False):
     and PowerPoint repairs by DISCARDING the fill and falling back to the theme
     colour. So let python-pptx place the element, then rewrite its children.
     See REG-19."""
-    from lxml import etree
+    etree = _need("lxml", "etree")
     g = parse_gradient(css)
     if not g:
         return False
@@ -603,7 +609,7 @@ SHADOW_RE = re.compile(
 def apply_shadow(shape, css):
     """CSS box-shadow -> <a:outerShdw>. Returns False if there is nothing to do."""
     import math
-    from lxml import etree
+    etree = _need("lxml", "etree")
     m = SHADOW_RE.search(css or "")
     if not m:
         return False
@@ -669,13 +675,12 @@ def prerender_icons(recs, tmp):
         return 0
     try:
         from playwright.sync_api import sync_playwright
-        from browser import launch
         from PIL import Image
     except Exception:
         return 0
     S = 4
     with sync_playwright() as pw:
-        b = launch(pw)
+        b = _launch(pw)
         pg = b.new_page(viewport={"width": 900, "height": 900})
         for n, (key, ic) in enumerate(jobs.items()):
             w, h = max(1, int(ic["w"])), max(1, int(ic["h"]))
@@ -712,11 +717,11 @@ def data_to_file(src, tmp, n):
 
 
 def build(slides, out, tmp):
-    from pptx import Presentation
-    from pptx.util import Emu, Pt
-    from pptx.dml.color import RGBColor
-    from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
-    from PIL import Image
+    Presentation = _need("pptx", "Presentation", pkg="python-pptx")
+    Emu, Pt = _need("pptx.util", "Emu", pkg="python-pptx"), _need("pptx.util", "Pt", pkg="python-pptx")
+    RGBColor = _need("pptx.dml.color", "RGBColor", pkg="python-pptx")
+    PP_ALIGN, MSO_ANCHOR = _need("pptx.enum.text", "PP_ALIGN", pkg="python-pptx"), _need("pptx.enum.text", "MSO_ANCHOR", pkg="python-pptx")
+    Image = _need("PIL", "Image", pkg="pillow")
     used_faces = set()
 
     ALIGN = {"left": PP_ALIGN.LEFT, "center": PP_ALIGN.CENTER, "right": PP_ALIGN.RIGHT}
@@ -942,8 +947,11 @@ def build(slides, out, tmp):
 #     hidden from the OS, LibreOffice rendered a correctly embedded deck end to end in
 #     DejaVu Sans. So embedding is a fallback, not a guarantee. The durable answers are
 #     Aptos installed on the opening machine, which Microsoft 365 provides, or a PDF.
-# Typeface -> slot -> the face brand_assets.py resolves on this machine (by the name
-# inside the file, so Office's numbered cloud-font files are found too).
+# PowerPoint slot -> the FACE NAME to look up on this machine. These were filenames under
+# assets/fonts/ttf until v4.12, when the cuts stopped shipping with the package: Aptos is
+# Microsoft's and a 365 subscription grants use, not redistribution. brand_assets.py finds
+# them by the name inside the file. PowerPoint embedding needs the real TTF or OTF, never
+# a woff2, so the format list here is narrower than the one the HTML path uses.
 FACE_FILES = {
     "Aptos":           {"regular": "Aptos", "bold": "Aptos Bold"},
     "Aptos SemiBold":  {"regular": "Aptos SemiBold"},
@@ -960,7 +968,10 @@ def embed_fonts(path, faces):
     plan, missing = [], []
     for face in faces:
         for slot, name in FACE_FILES.get(face, {}).items():
-            src = brand_assets.font_path(name, (".ttf", ".otf"))
+            # TTF/OTF only. A woff2 in ppt/fonts/ is not a font as far as PowerPoint is
+            # concerned: the embed fails silently and the deck still looks right on any
+            # machine that has Aptos installed, which is REG-22 exactly.
+            src = brand_assets.font_path(name, formats=(".ttf", ".otf"))
             if src:
                 plan.append((face, slot, src))
             else:
