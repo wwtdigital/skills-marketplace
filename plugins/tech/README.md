@@ -14,7 +14,7 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 
 | Skill | What it does |
 | --- | --- |
-| _(none yet)_ | |
+| `figma-design-to-code` | Implement a Figma design as code: read tokens and measurements from the Figma UI with playwright-cli, build against a token layer, verify with computed styles and screenshots |
 
 ## Owners
 

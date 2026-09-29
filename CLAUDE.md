@@ -45,7 +45,7 @@ hooks or MCP servers most of that category won't want. Skills so far: `admin` ha
 `wwtdigital-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer` (Toby Gerber)
 and `publish-page` (wraps the bundled artifact-publisher MCP); `research` has `brand-scan` (wraps the
 bundled brandscanner MCP) and `pursuit-intel-brief` (the only copy; its internal data, comparables, channel IDs,
-paths, lives on a team-editable Notion page linked from its SKILL.md, never in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell); the standalone
+paths, lives on a team-editable Notion page linked from its SKILL.md, never in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell); `tech` has `figma-design-to-code` (Zak Lampert); the standalone
 `wwtdigital-deck-design` (category `presentation`, from Toby Gerber) has `wwtdigital-deck-design` and
 `wwtdigital-deck-design-doctor`. The category plugins replaced the original discipline plugins on
 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
