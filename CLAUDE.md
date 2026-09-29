@@ -76,7 +76,7 @@ out of content hashes and downloads: an eval-only change needs no plugin bump, a
 don't get them (run them from a checkout). `evals/results/` is gitignored. Changing what `contentHash` covers (as excluding `evals/` did
 on 2026-09-24) makes every affected plugin look changed against the live catalog, so it needs a
 one-time bump of each; the deploy fails otherwise. Always gate a push on
-`node scripts/validate.ts --strict --prev-catalog auto`, the same check Vercel runs. All 9 skills have cases (28 total); 84/84 runs passed on 2026-09-24 at 8 turns, about $8 for the lot; pursuit-intel-brief 9/9 on 2026-09-28 at 4 turns ($0.82). Known
+`node scripts/validate.ts --strict --prev-catalog auto`, the same check Vercel runs. All 9 skills have cases (29 total); 84/84 runs passed on 2026-09-24 at 8 turns, about $8 for the lot; pursuit-intel-brief 12/12 on 2026-09-28 at 4 turns ($1.08). Known
 flake: `wwtdigital-deck-design-should-2` ("match our WWT template") missed once in seven runs at 4 turns
 with the skill never loaded; owner to decide whether the description needs a sharper phrase.
 

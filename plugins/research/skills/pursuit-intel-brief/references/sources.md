@@ -23,12 +23,12 @@ each location by search and ask the user for anything a search doesn't turn up.
 ## Notion
 
 - Each pursuit is one tabbed opportunity page in the Digital pipeline database (the reference page
-  says where). Find it with `notion-search` on the client name. Tabs usually include Links to
-  Tools, 9-Box, Pursuit, Project Dashboard, and sometimes Intelligence and Relevant Links.
+  says where). Find it with `notion-search` on the client name. Teams organize these differently; expect
+  some mix of a qualification brief, buyer map, pursuit workspace, research and links.
 - Page properties carry confidence, estimated revenue, pursuit status, close date and pipeline ID.
   Compare these to the CRM and the deck; they drift.
-- The 9-box has a version and a change log at the top. The Intelligence tab may have a
-  "Corrections" note with its own version. Anything dated before those corrections is suspect.
+- Look for a version or change log and any "Corrections" note. Anything dated before those
+  corrections is suspect.
 - `notion-fetch` on a big page saves to a file; extract the text and read it in chunks. Don't skip tabs.
 - Child pages (context dumps, benchmark dossiers, handoff notes) sit at the bottom of the page.
   Fetch them.
