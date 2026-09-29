@@ -1,8 +1,9 @@
 # Sizing a pursuit against comparable work
 
-No fees, margins or client outcomes are kept in this file: the plugin is published publicly. Gather
-the comparables fresh each run from the Digital SOW approval channel and the relevant pursuit
-channels, and keep them in the run's `03-sizing.md` checkpoint, never in this skill.
+The comparables table, current run rates, the GP floor and the deal-review triggers live on the
+internal reference page in Notion (linked from SKILL.md), not in this file: the plugin is published
+publicly. Fetch that page before this step. If Notion isn't connected, gather the comparables from
+the Digital SOW approval channel instead and say in the brief that the page wasn't read.
 
 ## What to capture per comparable
 
@@ -19,6 +20,9 @@ Pick the three to six closest by scope (strategy vs build vs run), client type a
 large non-comparable program as a ceiling if the pursuit could grow into a build phase, and label
 it as a ceiling.
 
+When you find a comparable that isn't on the page yet, add it as a row there (with the post date)
+so the next run starts warmer. That's the one team document this skill does edit.
+
 ## Run-rate math
 
 1. For each strategy-shaped comparable, divide fee by weeks to get a per-week run rate.
@@ -31,13 +35,6 @@ it as a ceiling.
 
 If there's no timeline yet (common at RFI stage), assume one, say so, and label the range as an
 assumption.
-
-## Deal review rules
-
-Look up the current GP floor, the approval needed below it, and the triggers for a deal review in
-the deal review channel or its pinned posts, and quote them with the post date. They change;
-don't rely on memory. Put them in the brief next to the sizing so the team sees which review
-this deal will need.
 
 ## Structuring patterns worth checking
 

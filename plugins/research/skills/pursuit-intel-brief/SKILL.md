@@ -6,7 +6,7 @@ metadata:
   category: research
   status: beta
   connectors: [slack, notion, microsoft-365]
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Pursuit Intel Brief
@@ -17,7 +17,9 @@ Everything in the brief passes one test: **would a team member learn something, 
 
 ## Inputs
 
-You need one of: a pursuit channel name, a client name, or a Notion opportunity link. Find the rest from there. `references/sources.md` says how to find each WWT location and has connector tips.
+You need one of: a pursuit channel name, a client name, or a Notion opportunity link. Find the rest from there.
+
+Before anything else, fetch the **internal reference page** in Notion: https://app.notion.com/p/3eab0eeb3b2281778130eb1dd9beb266. It holds what this public skill can't: the comparables table and run rates, the GP floor and deal-review triggers, channel IDs, SharePoint paths, prior pursuits worth pulling, and the wwt.com credential status. `references/sources.md` and `references/sizing.md` have the method and connector tips that don't change. If Notion isn't connected, say so, work from search, and note in the brief that the page wasn't read.
 
 Tools this skill leans on: Slack (read channel, threads, search), Notion (fetch), Microsoft 365 (SharePoint folder + file reads), WebSearch / web_fetch, and subagents for parallel outside research. If a connector isn't connected, say which one and what it would have covered, then proceed with the rest. Never try to fetch SharePoint or Slack files through the browser with the user's credentials.
 
@@ -29,7 +31,7 @@ A full run takes 10–15 minutes and dozens of tool calls. Three habits keep it 
 - **Checkpoint each phase to disk** in the scratchpad (`01-team-material.md`, `02-outside-research.md`, `03-sizing.md`, `04-credentials.md`). If the session is cut off, or a connector drops mid-run, resume from the last checkpoint instead of re-reading everything. Write the checkpoint as soon as the phase ends, not at the end of the run.
 - **Surface a missing connector or permission once, then move on.** If SharePoint, Notion or Slack isn't attached or a file won't open, record it in the checkpoint and the Sources section. Don't retry the same dead end, and never work around it through a browser with the user's credentials.
 
-Stay inside the ask. The brief informs the team; it doesn't edit their deck, their Notion, or this skill's files, and it doesn't draft proposal content unless asked. If you find something that should change in a team document, say so in "Corrections" and let the owner make the edit.
+Stay inside the ask. The brief informs the team; it doesn't edit their deck, their pursuit pages in Notion, or this skill's files, and it doesn't draft proposal content unless asked. The one exception is the internal reference page, where new comparables and corrected locations belong. If you find something that should change in a team document, say so in "Corrections" and let the owner make the edit.
 
 ## Workflow
 
@@ -65,7 +67,7 @@ Ask each subagent to check its own output before reporting: every fact has a URL
 
 ### 3. Size the deal against what WWT has actually sold
 
-Search the Digital SOW approval channel (and the relevant pursuit channels) for the closest comparable engagements. For each, capture fee, contract type, duration, GP%, team shape (roles and FTE), and what happened (won, cut, renegotiated). `references/sizing.md` has what to capture, the run-rate method and the structuring patterns. Keep the comparables in the `03-sizing.md` checkpoint and the brief only: this skill is published publicly, so fees, margins and client names never go into its files.
+Search the Digital SOW approval channel (and the relevant pursuit channels) for the closest comparable engagements. For each, capture fee, contract type, duration, GP%, team shape (roles and FTE), and what happened (won, cut, renegotiated). Start from the reference page's table, then search for anything newer or closer. `references/sizing.md` has what to capture, the run-rate method and the structuring patterns. Add any comparable that isn't on the reference page yet as a row there, with the post date, so the next run starts warmer. Nothing internal goes into this skill's own files: they're public.
 
 Then compute a per-week run rate from the comparables and multiply by the working deck's timeline. Compare that to the Notion estimate and the deck's own numbers. Note the GP floor, the deal-review triggers, and any pattern of client pushback. This is the section the first deal review will actually use.
 
@@ -75,7 +77,7 @@ If there's no timeline yet (common at RFI stage), assume one, say so in the brie
 
 For every named case study, partner, or "we did X" claim in the working deck, search `site:wwt.com <client>` and fetch the page. Record what the public site says, in its own words, next to what the deck says. Three verdicts: **supported**, **overstated** (public site supports a weaker version), **not public** (nothing on the site; needs written clearance). The client's evaluators will do this search. Doing it first is cheap.
 
-Check WWT's own boilerplate too: headcount, partner-of-the-year counts, rankings. Decks copy these from old versions, and they drift. Look up the current figures on wwt.com each run (`references/sources.md` says where).
+Check WWT's own boilerplate too: headcount, partner-of-the-year counts, rankings. Decks copy these from old versions, and they drift. The reference page has the figures as of its review date; recheck wwt.com if that's more than a quarter old, and update the page.
 
 Also check the internal record: a context file or Notion note saying "we did not do that work" outranks a deck slide that says we did.
 
@@ -128,7 +130,8 @@ When asked to update a brief later in the pursuit, republish to the same URL. Re
 
 ## References
 
-- `references/sources.md` — how to find WWT pursuit material, connector quirks, wwt.com search patterns.
-- `references/sizing.md` — what to capture per comparable, run-rate math, where the deal-review rules live, structuring patterns.
+- Internal reference page (Notion): https://app.notion.com/p/3eab0eeb3b2281778130eb1dd9beb266. Comparables, rules, locations, credential status. Team-editable.
+- `references/sources.md` — connector quirks, file limits, wwt.com search patterns.
+- `references/sizing.md` — what to capture per comparable, run-rate math, structuring patterns.
 - `references/sports-venues.md` — checks specific to stadium, team and league pursuits (venue tech pattern, incumbents to look for, benchmark venues, landmine themes).
 - `assets/brief-template.html` — the page scaffold and CSS.

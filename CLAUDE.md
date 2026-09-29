@@ -44,8 +44,8 @@ standalone opt-in plugins that belong to a category but install separately becau
 hooks or MCP servers most of that category won't want. Skills so far: `admin` has
 `wwtdigital-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer` (Toby Gerber)
 and `publish-page` (wraps the bundled artifact-publisher MCP); `research` has `brand-scan` (wraps the
-bundled brandscanner MCP) and `pursuit-intel-brief` (sanitized for the public repo: no fees, GP, client
-names or channel IDs in its files; it gathers comparables live each run); `ops` has `wwtdigital-onboarding` (Staci Powell); the standalone
+bundled brandscanner MCP) and `pursuit-intel-brief` (the only copy; its internal data, comparables, channel IDs,
+paths, lives on a team-editable Notion page linked from its SKILL.md, never in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell); the standalone
 `wwtdigital-deck-design` (category `presentation`, from Toby Gerber) has `wwtdigital-deck-design` and
 `wwtdigital-deck-design-doctor`. The category plugins replaced the original discipline plugins on
 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
