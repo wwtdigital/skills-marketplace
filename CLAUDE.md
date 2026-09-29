@@ -44,7 +44,8 @@ standalone opt-in plugins that belong to a category but install separately becau
 hooks or MCP servers most of that category won't want. Skills so far: `admin` has
 `wwtdigital-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer` (Toby Gerber)
 and `publish-page` (wraps the bundled artifact-publisher MCP); `research` has `brand-scan` (wraps the
-bundled brandscanner MCP); `ops` has `wwtdigital-onboarding` (Staci Powell); the standalone
+bundled brandscanner MCP) and `pursuit-intel-brief` (sanitized for the public repo: no fees, GP, client
+names or channel IDs in its files; it gathers comparables live each run); `ops` has `wwtdigital-onboarding` (Staci Powell); the standalone
 `wwtdigital-deck-design` (category `presentation`, from Toby Gerber) has `wwtdigital-deck-design` and
 `wwtdigital-deck-design-doctor`. The category plugins replaced the original discipline plugins on
 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
@@ -75,7 +76,7 @@ out of content hashes and downloads: an eval-only change needs no plugin bump, a
 don't get them (run them from a checkout). `evals/results/` is gitignored. Changing what `contentHash` covers (as excluding `evals/` did
 on 2026-09-24) makes every affected plugin look changed against the live catalog, so it needs a
 one-time bump of each; the deploy fails otherwise. Always gate a push on
-`node scripts/validate.ts --strict --prev-catalog auto`, the same check Vercel runs. All 8 skills have cases (25 total); 84/84 runs passed on 2026-09-24 at 8 turns, about $8 for the lot. Known
+`node scripts/validate.ts --strict --prev-catalog auto`, the same check Vercel runs. All 9 skills have cases (28 total); 84/84 runs passed on 2026-09-24 at 8 turns, about $8 for the lot; pursuit-intel-brief 9/9 on 2026-09-28 at 4 turns ($0.82). Known
 flake: `wwtdigital-deck-design-should-2` ("match our WWT template") missed once in seven runs at 4 turns
 with the skill never loaded; owner to decide whether the description needs a sharper phrase.
 

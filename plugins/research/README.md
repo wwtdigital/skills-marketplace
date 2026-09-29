@@ -15,6 +15,7 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 | Skill | What it does |
 | --- | --- |
 | [`brand-scan`](skills/brand-scan/SKILL.md) | Run or read a brandscanner assessment of a company: security posture, tech stack, app reviews, public financials, cohort benchmarks and the saved scorecard. |
+| [`pursuit-intel-brief`](skills/pursuit-intel-brief/SKILL.md) | Build a supplemental intel brief for a WWT Digital pursuit: reads the pursuit channel, Notion and SharePoint, researches the client, sizes the deal against past SOWs, checks credentials against wwt.com, and publishes only what's new. |
 
 ## MCP servers
 
