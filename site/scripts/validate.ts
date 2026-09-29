@@ -28,6 +28,10 @@ const SECRET_PATTERNS = [
 // it get an improvised failure instead of instructions.
 const MISSING_CONNECTOR = /\b(isn't|isn’t|is not|aren't|aren’t|are not|not)\s+(connected|set up)\b|\bconnector\s+(is\s+)?(missing|unavailable)\b/i;
 
+// Connectors with a saved logo (scripts/fetch-connector-icons.ts); the rest show a plain plug.
+const CONNECTOR_ICONS: Record<string, string> = JSON.parse(
+  readFileSync(path.join(import.meta.dirname, "..", "lib", "connector-icons.json"), "utf8"));
+
 const BINARY = new Set([
   ".png", ".jpg", ".jpeg", ".gif", ".webp", ".pdf", ".pptx", ".docx", ".xlsx", ".zip",
   ".woff", ".woff2", ".ttf", ".otf",
@@ -170,6 +174,9 @@ function checkSkill(plugin: string, category: string, bundled: string[], sk: Ski
     if (external.length && !MISSING_CONNECTOR.test(sk.body))
       warn(`${tag}: needs ${external.join(", ")} but never says what to do when it isn't connected — ` +
         "add a first step that checks for its tools and tells the person how to connect it");
+    for (const c of external.filter((c) => !CONNECTOR_ICONS[c]))
+      notes.push(`${tag}: connector '${c}' has no logo — add it to CONNECTOR_ICON_SOURCES in lib/catalog.ts ` +
+        "and run node scripts/fetch-connector-icons.ts");
   }
   const lines = sk.body.split("\n").length - 1;
   if (lines > 250) warn(`${tag}: SKILL.md body is ${lines} lines — move detail into references/`);

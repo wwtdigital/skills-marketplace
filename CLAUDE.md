@@ -130,7 +130,11 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   description under 80 chars, no "verif"/"check" in the body, a body over 250 lines, a missing
   `metadata.version`, or a `metadata.connectors` entry (other than one the plugin bundles in
   `.mcp.json`) with no "if it isn't connected" guidance in the body. The site labels connectors
-  "Needs X" or "X included" on that same bundled/not basis. Empty plugins print a `NOTE`, not a warning.
+  "Needs X" or "X included" on that same bundled/not basis. Connector logos are each service's colour favicon, saved in
+  `site/public/connectors/` (committed; nothing is fetched at runtime). To add one, put a page URL in
+  `CONNECTOR_ICON_SOURCES` (`site/lib/catalog.ts`), run `node scripts/fetch-connector-icons.ts` from
+  `site/`, and look at the image before committing. Anything without a logo shows a plug, and
+  validate prints a `NOTE` for it. Empty plugins print a `NOTE`, not a warning.
 - Version bumps: any change under `plugins/<p>/` other than `README.md`/`.gitkeep` needs a higher
   `plugin.json` version, and a changed existing skill needs a higher `metadata.version`. Adding or
   removing a plugin needs a higher marketplace `version`. New plugins and new skills don't need a

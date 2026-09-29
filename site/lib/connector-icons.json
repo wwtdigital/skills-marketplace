@@ -1,0 +1,20 @@
+{
+  "confluence": "confluence.png",
+  "excel": "excel.png",
+  "figma": "figma.png",
+  "github": "github.png",
+  "glean": "glean.png",
+  "google-drive": "google-drive.png",
+  "jira": "jira.png",
+  "microsoft": "microsoft.png",
+  "microsoft-365": "microsoft-365.png",
+  "microsoft-teams": "microsoft-teams.png",
+  "notion": "notion.png",
+  "onedrive": "onedrive.png",
+  "outlook": "outlook.jpg",
+  "powerpoint": "powerpoint.png",
+  "sharepoint": "sharepoint.png",
+  "slack": "slack.png",
+  "teams": "teams.png",
+  "word": "word.png"
+}

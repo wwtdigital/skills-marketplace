@@ -80,3 +80,18 @@ const CONNECTOR_NAMES: Record<string, string> = {
 export const connectorName = (c: string) =>
   CONNECTOR_NAMES[c] ?? c.replace(/(^|-)(\w)/g, (_, dash: string, ch: string) => (dash ? " " : "") + ch.toUpperCase());
 export const isBundled = (p: Plugin, c: string) => p.mcp_servers.some((m) => m.name === c);
+
+// Page whose favicon is the connector's logo. After adding one, run
+// `node scripts/fetch-connector-icons.ts` and check the image. Some services (SharePoint,
+// OneDrive) only serve the plain Microsoft logo, and the Microsoft 365 app's is now Copilot's.
+export const CONNECTOR_ICON_SOURCES: Record<string, string> = {
+  notion: "https://www.notion.so", figma: "https://www.figma.com", slack: "https://slack.com",
+  github: "https://github.com", glean: "https://www.glean.com",
+  "google-drive": "https://drive.google.com/drive/my-drive",
+  jira: "https://jira.atlassian.com", confluence: "https://confluence.atlassian.com",
+  outlook: "https://outlook.live.com/mail/", teams: "https://teams.microsoft.com",
+  "microsoft-teams": "https://teams.microsoft.com", excel: "https://excel.cloud.microsoft",
+  word: "https://word.cloud.microsoft", powerpoint: "https://powerpoint.cloud.microsoft",
+  "microsoft-365": "https://www.microsoft.com", microsoft: "https://www.microsoft.com",
+  sharepoint: "https://www.microsoft.com", onedrive: "https://onedrive.live.com",
+};
