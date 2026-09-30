@@ -7,7 +7,8 @@
 # %USERPROFILE%\.wwtdigital-deck-design:
 #
 #   1. uv, a small self-contained tool that manages Python (astral.sh/uv). Used from PATH if
-#      it is already installed, otherwise downloaded into .wwtdigital-deck-design\uv.
+#      it is already installed, otherwise a pinned release is downloaded from GitHub into
+#      .wwtdigital-deck-design\uv after its SHA-256 is checked.
 #   2. A private Python and the packages in requirements.txt, in .wwtdigital-deck-design\venv.
 #      uv fetches its own Python, so a missing Python or the Microsoft Store shortcut does
 #      not matter.
@@ -37,13 +38,35 @@ $localUv = Join-Path $HomeDir "uv\uv.exe"
 if ($uvCmd) { $Uv = $uvCmd.Source }
 elseif (Test-Path $localUv) { $Uv = $localUv }
 else {
-  Write-Host "Downloading uv into $HomeDir\uv (about 15 MB)..."
+  # uv comes straight from its GitHub release: one pinned version, and the download must match
+  # the SHA-256 below before anything is unpacked. Nothing downloaded is ever run as a script.
+  # To move to a newer uv, change the version and both hashes together, here and in setup.sh.
+  $UvVersion = "0.12.17"
+  $Arch = if ($env:PROCESSOR_ARCHITEW6432) { $env:PROCESSOR_ARCHITEW6432 } else { $env:PROCESSOR_ARCHITECTURE }
+  switch ($Arch) {
+    "AMD64" { $UvTarget = "x86_64-pc-windows-msvc";  $UvSha = "a252121d5b59398fcb137c6ea448176459a44010f33f67e0072305a637119ca7" }
+    "ARM64" { $UvTarget = "aarch64-pc-windows-msvc"; $UvSha = "3e1aa6849d77f0e00dc865e4afab5c5b32de053e21fe35bf5ad5cec3734ec976" }
+    default { Fail "this kind of computer ($Arch) is not supported. Install uv yourself (docs.astral.sh/uv) and run this again." }
+  }
+  Write-Host "Downloading uv $UvVersion into $HomeDir\uv (about 20 MB)..."
+  $Tmp = Join-Path $HomeDir "uv-download"
+  function FailTmp($m) { Remove-Item -Recurse -Force $Tmp -ErrorAction SilentlyContinue; Fail $m }
+  if (Test-Path $Tmp) { Remove-Item -Recurse -Force $Tmp }
+  New-Item -ItemType Directory -Force -Path $Tmp | Out-Null
+  $Zip = Join-Path $Tmp "uv.zip"
   try {
-    $env:UV_INSTALL_DIR = Join-Path $HomeDir "uv"
-    $env:UV_NO_MODIFY_PATH = "1"
-    $env:XDG_CONFIG_HOME = Join-Path $HomeDir "config"
-    Invoke-RestMethod https://astral.sh/uv/install.ps1 | Invoke-Expression | Out-Null
-  } catch { Fail "uv could not be downloaded. Check the network connection and try again." }
+    [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+    $ProgressPreference = "SilentlyContinue"   # the progress bar makes downloads far slower in Windows PowerShell 5
+    Invoke-WebRequest -UseBasicParsing -Uri "https://github.com/astral-sh/uv/releases/download/$UvVersion/uv-$UvTarget.zip" -OutFile $Zip
+  } catch { FailTmp "uv could not be downloaded. Check the network connection and try again." }
+  $Got = (Get-FileHash $Zip -Algorithm SHA256).Hash
+  if ($Got -ne $UvSha) { FailTmp "the uv download did not match its expected checksum, so it was discarded. Try again; if it keeps happening, tell the plugin owner." }
+  try {
+    Expand-Archive -Path $Zip -DestinationPath (Join-Path $Tmp "unpacked") -Force
+    New-Item -ItemType Directory -Force -Path (Join-Path $HomeDir "uv") | Out-Null
+    Copy-Item (Join-Path $Tmp "unpacked\uv.exe") $localUv -Force
+  } catch { FailTmp "uv could not be unpacked and installed into $HomeDir\uv." }
+  Remove-Item -Recurse -Force $Tmp -ErrorAction SilentlyContinue
   $Uv = $localUv
 }
 Write-Host "Using $Uv"

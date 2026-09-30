@@ -220,10 +220,14 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   Users are assumed non-technical with no working Python, so the plugin has **no hooks** (hooks run in
   whatever shell exists, PowerShell on Windows without Git Bash, and a bare `python3` on a Mac without
   developer tools pops an install dialog). Instead `setup/setup.sh` / `setup.ps1` (run once, with the
-  user's OK, offered by the skill) installs uv, a uv-managed Python 3.12 and `setup/requirements.txt`
+  user's OK, offered by the skill) installs uv (a pinned GitHub release, verified against a SHA-256 in the
+  script; never `curl | sh` or `Invoke-Expression`, which security scanners flag and org scanning blocks
+  with no admin override), a uv-managed Python 3.12 and `setup/requirements.txt`
   into `~/.wwtdigital-deck-design/venv`, and a browser only if there's no Chrome/Edge; every script runs
   via `setup/run.sh` / `run.ps1`, which exits 3 with "SETUP NEEDED" instead of touching system
-  Python. `scripts/browser.py` launches installed Chrome/Edge first. Where scripts execute in Cowork
+  Python. To bump the pinned uv, change `UV_VERSION` and the hashes in both setup scripts together
+  (`gh api repos/astral-sh/uv/releases/tags/<ver> --jq '.assets[] | select(.name|test("^uv-(aarch64-apple-darwin|x86_64-apple-darwin|x86_64-unknown-linux-musl|aarch64-unknown-linux-musl|x86_64-pc-windows-msvc|aarch64-pc-windows-msvc)\\.(tar\\.gz|zip)$")) | "\(.name) \(.digest)"'`),
+  then run `setup.sh` with a PATH that has no uv and a scratch `WWT_DESIGN_HOME`. `scripts/browser.py` launches installed Chrome/Edge first. Where scripts execute in Cowork
   (host vs VM) is unverified; if it's a VM, the PowerPoint.app font lookup won't find anything.
 
 ## Do not touch without asking

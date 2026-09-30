@@ -58,8 +58,9 @@ sh "${CLAUDE_PLUGIN_ROOT}/setup/setup.sh"
 
 On Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File setup\setup.ps1`. It needs
 no admin rights and writes only to `~/.wwtdigital-deck-design`: a private Python and its packages
-(installed with [uv](https://docs.astral.sh/uv/), about 330 MB of disk space), and a browser only if the
-machine has neither Chrome nor Edge. Run it again any time; finished steps are skipped. It ends
+(installed with [uv](https://docs.astral.sh/uv/), about 330 MB of disk space; if uv isn't already on
+the machine, a pinned release is downloaded from GitHub and its checksum is verified before use), and a
+browser only if the machine has neither Chrome nor Edge. Run it again any time; finished steps are skipped. It ends
 by running the doctor. After that, run any script through `setup/run.sh` (or `run.ps1`), which
 uses that private Python.
 

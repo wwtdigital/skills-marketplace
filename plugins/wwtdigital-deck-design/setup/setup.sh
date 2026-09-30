@@ -8,7 +8,8 @@
 # ~/.wwtdigital-deck-design:
 #
 #   1. uv, a small self-contained tool that manages Python (astral.sh/uv). Used from PATH if
-#      it is already installed, otherwise downloaded into ~/.wwtdigital-deck-design/uv.
+#      it is already installed, otherwise a pinned release is downloaded from GitHub into
+#      ~/.wwtdigital-deck-design/uv after its SHA-256 is checked.
 #   2. A private Python and the packages in requirements.txt, in ~/.wwtdigital-deck-design/venv.
 #      uv fetches its own Python, so a missing, old or system-managed Python does not matter.
 #   3. A browser for rendering. Google Chrome or Microsoft Edge is used if either is
@@ -38,11 +39,46 @@ if command -v uv >/dev/null 2>&1; then
 elif [ -x "$HOME_DIR/uv/uv" ]; then
   UV="$HOME_DIR/uv/uv"
 else
+  # uv comes straight from its GitHub release: one pinned version, and the download must match
+  # the SHA-256 below before anything is unpacked. Nothing downloaded is ever run as a script.
+  # To move to a newer uv, change the version and all four hashes together, here and in
+  # setup.ps1 (see CLAUDE.md).
+  UV_VERSION="0.12.17"
+  case "$(uname -s)-$(uname -m)" in
+    Darwin-arm64)
+      UV_TARGET="aarch64-apple-darwin"
+      UV_SHA256="85f00cbdc6dd3e97eba4c31b4d014375a9fdfe8f570023b84e5102fc3456896b" ;;
+    Darwin-x86_64)
+      UV_TARGET="x86_64-apple-darwin"
+      UV_SHA256="8dcf05a8c809bb3c471d2b614788ba27a6e41298fc8c31ac84b5f4339fd468e5" ;;
+    Linux-x86_64)
+      UV_TARGET="x86_64-unknown-linux-musl"
+      UV_SHA256="6401c4665d8fa2a9893e087c91f585430738e3170f5398a1141483efb4a93310" ;;
+    Linux-aarch64|Linux-arm64)
+      UV_TARGET="aarch64-unknown-linux-musl"
+      UV_SHA256="a6096da273d548cb9f277d237a01ac7344a39ef0f455c0e148e4dc9737c1596b" ;;
+    *) fail "this kind of computer ($(uname -sm)) is not supported. Install uv yourself (docs.astral.sh/uv) and run this again." ;;
+  esac
   command -v curl >/dev/null 2>&1 || fail "curl is missing, so uv cannot be downloaded."
-  echo "Downloading uv into $HOME_DIR/uv (about 15 MB)..."
-  curl -LsSf https://astral.sh/uv/install.sh |
-    env UV_INSTALL_DIR="$HOME_DIR/uv" UV_NO_MODIFY_PATH=1 XDG_CONFIG_HOME="$HOME_DIR/config" sh >/dev/null ||
+  command -v tar >/dev/null 2>&1 || fail "tar is missing, so uv cannot be unpacked."
+  if command -v shasum >/dev/null 2>&1; then SHA_CMD="shasum -a 256"
+  elif command -v sha256sum >/dev/null 2>&1; then SHA_CMD="sha256sum"
+  else fail "neither shasum nor sha256sum is available, so the uv download cannot be checked."; fi
+
+  echo "Downloading uv $UV_VERSION into $HOME_DIR/uv (about 20 MB)..."
+  TMP=$(mktemp -d "$HOME_DIR/uv-download.XXXXXX")
+  trap 'rm -rf "$TMP"' EXIT
+  ARCHIVE="uv-$UV_TARGET.tar.gz"
+  curl -fsSL -o "$TMP/$ARCHIVE" "https://github.com/astral-sh/uv/releases/download/$UV_VERSION/$ARCHIVE" ||
     fail "uv could not be downloaded. Check the network connection and try again."
+  GOT=$($SHA_CMD "$TMP/$ARCHIVE" | cut -d' ' -f1)
+  [ "$GOT" = "$UV_SHA256" ] ||
+    fail "the uv download did not match its expected checksum, so it was discarded. Try again; if it keeps happening, tell the plugin owner."
+  tar -xzf "$TMP/$ARCHIVE" -C "$TMP" || fail "the uv download could not be unpacked."
+  mkdir -p "$HOME_DIR/uv"
+  cp "$TMP/uv-$UV_TARGET/uv" "$HOME_DIR/uv/uv" && chmod +x "$HOME_DIR/uv/uv" ||
+    fail "uv could not be installed into $HOME_DIR/uv."
+  rm -rf "$TMP"; trap - EXIT
   UV="$HOME_DIR/uv/uv"
 fi
 echo "Using $UV"
