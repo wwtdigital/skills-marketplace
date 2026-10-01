@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { CopyCmd } from "./CopyCmd";
+import { useInstallMode } from "./InstallMode";
 
 const TABS = [
   { id: "code", label: "Claude Code" },
@@ -19,7 +19,7 @@ export function InstallTabs({
   marketplace: string;
   marketplaceUrl: string | null;
 }) {
-  const [tab, setTab] = useState<(typeof TABS)[number]["id"]>("code");
+  const { mode: tab, setMode: setTab } = useInstallMode();
   const slug = repo.replace(/^https:\/\/github\.com\//, "");
   const managed = JSON.stringify(
     {

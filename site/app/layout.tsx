@@ -5,6 +5,7 @@ import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
 import { Analytics } from "@vercel/analytics/next";
 import { REPO_URL } from "@/lib/catalog";
 import { loadCatalog } from "@/lib/load";
+import { InstallModeProvider } from "@/components/InstallMode";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
@@ -43,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ThemeToggle />
           </div>
         </header>
-        {children}
+        <InstallModeProvider>{children}</InstallModeProvider>
         <Analytics />
       </body>
     </html>

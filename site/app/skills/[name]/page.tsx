@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRightIcon, CaretRightIcon, DownloadSimpleIcon } from "@phosphor-icons/react/ssr";
 import { ConnectorTag } from "@/components/ConnectorTag";
-import { CopyCmd } from "@/components/CopyCmd";
+import { PluginInstall } from "@/components/PluginInstall";
 import { Footer } from "@/components/Footer";
 import { Prose } from "@/components/Prose";
 import { asset, connectorName, formatDate, isBundled } from "@/lib/catalog";
@@ -57,7 +57,7 @@ export default async function SkillPage({ params }: Props) {
           {s.body ? <Prose base={s.source.replace(/^.*?\/tree\/main\//, "")}>{s.body}</Prose> : <div />}
           <aside className="aside" aria-label="Install and details">
             <p className="aside-label">Install the {p.displayName} bundle</p>
-            <CopyCmd text={p.install} />
+            <PluginInstall plugin={p} />
             {s.download ? (
               <a className="btn btn-primary" href={asset(s.download)} download>
                 <DownloadSimpleIcon size={16} aria-hidden="true" />

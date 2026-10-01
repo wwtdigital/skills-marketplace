@@ -137,6 +137,11 @@ code, pre, .mono { font-family: var(--font-mono), ui-monospace, Menlo, monospace
 .cmd .copy:active { transform: scale(.94); }
 .cmd .copy[data-copied="true"] { color: var(--code-fg); }
 .cmd-multiline { align-items: flex-start; }
+.install-note {
+  margin: 8px 0 0; padding: 10px 14px; font-size: 13px; line-height: 1.5; color: var(--muted);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+}
+.install-note b { color: var(--text); font-weight: 600; }
 
 /* ---------- hero ---------- */
 .hero {

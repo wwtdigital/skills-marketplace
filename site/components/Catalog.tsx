@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ArrowUpRightIcon, DownloadSimpleIcon, MagnifyingGlassIcon, PlugsConnectedIcon } from "@phosphor-icons/react";
 import { asset, type McpServer, type Plugin, type Skill } from "@/lib/catalog";
 import { ConnectorIcon, ConnectorTag } from "./ConnectorTag";
-import { CopyCmd } from "./CopyCmd";
+import { PluginInstall } from "./PluginInstall";
 
 const STATUSES = ["stable", "beta", "draft"] as const;
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
@@ -101,7 +101,7 @@ export function Catalog({ plugins }: { plugins: Plugin[] }) {
                 )}
                 {p.version && <span className="mono">v{p.version}</span>}
               </div>
-              <CopyCmd text={p.install} />
+              <PluginInstall plugin={p} />
               <div className="links">
                 <a className="btn btn-sm btn-quiet" href={asset(p.download)} download>
                   <DownloadSimpleIcon size={15} aria-hidden="true" /> Bundle .zip
