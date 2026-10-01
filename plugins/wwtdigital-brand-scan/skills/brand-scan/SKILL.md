@@ -1,12 +1,12 @@
 ---
 name: brand-scan
-description: "Run or read a brandscanner assessment of a company's digital presence: security posture, tech stack, app-store reviews, public financials, email-auth records, benchmarks against the scanned cohort, and the resulting scorecard, using the brandscanner MCP server bundled with the research plugin. Use when someone says \"scan this brand\", \"run brandscanner on <company>\", \"what's <company>'s scorecard\", \"how does <company> compare to its cohort\", \"pull the tech stack for <company>\", or \"prep a digital assessment of a prospect\". Not for general desk research without the tool, for writing the pitch deck or proposal that follows, or for anything about WWT's own internal systems."
+description: "Run or read a brandscanner assessment of a company's digital presence: security posture, tech stack, app-store reviews, public financials, email-auth records, benchmarks against the scanned cohort, and the resulting scorecard, using the brandscanner MCP server bundled with this plugin. Use when someone says \"scan this brand\", \"run brandscanner on <company>\", \"what's <company>'s scorecard\", \"how does <company> compare to its cohort\", \"pull the tech stack for <company>\", or \"prep a digital assessment of a prospect\". Not for general desk research without the tool, for writing the pitch deck or proposal that follows, or for anything about WWT's own internal systems."
 metadata:
   owner: scott.cullum@wwt.com
   category: research
   status: draft
   connectors: [brandscanner]
-  version: 0.1.0
+  version: 0.1.1
 ---
 
 # Brand scan
@@ -28,7 +28,7 @@ scorecard saved in brandscanner. Per-tool notes and the scorecard JSON shape are
 
 ## Steps
 
-1. **Connector check.** The `brandscanner` server connects when the research plugin is
+1. **Connector check.** The `brandscanner` server connects when this plugin is
    installed, but it needs a one-time sign-in. If tools like `list_brands` and `get_scorecard`
    aren't available, brandscanner isn't connected: tell the person to run `/mcp` in Claude Code
    (or accept the sign-in prompt in the Claude app), sign in, and ask again. Then stop.

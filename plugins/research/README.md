@@ -14,16 +14,14 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 
 | Skill | What it does |
 | --- | --- |
-| [`brand-scan`](skills/brand-scan/SKILL.md) | Run or read a brandscanner assessment of a company: security posture, tech stack, app reviews, public financials, cohort benchmarks and the saved scorecard. |
 | [`pursuit-intel-brief`](skills/pursuit-intel-brief/SKILL.md) | Build a supplemental intel brief for a WWT Digital pursuit at any stage (RFP, RFI or nothing yet): reads the pursuit channel, Notion space and SharePoint, researches the client, sizes the deal against past SOWs, checks every claim in our material against wwt.com, and publishes what's new, the positioning angles it supports, and what would blow up if the client checked. |
 
-## MCP servers
+This bundle has no MCP servers, so it installs without connecting anything. `pursuit-intel-brief` reads
+Slack, Notion and Microsoft 365 through the connectors you already have in Claude.
 
-Installing this plugin also connects these MCP servers. The first time a tool is used, run `/mcp` and sign in (OAuth); no keys are stored in the plugin.
-
-| Server | What it does |
-| --- | --- |
-| `brandscanner` | Brand research: scorecards, tech stack, security posture, app reviews and public financials. Driven by the [`brand-scan`](skills/brand-scan/SKILL.md) skill. |
+Need to scan a company's digital presence? `brand-scan` used to live here. It moved to its own plugin
+because it brings the brandscanner MCP server:
+`/plugin install wwtdigital-brand-scan@wwtdigital`.
 
 ## Owners
 

@@ -1,7 +1,7 @@
 {
   "name": "wwtdigital",
   "description": "WWTDigital's shared catalog of Claude skills, grouped by category: presentation, research, ops, admin and tech. Install the bundles you need, or browse and download individual skills at the marketplace site.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "owner": {
     "name": "WWTDigital",
     "url": "https://github.com/wwtdigital"
@@ -47,6 +47,22 @@
       }
     },
     {
+      "name": "wwtdigital-publish-page",
+      "displayName": "WWTDigital Publish Page",
+      "source": "./plugins/wwtdigital-publish-page",
+      "description": "Publish an HTML or Markdown page as a shareable, access-controlled link and manage who can open it. Opt-in, separate from the Presentation bundle because it brings the artifact-publisher MCP server.",
+      "category": "presentation",
+      "tags": [
+        "presentation",
+        "publish",
+        "sharing",
+        "artifact"
+      ],
+      "author": {
+        "name": "WWTDigital"
+      }
+    },
+    {
       "name": "research",
       "displayName": "Research",
       "source": "./plugins/research",
@@ -57,6 +73,22 @@
         "analysis",
         "synthesis",
         "data"
+      ],
+      "author": {
+        "name": "WWTDigital"
+      }
+    },
+    {
+      "name": "wwtdigital-brand-scan",
+      "displayName": "WWTDigital Brand Scan",
+      "source": "./plugins/wwtdigital-brand-scan",
+      "description": "Run or read a brandscanner assessment of a company: security posture, tech stack, app reviews, public financials and the saved scorecard. Opt-in, separate from the Research bundle because it brings the brandscanner MCP server.",
+      "category": "research",
+      "tags": [
+        "research",
+        "brand",
+        "scorecard",
+        "security"
       ],
       "author": {
         "name": "WWTDigital"

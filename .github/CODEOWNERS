@@ -14,3 +14,5 @@
 
 # Standalone plugins: owned by the team of the category they belong to
 /plugins/wwtdigital-deck-design/  @wwtdigital/skills-presentation
+/plugins/wwtdigital-publish-page/  @wwtdigital/skills-presentation
+/plugins/wwtdigital-brand-scan/  @wwtdigital/skills-research

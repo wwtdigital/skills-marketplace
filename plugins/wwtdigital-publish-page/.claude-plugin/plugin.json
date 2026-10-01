@@ -1,0 +1,17 @@
+{
+  "name": "wwtdigital-publish-page",
+  "displayName": "WWTDigital Publish Page",
+  "version": "0.1.0",
+  "description": "Publish an HTML or Markdown page as a shareable, access-controlled link through the team's artifact publisher, and manage who can open it. Brings the artifact-publisher MCP server, so it installs separately from the Presentation bundle.",
+  "author": {
+    "name": "WWTDigital"
+  },
+  "homepage": "https://skills-marketplace.wwtdigital.io/#wwtdigital-publish-page",
+  "repository": "https://github.com/wwtdigital/skills-marketplace",
+  "keywords": [
+    "presentation",
+    "publish",
+    "sharing",
+    "artifact"
+  ]
+}

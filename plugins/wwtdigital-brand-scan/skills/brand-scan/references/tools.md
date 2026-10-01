@@ -1,7 +1,7 @@
 # brandscanner tools
 
-Notes on the `brandscanner` MCP server as bundled in `plugins/research/.mcp.json`. In an
-installed plugin the tools register under `plugin:research:brandscanner`. Names below are the
+Notes on the `brandscanner` MCP server as bundled in `plugins/wwtdigital-brand-scan/.mcp.json`. In an
+installed plugin the tools register under `plugin:wwtdigital-brand-scan:brandscanner`. Names below are the
 tool names without any client prefix. Everything here was read from the tool schemas and a
 read-only look at the data on 2026-09-24; timings are estimates.
 

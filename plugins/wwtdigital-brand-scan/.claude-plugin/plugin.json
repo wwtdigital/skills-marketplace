@@ -1,0 +1,17 @@
+{
+  "name": "wwtdigital-brand-scan",
+  "displayName": "WWTDigital Brand Scan",
+  "version": "0.1.0",
+  "description": "Run or read a brandscanner assessment of a company: security posture, tech stack, app reviews, public financials, cohort benchmarks and the saved scorecard. Brings the brandscanner MCP server, so it installs separately from the Research bundle.",
+  "author": {
+    "name": "WWTDigital"
+  },
+  "homepage": "https://skills-marketplace.wwtdigital.io/#wwtdigital-brand-scan",
+  "repository": "https://github.com/wwtdigital/skills-marketplace",
+  "keywords": [
+    "research",
+    "brand",
+    "scorecard",
+    "security"
+  ]
+}

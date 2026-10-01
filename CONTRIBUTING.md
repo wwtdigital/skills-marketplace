@@ -84,13 +84,16 @@ shouldn't-case is the minimum, and the build fails without them. Results land in
 
 ## Adding an MCP server
 
-A category plugin can also bring the team's MCP servers: installing the bundle connects them.
-Today `presentation` includes the artifact publisher (used by the `publish-page` skill) and
-`research` includes brandscanner (used by `brand-scan`). A bundled server should come with a
-skill that says what to do with it; tools with no instructions are hard to use well.
+A skill that needs one of the team's MCP servers goes in its own add-on plugin, and installing the
+add-on connects the server. The category bundles stay free of MCP servers, so anyone can install a
+bundle without connecting anything, and a server that needs approval or a sign-in only affects the
+people who asked for it. Today `wwtdigital-publish-page` brings the artifact publisher (used by the
+`publish-page` skill) and `wwtdigital-brand-scan` brings brandscanner (used by `brand-scan`). A server
+should come with a skill that says what to do with it; tools with no instructions are hard to use well.
 
-To add one, send the server's name, URL and what it does to the marketplace admin (no git), or
-add it to `plugins/<category>/.mcp.json` yourself and list it in that plugin's README:
+To add one, send the server's name, URL and what it does to the marketplace admin (no git), or make
+an add-on plugin yourself: put the server in `plugins/<your-plugin>/.mcp.json`, list it in that
+plugin's README, and give its marketplace entry a `category`:
 
 ```json
 {

@@ -41,13 +41,27 @@ site/scripts/lib.ts               shared loaders (marketplace, manifests, SKILL.
 
 Plugins: one bundle per category (`presentation`, `research`, `ops`, `admin`, `tech`), plus
 standalone opt-in plugins that belong to a category but install separately because they bring
-hooks or MCP servers most of that category won't want. Skills so far: `admin` has
-`wwtdigital-skill-author` and `marketplace-smoke-test`; `presentation` has `humanizer` (Toby Gerber)
-and `publish-page` (wraps the bundled artifact-publisher MCP); `research` has `brand-scan` (wraps the
-bundled brandscanner MCP) and `pursuit-intel-brief` (the only copy; its internal data, comparables, channel IDs,
-paths, lives on a team-editable Notion page linked from its SKILL.md, never in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell); `tech` has `figma-design-to-code` (Zak Lampert); the standalone
-`wwtdigital-deck-design` (category `presentation`, from Toby Gerber) has `wwtdigital-deck-design` and
-`wwtdigital-deck-design-doctor`. The category plugins replaced the original discipline plugins on
+hooks or MCP servers most of that category won't want.
+
+**Rule (Scott, 2026-10-01): category bundles carry no MCP servers and no scripts, so each installs
+without needing anyone's approval.** Corporate IT approvals are a black box we don't open and a plugin
+that needs an exception just doesn't get installed, so anything that might need one goes in a
+standalone add-on that people opt into. Before 2026-10-01 `presentation` bundled artifact-publisher
+and `research` bundled brandscanner, which meant an unapprovable server blocked `humanizer` and
+`pursuit-intel-brief` too. Both moved out (below). Not yet done: deck-design still auto-connects the
+Figma server though its doctor calls Figma optional, and its setup installs unpinned Python packages.
+
+Skills so far: `admin` has `wwtdigital-skill-author` and `marketplace-smoke-test`; `presentation` has
+`humanizer` (Toby Gerber); `research` has `pursuit-intel-brief` (the only copy; its internal data,
+comparables, channel IDs, paths, lives on a team-editable Notion page linked from its SKILL.md, never
+in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell); `tech` has `figma-design-to-code`
+(Zak Lampert). Standalone add-ons: `wwtdigital-deck-design` (category `presentation`, from Toby
+Gerber) has `wwtdigital-deck-design` and `wwtdigital-deck-design-doctor`; `wwtdigital-publish-page`
+(category `presentation`) has `publish-page` and bundles the artifact-publisher MCP;
+`wwtdigital-brand-scan` (category `research`) has `brand-scan` and bundles the brandscanner MCP.
+`publish-page` and `brand-scan` moved out of `presentation` and `research` on 2026-10-01; there is no
+migration path for a skill moving plugins (`renames` only covers plugin renames), so anyone who had them
+installed has to install the add-on. The category plugins replaced the original discipline plugins on
 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
 
 ## Commands
@@ -76,7 +90,7 @@ out of content hashes and downloads: an eval-only change needs no plugin bump, a
 don't get them (run them from a checkout). `evals/results/` is gitignored. Changing what `contentHash` covers (as excluding `evals/` did
 on 2026-09-24) makes every affected plugin look changed against the live catalog, so it needs a
 one-time bump of each; the deploy fails otherwise. Always gate a push on
-`node scripts/validate.ts --strict --prev-catalog auto`, the same check Vercel runs. All 9 skills have cases (29 total); 84/84 runs passed on 2026-09-24 at 8 turns, about $8 for the lot; pursuit-intel-brief 12/12 on 2026-09-28 at 4 turns ($1.08). Known
+`node scripts/validate.ts --strict --prev-catalog auto`, the same check Vercel runs. All 10 skills have cases (32 total); 84/84 runs passed on 2026-09-24 at 8 turns, about $8 for the lot; pursuit-intel-brief 12/12 on 2026-09-28 at 4 turns ($1.08). Known
 flake: `wwtdigital-deck-design-should-2` ("match our WWT template") missed once in seven runs at 4 turns
 with the skill never loaded; owner to decide whether the description needs a sharper phrase.
 
@@ -158,13 +172,14 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 - A skill whose files mention `${CLAUDE_PLUGIN_ROOT}` reaches outside its own folder, so build-index
   marks it `bundle_only`, writes no `.skill` for it, and the site offers the plugin zip instead
   (currently both `wwtdigital-deck-design` skills). Automatic: no flag to set.
-- MCP servers live in `plugins/<category>/.mcp.json` (not `plugin.json`, which the validator
-  rejects) and connect for everyone who installs that category. `presentation` has
-  `artifact-publisher`, `research` has `brandscanner`; both are OAuth-backed http servers, so the
+- MCP servers live in `plugins/<plugin>/.mcp.json` (not `plugin.json`, which the validator
+  rejects) and connect for everyone who installs that plugin, so they belong only in standalone
+  add-ons (see the rule above). `wwtdigital-publish-page` has `artifact-publisher` and
+  `wwtdigital-brand-scan` has `brandscanner`; both are OAuth-backed http servers, so the
   config is just type + url. The validator requires https, kebab-case names, and `${VAR}`
   references for any header/env value, and runs the secret scan on `.mcp.json`. build-index emits
   them as `mcp_servers` per plugin, which the site shows on the plugin card. Verified: installing
-  the plugin registers `plugin:<category>:<server>` in `claude mcp list`.
+  the plugin registers `plugin:<plugin-name>:<server>` in `claude mcp list`.
 - Two ways to install the marketplace. The git one (`/plugin marketplace add wwtdigital/skills-marketplace`)
   needs no account or access now that the repo is public. The URL one (`/plugin marketplace add
   https://skills-marketplace.wwtdigital.io/marketplace.json`) needs no GitHub account either: build-index
