@@ -144,6 +144,15 @@ The plugin version is what Claude Code checks for updates: if it doesn't go up, 
 already installed the plugin never get your change. The site build fails if a plugin or skill
 changed without a bump (it compares against the live site). README-only edits don't need a bump.
 
+## Release notes
+
+Every version change also gets a line in the [catalog](https://skills-marketplace.wwtdigital.io/catalog)
+(`CATALOG.md` in the repo): the plugin name and new version in bold, then what changed and, if people
+need to do something, what. For example, `**research 0.5.0**: pursuit-intel-brief only; brand-scan moved
+to its own plugin.` Changes to the site or how people install go in the
+[changelog](https://skills-marketplace.wwtdigital.io/changelog) (`CHANGELOG.md`). The build prints a
+note if a plugin's current version has no catalog line, but it won't fail the deploy.
+
 ## Standalone plugins
 
 A skill that brings a hook, an MCP server or a large toolkit that most people in its category
@@ -171,3 +180,4 @@ and to `.github/CODEOWNERS`.
 - [ ] Site build passes (the Vercel preview, or `npm --prefix site run build`)
 - [ ] Plugin README table updated
 - [ ] Versions bumped
+- [ ] Catalog line added for each new plugin version (`CATALOG.md`)

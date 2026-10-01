@@ -33,6 +33,7 @@ plugins/<plugin>/
   README.md                       bundle description + skills table (update when adding a skill)
 templates/skill-template/         starting point for new skills; frontmatter has a `metadata` block
 site/                             Next.js App Router on Vercel (pages prerendered); Root Directory = site/
+CATALOG.md, CHANGELOG.md          library release notes and site changelog, published at /catalog and /changelog
 site/scripts/validate.ts          lint the whole repo; --strict makes warnings fatal; version-bump checks
 site/scripts/build-index.ts       writes site/public/{data/index.json, downloads/, marketplace.json}
 site/scripts/lib.ts               shared loaders (marketplace, manifests, SKILL.md frontmatter, hashing)
@@ -43,10 +44,10 @@ Plugins: one bundle per category (`presentation`, `research`, `ops`, `admin`, `t
 standalone opt-in plugins that belong to a category but install separately because they bring
 hooks or MCP servers most of that category won't want.
 
-**Rule (Scott, 2026-10-01): category bundles carry no MCP servers and no scripts, so each installs
+**Rule (Scott, 2026-09-30): category bundles carry no MCP servers and no scripts, so each installs
 without needing anyone's approval.** Corporate IT approvals are a black box we don't open and a plugin
 that needs an exception just doesn't get installed, so anything that might need one goes in a
-standalone add-on that people opt into. Before 2026-10-01 `presentation` bundled artifact-publisher
+standalone add-on that people opt into. Before 2026-09-30 `presentation` bundled artifact-publisher
 and `research` bundled brandscanner, which meant an unapprovable server blocked `humanizer` and
 `pursuit-intel-brief` too. Both moved out (below). Not yet done: deck-design still auto-connects the
 Figma server though its doctor calls Figma optional, and its setup installs unpinned Python packages.
@@ -59,7 +60,7 @@ in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell); `tech` has `figm
 Gerber) has `wwtdigital-deck-design` and `wwtdigital-deck-design-doctor`; `wwtdigital-publish-page`
 (category `presentation`) has `publish-page` and bundles the artifact-publisher MCP;
 `wwtdigital-brand-scan` (category `research`) has `brand-scan` and bundles the brandscanner MCP.
-`publish-page` and `brand-scan` moved out of `presentation` and `research` on 2026-10-01; there is no
+`publish-page` and `brand-scan` moved out of `presentation` and `research` on 2026-09-30; there is no
 migration path for a skill moving plugins (`renames` only covers plugin renames), so anyone who had them
 installed has to install the add-on. The category plugins replaced the original discipline plugins on
 2026-09-23; `renames` maps `marketplace-tooling` → `admin`.
@@ -118,6 +119,12 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   `metadata.version` is informational only; the site shows it, Claude Code ignores it.
   `validate.py --base` enforces the bumps (see below).
 - `site/public/data/` and `site/public/downloads/` are generated at build time and gitignored.
+- Two release-note docs live at the repo root and are published on the site like `CONTRIBUTING.md`:
+  `CATALOG.md` (`/catalog`: the library today plus release notes per plugin and skill, newest first) and
+  `CHANGELOG.md` (`/changelog`: the site, install paths and build checks). Every plugin version change gets a
+  `**plugin-name version**` line in `CATALOG.md` saying what changed and what people must do; `validate.ts`
+  prints a `NOTE` (never a failure, so a teammate's deploy can't break over it) when a plugin's current version
+  has none. Site and pipeline changes go in `CHANGELOG.md`. Dates in both are the maintainer's local date.
 - `CONTRIBUTING.md` is published as the site's `/contribute` page (read from the repo root at build
   time), for contributors who never open the repo at all. Write it for them: absolute links to the
   site (made relative when rendered), no links assuming repo familiarity.

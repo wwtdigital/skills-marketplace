@@ -13,7 +13,7 @@ import path from "node:path";
 import {
   CATEGORIES, contentHash, git, iterSkills, KEBAB, loadMarketplace, loadMcpConfig, loadPluginManifest,
   loadPrevCatalog, type Marketplace, type MarketplaceEntry, NO_BUMP_NEEDED, opt, parseSkillMd,
-  pluginDir, rel, SKIP_DIRS, type SkillSource, STATUSES, walk,
+  pluginDir, rel, ROOT, SKIP_DIRS, type SkillSource, STATUSES, walk,
 } from "./lib.ts";
 
 const SECRET_PATTERNS = [
@@ -36,6 +36,10 @@ const BINARY = new Set([
   ".png", ".jpg", ".jpeg", ".gif", ".webp", ".pdf", ".pptx", ".docx", ".xlsx", ".zip",
   ".woff", ".woff2", ".ttf", ".otf",
 ]);
+
+// CATALOG.md is the library's release notes (published at /catalog). A plugin whose current version has
+// no "**name version**" line gets a note, never a failure, so a deploy doesn't break over a missing line.
+const CATALOG_DOC = existsSync(path.join(ROOT, "CATALOG.md")) ? readFileSync(path.join(ROOT, "CATALOG.md"), "utf8") : null;
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -67,6 +71,9 @@ function checkPlugin(entry: MarketplaceEntry) {
   else {
     if (manifest.name !== n) err(`plugin '${n}': plugin.json name '${manifest.name}' does not match marketplace entry`);
     if (!("version" in manifest)) warn(`plugin '${n}': plugin.json has no version (users won't get pinned updates)`);
+    if (CATALOG_DOC && manifest.version && !CATALOG_DOC.includes(`**${n} ${manifest.version}**`))
+      notes.push(`plugin '${n}': CATALOG.md has no entry for ${manifest.version}. Add a "**${n} ${manifest.version}**" ` +
+        "line saying what changed (it's published at /catalog)");
   }
   if (manifest && "mcpServers" in manifest) err(`plugin '${n}': put MCP servers in .mcp.json at the plugin root, not plugin.json`);
   checkMcp(n, pdir);

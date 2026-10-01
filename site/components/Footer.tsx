@@ -8,6 +8,8 @@ export function Footer({ catalog }: { catalog: Catalog | null }) {
       <div className="wrap">
         <span>WWTDigital Skills{m && `, updated ${formatDate(m.generated)}`}</span>
         <nav aria-label="Footer">
+          <Link href="/catalog">Catalog</Link>
+          <Link href="/changelog">Changelog</Link>
           <Link href="/contribute">Contribute</Link>
           <a href="mailto:scott.cullum@wwt.com">Contact the maintainer</a>
           <a href={m?.repo || REPO_URL} target="_blank" rel="noopener">
