@@ -52,6 +52,17 @@ and `research` bundled brandscanner, which meant an unapprovable server blocked 
 `pursuit-intel-brief` too. Both moved out (below). Not yet done: deck-design still auto-connects the
 Figma server though its doctor calls Figma optional, and its setup installs unpinned Python packages.
 
+**Scope rule (Scott, 2026-10-01): we can't change enterprise rules, so keep everything inside the scope
+tree people control themselves.** That means Claude Code's user, project and local scopes, and member-level
+Customize in Cowork (add a marketplace, upload a plugin, share it with specific people). Nothing may depend
+on managed settings, marketplace allowlists, claude.ai org sync, the org's scan policy, or anything that
+needs an Owner. Protect sensitive material at the data layer, not the distribution layer: keep it out of the
+repo and the zips, put it in a page behind WWT SSO (Notion, SharePoint, Slack) and have the skill read it with
+the caller's own connectors, as `pursuit-intel-brief` does. A plugin that genuinely can't be public can be
+uploaded by a member and shared with named people (Customize > Plugins > Share), which reaches Cowork and
+signed-in Claude Code (as `@synced`, v2.1.273+); that needs the org's Skill sharing policy on and the plugin
+to pass the scan, neither of which we control, so treat it as unproven until someone has done it once.
+
 Skills so far: `admin` has `wwtdigital-skill-author` and `marketplace-smoke-test`; `presentation` has
 `humanizer` (Toby Gerber); `research` has `pursuit-intel-brief` (the only copy; its internal data,
 comparables, channel IDs, paths, lives on a team-editable Notion page linked from its SKILL.md, never
