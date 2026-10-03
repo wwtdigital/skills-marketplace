@@ -56,7 +56,7 @@ Skills so far: `admin` has `wwtdigital-skill-author` and `marketplace-smoke-test
 `humanizer` (Toby Gerber); `research` has `pursuit-intel-brief` (the only copy; its internal data,
 comparables, channel IDs, paths, lives on a team-editable Notion page linked from its SKILL.md, never
 in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell); `tech` has `figma-design-to-code`
-(Zak Lampert). Standalone add-ons: `wwtdigital-deck-design` (category `presentation`, from Toby
+(Zak Lampert), `wave-planning` and `wave-review` (Andrew Brydon). Standalone add-ons: `wwtdigital-deck-design` (category `presentation`, from Toby
 Gerber) has `wwtdigital-deck-design` and `wwtdigital-deck-design-doctor`; `wwtdigital-publish-page`
 (category `presentation`) has `publish-page` and bundles the artifact-publisher MCP;
 `wwtdigital-brand-scan` (category `research`) has `brand-scan` and bundles the brandscanner MCP.

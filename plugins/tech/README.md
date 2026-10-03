@@ -15,6 +15,8 @@ Each subfolder of `skills/` is one skill. See the [contribution guide](../../CON
 | Skill | What it does |
 | --- | --- |
 | `figma-design-to-code` | Implement a Figma design as code: read tokens and measurements from the Figma UI with playwright-cli, build against a token layer, verify with computed styles and screenshots |
+| `wave-planning` | Plan a project or large feature as dependency-ordered Waves → Stories, with every acceptance criterion mapped to the test that proves it, anchored to a reality inventory of the codebase |
+| `wave-review` | End-of-wave checkpoint: verify each story's acceptance criteria, update the plan in place, reconcile drift, and re-check the next wave's dependencies |
 
 ## Owners
 
