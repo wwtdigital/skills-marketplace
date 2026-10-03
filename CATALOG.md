@@ -1,6 +1,6 @@
 # Catalog
 
-What is in the library, and what changed in it. The table is the library as of 2026-09-30. The release
+What is in the library, and what changed in it. The table is the library as of 2026-10-03. The release
 notes under it are newest first. Changes to the site and install paths are in the
 [changelog](https://skills-marketplace.wwtdigital.io/changelog).
 
@@ -19,7 +19,7 @@ current version has no entry.
 | `wwtdigital-brand-scan` (Research add-on) | 0.1.0 | `brand-scan` 0.1.1 | brandscanner | Scott Cullum |
 | `ops` | 0.3.3 | `wwtdigital-onboarding` 1.1.1 | no | Staci Powell |
 | `admin` | 0.4.3 | `wwtdigital-skill-author` 0.2.1, `marketplace-smoke-test` 0.2.0 | no | Scott Cullum |
-| `tech` | 0.2.0 | `figma-design-to-code` 0.1.0 | no | Zak Lampert |
+| `tech` | 0.3.0 | `figma-design-to-code` 0.1.0, `wave-planning` 1.0.0, `wave-review` 1.0.0 | no | Zak Lampert, Andrew Brydon |
 
 The five category bundles (`presentation`, `research`, `ops`, `admin`, `tech`) bring no MCP servers and no
 scripts, so each installs without connecting anything. Anything that does goes in an add-on you opt into.
@@ -28,6 +28,14 @@ Skills that read from your own tools say which ones: `pursuit-intel-brief` needs
 Microsoft 365 connected in Claude, and `wwtdigital-onboarding` needs Notion.
 
 ## Release notes
+
+### 2026-10-03
+
+- **tech 0.3.0**: added `wave-planning` 1.0.0 and `wave-review` 1.0.0 (Andrew Brydon). `wave-planning` turns a
+  project or large feature into dependency-ordered Waves of Stories, each acceptance criterion tied to the test
+  that proves it; `wave-review` is the end-of-wave check that grades a wave against those criteria and updates
+  the plan. A repo can set its own plan paths and story IDs in `.claude/wave-conventions.md`. Run
+  `/plugin update tech@wwtdigital` to get them.
 
 ### 2026-09-30
 
