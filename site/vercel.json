@@ -2,7 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "headers": [
-    { "source": "/data/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=300" }] },
+    { "source": "/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/data/(.*)", "headers": [{ "key": "Cache-Control", "value": "private, max-age=300" }] },
     { "source": "/downloads/(.*)", "headers": [
       { "key": "Content-Type", "value": "application/zip" },
       { "key": "Content-Disposition", "value": "attachment" }

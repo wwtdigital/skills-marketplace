@@ -90,8 +90,8 @@ export default async function SkillPage({ params }: Props) {
               <dd>{formatDate(s.updated)}</dd>
               <dt>Source</dt>
               <dd>
-                <a href={s.source} target="_blank" rel="noopener">
-                  GitHub <ArrowUpRightIcon size={12} weight="bold" aria-hidden="true" />
+                <a href={s.source} target="_blank" rel="noopener" title="The repo is private: GitHub org members only">
+                  GitHub (org members) <ArrowUpRightIcon size={12} weight="bold" aria-hidden="true" />
                 </a>
               </dd>
             </dl>

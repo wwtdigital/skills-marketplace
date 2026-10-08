@@ -9,14 +9,56 @@ Skills are grouped into one plugin per category; users install the bundles they 
 A Next.js site (`site/`, deployed to Vercel) lets people browse and download skills without GitHub.
 
 Hosting:
-- Repo: `github.com/wwtdigital/skills-marketplace` (made public 2026-09-23 so the GitHub install
-  path needs no org membership or account; the site's downloads already made everything else in it
-  public anyway, and `wwtdigital` already runs other public repos, so this isn't out of pattern.
-  **Owner calls this temporary, a for-now fix, not a settled decision** — don't assume it stays
-  public, and check with the owner before building anything that depends on it staying that way.)
-- Vercel: project `skills-marketplace` in team `wwtd`, Root Directory `site`, Next.js preset,
-  production branch `main`. Every pushed branch gets a preview deployment.
-- Site: `https://skills-marketplace.wwtdigital.io` (`wwtdigital.io` DNS is managed in the `wwtd` team)
+- Repo: `github.com/wwtdigital/skills-marketplace`, **private** (public from 2026-09-23 to 2026-10-08
+  so the GitHub install path needed no account; made private again when the site got its access gate,
+  see "Site access" below). The GitHub install path now needs a GitHub account in the `wwtdigital` org
+  with git signed in; everyone else installs through the site's URL marketplace with the team key.
+- Vercel: project `skills-marketplace` in team `wwtd` (Pro plan), Root Directory `site`, Next.js preset,
+  production branch `main`. Every pushed branch gets a preview deployment (behind Vercel Authentication).
+- Site: `https://skills-marketplace.wwtdigital.io` (`wwtdigital.io` DNS is managed in the `wwtd` team),
+  gated by the team access key (below).
+
+## Site access (the team key)
+
+Decided 2026-10-07 (Scott): the threat model is public discovery, not per-person revocation, IT allows
+no OAuth of any kind (no Slack sign-in, no Entra, no GitHub App on claude.ai), and no paid Vercel
+protection. So the whole production site (pages, `marketplace.json`, `/downloads/*`, `/data/*`) sits
+behind **one shared team key**, distributed in the private team Slack channel, enforced by our own code:
+
+- `site/proxy.ts` (Next 16's renamed middleware, Node runtime) checks every request except
+  `_next/static`, `_next/image`, `_vercel` (analytics), `icon.svg`, `robots.txt`, `/access` and
+  `/api/access`. Three ways in, same key: `Authorization: Bearer <key>`; the `wwtd_access` cookie
+  (`sha256("wwtd-access-v1|" + key)`, 90 days, HttpOnly); or `?key=<key>` on any URL (the link pinned
+  in Slack), which sets the cookie and 302s to the same URL without it. Unauthenticated machine
+  requests to the three machine paths get a plain 401 with `WWW-Authenticate`; everything else is
+  rewritten (URL kept) to `/access`, whose form posts to `site/app/api/access/route.ts`.
+- Keys live in `SITE_ACCESS_TOKENS` (comma-separated), set in Vercel for **Production and Preview**
+  (Sensitive) and in `site/.env.local` locally (gitignored; the npm scripts load it with
+  `--env-file-if-exists`). No keys: fail closed on Vercel (`VERCEL` set), open with a warning locally.
+  All logic is in `site/lib/access.ts`.
+- **Claude Code** reaches the site with the header from an `extraKnownMarketplaces` entry in
+  `~/.claude/settings.json` (`source: { source: "url", url, headers: { Authorization } }`, needs Claude
+  Code 2.1.286+). The header rides on `marketplace.json` and on every archive zip on that origin, so
+  installs and auto-update work with no account. `/plugin marketplace add <url>` can't send headers,
+  so the site's Install tab shows the settings block instead, **with the real key baked in at build
+  time** (`page.tsx` reads `firstToken()`; only people past the gate see the page). A `headers` change
+  doesn't change the marketplace URL, so rotation never trips "network source differs".
+- **Build**: `loadPrevCatalog` in `site/scripts/lib.ts` sends each key as a bearer in turn when reading
+  the live `/data/index.json` (during a rotation deploy production still only knows the old key).
+  Without a key locally it degrades to the usual `NOTE` and skips the baseline checks.
+- **Rotation runbook**: generate (`openssl rand -base64 24 | tr '+/' '-_'`); set `SITE_ACCESS_TOKENS=new,old`
+  in Vercel; redeploy (env changes need one); post the new link, key and settings block in Slack and
+  re-pin; a week later set `new` only and redeploy. Old cookies die with the old key. Bumping
+  `DERIVE_PREFIX` in `lib/access.ts` logs everyone out at once.
+- **Cowork / Desktop**: its Add marketplace dialog takes only a GitHub repo, so with the private repo
+  it needs a GitHub account in the org (`onboard-teammate` skill). Otherwise: bundle `.zip` from the
+  gated site → Upload plugin. Whether the desktop app honors `extraKnownMarketplaces` with headers is
+  unverified. Org sync via claude.ai Organization settings would avoid user git credentials but needs
+  a GitHub connection on claude.ai (an OAuth app), which IT won't approve today.
+- Per-person revocation isn't built, but `isValidToken` already checks a list, so a Slack Workflow or
+  small Slack app could mint per-user keys into that list later without changing any client.
+- `vercel.json` sends `X-Robots-Tag: noindex, nofollow` on everything and `site/app/robots.ts` disallows
+  all. Pages indexed while public need a Search Console removal request (not done).
 
 If either changes, `git grep` for it. The site hostname lives in `marketplace.json` `metadata.site`,
 every `plugin.json` `homepage`, and `README.md`. The repo slug lives in `site/lib/catalog.ts`
@@ -188,12 +230,14 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   them as `mcp_servers` per plugin, which the site shows on the plugin card. Verified: installing
   the plugin registers `plugin:<plugin-name>:<server>` in `claude mcp list`.
 - Two ways to install the marketplace. The git one (`/plugin marketplace add wwtdigital/skills-marketplace`)
-  needs no account or access now that the repo is public. The URL one (`/plugin marketplace add
-  https://skills-marketplace.wwtdigital.io/marketplace.json`) needs no GitHub account either: build-index
-  generates that file with every plugin as an `archive` source (`downloads/<plugin>.zip` + `sha256`).
-  Both use the same marketplace name, so plugin ids are the same. Claude Code only accepts https
-  archive URLs on non-loopback hosts, so you can't test it on localhost, and previews are behind
-  Vercel auth. Zips are deterministic (fixed mtime), so a `sha256` only changes when content does.
+  needs a GitHub account in the org with git signed in (`gh auth setup-git` or SSH) since the repo went
+  private on 2026-10-08. The URL one needs no GitHub account but must carry the team key, so it's an
+  `extraKnownMarketplaces` settings entry with `headers`, not a `/plugin marketplace add` command (see
+  "Site access"). build-index generates `marketplace.json` with every plugin as an `archive` source
+  (`downloads/<plugin>.zip` + `sha256`). Both use the same marketplace name, so plugin ids are the same.
+  Claude Code only accepts https archive URLs on non-loopback hosts, so you can't test it on localhost,
+  and previews are behind Vercel auth. Zips are deterministic (fixed mtime), so a `sha256` only changes
+  when content does.
 - The marketplace's own top-level `name` (`wwtdigital`, renamed 2026-09-24 from `wwt-digital` for
   consistency with the GitHub org and domain) is what Claude Code registers locally, taken from
   `marketplace.json`'s `name` field, not from the repo slug or URL. Renaming it, unlike renaming a
@@ -231,7 +275,8 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 - When copying `templates/skill-template/`, rename the frontmatter `name: skill-template` and cut
   the `category`/`status` option lists down to single values. Otherwise the validator fails.
 
-- `wwtdigital-deck-design` ships **no Aptos fonts**: they're Microsoft's and the repo is public. Its
+- `wwtdigital-deck-design` ships **no Aptos fonts**: they're Microsoft's, and the repo was public when
+  that was decided (keep it that way; the site still serves the plugin zip to the whole team). Its
   `scripts/brand_assets.py` finds Aptos on the machine by the name inside each file (PowerPoint.app
   on Mac carries the five sans cuts; Aptos Serif is an Office cloud font, only needed for pull
   quotes; Microsoft's free download has all of them). It deliberately skips Office's Mac cloud-font
@@ -256,6 +301,8 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
 
 - `.claude-plugin/marketplace.json` plugin names (renaming breaks installs; use `renames`)
 - `site/vercel.json` download headers
+- `site/proxy.ts` `config.matcher` and `DERIVE_PREFIX` in `site/lib/access.ts` (loosening the matcher
+  opens a hole; changing the prefix logs the whole team out)
 
 ## Backlog (in rough priority order)
 

@@ -5,7 +5,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 // Which install tab the visitor picked. The install tabs set it, and every plugin card and skill
 // page reads it, so a Cowork visitor sees where to click in Customize instead of a CLI command.
 // Remembered in the browser; the server render always starts on "code" so nothing mismatches.
-export const INSTALL_MODES = ["code", "nogit", "cowork", "admin"] as const;
+export const INSTALL_MODES = ["code", "github", "cowork", "admin"] as const;
 export type InstallMode = (typeof INSTALL_MODES)[number];
 
 const KEY = "install-mode";

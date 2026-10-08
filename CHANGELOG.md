@@ -5,6 +5,37 @@ Changes to the skills and plugins are in the [catalog](https://skills-marketplac
 
 Newest first. Dates are the maintainer's local date.
 
+## 2026-10-08
+
+**Site**
+
+- The site is now for the team only. Every page, the marketplace file and every download ask for the
+  team access key. The key, and a link that signs you in without typing it, are pinned in the team
+  Slack channel. Signing in once lasts 90 days in that browser. The site also asks search engines not
+  to index it.
+- The GitHub repo went private on the same day. Source links on the site work for members of the
+  WWTDigital GitHub org.
+
+**Install**
+
+- Claude Code now installs from the site with a settings entry instead of `/plugin marketplace add`:
+  the Install tab shows a block to paste into `~/.claude/settings.json` that carries the key as a
+  header, so installs and updates need no GitHub account and nothing else to sign in to. It needs
+  Claude Code 2.1.286 or later. If you added `wwtdigital` from the site's URL before, add that entry
+  and your next update works again.
+- The GitHub route still works for members of the WWTDigital GitHub org whose git is signed in
+  (`gh auth login`, then `gh auth setup-git`, or an SSH key). Anyone who added `wwtdigital` from GitHub
+  without that keeps the plugins they have but stops getting updates: run
+  `/plugin marketplace remove wwtdigital`, add the settings entry, and reinstall.
+- Cowork / Desktop's Add marketplace dialog takes only a GitHub repo, so it now needs a GitHub account
+  in the org. Without one, download a bundle's `.zip` and use Upload plugin.
+
+**Checks**
+
+- The build reads the live catalog (for version-bump checks and "updated" dates) with the same key, so
+  that check keeps working behind the gate. Locally, `npm run validate` and `npm run build` pick the key
+  up from `site/.env.local` if it's there; without it they skip the live comparison and say so.
+
 ## 2026-09-30
 
 **Site**
@@ -75,3 +106,4 @@ Launch.
 - Every deploy runs strict checks on every plugin and skill and enforces version bumps against the live
   catalog. A failed check keeps the last good site up.
 - The repo was made public so installing needs no account. Maintainers treat that as a for-now decision.
+  (It went private again on 2026-10-08; see that entry.)

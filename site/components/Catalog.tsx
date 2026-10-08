@@ -106,7 +106,13 @@ export function Catalog({ plugins }: { plugins: Plugin[] }) {
                 <a className="btn btn-sm btn-quiet" href={asset(p.download)} download>
                   <DownloadSimpleIcon size={15} aria-hidden="true" /> Bundle .zip
                 </a>
-                <a className="btn btn-sm btn-quiet" href={p.source} target="_blank" rel="noopener">
+                <a
+                  className="btn btn-sm btn-quiet"
+                  href={p.source}
+                  target="_blank"
+                  rel="noopener"
+                  title="The repo is private: GitHub org members only"
+                >
                   Source <ArrowUpRightIcon size={13} weight="bold" aria-hidden="true" />
                 </a>
               </div>

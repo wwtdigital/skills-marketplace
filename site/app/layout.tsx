@@ -16,6 +16,7 @@ const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 export const metadata: Metadata = {
   title: { default: "WWTDigital Skills", template: "%s | WWTDigital Skills" },
   description: "Browse and install WWTDigital's shared Claude skills and MCP servers, grouped by category.",
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

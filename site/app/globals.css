@@ -271,6 +271,16 @@ code, pre, .mono { font-family: var(--font-mono), ui-monospace, Menlo, monospace
 }
 .aside-note b { color: var(--text); font-weight: 600; }
 .aside-note code { font-size: 12.5px; }
+
+/* ---------- /access (the team key form) ---------- */
+.access-form { display: flex; gap: 10px; flex-wrap: wrap; max-width: 520px; margin-top: 28px; }
+.access-form label { flex: 1; min-width: 220px; }
+.access-form input {
+  width: 100%; height: 40px; padding: 0 12px;
+  border: 1px solid var(--line-strong); border-radius: var(--r); background: var(--surface); color: var(--text); font: inherit; font-size: 14.5px;
+}
+.access-form input::placeholder { color: var(--muted); }
+.access-error { flex-basis: 100%; margin: 4px 0 0; font-size: 14px; color: var(--muted); }
 .toc { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
 .toc a { color: var(--muted); text-decoration: none; padding: 5px 0 5px 12px; border-left: 1px solid var(--line); transition: color .2s var(--ease), border-color .2s var(--ease); }
 .toc a:hover { color: var(--text); border-color: var(--text); }

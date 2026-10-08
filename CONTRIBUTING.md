@@ -19,12 +19,13 @@ Not sure? Pick the closest one and say so when you submit it. A reviewer will mo
 
 ## Without git or a GitHub account
 
-1. Get Claude to build the skill for you. Install the `admin` bundle with the two commands below
-   (in Claude Code; no GitHub account needed), then describe your workflow and say "make this a
-   skill for the marketplace". Claude builds the folder in the right format and checks it.
+1. Get Claude to build the skill for you. Add the marketplace to Claude Code as the
+   [Install tab](https://skills-marketplace.wwtdigital.io/#install) on the site shows (it needs the
+   team access key, which is pinned in the team Slack channel; no GitHub account), install the `admin`
+   bundle, then describe your workflow and say "make this a skill for the marketplace". Claude builds
+   the folder in the right format and checks it.
 
    ```
-   /plugin marketplace add https://skills-marketplace.wwtdigital.io/marketplace.json
    /plugin install admin@wwtdigital
    ```
 
@@ -106,7 +107,8 @@ plugin's README, and give its marketplace entry a `category`:
 Rules, which the build checks: remote servers use `https://`, names are kebab-case, and there
 are no credentials in the file. Prefer servers that sign people in with OAuth (`/mcp` in Claude
 Code). If a header or environment value is unavoidable, use a `${VAR}` reference that each
-person sets themselves. Everything in this repo is published on the site. Adding a server
+person sets themselves. Everything in this repo is published on the site, which the whole team can
+read, so the no-credentials rule holds even though the site is behind the team key. Adding a server
 changes the plugin, so bump its `version`.
 
 Everyone who installs the category gets the server, and its tools take up room in Claude's

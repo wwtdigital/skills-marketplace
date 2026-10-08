@@ -3,6 +3,7 @@ import { ArrowDownIcon } from "@phosphor-icons/react/ssr";
 import { Catalog } from "@/components/Catalog";
 import { Footer } from "@/components/Footer";
 import { InstallTabs } from "@/components/InstallTabs";
+import { firstToken } from "@/lib/access";
 import { REPO_URL } from "@/lib/catalog";
 import { loadCatalog } from "@/lib/load";
 
@@ -34,10 +35,13 @@ export default function Home() {
                 </Link>
               </div>
             </div>
+            {/* The access key is read at build time and shown in the Claude Code snippet. This page is
+                only reachable through the gate (proxy.ts), so everyone who sees it already has the key. */}
             <InstallTabs
               repo={repo}
               marketplace={catalog?.marketplace.name || "wwtdigital"}
               marketplaceUrl={catalog?.marketplace.site ? `${catalog.marketplace.site}/marketplace.json` : null}
+              accessToken={firstToken()}
             />
           </section>
         </div>

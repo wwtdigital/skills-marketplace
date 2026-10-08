@@ -6,37 +6,57 @@ bundles you need and Claude picks up the skills automatically in Claude Code and
 Cowork.
 
 Browse the catalog and get step-by-step install help at **https://skills-marketplace.wwtdigital.io**.
+The site and this repo are for the team: the site asks for the **team access key**, which is pinned
+in the team Slack channel along with a link that signs you in, and the repo is private.
 
 ## Install
 
-**Claude Code**
+**Claude Code** (any machine, no GitHub account; needs Claude Code 2.1.286 or later)
+
+Add this to `~/.claude/settings.json`, with the key from Slack in place of `<team access key>`
+(the site's Install tab shows it filled in), then start a new session:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "wwtdigital": {
+      "source": {
+        "source": "url",
+        "url": "https://skills-marketplace.wwtdigital.io/marketplace.json",
+        "headers": { "Authorization": "Bearer <team access key>" }
+      },
+      "autoUpdate": true
+    }
+  }
+}
+```
+
+```
+/plugin install presentation@wwtdigital
+```
+
+Repeat `/plugin install <plugin>@wwtdigital` for each bundle you want. New skills arrive on their
+own, or run `/plugin marketplace update wwtdigital`. If you added `wwtdigital` from GitHub before,
+run `/plugin marketplace remove wwtdigital` first and reinstall your plugins after.
+
+**Claude Code, GitHub org members**
+
+If git on your machine is signed in to a GitHub account in the WWTDigital org (`gh auth login`,
+then `gh auth setup-git`, or an SSH key), the GitHub route also works:
 
 ```
 /plugin marketplace add wwtdigital/skills-marketplace
 /plugin install presentation@wwtdigital
 ```
 
-Repeat `/plugin install <plugin>@wwtdigital` for each bundle you want. Run
-`/plugin marketplace update wwtdigital` to pull new skills.
-
 **Cowork / Claude desktop**
 
-Open *Customize → Plugins → Add marketplace* and paste
-`https://github.com/wwtdigital/skills-marketplace`, then install the bundles you want.
-
-**No GitHub account?**
-
-The repo is public, so the GitHub route above needs no account or access. If you'd rather skip
-GitHub entirely, add the marketplace from the site instead in Claude Code:
-
-```
-/plugin marketplace add https://skills-marketplace.wwtdigital.io/marketplace.json
-/plugin install presentation@wwtdigital
-```
-
-Or download a skill as a `.skill` file from the site and drop it into Cowork
-(*Customize → Skills → Add*), or unzip it into `~/.claude/skills/` for Claude Code. Skills that
-need the rest of their plugin (setup scripts, shared files) are offered only as the whole bundle.
+Open *Customize → Plugins → + Add → Add marketplace* and paste `wwtdigital/skills-marketplace`.
+That dialog only takes a GitHub repo, so it needs a GitHub account in the WWTDigital org. Without
+one, download a bundle's `.zip` from the site and use *Customize → Plugins → + Add → Upload plugin*,
+or download a single skill as a `.skill` file and use *Customize → Skills → + Add → Upload skill*.
+Skills that need the rest of their plugin (setup scripts, shared files) are offered only as the
+whole bundle.
 
 ## Plugins
 

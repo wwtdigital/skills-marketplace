@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { parse as parseYaml } from "yaml";
+import { tokens as accessTokens } from "../lib/access.ts";
 import type { Catalog, McpServer } from "../lib/catalog.ts";
 
 export const ROOT = path.resolve(import.meta.dirname, "../..");
@@ -176,6 +177,12 @@ export function opt(name: string): string | undefined {
  * src is a path, a URL, or "auto" (metadata.site + /data/index.json). On Vercel ($VERCEL set) it
  * defaults to "auto", because the build's clone has no origin/main and only shallow history.
  * Returns null if there isn't one yet (first deploy) or it can't be fetched.
+ *
+ * The live site is behind the team access key (site/proxy.ts), so the fetch sends it as a bearer
+ * token from SITE_ACCESS_TOKENS. Every listed key is tried in order: during a rotation the env var
+ * already says "new,old" while the deployment being compared against still only knows "old".
+ * Locally, put the key in site/.env.local (the npm scripts load it); without it the fetch gets a
+ * 401 and the baseline checks are skipped with the NOTE below.
  */
 export async function loadPrevCatalog(mp: Marketplace, src = opt("--prev-catalog") ?? (process.env.VERCEL ? "auto" : undefined)): Promise<Catalog | null> {
   if (!src) return null;
@@ -186,8 +193,13 @@ export async function loadPrevCatalog(mp: Marketplace, src = opt("--prev-catalog
   }
   try {
     if (/^https?:\/\//.test(src)) {
-      const r = await fetch(src, { signal: AbortSignal.timeout(15_000) });
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const keys = accessTokens();
+      let r: Response | undefined;
+      for (const auth of keys.length ? keys.map((k) => `Bearer ${k}`) : [undefined]) {
+        r = await fetch(src, { headers: auth ? { Authorization: auth } : {}, signal: AbortSignal.timeout(15_000) });
+        if (r.status !== 401) break;
+      }
+      if (!r?.ok) throw new Error(`HTTP ${r?.status}${r?.status === 401 ? " (set SITE_ACCESS_TOKENS to the team access key)" : ""}`);
       return (await r.json()) as Catalog;
     }
     return JSON.parse(readFileSync(src, "utf8"));
