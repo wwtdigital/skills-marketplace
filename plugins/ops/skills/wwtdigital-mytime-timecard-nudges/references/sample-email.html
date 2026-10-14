@@ -1,0 +1,71 @@
+<!--
+  Anonymized sample of the MyTime manager pay period review email, for testing the parser.
+  Every name and ID here is made up. Never replace them with real employee data.
+  From: MyTime_Manager_Action@wwt.com
+  Subject: Action Required – Complete Your MyTime Manager Pay Period Review
+-->
+<html>
+<body>
+<p>Hello,</p>
+<p>The employees below have timecard exceptions for the week ending 10/10/2026 that were identified
+prior to the time of data extraction (10/12/2026 10:30 AM). Please review each timecard in MyTime,
+work with your employees to correct any exceptions, and approve their timecards.</p>
+<p>The lockout and import to Oracle process will begin at 10am CST Tuesday morning.</p>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr>
+    <th>Employee ID</th>
+    <th>Employee Full Name</th>
+    <th>Missed In Punch</th>
+    <th>Missed Out Punch</th>
+    <th>Unexcused Absence</th>
+    <th>Manager Approval Status</th>
+    <th>IDLE TIME</th>
+    <th>Total Actual Hours</th>
+    <th>Actual Hrs Warning</th>
+  </tr>
+  <tr>
+    <td>900001</td>
+    <td>Sample, Avery J</td>
+    <td></td>
+    <td></td>
+    <td>0</td>
+    <td>Approved</td>
+    <td>6.00</td>
+    <td>40.00</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>900002</td>
+    <td>Example, Jordan K</td>
+    <td></td>
+    <td></td>
+    <td>1</td>
+    <td>Needs Approval</td>
+    <td>0.00</td>
+    <td>32.00</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>900003</td>
+    <td>Placeholder, Riley M</td>
+    <td></td>
+    <td></td>
+    <td>0</td>
+    <td>Approved</td>
+    <td>0.00</td>
+    <td>52.00</td>
+    <td>WARNING</td>
+  </tr>
+</table>
+<p>Thank you,<br>Payroll</p>
+</body>
+</html>
+<!--
+  Expected result with the default flags (idle time, missed punches, unexcused absence):
+  - Avery: DM about 6 hours of idle time (no project or task).
+  - Jordan: DM about 1 unexcused absence. Jordan is also listed under "Waiting on your approval:"
+    in the manager's summary, and the DM says nothing about approval.
+  - Riley: no DM (hours warning is off by default) and not listed as unmatched.
+  - Summary first line: MyTime nudges sent (data extraction 10/12/2026 10:30 AM)
+  - No DM contains an employee ID, an hours total, or anyone else's name.
+-->

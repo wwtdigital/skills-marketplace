@@ -55,7 +55,7 @@ Figma server though its doctor calls Figma optional, and its setup installs unpi
 Skills so far: `admin` has `wwtdigital-skill-author` and `marketplace-smoke-test`; `presentation` has
 `humanizer` (Toby Gerber); `research` has `pursuit-intel-brief` (the only copy; its internal data,
 comparables, channel IDs, paths, lives on a team-editable Notion page linked from its SKILL.md, never
-in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell); `tech` has `figma-design-to-code`
+in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell) and `wwtdigital-mytime-timecard-nudges` (draft); `tech` has `figma-design-to-code`
 (Zak Lampert), `wave-planning` and `wave-review` (Andrew Brydon). Standalone add-ons: `wwtdigital-deck-design` (category `presentation`, from Toby
 Gerber) has `wwtdigital-deck-design` and `wwtdigital-deck-design-doctor`; `wwtdigital-publish-page`
 (category `presentation`) has `publish-page` and bundles the artifact-publisher MCP;
