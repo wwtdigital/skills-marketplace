@@ -7,8 +7,8 @@ description: >
   and whose timecards are waiting on their own approval. Sets up an hourly Monday to Wednesday
   scheduled check, or runs once on demand. Use when a people manager says "set up MyTime nudges
   for my team", "nudge everyone flagged in today's MyTime email", "ping everyone in the pay
-  period review email", "chase my team about their timecards" or "automate my MyTime
-  reminders". Needs Slack and Microsoft 365 (Outlook). Not for filling in your own timesheet or
+  period review email", "chase my team about their timecards", "automate my MyTime
+  reminders", or asks what to do about the pay period review email they just got. Needs Slack and Microsoft 365 (Outlook). Not for filling in your own timesheet or
   reconstructing a Kronos or MyTime week, payroll or time-entry policy questions (use
   wwtdigital-onboarding), or approving timecards in MyTime itself.
 metadata:
@@ -16,7 +16,7 @@ metadata:
   category: ops
   status: draft
   connectors: [slack, microsoft-365]
-  version: 0.1.0
+  version: 0.2.0
 ---
 
 # WWTDigital MyTime Nudge
@@ -73,7 +73,8 @@ desktop app or Cowork, offer a one-off run instead, and stop.
    - `{{CUTOFF}}`: the current time as ISO 8601 with offset, e.g. `2026-10-14T09:12:00-05:00`
    The filled prompt must stand on its own. Scheduled runs may not load this plugin, so never
    shorten it to "use this skill".
-4. **Create the scheduled task** with the scheduled-task tool: name it
+4. **Create the scheduled task** with the scheduled-task tool. If one named
+   `wwtdigital-mytime-nudge` already exists, update it instead of adding a second. Name it
    `wwtdigital-mytime-nudge`, give it the filled prompt, and use cron
    `CRON_TZ=<their tz> 0 7-17 * * 1-3` (adjust the hours or days if they chose another window).
 5. **Verify.** List the scheduled tasks and confirm the new one is there with the right cron
@@ -83,7 +84,7 @@ desktop app or Cowork, offer a one-off run instead, and stop.
    - Automatic approval is turned off for the org, so they'll be asked to approve each run that
      sends messages. Runs that find no email finish on their own and don't need them.
    - Anything already in their inbox before now (including this week's email, if it has
-     arrived) won't be processed. If they want it handled, they can say "nudge everyone
+     arrived and they didn't just run it by hand) won't be processed. If they want it handled, they can say "nudge everyone
      flagged in today's MyTime email" once.
    - How to stop it: delete the `wwtdigital-mytime-nudge` scheduled task.
 
@@ -99,6 +100,13 @@ and follow it as written, with these values instead of the placeholders:
 - Because they're here: after parsing, show them the planned DMs (who, and for what) and the
   approval list, and send only after they say yes. A scheduled run skips this question; its
   per-run approval is the confirmation.
+
+After the run, check the scheduled tasks for one named `wwtdigital-mytime-nudge`. If there
+isn't one, end with one question: "Want this to run on its own? I can check for the email every
+hour, Monday to Wednesday, and nudge people for you." If they say yes, go straight to Setup
+(Mode A). Ask once per conversation, and skip it if the scheduled-task tools aren't available.
+Do the same when they ask what to do about the email without asking for nudges: explain it in a
+sentence, offer a one-off run now, and offer the schedule.
 
 The run prompt covers the whole workflow: find the email, skip ones already done, parse the
 table, decide whose action each flag is, match people in Slack, send the DMs, post the summary,
