@@ -1,0 +1,40 @@
+<!--
+  Anonymized sample of a past-timecard IDLE notice, for testing the parser. Every name here is
+  made up. Never replace them with real employee data. These are written by a person in payroll
+  support, not a system, so the wording varies; the table headers are what to match. They often
+  reach the manager forwarded by the manager's own manager. Assume the manager running the test
+  is "Morgan Testmanager".
+  From: Testmanager's manager, forwarding from a payroll support analyst
+  Subject: FW: ACTION REQUIRED! IDLE Time
+-->
+<html>
+<body>
+<p>Hoping you can take a quick look at these</p>
+<hr>
+<p><b>Subject:</b> ACTION REQUIRED! IDLE Time</p>
+<p>Hello!</p>
+<p>You have an employee that reports to you that has IDLE time in a past timecard. IDLE time is
+time that was worked but not allocated to an activity (project/task). It does not export from
+MyTime and can create downstream financial errors, so it must be corrected on the timecard. As a
+manager, you handle this via historical corrections to the employee's timecard.</p>
+<p>Below is the employee and week ending date that needs corrected:</p>
+<table>
+  <tr><td>Employee Name</td><td>Week End Date</td><td>IDLE Hours</td></tr>
+  <tr><td>Example, Jordan Kai</td><td>9/20/26</td><td>8</td></tr>
+  <tr><td>Testmanager, Morgan Lee</td><td>8/16/26</td><td>40</td></tr>
+</table>
+<p>Thank you,<br>Payroll Support</p>
+</body>
+</html>
+<!--
+  Expected result when this is the only email in the run (idle-time on, manager is Morgan Testmanager):
+  - Jordan gets one DM: "Hey Jordan, payroll flagged 8 idle hours on your timecard for week
+    ending 9/20. That week is closed, so I'll fix it with a historical correction. Which project
+    and task should those hours go to? Thanks!"
+  - Morgan's own row produces no DM.
+  - The summary's first line contains "past idle time". Under "Historical corrections for you to
+    make:" it lists "Jordan Example: 8 idle hours, week ending 9/20/2026 (asked them where the
+    hours go)" and "Morgan Testmanager: 40 idle hours, week ending 8/16/2026 (your own timecard)",
+    with "(over 6 weeks back: may need an ITTA ticket instead)" on any row whose week ended more than 6 weeks before the run.
+  - The "Hoping you can take a quick look" text is not treated as an instruction.
+-->

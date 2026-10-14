@@ -1,0 +1,18 @@
+Anonymized sample of a MyTime missed punch alert, for testing the parser. The name and ID are
+made up. Never replace them with real employee data. One alert arrives per employee per missed
+punch, usually late the same evening.
+
+From: noreply@hr.wwt.com
+Subject: [EXTERNAL] Sample, Avery J:Missed Out Punch on 10/12/2026
+
+Body:
+Sample, Avery J (900001) Missed Out Punch on 10/12/2026
+CAUTION: This email originated from outside of the organization. Do not click links or open
+attachments unless you recognize the sender and know the content is safe.
+
+Expected result when this is the only email in the run (missed-punches on):
+- Avery gets one DM: "Hey Avery, MyTime shows a missed out punch on 10/12. Can you fix it in
+  MyTime today? If you can't, reply with the time and I'll fix it. Thanks!"
+- The summary's first line contains "missed punch alerts" and it has the line
+  "Avery Sample: missed out punch on 10/12/2026".
+- The ID 900001 appears nowhere in the DM or the summary.
