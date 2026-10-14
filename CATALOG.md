@@ -17,7 +17,7 @@ current version has no entry.
 | `wwtdigital-publish-page` (Presentation add-on) | 0.1.0 | `publish-page` 0.1.0 | artifact-publisher | Scott Cullum |
 | `research` | 0.5.0 | `pursuit-intel-brief` 1.2.0 | no | Scott Cullum |
 | `wwtdigital-brand-scan` (Research add-on) | 0.1.0 | `brand-scan` 0.1.1 | brandscanner | Scott Cullum |
-| `ops` | 0.4.1 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.2.0 (draft) | no | Staci Powell, Scott Cullum |
+| `ops` | 0.5.0 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft) | no | Staci Powell, Scott Cullum |
 | `admin` | 0.4.3 | `wwtdigital-skill-author` 0.2.1, `marketplace-smoke-test` 0.2.0 | no | Scott Cullum |
 | `tech` | 0.3.0 | `figma-design-to-code` 0.1.0, `wave-planning` 1.0.0, `wave-review` 1.0.0 | no | Zak Lampert, Andrew Brydon |
 
@@ -32,6 +32,12 @@ needs Slack and Microsoft 365.
 
 ### 2026-10-14
 
+- **ops 0.5.0**: `wwtdigital-mytime-nudge` 0.3.0 also handles MyTime's nightly missed punch alerts and the
+  past-timecard "ACTION REQUIRED! IDLE Time" notices. For idle time on a closed week it asks the employee
+  which project the hours belong to and lists the historical correction for you, since that fix is yours.
+  Each person still gets one DM per run. Setup can now poll every weekday, so a missed punch is nudged the
+  next morning. If you already set up the schedule, run "set up MyTime nudges for my team" again after
+  `/plugin update ops@wwtdigital` so the scheduled task picks up the new run prompt.
 - **ops 0.4.1**: `wwtdigital-mytime-nudge` 0.2.0 offers to set up the hourly schedule after a one-off run, and
   when you ask what to do about the pay period review email. Running setup again updates your schedule instead
   of adding a second one. Run `/plugin update ops@wwtdigital` to get it.
