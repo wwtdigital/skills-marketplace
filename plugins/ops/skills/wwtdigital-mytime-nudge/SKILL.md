@@ -1,5 +1,5 @@
 ---
-name: wwtdigital-mytime-timecard-nudges
+name: wwtdigital-mytime-nudge
 description: >
   Turn WWT payroll's MyTime manager email ("Action Required – Complete Your MyTime Manager Pay
   Period Review") into Slack nudges: a DM from the manager to each teammate flagged for idle
@@ -19,7 +19,7 @@ metadata:
   version: 0.1.0
 ---
 
-# WWTDigital MyTime Timecard Nudges
+# WWTDigital MyTime Nudge
 
 WWT payroll emails people managers "Action Required – Complete Your MyTime Manager Pay Period
 Review" from `MyTime_Manager_Action@wwt.com`, usually Monday around 11am ET, Tuesday around
@@ -74,7 +74,7 @@ desktop app or Cowork, offer a one-off run instead, and stop.
    The filled prompt must stand on its own. Scheduled runs may not load this plugin, so never
    shorten it to "use this skill".
 4. **Create the scheduled task** with the scheduled-task tool: name it
-   `mytime-timecard-nudges`, give it the filled prompt, and use cron
+   `wwtdigital-mytime-nudge`, give it the filled prompt, and use cron
    `CRON_TZ=<their tz> 0 7-17 * * 1-3` (adjust the hours or days if they chose another window).
 5. **Verify.** List the scheduled tasks and confirm the new one is there with the right cron
    expression, and that its prompt has no `{{` left in it and contains the manager's email and
@@ -85,7 +85,7 @@ desktop app or Cowork, offer a one-off run instead, and stop.
    - Anything already in their inbox before now (including this week's email, if it has
      arrived) won't be processed. If they want it handled, they can say "nudge everyone
      flagged in today's MyTime email" once.
-   - How to stop it: delete the `mytime-timecard-nudges` scheduled task.
+   - How to stop it: delete the `wwtdigital-mytime-nudge` scheduled task.
 
 ## Mode B: Run
 
@@ -130,7 +130,7 @@ instead of posting it. Never send test DMs to real people.
 **User says:** "Set up MyTime nudges for my team."
 **Claude does:** checks Slack, Microsoft 365 and the scheduled-task tools, asks the three
 questions, looks up the manager's email and `America/Chicago` time zone, fills the run prompt
-with a cutoff of now, creates `mytime-timecard-nudges` on `CRON_TZ=America/Chicago 0 7-17 * * 1-3`,
+with a cutoff of now, creates `wwtdigital-mytime-nudge` on `CRON_TZ=America/Chicago 0 7-17 * * 1-3`,
 confirms it's listed, and explains approvals and that this week's email won't be processed.
 
 **User says:** "Ping everyone flagged in today's MyTime pay period review email."

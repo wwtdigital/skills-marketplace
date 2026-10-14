@@ -1,6 +1,6 @@
 ---
 description: Manager asks to set up the scheduled nudges. Should fire.
-tags: [trigger, wwtdigital-mytime-timecard-nudges]
+tags: [trigger, wwtdigital-mytime-nudge]
 max_turns: 4
 timeout_seconds: 120
 allowed_tools: [Skill, Read, Glob, Grep]

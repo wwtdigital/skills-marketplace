@@ -1,6 +1,6 @@
 ---
 description: Filling in your own timesheet is explicitly out of scope.
-tags: [trigger, wwtdigital-mytime-timecard-nudges, negative]
+tags: [trigger, wwtdigital-mytime-nudge, negative]
 max_turns: 4
 timeout_seconds: 120
 allowed_tools: [Skill, Read, Glob, Grep]
