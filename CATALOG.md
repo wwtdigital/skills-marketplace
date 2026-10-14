@@ -17,7 +17,7 @@ current version has no entry.
 | `wwtdigital-publish-page` (Presentation add-on) | 0.1.0 | `publish-page` 0.1.0 | artifact-publisher | Scott Cullum |
 | `research` | 0.5.0 | `pursuit-intel-brief` 1.2.0 | no | Scott Cullum |
 | `wwtdigital-brand-scan` (Research add-on) | 0.1.0 | `brand-scan` 0.1.1 | brandscanner | Scott Cullum |
-| `ops` | 0.5.0 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft) | no | Staci Powell, Scott Cullum |
+| `ops` | 0.6.0 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft), `wwtdigital-mytime-time-off-digest` 0.1.0 (draft) | no | Staci Powell, Scott Cullum |
 | `admin` | 0.4.3 | `wwtdigital-skill-author` 0.2.1, `marketplace-smoke-test` 0.2.0 | no | Scott Cullum |
 | `tech` | 0.3.0 | `figma-design-to-code` 0.1.0, `wave-planning` 1.0.0, `wave-review` 1.0.0 | no | Zak Lampert, Andrew Brydon |
 
@@ -25,13 +25,18 @@ The five category bundles (`presentation`, `research`, `ops`, `admin`, `tech`) b
 scripts, so each installs without connecting anything. Anything that does goes in an add-on you opt into.
 
 Skills that read from your own tools say which ones: `pursuit-intel-brief` needs Slack, Notion and
-Microsoft 365 connected in Claude, `wwtdigital-onboarding` needs Notion, and `wwtdigital-mytime-nudge`
-needs Slack and Microsoft 365.
+Microsoft 365 connected in Claude, `wwtdigital-onboarding` needs Notion, and `wwtdigital-mytime-nudge` and
+`wwtdigital-mytime-time-off-digest` need Slack and Microsoft 365.
 
 ## Release notes
 
 ### 2026-10-14
 
+- **ops 0.6.0**: Adds `wwtdigital-mytime-time-off-digest` 0.1.0 (draft): one Slack self-DM each weekday listing
+  the new time-off requests from your team once each, however many MyTime emails they came in, with cancellations,
+  late submissions that need manual approval, and who else is out the same days. It never approves anything:
+  that stays in MyTime. Run "set up a daily digest of the PTO requests waiting on me" to start, after
+  `/plugin update ops@wwtdigital`.
 - **ops 0.5.0**: `wwtdigital-mytime-nudge` 0.3.0 also handles MyTime's nightly missed punch alerts and the
   past-timecard "ACTION REQUIRED! IDLE Time" notices. For idle time on a closed week it asks the employee
   which project the hours belong to and lists the historical correction for you, since that fix is yours.

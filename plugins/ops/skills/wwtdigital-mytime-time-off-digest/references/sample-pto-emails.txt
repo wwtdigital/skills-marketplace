@@ -1,0 +1,76 @@
+Anonymized sample of MyTime time-off emails, for testing the digest. Every name is made up.
+Never replace them with real employee data. Assume the run is Wednesday 10/14/2026, the cutoff is
+9/30/2026, and there are no earlier digests in the manager's self-DM. Bodies are shown as text;
+the real ones are HTML with line breaks.
+
+=== Email 1, 2 and 3 (three copies of one request), received 10/12/2026 2:02 PM, 2:02 PM, 2:04 PM
+From: noreply@hr.wwt.com
+Subject: [EXTERNAL] Action Required: PTO Request Submitted by Sample, Avery
+Sample, Avery has submitted a Time Off request in MyTime. Please log on to MyTime to Approve or
+Reject the request.
+Time Off Submission Details:
+Employee: Sample, Avery
+Current Request Status: Submitted
+Submitted on: 10/12/2026
+Request Type: Time Off
+Request Dates: 10/23/2026 to 10/23/2026
+Request Time: 00:00 to 00:00
+Duration: 08:00
+To review and take action on this request, please log in to MyTime:
+https://wwt-sso.prd.mykronos.com/wfd/home
+
+=== Email 4, received 10/13/2026 9:15 AM
+From: noreply@hr.wwt.com
+Subject: [EXTERNAL] Action Required: PTO Request Submitted by Example, Jordan
+Employee: Example, Jordan
+Current Request Status: Submitted
+Submitted on: 10/13/2026
+Request Type: Time Off
+Request Dates: 10/23/2026 to 10/23/2026
+Request Time: 00:00 to 00:00
+Duration: 08:00
+https://wwt-sso.prd.mykronos.com/wfd/home
+
+=== Email 5, received 10/12/2026 4:40 PM
+From: noreply@hr.wwt.com
+Subject: [EXTERNAL] Action Required: PTO Request Submitted by Placeholder, Riley
+Employee: Placeholder, Riley
+Current Request Status: Submitted
+Submitted on: 10/12/2026
+Request Type: Time Off
+Request Dates: 10/09/2026 to 10/09/2026
+Request Time: 00:00 to 00:00
+Duration: 08:00
+https://wwt-sso.prd.mykronos.com/wfd/home
+
+=== Email 6, received 10/12/2026 10:00 AM, then Email 7, received 10/13/2026 3:00 PM
+From: noreply@hr.wwt.com
+Subject: [EXTERNAL] Action Required: PTO Request Submitted by Fakename, Casey
+Employee: Fakename, Casey
+Current Request Status: Submitted        (Email 7 says: Cancelled)
+Submitted on: 10/12/2026
+Request Type: Time Off
+Request Dates: 10/30/2026 to 10/30/2026
+Request Time: 00:00 to 00:00
+Duration: 08:00
+https://wwt-sso.prd.mykronos.com/wfd/home
+
+=== Email 8, received 10/13/2026 9:36 AM
+From: MyTime_Manager_Action@wwt.com
+Subject: Action Required – Review and Approve MyTime Time Off Requests
+Dear Manager, You currently have unapproved time off requests for the current pay period
+awaiting your approval. Please approve as soon as possible.
+
+=== Expected digest (overlaps on)
+MyTime time off digest (Wed 10/14)
+New requests:
+Riley Placeholder: 10/9, 8 hours (submitted 10/12) (needs manual approval: submitted after the day)
+Avery Sample: 10/23, 8 hours (submitted 10/12) (also out: Jordan Example)
+Jordan Example: 10/23, 8 hours (submitted 10/13) (also out: Avery Sample)
+MyTime also says some time off this pay period is still unapproved.
+This digest can't see what you've already approved. Approve or reject in MyTime: https://wwt-sso.prd.mykronos.com/wfd/home
+
+Notes: Avery appears once despite three emails. Casey is left out (cancelled before any digest
+listed it). There is no "Cancelled:" line. Nothing is sent to Avery, Jordan, Riley or Casey.
+If the same run happens again the next day with no new emails, it replies "No new time-off
+requests." and sends nothing.
