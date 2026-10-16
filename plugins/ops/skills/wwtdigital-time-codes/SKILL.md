@@ -15,7 +15,7 @@ metadata:
   category: ops
   status: draft
   connectors: [slack, notion]
-  version: 0.1.1
+  version: 0.1.2
 ---
 
 # Time Codes

@@ -11,6 +11,14 @@ Connector facts that shape the steps:
 
 ## Steps
 
+**Cheaper model for steps 1–4.** These steps are most of the cost, and they're mechanical. If you can start a subagent and choose its model (in Claude Code, the Agent tool with `model: "haiku"`), hand steps 1–4 to one on Haiku:
+
+- Give it the person's Slack ID (`<ME>`), their workspace domain, the full path to this file and to `extraction-rules.md`, and the activity-sweep start date.
+- Tell it the job is read-only: search and read, never post, react or change anything.
+- Have it return only JSON: `channels_scanned`, `rows` and `no_code_channels`, in the shapes in `data-schema.md`. No raw search results.
+
+Then carry on from step 5 yourself. Spot-check three rows against their channels' live topics. If they don't match, or `channels_scanned` fails the check in "Verify before you report", run steps 1–4 yourself. If you can't choose a subagent's model, or the subagent can't reach Slack, just run every step yourself.
+
 ### 1. Activity sweep
 
 This is the most reliable way to find the channels someone actually uses.
