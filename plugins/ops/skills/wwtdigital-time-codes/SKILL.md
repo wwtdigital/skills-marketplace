@@ -15,7 +15,7 @@ metadata:
   category: ops
   status: draft
   connectors: [slack, notion]
-  version: 0.1.0
+  version: 0.1.1
 ---
 
 # Time Codes
@@ -40,7 +40,7 @@ Every person has their own copy. Nothing is shared unless the owner shares the p
 
 The data lives in a private Artifact titled **"My Time Codes"**. Its data is a JSON block in the page, inside `<script type="application/json" id="bill-codes-data">`. Find the page with `Artifact` (`action: "list"`, `scope: "mine"`), then `read` it. If there's none, run **Setup**.
 
-`scripts/build_page.py` does the mechanical parts:
+`scripts/build_page.py` does the mechanical parts. Run it with `python3` (macOS has no `python` command). If Python isn't available, do the same steps yourself by following `references/build-without-python.md`, which also says how to check without setting off an installer:
 
 - `extract <page.html> <data.json>` pulls the JSON out of a saved page, so you don't read 50KB of HTML.
 - `build <data.json> <out.html>` puts the JSON into `references/page-template.html`, escapes it, and checks the result.
@@ -65,7 +65,7 @@ If the person can't open the Notion page or the channel, they're probably on ano
 ## Setup (first run)
 
 1. Identify the person, then build the data by following `references/refresh.md`, steps 1–6.
-2. Run `python scripts/build_page.py build data.json my-time-codes.html`. If it reports an error, fix the data and run it again. Don't hand-edit the template.
+2. Run `python3 scripts/build_page.py build data.json my-time-codes.html`, or the fallback in `references/build-without-python.md`. If it reports an error, fix the data and run it again. Don't hand-edit the template.
 3. Publish the page with the Artifact tool, using `icon: "clock"` and a one-line description. It's private by default.
 4. Report back: channels scanned, channels with codes, the notices that affect this person, and any conflicts found. Offer once to pin the page.
 
@@ -126,7 +126,7 @@ Follow `references/refresh.md` to:
 
 Before saying a setup or refresh is done:
 
-- `build_page.py build` exits cleanly. It checks that the JSON parses, the template has exactly one placeholder, and every row has a channel, code and type.
+- `build_page.py build` exits cleanly, or every check in the fallback passes. It checks that the JSON parses, the template has exactly one placeholder, and every row has a channel, code and type.
 - The published page is the same URL as before (refresh) or a new private page (setup).
 - `channels_scanned` is plausible. For someone on Digital, it's usually over 100. A very small number means paging stopped early, so rerun the sweep.
 - Every notice that names a code shows its flag on at least one row, or the report says the code isn't in this person's channels.

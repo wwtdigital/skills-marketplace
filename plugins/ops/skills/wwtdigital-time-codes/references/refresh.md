@@ -85,8 +85,8 @@ When a channel has gone missing, say whether it was archived or simply not found
 ### 8. Build and republish
 
 1. `read` the artifact, which saves the page locally. If the page was published in an earlier conversation, the Artifact tool may require you to read the whole saved file before it allows a republish. Read it through, then continue.
-2. Run `scripts/build_page.py extract` to get the current data.
-3. Write the new data and run `scripts/build_page.py build`.
+2. Run `python3 scripts/build_page.py extract <page.html> data.json` to get the current data, or follow `build-without-python.md` if Python isn't available.
+3. Write the new data and run `python3 scripts/build_page.py build data.json my-time-codes.html` (or the fallback).
 4. Publish with `url` set to the page's URL, so the link stays the same.
 
 ### 9. Report

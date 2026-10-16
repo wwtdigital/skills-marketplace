@@ -1,6 +1,6 @@
 # Data schema
 
-The page stores its data as JSON inside `<script type="application/json" id="bill-codes-data">`. `scripts/build_page.py` reads and writes it.
+The page stores its data as JSON inside `<script type="application/json" id="bill-codes-data">`. `scripts/build_page.py` reads and writes it (`build-without-python.md` covers doing that without Python).
 
 ```json
 {
