@@ -39,6 +39,8 @@ The page stores its data as JSON inside `<script type="application/json" id="bil
 - Team-wide rule changes that override channel topics.
 - `flag` is a short label that the page shows on matching rows.
 - A notice matches rows through `codes` (every row with that code) or `channels` (only those channels). Use `channels` when the rule changes one channel's code but not the code everywhere.
+- A `channels` entry can be a pattern with `*`, like `aine-*bootcamp*`, so the notice also covers channels created after it. Use a pattern whenever the rule is about a kind of channel, not one channel.
+- `codes` and `channels` can both be empty for a rule about a kind of work (training, events, interviews). Lookup still applies it; the page just shows no row flag.
 
 **`open_questions`**
 - Questions this person has posted to the ops team.

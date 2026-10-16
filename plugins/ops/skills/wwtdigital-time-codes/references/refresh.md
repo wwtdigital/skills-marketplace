@@ -57,21 +57,28 @@ Extract codes from each Topic and Purpose using `extraction-rules.md`.
 
 Also add `10035304` (general AI internal initiatives) and `10034890` (AINE initiative only), as long as #d-time-entry still says so.
 
+The Notion page lists some codes without their tasks (Solutions Strategy `10023126`, for one). Fill those in from the #d-time-entry pins: read each pinned task list and add one `standing` entry per task, with the pin as the source. Never leave a code's tasks empty when a pin lists them.
+
 **Notices.**
 - Read the #d-time-entry pins first, with `filters: "in:<#C0321TBF0P5> has:pin"`.
 - Then skim Brandi's messages, using `filters: "in:<#C0321TBF0P5> from:<@U68QGJ6S2> after:<date>"`. For `<date>`, use the last refresh, or 12 months ago on setup.
 - Most of her messages are one-off replies in threads. Look for channel-wide guidance: "<!here>", "going forward", "please use X instead of Y", "for everyone".
 - Turn each piece of guidance into a `notice`. Give it a short `flag`, plus `codes` and/or `channels`.
+- Also look for **repeated admin answers to non-client questions**: two or more admins, or the same admin twice, giving the same code for the same kind of work. Show these to the person as candidate notices and add only the ones they confirm.
+- **Contradictions:** if a channel's topic or purpose gives a code that a notice overrides, keep the row, make sure the notice's flag shows on it, and list the channel in the report.
 
-These three notices were current as of October 2026. Confirm them and carry them forward:
+These notices were current as of October 2026. Confirm them and carry them forward:
 
 | Date | Rule | Flag | Applies to |
 |---|---|---|---|
 | 2026-09-04 | Retail sales team disbanded. Pursuit time that used to go to `10028191` now goes to the regional P&L. | "retail team disbanded, use regional P&L" | codes `["10028191"]` |
 | 2026-02-11 | General AI work goes to `10035304`. `10034890` is only for the AINE initiative. | "AINE initiative only" | codes `["10034890"]` |
-| 2026-09-21 | AINE bootcamp: facilitating goes to `10034890`, attending goes to Administration / 1.2 Training. | "bootcamp: facilitating only" | the bootcamp channel(s) |
+| 2026-09-21 | AINE bootcamp: facilitating goes to `10034890`, attending goes to Administration / 1.2 Training. | "bootcamp: facilitating only" | channels `["aine-*bootcamp*"]` |
+| 2026-09-11 | Training: preparing or delivering internal training goes to Practice dev, `10004590/01`. Attending training, including new-hire onboarding, goes to Administration / 1.2 Training Education. | "training: prep/deliver vs attend" | no codes (a rule about the kind of work) |
+| 2026-06-01 | Conferences and events (prep, presenting, attending, travel) go to Solutions Strategy `10023126/03 Event support`. AI-initiative events follow the AI rule (`10035304`). | "events: 10023126/03" | codes `["10023126"]` |
+| 2026-02-27 | Interviews: ops said Administration / 1.23 in #d-time-entry. The Time Entry page still says 1.15. Use 1.23, mention that the page says 1.15, and drop this notice once the page agrees. | "interviews: 1.23, page says 1.15" | no codes (a rule about the kind of work) |
 
-**Conflicts.** When sources disagree, the newest dated source wins, and the conflict goes in the report. For example, the Notion page lists interviews as Admin 1.15, but a February 2026 thread says 1.23.
+**Conflicts.** When sources disagree, the newest dated source wins, and the conflict goes in the report. A conflict that changes which code to use becomes a notice, as with interviews above, so Lookup sees it.
 
 ### 6. Open questions
 
