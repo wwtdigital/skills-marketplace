@@ -15,7 +15,7 @@ metadata:
   category: ops
   status: draft
   connectors: [slack, notion]
-  version: 0.1.3
+  version: 0.1.4
 ---
 
 # Time Codes
@@ -74,8 +74,13 @@ If the person can't open the Notion page or the channel, they're probably on ano
 1. Read the page and `extract` the data.
 2. **Check `notices` first.** If a notice covers the code or the kind of work, apply it and say so. Notices are newer than channel topics.
 3. **Non-client work** (interviews, training, all-hands, PTO, R&D, practice dev, partner meetings, general sales support, AI initiatives): answer from `standing` after applying any notice, and include the task (`10004590/06 Internal Initiatives`, `Administration/1.2 Training Education`). For general sales support, ask which region if it isn't obvious.
+   - **Give a code only when exactly one rule fits.** If the work could fall under more than one notice or `standing` entry, don't pick one. Ops hasn't said which rule wins when they overlap.
+   - Overlaps are most likely when the work is AI-themed, aimed at a sales or client audience, built from specific clients' work, or part of a partner program. If any of those apply, check before answering.
+   - If one question would leave exactly one rule ("Was it AI-themed?", "Who's the audience?", "Attending or delivering?"), ask it. Otherwise say the rules overlap, name the candidate codes without recommending one, and offer to ask the ops team.
+   - Never fill a gap with a standing task that only sounds similar.
 4. **Client work:** match on channel name, client name, label or code. Try short forms and hyphenated names (`acme`, `ac`, `acme-corp`). A client can have both a delivery channel and a pursuit channel, so pick the one that matches the work.
-   - **Even when a topic has a code**, search #d-time-entry for the client or channel name over the last six months. If an admin gave a different code there, the admin's answer wins: give it and mention the topic code. Topics go stale and admins correct them in threads.
+   - **Even when a topic has a code**, search #d-time-entry for the client or channel name over the last six months. If an admin gave a different code there **for the same kind of work** (delivery vs pursuit or presales), the admin's answer wins: give it and mention the topic code. Topics go stale and admins correct them in threads. An admin's Sales P&L doesn't replace a channel's project code for delivery work, or the reverse.
+   - Treat a code that doesn't fit the patterns in `references/extraction-rules.md` as a possible typo, wherever it came from: mention it, don't hand it over, and offer to check.
    - If the topic's only code carries an older year or phase label, or the person says it doesn't work in MyTime, say it may be stale and offer to check, instead of handing it over.
 5. **Nothing found:** check in this order.
    - Search channels live, since the channel may be newer than the last refresh.

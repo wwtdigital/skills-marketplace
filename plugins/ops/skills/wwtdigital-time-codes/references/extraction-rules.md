@@ -37,7 +37,7 @@ Use this table to label a bare code. Don't treat it as complete.
 | 10028184 | SLED NYC |
 | 10028185 | SLED Florida |
 | 10028189 | GES Healthcare |
-| 10028191 | GES Retail & Hospitality (retail team disbanded Sept 2026; see notices) |
+| 10028191 | GES Retail & Hospitality |
 | 10028192 | GES Energy & Utilities |
 | 10028195 | GES Domestic Financials |
 | 10028199 | GES Insurance |
