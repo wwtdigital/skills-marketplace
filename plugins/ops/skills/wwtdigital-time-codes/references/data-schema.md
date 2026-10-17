@@ -26,7 +26,7 @@ The page stores its data as JSON inside `<script type="application/json" id="bil
 **`rows`**
 - One entry per code-and-task pair. A channel that lists `10004590` with tasks 01, 02 and 03 gets three rows.
 - `code_type` is one of `project`, `sales_pl` or `indirect`.
-- `found_in` is one of `topic`, `purpose`, `topic+purpose`, or `#d-time-entry` (for an ops answer).
+- `found_in` is one of `topic`, `purpose`, `topic+purpose`, `#d-time-entry` (an admin's answer found there), or `answer` (a reply to a question this person asked).
 - `code` can be text, such as `Administration`. The page shows a copy button only for numeric codes.
 - `kronos` is optional. It holds the exact Kronos string when the topic posts one.
 
@@ -43,6 +43,6 @@ The page stores its data as JSON inside `<script type="application/json" id="bil
 - `codes` and `channels` can both be empty for a rule about a kind of work (training, events, interviews). Lookup still applies it; the page just shows no row flag.
 
 **`open_questions`**
-- Questions this person has posted to the ops team.
+- Questions this person has asked about a code, to a channel lead or in #d-time-entry.
 - `status` is `open` or `answered`.
 - The page lists the open ones with a link to the thread.

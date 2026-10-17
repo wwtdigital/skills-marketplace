@@ -82,7 +82,7 @@ These notices were current as of October 2026. Confirm them and carry them forwa
 
 ### 6. Open questions
 
-Read the thread of each `open` question and apply any answers. See `ops-questions.md`, step 6.
+Read the thread of each `open` question and apply any answers. See `asking-for-codes.md`, step 6.
 
 ### 7. Diff
 
@@ -106,4 +106,4 @@ When a channel has gone missing, say whether it was archived or simply not found
 
 ### 9. Report
 
-In a few lines, give the counts, the diff, and anything ambiguous. Offer to ask the ops team about the ambiguous items in one message.
+In a few lines, give the counts, the diff, and anything ambiguous. Offer to ask about the ambiguous items, following `asking-for-codes.md`.

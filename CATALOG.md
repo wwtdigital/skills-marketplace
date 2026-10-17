@@ -17,7 +17,7 @@ current version has no entry.
 | `wwtdigital-publish-page` (Presentation add-on) | 0.1.0 | `publish-page` 0.1.0 | artifact-publisher | Scott Cullum |
 | `research` | 0.5.0 | `pursuit-intel-brief` 1.2.0 | no | Scott Cullum |
 | `wwtdigital-brand-scan` (Research add-on) | 0.1.0 | `brand-scan` 0.1.1 | brandscanner | Scott Cullum |
-| `ops` | 0.7.4 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft), `wwtdigital-mytime-time-off-digest` 0.1.0 (draft), `wwtdigital-time-codes` 0.1.4 (draft) | no | Staci Powell, Scott Cullum |
+| `ops` | 0.7.5 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft), `wwtdigital-mytime-time-off-digest` 0.1.0 (draft), `wwtdigital-time-codes` 0.1.5 (draft) | no | Staci Powell, Scott Cullum |
 | `admin` | 0.4.3 | `wwtdigital-skill-author` 0.2.1, `marketplace-smoke-test` 0.2.0 | no | Scott Cullum |
 | `tech` | 0.3.0 | `figma-design-to-code` 0.1.0, `wave-planning` 1.0.0, `wave-review` 1.0.0 | no | Zak Lampert, Andrew Brydon |
 
@@ -34,11 +34,11 @@ Microsoft 365 connected in Claude, `wwtdigital-onboarding` needs Notion, `wwtdig
 
 ### 2026-10-16
 
-- **ops 0.7.4**: Adds `wwtdigital-time-codes` 0.1.4 (draft): a personal time-code directory built from your private
+- **ops 0.7.5**: Adds `wwtdigital-time-codes` 0.1.5 (draft): a personal time-code directory built from your private
   Slack channel topics and the Digital Time Entry page, published as your own private "My Time Codes" page. It
-  answers "what do I bill this to?", maps a timesheet week of Slack activity to codes, and drafts questions to the
-  ops team in #d-time-entry, posted only after you approve them. For internal (non-client) work it gives a code only when one rule clearly
-  fits, and otherwise asks you a question or offers to ask ops. It runs a small Python helper when Python is there and does the same steps
+  answers "what do I bill this to?", maps a timesheet week of Slack activity to codes, and drafts questions for a
+  channel's lead, or untagged in #d-time-entry, posted only after you approve them. It never tags the ops team. For internal (non-client) work it gives a code only when one rule clearly
+  fits, and otherwise asks you a question or offers to ask. It runs a small Python helper when Python is there and does the same steps
   itself when it isn't, so nothing needs installing. In Claude Code, the channel sweep runs on a
   cheaper model (Haiku) and the main model checks its work. Run "set up my time codes" to start, after
   `/plugin update ops@wwtdigital`.

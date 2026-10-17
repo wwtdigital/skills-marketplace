@@ -7,7 +7,8 @@ description: >
   charge time to, needs codes for a timesheet week, names a client, pursuit or #channel and wants
   its code, asks where interviews, training, PTO, R&D, practice dev, AI initiative or sales support
   time goes, or says "set up my time codes" or "refresh my time codes". When a code is unknown or
-  sources conflict, it drafts a question to the ops team in #d-time-entry. Not for entering or
+  sources conflict, it drafts a question for the channel's lead or an untagged post in #d-time-entry,
+  never tagging the ops team. Not for entering or
   approving time in Kronos/MyTime, nudging teammates about timecards (wwtdigital-mytime-nudge), or
   expense reports.
 metadata:
@@ -15,7 +16,7 @@ metadata:
   category: ops
   status: draft
   connectors: [slack, notion]
-  version: 0.1.4
+  version: 0.1.5
 ---
 
 # Time Codes
@@ -28,7 +29,7 @@ Every person has their own copy. Nothing is shared unless the owner shares the p
 
 | Need | Used for | If it isn't connected |
 |---|---|---|
-| **Slack** connector | channel topics, activity, #d-time-entry, ops questions | Stop and say: "This skill needs the Slack connector. Connect Slack in your connector settings, then ask again." |
+| **Slack** connector | channel topics, activity, #d-time-entry, questions about codes | Stop and say: "This skill needs the Slack connector. Connect Slack in your connector settings, then ask again." |
 | **Notion** connector | the Digital Time Entry page (standing codes) | Carry on without standing codes. Tell the person to connect Notion to get admin, indirect and regional sales codes. |
 | **Artifacts** (claude.ai) | the person's "My Time Codes" page | Answer in chat and write the data to a JSON file instead. Say the page needs claude.ai with artifacts enabled. |
 
@@ -51,14 +52,14 @@ The full schema is in `references/data-schema.md`. In short:
 - **`standing`**: non-client codes from the Time Entry page.
 - **`notices`**: team-wide rule changes that override channel topics.
 - **`no_code_channels`**: channels that were scanned and had no code.
-- **`open_questions`**: questions this person has asked the ops team.
+- **`open_questions`**: questions this person has asked about a code.
 
 ## Team defaults (WWT Digital)
 
 These are the same for everyone on the team:
 
 - **Time Entry page (Notion):** https://app.notion.com/p/381b0eeb3b2280d3871bdf288052ae7e. This is the canonical list of regional Sales P&Ls, `10004590` GSE Indirect tasks, `10023126` Solutions Strategy, and Administration tasks.
-- **#d-time-entry** (`C0321TBF0P5`): where people ask for codes. The time-entry admins (Brandi Gallagher-Taylor `U68QGJ6S2`, Staci Powell `U02M9FU5J3F`, Kenzie McAllister `U0B94600X1Q`) answer in threads. The ops group handle is `<!subteam^S0BECPY6SET>`.
+- **#d-time-entry** (`C0321TBF0P5`): where people ask for codes. The time-entry admins (Brandi Gallagher-Taylor `U68QGJ6S2`, Staci Powell `U02M9FU5J3F`, Kenzie McAllister `U0B94600X1Q`) answer in threads when they choose. Never tag them or the ops group: the channel is meant to answer itself, and ops isn't on call for it.
 
 If the person can't open the Notion page or the channel, they're probably on another team. Build the page from their own channels only and say that's what you did.
 
@@ -76,7 +77,7 @@ If the person can't open the Notion page or the channel, they're probably on ano
 3. **Non-client work** (interviews, training, all-hands, PTO, R&D, practice dev, partner meetings, general sales support, AI initiatives): answer from `standing` after applying any notice, and include the task (`10004590/06 Internal Initiatives`, `Administration/1.2 Training Education`). For general sales support, ask which region if it isn't obvious.
    - **Give a code only when exactly one rule fits.** If the work could fall under more than one notice or `standing` entry, don't pick one. Ops hasn't said which rule wins when they overlap.
    - Overlaps are most likely when the work is AI-themed, aimed at a sales or client audience, built from specific clients' work, or part of a partner program. If any of those apply, check before answering.
-   - If one question would leave exactly one rule ("Was it AI-themed?", "Who's the audience?", "Attending or delivering?"), ask it. Otherwise say the rules overlap, name the candidate codes without recommending one, and offer to ask the ops team.
+   - If one question would leave exactly one rule ("Was it AI-themed?", "Who's the audience?", "Attending or delivering?"), ask it. Otherwise say the rules overlap, name the candidate codes without recommending one, and offer to ask (see **Asking for a code**).
    - Never fill a gap with a standing task that only sounds similar.
 4. **Client work:** match on channel name, client name, label or code. Try short forms and hyphenated names (`acme`, `ac`, `acme-corp`). A client can have both a delivery channel and a pursuit channel, so pick the one that matches the work.
    - **Even when a topic has a code**, search #d-time-entry for the client or channel name over the last six months. If an admin gave a different code there **for the same kind of work** (delivery vs pursuit or presales), the admin's answer wins: give it and mention the topic code. Topics go stale and admins correct them in threads. An admin's Sales P&L doesn't replace a channel's project code for delivery work, or the reverse.
@@ -85,11 +86,11 @@ If the person can't open the Notion page or the channel, they're probably on ano
 5. **Nothing found:** check in this order.
    - Search channels live, since the channel may be newer than the last refresh.
    - Search #d-time-entry for the client and read the thread for an admin's answer. Answers older than six months may be stale.
-   - Still nothing: say so and offer to ask the ops team. Don't guess from a similar client.
+   - Still nothing: say so and offer to ask the channel's lead (see **Asking for a code**). Don't guess from a similar client.
 6. **Answer briefly.** Give the code in backticks, the task if one is posted, the label and the source.
    - **Kronos format:** if the channel posts a full Kronos string (`kronos` on the row), give it verbatim. Otherwise use `code/task`, e.g. `100XXXXX/1001-Project Cost Collection`. If no task is posted, take it from another row or `standing` entry for the same code, and say where it came from. If there's no task anywhere, give the bare code and say the Kronos picker lists the valid tasks. **Never invent a task.**
    - **Picking the type:** project codes are for delivery work. Sales P&L codes are for pursuit, presales and new-biz work.
-   - **Conflicts:** if sources disagree, use the newest one and mention the other. If the conflict changes which code to use and nothing settles it, offer to ask the ops team.
+   - **Conflicts:** if sources disagree, use the newest one and mention the other. If the conflict changes which code to use and nothing settles it, offer to ask.
 7. **When to check live:** if the data is more than 30 days old, a row looks off, or the person says a code is wrong, read the channel's topic and purpose live. Offer a full refresh, but don't run one to answer a single question.
 
 ## Codes for a timesheet week
@@ -106,18 +107,18 @@ If the person can't open the Notion page or the channel, they're probably on ano
 3. Answer with two short tables, busiest channel first:
    - **Channels with codes:** the channel, message count, code(s), and what each code is. Apply `notices`. When a channel has both a project code and a Sales P&L code, pick one from what the messages were about and say why.
    - **Channels with no code:** suggest a `standing` code for clearly internal channels, labeled as a suggestion. Otherwise leave the call to the person.
-4. If anything is unknown or conflicting, offer **one** combined question to the ops team.
+4. If anything is unknown or conflicting, offer to ask: one message per channel lead, plus one untagged #d-time-entry message for the internal items.
 5. Caveats: this covers private channels only, not DMs, public channels or meetings. Message count isn't hours. Flag non-billable-looking channels instead of dropping them.
 
-## Asking the ops team
+## Asking for a code
 
-Follow `references/ops-questions.md`. In short:
+Follow `references/asking-for-codes.md`. In short:
 
 1. Check that nobody has already asked the same question.
-2. Draft one short, specific message tagging `<!subteam^S0BECPY6SET>`.
+2. **Client or pursuit code:** ask the channel's lead, in that channel, and ask them to add the code to the topic. **Internal code:** post in #d-time-entry with no tags. Never tag the ops group, the admins, `@here` or `@channel`.
 3. **Show the draft and get a yes before posting**, because the message goes out under the person's name. If they'd rather send it themselves, save it with `slack_send_message_draft`.
-4. Post it in #d-time-entry and record it in `open_questions`.
-5. Check the thread on the next lookup or refresh.
+4. Post it and record it in `open_questions`.
+5. Check the thread on the next lookup or refresh. A teammate's answer counts once the person confirms it worked in MyTime.
 
 ## Refresh
 
@@ -126,7 +127,7 @@ Follow `references/refresh.md` to:
 - find the person's channels with activity search plus name sweeps (Slack has no "list my channels" call),
 - extract codes using the rules in `references/extraction-rules.md`,
 - rebuild the standing codes and notices,
-- apply any answered ops questions,
+- apply any answered questions,
 - diff against the last version and republish to the same URL.
 
 ## Verify before you report
@@ -142,7 +143,7 @@ Before answering a lookup, confirm the code came from a source you can name (a c
 
 ## Ground rules
 
-- **Slack writes:** the only messages this skill sends are ops questions in #d-time-entry, and only after the person approves the wording. Never post anywhere else, react, edit or delete messages, or change channel topics.
+- **Slack writes:** the only messages this skill sends are questions about a code, to a client channel's lead in that channel or untagged in #d-time-entry, and only after the person approves the wording. Never tag the ops group or the admins. Never post anywhere else, react, edit or delete messages, or change channel topics.
 - **Privacy:** each person's page is their own. Never read or write anyone else's.
 - **Kronos/MyTime:** this skill never enters or approves time there. It only tells the person what to enter.
 - **Old and new codes:** topics roll forward to new phases and years. When a channel lists an old code and a new one, keep both and give the newer one first.

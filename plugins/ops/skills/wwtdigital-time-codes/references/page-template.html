@@ -71,7 +71,7 @@ var flagC = {}, flagH = {}, flagP = []; (D.notices||[]).forEach(function(n){ (n.
 function chanFlags(ch){ return (flagH[ch]||[]).concat(flagP.filter(function(p){return p[0].test(ch)}).map(function(p){return p[1]})) }
 function flagsFor(r){ var seen=[], out=''; (flagC[r.code]||[]).concat(chanFlags(r.channel)).forEach(function(n){ if(seen.indexOf(n)>-1) return; seen.push(n); out+='<span class="flag">● '+esc(n.flag||('see note '+n.date))+'</span>' }); return out }
 document.getElementById('notices').innerHTML = (D.notices||[]).map(function(n){return '<div class="notice"><span class="d">'+esc(n.date)+'</span>'+esc(n.text)+(n.source?' <a href="'+esc(n.source)+'" target="_blank" rel="noopener">Source</a>':'')+'</div>'}).join('');
-document.getElementById('openq').innerHTML = (D.open_questions||[]).filter(function(q){return q.status!=='answered'}).map(function(q){return '<div class="notice q"><span class="d">ASKED '+esc(q.date)+'</span>'+esc(q.topic)+': waiting on ops in #d-time-entry'+(q.permalink?' <a href="'+esc(q.permalink)+'" target="_blank" rel="noopener">Thread</a>':'')+'</div>'}).join('');
+document.getElementById('openq').innerHTML = (D.open_questions||[]).filter(function(q){return q.status!=='answered'}).map(function(q){return '<div class="notice q"><span class="d">ASKED '+esc(q.date)+'</span>'+esc(q.topic)+': waiting for an answer'+(q.permalink?' <a href="'+esc(q.permalink)+'" target="_blank" rel="noopener">Thread</a>':'')+'</div>'}).join('');
 document.getElementById('refs').innerHTML = (D.references||[]).map(function(r){return '<a href="'+esc(r.url)+'" target="_blank" rel="noopener">'+esc(r.label)+'</a>'}).join('');
 function renderStd(){
 var q = state.q.toLowerCase(), g = {}, html='';
