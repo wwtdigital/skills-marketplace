@@ -1,6 +1,6 @@
 # Catalog
 
-What is in the library, and what changed in it. The table is the library as of 2026-10-16. The release
+What is in the library, and what changed in it. The table is the library as of 2026-10-20. The release
 notes under it are newest first. Changes to the site and install paths are in the
 [changelog](https://skills-marketplace.wwtdigital.io/changelog).
 
@@ -19,7 +19,7 @@ current version has no entry.
 | `wwtdigital-brand-scan` (Research add-on) | 0.1.0 | `brand-scan` 0.1.1 | brandscanner | Scott Cullum |
 | `ops` | 0.7.5 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft), `wwtdigital-mytime-time-off-digest` 0.1.0 (draft), `wwtdigital-time-codes` 0.1.5 (draft) | no | Staci Powell, Scott Cullum |
 | `admin` | 0.4.3 | `wwtdigital-skill-author` 0.2.1, `marketplace-smoke-test` 0.2.0 | no | Scott Cullum |
-| `tech` | 0.3.0 | `figma-design-to-code` 0.1.0, `wave-planning` 1.0.0, `wave-review` 1.0.0 | no | Zak Lampert, Andrew Brydon |
+| `tech` | 0.4.0 | `figma-design-to-code` 0.1.0, `wave-planning` 1.0.0, `wave-review` 1.0.0, `wwtdigital-gated-artifact-site` 0.1.0 (draft) | no | Zak Lampert, Andrew Brydon, Scott Cullum |
 
 The five category bundles (`presentation`, `research`, `ops`, `admin`, `tech`) bring no MCP servers, so each
 installs without connecting anything. Anything that does goes in an add-on you opt into. The one script in a
@@ -31,6 +31,13 @@ Microsoft 365 connected in Claude, `wwtdigital-onboarding` needs Notion, `wwtdig
 (Notion adds the standing codes).
 
 ## Release notes
+
+### 2026-10-20
+
+- **tech 0.4.0**: added `wwtdigital-gated-artifact-site` (draft): host a Claude HTML artifact as a
+  password-gated site on the WWTD Vercel team at `<name>.wwtdigital.io`, built from the
+  `wwtdigital/gated-artifact-site` template repo. Nothing to do unless you want it; `/plugin marketplace
+  update wwtdigital` then reinstall `tech`.
 
 ### 2026-10-16
 
