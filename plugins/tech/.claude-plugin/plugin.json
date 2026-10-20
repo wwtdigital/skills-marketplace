@@ -1,7 +1,7 @@
 {
   "name": "tech",
   "displayName": "Tech",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Skills for engineers and technologists: code review, architecture documentation, repo hygiene, prototyping.",
   "author": {
     "name": "WWTDigital"
@@ -12,6 +12,9 @@
     "tech",
     "engineering",
     "code-review",
-    "architecture"
+    "architecture",
+    "vercel",
+    "hosting",
+    "artifact"
   ]
 }
