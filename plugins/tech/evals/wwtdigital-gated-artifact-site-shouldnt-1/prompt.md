@@ -1,5 +1,5 @@
 ---
-description: Near miss: publishing a page publicly so anyone with the link can view it. Should NOT fire; that is publish-page.
+description: "Near miss: publishing a page publicly so anyone with the link can view it. Should NOT fire; that is publish-page."
 tags: [trigger, wwtdigital-gated-artifact-site]
 max_turns: 4
 timeout_seconds: 120
