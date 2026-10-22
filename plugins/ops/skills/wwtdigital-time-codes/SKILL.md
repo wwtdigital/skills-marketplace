@@ -8,15 +8,15 @@ description: >
   its code, asks where interviews, training, PTO, R&D, practice dev, AI initiative or sales support
   time goes, or says "set up my time codes" or "refresh my time codes". When a code is unknown or
   sources conflict, it drafts a question for the channel's lead or an untagged post in #d-time-entry,
-  never tagging the ops team. Not for entering or
-  approving time in Kronos/MyTime, nudging teammates about timecards (wwtdigital-mytime-nudge), or
-  expense reports.
+  never tagging the ops team. Not for general new-hire questions about how MyTime works, timecard
+  deadlines, PTO or payroll (use wwtdigital-onboarding), entering or approving time in Kronos/MyTime,
+  nudging teammates about timecards (wwtdigital-mytime-nudge), or expense reports.
 metadata:
   owner: scott.cullum@wwt.com
   category: ops
   status: draft
   connectors: [slack, notion]
-  version: 0.1.5
+  version: 0.1.6
 ---
 
 # Time Codes
