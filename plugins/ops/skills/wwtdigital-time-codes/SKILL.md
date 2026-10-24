@@ -16,7 +16,7 @@ metadata:
   category: ops
   status: draft
   connectors: [slack, notion]
-  version: 0.1.6
+  version: 0.1.7
 ---
 
 # Time Codes
@@ -76,7 +76,7 @@ If the person can't open the Notion page or the channel, they're probably on ano
 2. **Check `notices` first.** If a notice covers the code or the kind of work, apply it and say so. Notices are newer than channel topics.
 3. **Non-client work** (interviews, training, all-hands, PTO, R&D, practice dev, partner meetings, general sales support, AI initiatives): answer from `standing` after applying any notice, and include the task (`10004590/06 Internal Initiatives`, `Administration/1.2 Training Education`). For general sales support, ask which region if it isn't obvious.
    - **Give a code only when exactly one rule fits.** If the work could fall under more than one notice or `standing` entry, don't pick one. Ops hasn't said which rule wins when they overlap.
-   - Overlaps are most likely when the work is AI-themed, aimed at a sales or client audience, built from specific clients' work, or part of a partner program. If any of those apply, check before answering.
+   - Overlaps are most likely when the work is AI-themed, aimed at a sales or client audience, built from specific clients' work, part of a partner program, or enablement and offering development (the Time Entry page lists both Sales P&L Offering Development and `10023126/04 Solution Development & Enablement`). If any of those apply, check before answering.
    - If one question would leave exactly one rule ("Was it AI-themed?", "Who's the audience?", "Attending or delivering?"), ask it. Otherwise say the rules overlap, name the candidate codes without recommending one, and offer to ask (see **Asking for a code**).
    - Never fill a gap with a standing task that only sounds similar.
 4. **Client work:** match on channel name, client name, label or code. Try short forms and hyphenated names (`acme`, `ac`, `acme-corp`). A client can have both a delivery channel and a pursuit channel, so pick the one that matches the work.

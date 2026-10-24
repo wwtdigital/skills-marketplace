@@ -53,11 +53,13 @@ Extract codes from each Topic and Purpose using `extraction-rules.md`.
 - Regional Sales P&L (task: Cost collect)
 - GSE Indirect 01–06
 - Solutions Strategy
-- Administration: 1.1, 1.15, 1.2, 1.22, 1.7, 2.1 Holiday, 2.2 PTO, and the other 2.x leave types it lists
+- Administration: every code it lists (as of 2026-10-24: 1.1, 1.2, 1.22, 1.23 Recruiting/Interviewing, 1.7, 1.14, 2.1 Holiday, 2.2 PTO and the other 2.x leave types)
 
-Also add `10035304` (general AI internal initiatives) and `10034890` (AINE initiative only), as long as #d-time-entry still says so.
+The page lists `10035304` and `10034890` nested under `10004590/06`. They are separate codes, not tasks: store each as its own `standing` entry (group "AI internal work"), with the page's rule as `use_for`. Internal initiative codes change from year to year, so after 2026 treat them as possibly stale and check #d-time-entry before handing them over.
 
-The Notion page lists some codes without their tasks (Solutions Strategy `10023126`, for one). Fill those in from the #d-time-entry pins: read each pinned task list and add one `standing` entry per task, with the pin as the source. Never leave a code's tasks empty when a pin lists them.
+Solutions Strategy `10023126` lists its tasks on the page now (01, 02, 03 Event support, 04, 05, 08, 09). The older #d-time-entry pin also has 06 and 07 (Retail and Other Big Bets), which the page leaves off: don't add them. If a code ever shows up on the page with no tasks, fill them in from a pin, one `standing` entry per task, and name the pin as the source. Never leave a code's tasks empty when a pin lists them.
+
+**GES and other regional Sales P&Ls.** The page doesn't list GES codes: they vary by sub-region and change. Take them from channel topics or an admin's answer, never from memory, and point the person to the Indirect Sales P&L workbook the page links.
 
 **Notices.**
 - Read the #d-time-entry pins first, with `filters: "in:<#C0321TBF0P5> has:pin"`.
@@ -72,13 +74,15 @@ These notices were current as of October 2026. Confirm them and carry them forwa
 | Date | Rule | Flag | Applies to |
 |---|---|---|---|
 | 2026-09-04 | Retail sales team disbanded. Pursuit time that used to go to `10028191` now goes to the regional P&L. | "retail team disbanded, use regional P&L" | codes `["10028191"]` |
-| 2026-02-11 | General AI work goes to `10035304`. `10034890` is only for the AINE initiative. | "AINE initiative only" | codes `["10034890"]` |
+| 2026-10-24 | AI internal work: `10035304` is general AI internal work not tied to a named program. `10034890` is for AINE-branded work, instead of `10035304`. Only facilitating or building AI work uses these. Attending AI training goes to Administration / 1.2. | "AI: 10035304 general, 10034890 AINE" | codes `["10035304","10034890"]` |
 | 2026-09-21 | AINE bootcamp: facilitating goes to `10034890`, attending goes to Administration / 1.2 Training. | "bootcamp: facilitating only" | channels `["aine-*bootcamp*"]` |
 | 2026-09-11 | Training: preparing or delivering internal training goes to Practice dev, `10004590/01`. Attending training, including new-hire onboarding, goes to Administration / 1.2 Training Education. | "training: prep/deliver vs attend" | no codes (a rule about the kind of work) |
-| 2026-06-01 | Conferences and events (prep, presenting, attending, travel) go to Solutions Strategy `10023126/03 Event support`. AI-initiative events follow the AI rule (`10035304`). | "events: 10023126/03" | codes `["10023126"]` |
-| 2026-02-27 | Interviews: ops said Administration / 1.23 in #d-time-entry. The Time Entry page still says 1.15. Use 1.23, mention that the page says 1.15, and drop this notice once the page agrees. | "interviews: 1.23, page says 1.15" | no codes (a rule about the kind of work) |
+| 2026-10-24 | Events: content, attendance and travel go to Solutions Strategy `10023126/03 Event support`, unless the event is client specific. For an AI-themed event the AI and events rules overlap and ops hasn't said which wins, so ask. | "events: 10023126/03" | codes `["10023126"]` |
+| 2026-10-24 | Corporate updates and WWT corp meetings go to Administration / 1.7, not practice dev, whatever an older thread says. | "corporate updates: 1.7" | no codes (a rule about the kind of work) |
 
-**Conflicts.** When sources disagree, the newest dated source wins, and the conflict goes in the report. A conflict that changes which code to use becomes a notice, as with interviews above, so Lookup sees it.
+**Conflicts.** When sources disagree, the newest dated source wins, and the conflict goes in the report. A conflict that changes which code to use becomes a notice, as with corporate updates above, so Lookup sees it. Interviews (1.23) are on the Time Entry page now, so they come from `standing` and need no notice.
+
+**Not yet ruled.** Ops hasn't said which rule wins when two apply, such as an AI-themed event (AI vs events) or enablement content (Sales P&L Offering Development, or `10023126/04 Solution Development & Enablement`). It also hasn't said whether enablement or offering content for a sales audience goes to a Sales P&L. Don't seed a precedence for these. Lookup asks, following the "exactly one rule" step in SKILL.md.
 
 ### 6. Open questions
 
