@@ -77,12 +77,12 @@ These notices were current as of October 2026. Confirm them and carry them forwa
 | 2026-10-24 | AI internal work: `10035304` is general AI internal work not tied to a named program. `10034890` is for AINE-branded work, instead of `10035304`. Only facilitating or building AI work uses these. Attending AI training goes to Administration / 1.2. | "AI: 10035304 general, 10034890 AINE" | codes `["10035304","10034890"]` |
 | 2026-09-21 | AINE bootcamp: facilitating goes to `10034890`, attending goes to Administration / 1.2 Training. | "bootcamp: facilitating only" | channels `["aine-*bootcamp*"]` |
 | 2026-09-11 | Training: preparing or delivering internal training goes to Practice dev, `10004590/01`. Attending training, including new-hire onboarding, goes to Administration / 1.2 Training Education. | "training: prep/deliver vs attend" | no codes (a rule about the kind of work) |
-| 2026-10-24 | Events: content, attendance and travel go to Solutions Strategy `10023126/03 Event support`, unless the event is client specific. For an AI-themed event the AI and events rules overlap and ops hasn't said which wins, so ask. | "events: 10023126/03" | codes `["10023126"]` |
+| 2026-10-24 | Events: content, attendance and travel go to Solutions Strategy `10023126/03 Event support`, unless the event is client specific. An AI-themed event is still an event: it goes to `10023126/03` too. | "events: 10023126/03" | codes `["10023126"]` |
 | 2026-10-24 | Corporate updates and WWT corp meetings go to Administration / 1.7, not practice dev, whatever an older thread says. | "corporate updates: 1.7" | no codes (a rule about the kind of work) |
 
 **Conflicts.** When sources disagree, the newest dated source wins, and the conflict goes in the report. A conflict that changes which code to use becomes a notice, as with corporate updates above, so Lookup sees it. Interviews (1.23) are on the Time Entry page now, so they come from `standing` and need no notice.
 
-**Not yet ruled.** Ops hasn't said which rule wins when two apply, such as an AI-themed event (AI vs events) or enablement content (Sales P&L Offering Development, or `10023126/04 Solution Development & Enablement`). It also hasn't said whether enablement or offering content for a sales audience goes to a Sales P&L. Don't seed a precedence for these. Lookup asks, following the "exactly one rule" step in SKILL.md.
+**Not yet ruled.** Ops hasn't said which rule wins when two apply, such as enablement content (Sales P&L Offering Development, or `10023126/04 Solution Development & Enablement`) or AI-themed training (the AI codes, or practice dev for preparing and delivering training). It also hasn't said whether enablement or offering content for a sales audience goes to a Sales P&L. Don't seed a precedence for these. Lookup asks, following the "exactly one rule" step in SKILL.md.
 
 ### 6. Open questions
 
