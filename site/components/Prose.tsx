@@ -2,6 +2,9 @@ import type { ReactNode } from "react";
 import Markdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { REPO_URL } from "@/lib/catalog";
+import { headings, slug } from "@/lib/markdown";
+
+export { headings } from "@/lib/markdown";
 
 const SITE = "https://skills-marketplace.wwtdigital.io";
 
@@ -13,11 +16,6 @@ const text = (n: ReactNode): string =>
       : n && typeof n === "object" && "props" in n
         ? text((n as { props: { children?: ReactNode } }).props.children)
         : "";
-export const slug = (n: ReactNode) =>
-  text(n)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
 
 /**
  * Links to this site become relative (so they work on previews); repo-relative paths point at
@@ -31,33 +29,32 @@ function href(h = "", base = ""): string {
   return `${REPO_URL}/blob/main${path}`;
 }
 
-const components = (base: string): Components => ({
-  h2: ({ children }) => <h2 id={slug(children)}>{children}</h2>,
-  h3: ({ children }) => <h3 id={slug(children)}>{children}</h3>,
-  a: ({ href: h, children }) => {
-    const to = href(h, base);
-    const external = /^https?:/.test(to);
-    return (
-      <a href={to} {...(external ? { target: "_blank", rel: "noopener" } : {})}>
-        {children}
-      </a>
-    );
-  },
-});
-
-/** The `## ` headings of a markdown doc, with the same ids Prose gives them (for a table of contents). */
-export function headings(md: string): { id: string; text: string }[] {
-  return [...md.matchAll(/^## +(.+)$/gm)].map((m) => {
-    const t = m[1].replace(/[`*_]/g, "").trim();
-    return { id: slug(t), text: t };
-  });
-}
+// Heading ids come from lib/markdown's headings() of the same source, looked up by the line the
+// heading sits on, so a TOC built from the source text links to exactly these ids (duplicates get
+// -2, -3…). The slug of the rendered text is only the fallback for a heading the scan didn't see.
+const components = (base: string, ids: Map<number, string>): Components => {
+  const id = (line: number | undefined, children: ReactNode) => (line && ids.get(line)) || slug(text(children));
+  return {
+    h2: ({ children, node }) => <h2 id={id(node?.position?.start.line, children)}>{children}</h2>,
+    h3: ({ children, node }) => <h3 id={id(node?.position?.start.line, children)}>{children}</h3>,
+    a: ({ href: h, children }) => {
+      const to = href(h, base);
+      const external = /^https?:/.test(to);
+      return (
+        <a href={to} {...(external ? { target: "_blank", rel: "noopener" } : {})}>
+          {children}
+        </a>
+      );
+    },
+  };
+};
 
 /** Render repo markdown (SKILL.md bodies, CONTRIBUTING.md) with GitHub-flavored extensions. */
 export function Prose({ children, base = "" }: { children: string; base?: string }) {
+  const ids = new Map(headings(children).map((h) => [h.line, h.id]));
   return (
     <article className="prose">
-      <Markdown remarkPlugins={[remarkGfm]} components={components(base)}>
+      <Markdown remarkPlugins={[remarkGfm]} components={components(base, ids)}>
         {children}
       </Markdown>
     </article>
