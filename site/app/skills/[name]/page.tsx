@@ -6,12 +6,17 @@ import { ConnectorTag } from "@/components/ConnectorTag";
 import { PluginInstall } from "@/components/PluginInstall";
 import { Footer } from "@/components/Footer";
 import { Prose } from "@/components/Prose";
+import { SkillDetails } from "@/components/SkillDetails";
 import { asset, connectorName, formatDate, isBundled } from "@/lib/catalog";
 import { findSkill, loadCatalog } from "@/lib/load";
+import { headings } from "@/lib/markdown";
+import { summarizeDescription } from "@/lib/skill-summary";
 
 type Props = { params: Promise<{ name: string }> };
 
 const kb = (bytes: number) => `${Math.max(1, Math.round(bytes / 1024)).toLocaleString("en-US")} KB`;
+// A body longer than this starts collapsed behind "Read the full skill"; the contents list still shows.
+const COLLAPSE_OVER_LINES = 60;
 
 // Only skills in the catalog exist; anything else is a 404.
 export const dynamicParams = false;
@@ -35,6 +40,14 @@ export default async function SkillPage({ params }: Props) {
   const included = s.connectors.filter((c) => isBundled(p, c)).map(connectorName);
   const list = (xs: string[]) => xs.join(xs.length > 2 ? ", " : " and ");
 
+  // The TL;DR is the description taken apart: what / say this / not for. A description that doesn't
+  // follow the pattern still gets a lead line (its first sentence, or the body's first paragraph).
+  const tldr = summarizeDescription(s.description);
+  const lead = tldr.lead || s.summary || s.description;
+  const notFor = tldr.notFor.replace(/^Not for\s+/i, "").replace(/^\w/, (ch) => ch.toUpperCase());
+  const toc = s.body ? headings(s.body) : [];
+  const collapsed = s.body.split(/\r?\n/).length > COLLAPSE_OVER_LINES;
+
   return (
     <>
       <main className="wrap doc">
@@ -50,11 +63,53 @@ export default async function SkillPage({ params }: Props) {
             {s.version && <span className="mono">v{s.version}</span>}
             <span>in {p.displayName}</span>
           </div>
-          <p className="desc">{s.description}</p>
+          <p className="desc">{lead}</p>
+          {tldr.more && <p className="desc-more">{tldr.more}</p>}
         </header>
 
-        <div className="doc-grid">
-          {s.body ? <Prose base={s.source.replace(/^.*?\/tree\/main\//, "")}>{s.body}</Prose> : <div />}
+        <section className="tldr" aria-labelledby="tldr-title">
+          <h2 id="tldr-title" className="visually-hidden">
+            At a glance
+          </h2>
+          <dl className="glance">
+            <div className="glance-row">
+              <dt>Say this</dt>
+              <dd>
+                {tldr.sayThis.length > 0 ? (
+                  <ul className="say" aria-label="Phrases that trigger this skill">
+                    {tldr.sayThis.map((phrase) => (
+                      <li key={phrase}>{phrase}</li>
+                    ))}
+                  </ul>
+                ) : tldr.when ? (
+                  <p>{tldr.when}</p>
+                ) : (
+                  <p className="muted">No trigger phrases listed. Ask for what it does, in your own words.</p>
+                )}
+              </dd>
+            </div>
+            <div className="glance-row">
+              <dt>Needs</dt>
+              <dd>
+                <div className="needs">
+                  {s.connectors.map((c) => (
+                    <ConnectorTag key={c} plugin={p} connector={c} labelled />
+                  ))}
+                  {s.connectors.length === 0 && <span>Nothing extra: no connectors to set up.</span>}
+                  {s.bundle_only && <span>The whole {p.displayName} plugin (it uses files outside its own folder).</span>}
+                </div>
+              </dd>
+            </div>
+            {notFor && (
+              <div className="glance-row">
+                <dt>Not for</dt>
+                <dd>
+                  <p>{notFor}</p>
+                </dd>
+              </div>
+            )}
+          </dl>
+
           <aside className="aside" aria-label="Install and details">
             <p className="aside-label">Install the {p.displayName} bundle</p>
             <PluginInstall plugin={p} />
@@ -78,11 +133,10 @@ export default async function SkillPage({ params }: Props) {
             <dl className="kv">
               <dt>Owner</dt>
               <dd>{s.owner ? <a href={`mailto:${s.owner}`}>{s.owner}</a> : "Not set"}</dd>
-              <dt>Connectors</dt>
+              <dt>Plugin</dt>
               <dd>
-                {s.connectors.length
-                  ? s.connectors.map((c) => <ConnectorTag key={c} plugin={p} connector={c} />)
-                  : "None"}
+                <Link href={`/#${p.name}`}>{p.displayName}</Link>
+                {p.version && <span className="mono muted">v{p.version}</span>}
               </dd>
               <dt>Includes</dt>
               <dd>{includes || "SKILL.md only"}</dd>
@@ -109,7 +163,13 @@ export default async function SkillPage({ params }: Props) {
               </p>
             )}
           </aside>
-        </div>
+        </section>
+
+        {s.body && (
+          <SkillDetails toc={toc} collapsed={collapsed} description={s.description}>
+            <Prose base={s.source.replace(/^.*?\/tree\/main\//, "")}>{s.body}</Prose>
+          </SkillDetails>
+        )}
       </main>
       <Footer catalog={catalog} />
     </>

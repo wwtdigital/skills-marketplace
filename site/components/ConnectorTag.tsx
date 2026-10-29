@@ -12,10 +12,19 @@ export function ConnectorIcon({ name, size = 13 }: { name: string; size?: number
   return <img className="logo" src={asset(`connectors/${file}`)} width={size} height={size} alt="" />;
 }
 
-// The tag shows only the logo, so the words live in visually-hidden text: screen readers read it and
-// a plain-text copy of the card keeps it ("Needs Notion"), where an icon alone would vanish. The
-// trailing space keeps neighbouring tags from running together. `title` is the hover explanation.
-export function ConnectorTag({ plugin, connector: c }: { plugin: Plugin; connector: string }) {
+// By default the tag shows only the logo, so the words live in visually-hidden text: screen readers
+// read it and a plain-text copy of the card keeps it ("Needs Notion"), where an icon alone would
+// vanish. The trailing space keeps neighbouring tags from running together. `title` is the hover
+// explanation. With `labelled` (the skill page's TL;DR) the words show beside the logo.
+export function ConnectorTag({
+  plugin,
+  connector: c,
+  labelled = false,
+}: {
+  plugin: Plugin;
+  connector: string;
+  labelled?: boolean;
+}) {
   const name = connectorName(c);
   const bundled = isBundled(plugin, c);
   const words = bundled ? `${name} included` : `Needs ${name}`;
@@ -23,9 +32,9 @@ export function ConnectorTag({ plugin, connector: c }: { plugin: Plugin; connect
     ? `${name} included: connects when you install the plugin`
     : `Needs ${name}: connect it in the Claude app first`;
   return (
-    <span className="tag tag-icon" title={hover}>
+    <span className={`tag ${labelled ? "tag-labelled" : "tag-icon"}`} title={hover}>
       <ConnectorIcon name={c} size={14} />
-      <span className="visually-hidden">{words} </span>
+      {labelled ? <span>{words}</span> : <span className="visually-hidden">{words} </span>}
     </span>
   );
 }
