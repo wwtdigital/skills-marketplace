@@ -17,16 +17,18 @@ current version has no entry.
 | `wwtdigital-publish-page` (Presentation add-on) | 0.1.0 | `publish-page` 0.1.0 | artifact-publisher | Scott Cullum |
 | `research` | 0.5.0 | `pursuit-intel-brief` 1.2.0 | no | Scott Cullum |
 | `wwtdigital-brand-scan` (Research add-on) | 0.1.0 | `brand-scan` 0.1.1 | brandscanner | Scott Cullum |
-| `ops` | 0.6.0 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft), `wwtdigital-mytime-time-off-digest` 0.1.0 (draft) | no | Staci Powell, Scott Cullum |
+| `ops` | 0.7.8 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft), `wwtdigital-mytime-time-off-digest` 0.1.0 (draft), `wwtdigital-time-codes` 0.1.8 (draft) | no | Staci Powell, Scott Cullum |
 | `admin` | 0.4.3 | `wwtdigital-skill-author` 0.2.1, `marketplace-smoke-test` 0.2.0 | no | Scott Cullum |
 | `tech` | 0.4.0 | `figma-design-to-code` 0.1.0, `wave-planning` 1.0.0, `wave-review` 1.0.0, `wwtdigital-gated-artifact-site` 0.1.0 (draft) | no | Zak Lampert, Andrew Brydon, Scott Cullum |
 
-The five category bundles (`presentation`, `research`, `ops`, `admin`, `tech`) bring no MCP servers and no
-scripts, so each installs without connecting anything. Anything that does goes in an add-on you opt into.
+The five category bundles (`presentation`, `research`, `ops`, `admin`, `tech`) bring no MCP servers, so each
+installs without connecting anything. Anything that does goes in an add-on you opt into. The one script in a
+bundle is `wwtdigital-time-codes`' `build_page.py`, a standard-library Python helper Claude runs to build your page.
 
 Skills that read from your own tools say which ones: `pursuit-intel-brief` needs Slack, Notion and
-Microsoft 365 connected in Claude, `wwtdigital-onboarding` needs Notion, and `wwtdigital-mytime-nudge` and
-`wwtdigital-mytime-time-off-digest` need Slack and Microsoft 365.
+Microsoft 365 connected in Claude, `wwtdigital-onboarding` needs Notion, `wwtdigital-mytime-nudge` and
+`wwtdigital-mytime-time-off-digest` need Slack and Microsoft 365, and `wwtdigital-time-codes` needs Slack
+(Notion adds the standing codes).
 
 ## Release notes
 
@@ -36,6 +38,18 @@ Microsoft 365 connected in Claude, `wwtdigital-onboarding` needs Notion, and `ww
   password-gated site on the WWTD Vercel team at `<name>.wwtdigital.io`, built from the
   `wwtdigital/gated-artifact-site` template repo. Nothing to do unless you want it; `/plugin marketplace
   update wwtdigital` then reinstall `tech`.
+
+### 2026-10-16
+
+- **ops 0.7.8**: Adds `wwtdigital-time-codes` 0.1.8 (draft): a personal time-code directory built from your private
+  Slack channel topics and the Digital Time Entry page, published as your own private "My Time Codes" page. It
+  answers "what do I bill this to?", maps a timesheet week of Slack activity to codes, and drafts questions for a
+  channel's lead, or untagged in #d-time-entry, posted only after you approve them. It never tags the ops team. It follows the Time Entry page, which now carries the interviews (1.23), corporate updates (1.7), AI, training and event rules, and treats every event, AI-themed or not, as an event. For internal (non-client) work it gives a code only when one rule clearly
+  fits, and otherwise asks you a question or offers to ask. General new-hire questions about how MyTime works, deadlines, PTO or payroll still go to
+  `wwtdigital-onboarding`. It runs a small Python helper when Python is there and does the same steps
+  itself when it isn't, so nothing needs installing. In Claude Code, the channel sweep runs on a
+  cheaper model (Haiku) and the main model checks its work. Run "set up my time codes" to start, after
+  `/plugin update ops@wwtdigital`.
 
 ### 2026-10-14
 

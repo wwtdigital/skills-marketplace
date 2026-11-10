@@ -66,7 +66,7 @@ to pass the scan, neither of which we control, so treat it as unproven until som
 Skills so far: `admin` has `wwtdigital-skill-author` and `marketplace-smoke-test`; `presentation` has
 `humanizer` (Toby Gerber); `research` has `pursuit-intel-brief` (the only copy; its internal data,
 comparables, channel IDs, paths, lives on a team-editable Notion page linked from its SKILL.md, never
-in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell) `wwtdigital-mytime-nudge` (draft) and `wwtdigital-mytime-time-off-digest` (draft); `tech` has `figma-design-to-code`
+in the repo); `ops` has `wwtdigital-onboarding` (Staci Powell) `wwtdigital-mytime-nudge` (draft), `wwtdigital-mytime-time-off-digest` (draft) and `wwtdigital-time-codes` (draft, the one bundle skill with a script, by exception); `tech` has `figma-design-to-code`
 (Zak Lampert), `wave-planning` and `wave-review` (Andrew Brydon). Standalone add-ons: `wwtdigital-deck-design` (category `presentation`, from Toby
 Gerber) has `wwtdigital-deck-design` and `wwtdigital-deck-design-doctor`; `wwtdigital-publish-page`
 (category `presentation`) has `publish-page` and bundles the artifact-publisher MCP;
