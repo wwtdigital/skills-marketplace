@@ -5,6 +5,18 @@ Changes to the skills and plugins are in the [catalog](https://skills-marketplac
 
 Newest first. Dates are the maintainer's local date.
 
+## 2026-10-28
+
+**Site**
+
+- Skill pages open with a summary instead of the whole SKILL.md: one line on what the skill does, the
+  phrases to say to make Claude load it ("Say this"), what it needs connected, what it is not for, and
+  the install and download actions, all taken from the skill's own description. The full text sits
+  below under Details, behind "Read the full skill" when it is long, with a contents list of its
+  headings that opens it and jumps to the section. Every heading has a stable link (`#heading`), so you
+  can send someone straight to one step. The description Claude reads is still there, folded under
+  Details.
+
 ## 2026-09-30
 
 **Site**

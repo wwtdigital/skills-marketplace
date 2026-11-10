@@ -6,7 +6,7 @@ import { loadCatalog, loadRepoDoc } from "@/lib/load";
 // access to the repo can read it. Edit the markdown, not the page that uses this.
 export function RepoDoc({ file }: { file: string }) {
   const doc = loadRepoDoc(file);
-  const toc = doc ? headings(doc) : [];
+  const toc = doc ? headings(doc, [2]) : [];
   return (
     <>
       <main className="wrap doc">

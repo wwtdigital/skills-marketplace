@@ -274,6 +274,55 @@ code, pre, .mono { font-family: var(--font-mono), ui-monospace, Menlo, monospace
 .toc { position: sticky; top: 88px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
 .toc a { color: var(--muted); text-decoration: none; padding: 5px 0 5px 12px; border-left: 1px solid var(--line); transition: color .2s var(--ease), border-color .2s var(--ease); }
 .toc a:hover { color: var(--text); border-color: var(--text); }
+.toc a.sub { padding-left: 24px; font-size: 13px; }
+
+/* skill page: TL;DR (what / say this / needs / not for + install) above a collapsible Details block */
+.doc-head .desc-more { margin: 10px 0 0; max-width: 68ch; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.tldr {
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px 56px; align-items: start;
+  margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line);
+}
+.tldr .aside { position: static; }
+.glance { margin: 0; display: grid; gap: 20px; max-width: 72ch; }
+.glance-row { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 4px 12px; }
+.glance dt { padding-top: 4px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.glance dd { margin: 0; min-width: 0; font-size: 15px; line-height: 1.55; }
+.glance dd p { margin: 0; }
+.say { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.say li {
+  padding: 5px 12px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface);
+  font-size: 14px; line-height: 1.4; overflow-wrap: anywhere;
+}
+.say li::before { content: "\201C"; color: var(--muted); }
+.say li::after { content: "\201D"; color: var(--muted); }
+.needs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tag-labelled { padding: 3px 9px 3px 5px; font-size: 13px; color: var(--text); }
+.kv dd .mono.muted { font-size: 12.5px; }
+
+.details { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); scroll-margin-top: 88px; }
+.details-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin: 0 0 14px; }
+.details-head h2 { margin: 0; font-size: 24px; letter-spacing: -.02em; font-weight: 600; }
+.details-head p { margin: 0; color: var(--muted); font-size: 14px; }
+.desc-full { margin: 0 0 24px; max-width: 72ch; font-size: 14px; color: var(--muted); }
+.desc-full summary { cursor: pointer; width: fit-content; transition: color .2s var(--ease); }
+.desc-full summary:hover { color: var(--text); }
+.desc-full p { margin: 8px 0 0; padding: 12px 14px; line-height: 1.55; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); }
+.details-grid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; align-items: start; }
+.skill-body { min-width: 0; }
+.skill-body > summary {
+  list-style: none; display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+  height: 40px; padding: 0 16px; border-radius: var(--r);
+  border: 1px solid var(--line-strong); background: var(--surface); color: var(--text);
+  font: 500 14.5px var(--font-sans), sans-serif; cursor: pointer;
+  transition: border-color .2s var(--ease), transform .2s var(--ease);
+}
+.skill-body > summary::-webkit-details-marker { display: none; }
+.skill-body > summary:hover { border-color: var(--text); }
+.skill-body > summary:active { transform: scale(.98); }
+.skill-body[open] > summary { margin-bottom: 28px; }
+.body-foot { margin: 40px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; }
+.body-foot a { color: var(--muted); text-decoration: none; }
+.body-foot a:hover { color: var(--text); }
 
 /* rendered markdown */
 .prose { max-width: 72ch; font-size: 15.5px; overflow-wrap: anywhere; }
@@ -319,9 +368,10 @@ code, pre, .mono { font-family: var(--font-mono), ui-monospace, Menlo, monospace
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 56px; }
   .category { grid-template-columns: 1fr; gap: 20px; }
-  .doc-grid, .doc-grid.toc-left { grid-template-columns: 1fr; gap: 32px; }
+  .doc-grid, .doc-grid.toc-left, .tldr, .details-grid { grid-template-columns: 1fr; gap: 32px; }
   .aside, .toc { position: static; }
-  .toc { display: none; }
+  .toc:not(.toc-always) { display: none; }
+  .glance-row { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .wrap { padding: 0 16px; }
