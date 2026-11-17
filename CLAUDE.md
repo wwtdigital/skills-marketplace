@@ -13,7 +13,10 @@ turtle mark, tagline "Skills everyone can reuse."). The rules live in the privat
 `wwtdigital/wwtd-arcworks-design` (`DESIGN.md`, `brand/content.json`); `site/app/globals.css` copies its
 v1.0.3 tokens by value and `site/public/brand/` + `site/app/icon.svg` are copies of its `logos/` files,
 because Vercel can't install from a private repo. Change a colour, name or mark there first, then copy it
-here. Molten (the gold) appears only inside the mark files. Only the site was renamed: the marketplace
+here. Molten (the gold) appears only inside the mark files. The site moved to `patternshop.wwtdigital.io`
+the same day; `skills-marketplace.wwtdigital.io` stays attached to the Vercel project as a domain-level 308
+redirect to it (path kept). **Never remove that redirect**: people who added the marketplace by the old
+URL have it registered locally and fetch through it. Only the site was renamed: the marketplace
 id `wwtdigital`, plugin names, install commands and the domain are unchanged, so nothing installed breaks.
 
 Hosting:
@@ -24,7 +27,7 @@ Hosting:
   public, and check with the owner before building anything that depends on it staying that way.)
 - Vercel: project `skills-marketplace` in team `wwtd`, Root Directory `site`, Next.js preset,
   production branch `main`. Every pushed branch gets a preview deployment.
-- Site: `https://skills-marketplace.wwtdigital.io` (`wwtdigital.io` DNS is managed in the `wwtd` team)
+- Site: `https://patternshop.wwtdigital.io` (`wwtdigital.io` DNS is managed in the `wwtd` team)
 
 If either changes, `git grep` for it. The site hostname lives in `marketplace.json` `metadata.site`,
 every `plugin.json` `homepage`, and `README.md`. The repo slug lives in `site/lib/catalog.ts`
@@ -208,7 +211,7 @@ Test the marketplace itself: `/plugin marketplace add ./` from the repo root, th
   the plugin registers `plugin:<plugin-name>:<server>` in `claude mcp list`.
 - Two ways to install the marketplace. The git one (`/plugin marketplace add wwtdigital/skills-marketplace`)
   needs no account or access now that the repo is public. The URL one (`/plugin marketplace add
-  https://skills-marketplace.wwtdigital.io/marketplace.json`) needs no GitHub account either: build-index
+  https://patternshop.wwtdigital.io/marketplace.json`) needs no GitHub account either: build-index
   generates that file with every plugin as an `archive` source (`downloads/<plugin>.zip` + `sha256`).
   Both use the same marketplace name, so plugin ids are the same. Claude Code only accepts https
   archive URLs on non-loopback hosts, so you can't test it on localhost, and previews are behind

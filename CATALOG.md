@@ -1,8 +1,8 @@
 # Catalog
 
-What is in the library, and what changed in it. The table is the library as of 2026-10-20. The release
+What is in the library, and what changed in it. The table is the library as of 2026-11-17. The release
 notes under it are newest first. Changes to the site and install paths are in the
-[changelog](https://skills-marketplace.wwtdigital.io/changelog).
+[changelog](https://patternshop.wwtdigital.io/changelog).
 
 Anyone who adds or changes a skill adds a line here. Every time a plugin version changes, the entry
 looks like `**plugin-name version**` followed by what changed. The build prints a note when a plugin's
@@ -12,14 +12,14 @@ current version has no entry.
 
 | Plugin | Version | Skills | Brings an MCP server | Owner |
 | --- | --- | --- | --- | --- |
-| `presentation` | 0.5.0 | `humanizer` 4.1.0 | no | Toby Gerber |
-| `wwtdigital-deck-design` (Presentation add-on) | 4.13.1 | `wwtdigital-deck-design` 4.13.0, `wwtdigital-deck-design-doctor` 4.11.0 | Figma | Toby Gerber |
-| `wwtdigital-publish-page` (Presentation add-on) | 0.1.0 | `publish-page` 0.1.0 | artifact-publisher | Scott Cullum |
-| `research` | 0.5.0 | `pursuit-intel-brief` 1.2.0 | no | Scott Cullum |
-| `wwtdigital-brand-scan` (Research add-on) | 0.1.0 | `brand-scan` 0.1.1 | brandscanner | Scott Cullum |
-| `ops` | 0.7.8 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft), `wwtdigital-mytime-time-off-digest` 0.1.0 (draft), `wwtdigital-time-codes` 0.1.8 (draft) | no | Staci Powell, Scott Cullum |
-| `admin` | 0.4.3 | `wwtdigital-skill-author` 0.2.1, `marketplace-smoke-test` 0.2.0 | no | Scott Cullum |
-| `tech` | 0.4.0 | `figma-design-to-code` 0.1.0, `wave-planning` 1.0.0, `wave-review` 1.0.0, `wwtdigital-gated-artifact-site` 0.1.0 (draft) | no | Zak Lampert, Andrew Brydon, Scott Cullum |
+| `presentation` | 0.5.1 | `humanizer` 4.1.0 | no | Toby Gerber |
+| `wwtdigital-deck-design` (Presentation add-on) | 4.13.2 | `wwtdigital-deck-design` 4.13.0, `wwtdigital-deck-design-doctor` 4.11.0 | Figma | Toby Gerber |
+| `wwtdigital-publish-page` (Presentation add-on) | 0.1.1 | `publish-page` 0.1.0 | artifact-publisher | Scott Cullum |
+| `research` | 0.5.1 | `pursuit-intel-brief` 1.2.0 | no | Scott Cullum |
+| `wwtdigital-brand-scan` (Research add-on) | 0.1.1 | `brand-scan` 0.1.1 | brandscanner | Scott Cullum |
+| `ops` | 0.7.9 | `wwtdigital-onboarding` 1.1.1, `wwtdigital-mytime-nudge` 0.3.0 (draft), `wwtdigital-mytime-time-off-digest` 0.1.0 (draft), `wwtdigital-time-codes` 0.1.8 (draft) | no | Staci Powell, Scott Cullum |
+| `admin` | 0.4.4 | `wwtdigital-skill-author` 0.2.2, `marketplace-smoke-test` 0.2.1 | no | Scott Cullum |
+| `tech` | 0.4.1 | `figma-design-to-code` 0.1.0, `wave-planning` 1.0.0, `wave-review` 1.0.0, `wwtdigital-gated-artifact-site` 0.1.0 (draft) | no | Zak Lampert, Andrew Brydon, Scott Cullum |
 
 The five category bundles (`presentation`, `research`, `ops`, `admin`, `tech`) bring no MCP servers, so each
 installs without connecting anything. Anything that does goes in an add-on you opt into. The one script in a
@@ -31,6 +31,15 @@ Microsoft 365 connected in Claude, `wwtdigital-onboarding` needs Notion, `wwtdig
 (Notion adds the standing codes).
 
 ## Release notes
+
+### 2026-11-17
+
+The site moved to patternshop.wwtdigital.io (the old address redirects). These releases only change
+the links that point at it. Nothing to do: you get them with the next update.
+
+- **admin 0.4.4**: `wwtdigital-skill-author` 0.2.2 and `marketplace-smoke-test` 0.2.1 link to the new address.
+- **presentation 0.5.1**, **wwtdigital-deck-design 4.13.2**, **wwtdigital-publish-page 0.1.1**, **research 0.5.1**,
+  **wwtdigital-brand-scan 0.1.1**, **ops 0.7.9**, **tech 0.4.1**: the plugin homepage link points at the new address.
 
 ### 2026-10-20
 

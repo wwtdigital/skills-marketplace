@@ -6,7 +6,7 @@ import { headings, slug } from "@/lib/markdown";
 
 export { headings } from "@/lib/markdown";
 
-const SITE = "https://skills-marketplace.wwtdigital.io";
+const SITE = "https://patternshop.wwtdigital.io";
 
 const text = (n: ReactNode): string =>
   typeof n === "string" || typeof n === "number"

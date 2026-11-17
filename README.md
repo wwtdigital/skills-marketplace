@@ -8,7 +8,7 @@ category is a **plugin**; each plugin contains one or more **skills**. Install t
 bundles you need and Claude picks up the skills automatically in Claude Code and
 Cowork.
 
-Browse the catalog and get step-by-step install help at **https://skills-marketplace.wwtdigital.io**.
+Browse the catalog and get step-by-step install help at **https://patternshop.wwtdigital.io**.
 
 ## Install
 
@@ -33,7 +33,7 @@ The repo is public, so the GitHub route above needs no account or access. If you
 GitHub entirely, add the marketplace from the site instead in Claude Code:
 
 ```
-/plugin marketplace add https://skills-marketplace.wwtdigital.io/marketplace.json
+/plugin marketplace add https://patternshop.wwtdigital.io/marketplace.json
 /plugin install presentation@wwtdigital
 ```
 
@@ -68,7 +68,7 @@ site/scripts/build-index.ts       builds the catalog, downloads and the URL mark
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), also published at https://skills-marketplace.wwtdigital.io/contribute. Short version: copy the template into the
+See [CONTRIBUTING.md](CONTRIBUTING.md), also published at https://patternshop.wwtdigital.io/contribute. Short version: copy the template into the
 right plugin, write a great `description`, run `npm --prefix site run validate`, open a PR.
 Install `admin` and ask Claude to "make this a skill" and it will walk
 you through it.

@@ -15,7 +15,7 @@ metadata:
   category: admin
   status: beta
   connectors: []
-  version: 0.2.1
+  version: 0.2.2
 ---
 
 # WWTDigital Skill Author
@@ -38,7 +38,7 @@ Ask for these one at a time, before writing anything:
    they want it (these become the trigger phrases in the description).
 2. Which category it belongs to: `presentation`, `research`, `ops`, `admin` or `tech`. These
    are the only categories. If they're unsure, propose one from the table in the
-   [contribution guide](https://skills-marketplace.wwtdigital.io/contribute) and say a
+   [contribution guide](https://patternshop.wwtdigital.io/contribute) and say a
    reviewer can move it.
 3. Which connectors it needs (Slack, Notion, Microsoft 365, GitLab, …), if any.
 4. An example of a good finished output, if one exists.
@@ -53,11 +53,11 @@ Ask for these one at a time, before writing anything:
 2. **Name it.** Kebab-case, and the folder name must equal the frontmatter `name`. Use the
    `wwtdigital-` prefix only when the skill is WWT-brand-specific (WWT templates, WWT process,
    WWT vocabulary); a general-purpose skill gets no prefix. Names must be unique across every
-   plugin: check the skills list at https://skills-marketplace.wwtdigital.io (or
+   plugin: check the skills list at https://patternshop.wwtdigital.io (or
    `plugins/*/skills/` in a checkout). Brand spelling is "WWTDigital", no space, everywhere.
 3. **Scaffold.** In a checkout, copy `templates/skill-template/` to
    `plugins/<category>/skills/<skill-name>/`. Without one, download
-   https://skills-marketplace.wwtdigital.io/downloads/skill-template.zip or write `SKILL.md`
+   https://patternshop.wwtdigital.io/downloads/skill-template.zip or write `SKILL.md`
    from the template shape below. Either way, set `name` and cut the `category` and `status`
    option lists in the template down to single values.
 4. **Write the description first.** It is the only text Claude reads when deciding whether to

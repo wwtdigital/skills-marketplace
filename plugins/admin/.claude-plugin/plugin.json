@@ -1,12 +1,12 @@
 {
   "name": "admin",
   "displayName": "Admin",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Everyday admin skills, plus tools for contributing to this marketplace: author a new skill and check an install.",
   "author": {
     "name": "WWTDigital"
   },
-  "homepage": "https://skills-marketplace.wwtdigital.io/#admin",
+  "homepage": "https://patternshop.wwtdigital.io/#admin",
   "repository": "https://github.com/wwtdigital/skills-marketplace",
   "keywords": [
     "admin",

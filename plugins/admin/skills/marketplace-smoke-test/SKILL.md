@@ -13,7 +13,7 @@ metadata:
   category: admin
   status: beta
   connectors: []
-  version: 0.2.0
+  version: 0.2.1
 ---
 
 # Marketplace Smoke Test
@@ -46,7 +46,7 @@ interpreter of any kind.
 4. **Verify:** for a plugin install the manifest `name` must be `admin`; anything else means
    the skill was loaded from an unexpected place, so say so and show the path. Then compare
    the skill version with the one shown at
-   https://skills-marketplace.wwtdigital.io/skills/marketplace-smoke-test (open it if you
+   https://patternshop.wwtdigital.io/skills/marketplace-smoke-test (open it if you
    can, or ask the person to). If the installed one is lower, the install is stale: tell the
    user to run `/plugin marketplace update wwtdigital` and reinstall the plugin. See
    [references/troubleshooting.md](references/troubleshooting.md) for other failures.

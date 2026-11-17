@@ -1,7 +1,7 @@
 # Contributing a skill
 
 Anyone at WWTDigital can contribute a skill, with or without a GitHub account. This page is
-also published at https://skills-marketplace.wwtdigital.io/contribute.
+also published at https://patternshop.wwtdigital.io/contribute.
 
 ## Pick a category
 
@@ -24,11 +24,11 @@ Not sure? Pick the closest one and say so when you submit it. A reviewer will mo
    skill for the marketplace". Claude builds the folder in the right format and checks it.
 
    ```
-   /plugin marketplace add https://skills-marketplace.wwtdigital.io/marketplace.json
+   /plugin marketplace add https://patternshop.wwtdigital.io/marketplace.json
    /plugin install admin@wwtdigital
    ```
 
-   Or start from the [skill template](https://skills-marketplace.wwtdigital.io/downloads/skill-template.zip)
+   Or start from the [skill template](https://patternshop.wwtdigital.io/downloads/skill-template.zip)
    and fill in `SKILL.md` yourself, using the checklist further down this page.
 2. Zip the skill folder.
 3. Send it to the marketplace admin, scott.cullum@wwt.com, or post it in #wwtd-claude-skills.
@@ -146,11 +146,11 @@ changed without a bump (it compares against the live site). README-only edits do
 
 ## Release notes
 
-Every version change also gets a line in the [catalog](https://skills-marketplace.wwtdigital.io/catalog)
+Every version change also gets a line in the [catalog](https://patternshop.wwtdigital.io/catalog)
 (`CATALOG.md` in the repo): the plugin name and new version in bold, then what changed and, if people
 need to do something, what. For example, `**research 0.5.0**: pursuit-intel-brief only; brand-scan moved
 to its own plugin.` Changes to the site or how people install go in the
-[changelog](https://skills-marketplace.wwtdigital.io/changelog) (`CHANGELOG.md`). The build prints a
+[changelog](https://patternshop.wwtdigital.io/changelog) (`CHANGELOG.md`). The build prints a
 note if a plugin's current version has no catalog line, but it won't fail the deploy.
 
 ## Standalone plugins

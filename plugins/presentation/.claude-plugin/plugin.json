@@ -1,12 +1,12 @@
 {
   "name": "presentation",
   "displayName": "Presentation",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Skills for anything you put in front of people: decks, documents, reports and copy, in the WWT house style.",
   "author": {
     "name": "WWTDigital"
   },
-  "homepage": "https://skills-marketplace.wwtdigital.io/#presentation",
+  "homepage": "https://patternshop.wwtdigital.io/#presentation",
   "repository": "https://github.com/wwtdigital/skills-marketplace",
   "keywords": [
     "presentation",

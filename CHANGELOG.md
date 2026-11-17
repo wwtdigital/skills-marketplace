@@ -1,7 +1,7 @@
 # Changelog
 
 What changed in the marketplace itself: the site, how people install, and the checks behind it.
-Changes to the skills and plugins are in the [catalog](https://skills-marketplace.wwtdigital.io/catalog).
+Changes to the skills and plugins are in the [catalog](https://patternshop.wwtdigital.io/catalog).
 
 Newest first. Dates are the maintainer's local date.
 
@@ -9,6 +9,11 @@ Newest first. Dates are the maintainer's local date.
 
 **Site**
 
+- The site moved to https://patternshop.wwtdigital.io. The old address,
+  skills-marketplace.wwtdigital.io, redirects there with the same path, so old links, the
+  `marketplace.json` URL and download links keep working. If you added the marketplace by URL you don't
+  need to do anything. New installs should use `/plugin marketplace add
+  https://patternshop.wwtdigital.io/marketplace.json`.
 - The site is now Pattern Shop, the skills member of WWT Digital ARCworks: the sea turtle mark and
   favicon, cobalt on Bone and Ink, and the ARCworks type (Bricolage Grotesque, Inter, JetBrains Mono).
   Status tags show their state by marker shape as well as by word: a solid dot for stable, a ring for
@@ -43,7 +48,7 @@ Newest first. Dates are the maintainer's local date.
 
 - The five category bundles no longer include MCP servers, so installing any of them connects nothing.
   Publishing a page and scanning a brand moved into their own opt-in plugins. The details and what to
-  do if you used them are in the [catalog](https://skills-marketplace.wwtdigital.io/catalog).
+  do if you used them are in the [catalog](https://patternshop.wwtdigital.io/catalog).
 - The contribution guide now says the same: a skill that needs an MCP server goes in an add-on plugin
   that brings the server.
 
