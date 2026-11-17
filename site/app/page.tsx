@@ -18,19 +18,36 @@ export default function Home() {
         <div className="wrap">
           <section className="hero">
             <div>
-              <h1 className="rise" style={step(0)}>
-                Skills Claude already knows how to use.
+              <div className="hero-mark rise" style={step(0)}>
+                <span className="tile">
+                  <img
+                    src="/brand/pattern-shop-on-ink.svg"
+                    width={78}
+                    height={78}
+                    alt="Pattern Shop mark: a sea turtle seen from above, its shell a gold pattern of plates"
+                  />
+                </span>
+                <p className="label">
+                  WWT Digital ARCworks
+                  <b>Pattern Shop</b>
+                </p>
+              </div>
+              <h1 className="rise" style={step(1)}>
+                Skills everyone can reuse.
               </h1>
-              <p className="hero-sub rise" style={step(1)}>
-                Shared across WWTDigital. Install a category bundle and Claude picks up the team&apos;s workflows in
-                Claude Code and Cowork.
+              <p className="hero-lead rise" style={step(2)}>
+                Where the practice&rsquo;s know-how is shaped, labelled and shelved.
               </p>
-              <div className="hero-ctas rise" style={step(2)}>
+              <p className="hero-sub rise" style={step(2)}>
+                Install a category bundle and Claude picks up the team&apos;s workflows in Claude Code and Cowork. Every
+                skill says what it&rsquo;s for, what it&rsquo;s not for, and what has to be connected before it will run.
+              </p>
+              <div className="hero-ctas rise" style={step(3)}>
                 <a className="btn btn-primary" href="#browse">
-                  Browse <ArrowDownIcon size={15} weight="bold" aria-hidden="true" />
+                  Browse skills <ArrowDownIcon size={15} weight="bold" aria-hidden="true" />
                 </a>
                 <Link className="btn" href="/contribute">
-                  Contribute
+                  Contribute a skill
                 </Link>
               </div>
             </div>

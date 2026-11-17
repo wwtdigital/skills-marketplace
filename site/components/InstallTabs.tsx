@@ -32,7 +32,7 @@ export function InstallTabs({
   );
 
   return (
-    <section className="install rise" style={{ "--i": 3 } as React.CSSProperties} id="install" aria-label="Install">
+    <section className="install rise" style={{ "--i": 4 } as React.CSSProperties} id="install" aria-label="Install">
       <div className="tabs" role="tablist">
         {TABS.map((t) => (
           <button key={t.id} role="tab" aria-selected={tab === t.id} onClick={() => setTab(t.id)}>

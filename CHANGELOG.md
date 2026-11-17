@@ -5,6 +5,16 @@ Changes to the skills and plugins are in the [catalog](https://skills-marketplac
 
 Newest first. Dates are the maintainer's local date.
 
+## 2026-11-17
+
+**Site**
+
+- The site is now Pattern Shop, the skills member of WWT Digital ARCworks: the sea turtle mark and
+  favicon, cobalt on Bone and Ink, and the ARCworks type (Bricolage Grotesque, Inter, JetBrains Mono).
+  Status tags show their state by marker shape as well as by word: a solid dot for stable, a ring for
+  beta, a dashed ring for draft. Nothing about installing changed: the marketplace is still
+  `wwtdigital`, and every install command and download link is the same.
+
 ## 2026-10-28
 
 **Site**

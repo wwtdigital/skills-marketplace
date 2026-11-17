@@ -6,7 +6,13 @@ export function Footer({ catalog }: { catalog: Catalog | null }) {
   return (
     <footer className="site-footer">
       <div className="wrap">
-        <span>WWTDigital Skills{m && `, updated ${formatDate(m.generated)}`}</span>
+        <span className="sig">
+          <img src="/brand/pattern-shop-avatar.svg" width={28} height={28} alt="" />
+          <span>
+            <b>Pattern Shop</b>
+            Part of WWT Digital ARCworks{m && `. Updated ${formatDate(m.generated)}`}
+          </span>
+        </span>
         <nav aria-label="Footer">
           <Link href="/catalog">Catalog</Link>
           <Link href="/changelog">Changelog</Link>

@@ -1,4 +1,7 @@
-# WWTDigital Skills Marketplace
+# Pattern Shop
+
+Skills everyone can reuse. Pattern Shop is the WWTDigital skills marketplace, part of the
+WWT Digital ARCworks family.
 
 A shared catalog of Claude skills for WWTDigital, organised by category. Each
 category is a **plugin**; each plugin contains one or more **skills**. Install the
