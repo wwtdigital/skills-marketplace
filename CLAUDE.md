@@ -8,13 +8,13 @@ A Claude Code / Cowork **plugin marketplace** for WWTDigital. Marketplace name `
 Skills are grouped into one plugin per category; users install the bundles they need.
 A Next.js site (`site/`, deployed to Vercel) lets people browse and download skills without GitHub.
 
-Brand (2026-11-17): the site is **Pattern Shop**, the skills member of WWT Digital ARCworks (cobalt, sea
+Brand: the site is **Pattern Shop**, the skills member of WWT Digital Castworks OS (cobalt, sea
 turtle mark, tagline "Skills everyone can reuse."). The rules live in the private design repo
-`wwtdigital/wwtd-arcworks-design` (`DESIGN.md`, `brand/content.json`); `site/app/globals.css` copies its
-v1.0.3 tokens by value and `site/public/brand/` + `site/app/icon.svg` are copies of its `logos/` files,
+`wwtdigital/wwtd-castworks-design` (`DESIGN.md`, `brand/content.json`); `site/app/globals.css` copies its
+v2.0.0 tokens by value and `site/public/brand/` + `site/app/icon.svg` are copies of its `logos/` files,
 because Vercel can't install from a private repo. Change a colour, name or mark there first, then copy it
 here. Molten (the gold) appears only inside the mark files. The site moved to `patternshop.wwtdigital.io`
-the same day; `skills-marketplace.wwtdigital.io` stays attached to the Vercel project as a domain-level 308
+on 2026-11-17; `skills-marketplace.wwtdigital.io` stays attached to the Vercel project as a domain-level 308
 redirect to it (path kept). **Never remove that redirect**: people who added the marketplace by the old
 URL have it registered locally and fetch through it. Only the site was renamed: the marketplace
 id `wwtdigital`, plugin names, install commands and the domain are unchanged, so nothing installed breaks.

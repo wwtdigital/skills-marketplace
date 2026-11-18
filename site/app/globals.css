@@ -1,7 +1,7 @@
 /*
-  Pattern Shop: the WWT Digital ARCworks member for skills. Native CSS, no framework.
-  Every colour, typeface and radius comes from the ARCworks design system v1.0.3
-  (wwtdigital/wwtd-arcworks-design, DESIGN.md). Do not invent values here; change them there first.
+  Pattern Shop: the WWT Digital Castworks OS member for skills. Native CSS, no framework.
+  Every colour, typeface and radius comes from the Castworks design system v2.0.0
+  (wwtdigital/wwtd-castworks-design, DESIGN.md). Do not invent values here; change them there first.
   Colour rule: Ink, Bone and one member colour, Cobalt. Molten is reserved for the gold inside the mark,
   so it never appears in this file. Flat colour only: no gradients, tints or shadows.
   Status is carried by the word and a marker shape, never by colour alone.

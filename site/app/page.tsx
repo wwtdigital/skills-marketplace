@@ -28,7 +28,7 @@ export default function Home() {
                   />
                 </span>
                 <p className="label">
-                  WWT Digital ARCworks
+                  WWT Digital Castworks OS
                   <b>Pattern Shop</b>
                 </p>
               </div>
