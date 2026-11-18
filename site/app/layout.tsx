@@ -10,7 +10,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
-// The ARCworks faces: Bricolage Grotesque for the wordmark and headings, Inter for text, JetBrains Mono for labels.
+// The Castworks faces: Bricolage Grotesque for the wordmark and headings, Inter for text, JetBrains Mono for labels.
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", axes: ["opsz"] });
 const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -18,7 +18,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 export const metadata: Metadata = {
   title: { default: "Pattern Shop", template: "%s | Pattern Shop" },
   description:
-    "Pattern Shop, from WWT Digital ARCworks: skills everyone can reuse. Browse and install WWT Digital's shared Claude skills and MCP servers, grouped by category.",
+    "Pattern Shop, from WWT Digital Castworks OS: skills everyone can reuse. Browse and install WWT Digital's shared Claude skills and MCP servers, grouped by category.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

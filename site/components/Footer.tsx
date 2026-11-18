@@ -10,7 +10,7 @@ export function Footer({ catalog }: { catalog: Catalog | null }) {
           <img src="/brand/pattern-shop-avatar.svg" width={28} height={28} alt="" />
           <span>
             <b>Pattern Shop</b>
-            Part of WWT Digital ARCworks{m && `. Updated ${formatDate(m.generated)}`}
+            Part of WWT Digital Castworks OS{m && `. Updated ${formatDate(m.generated)}`}
           </span>
         </span>
         <nav aria-label="Footer">

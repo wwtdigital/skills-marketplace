@@ -5,6 +5,13 @@ Changes to the skills and plugins are in the [catalog](https://patternshop.wwtdi
 
 Newest first. Dates are the maintainer's local date.
 
+## Unreleased
+
+**Site**
+
+- Current site copy, page metadata and design references now use WWT Digital Castworks OS and
+  `wwtdigital/wwtd-castworks-design`. Plugin names, install commands, domains and redirects are unchanged.
+
 ## 2026-11-17
 
 **Site**
